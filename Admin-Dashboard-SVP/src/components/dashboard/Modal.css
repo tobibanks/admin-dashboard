@@ -1,0 +1,40 @@
+.modal-content {
+  border-radius: 0rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.form-check-label {
+  font-family: "Inter", sans-serif;
+  color: var(--textblack);
+  position: relative;
+  top: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  /* text-align: center; */
+  padding-bottom: -5px;
+}
+
+.form-check-input:checked {
+  background-color: white;
+  border-color: black;
+}
+
+.form-check-input:checked[type="checkbox"] {
+  background-image: url("/icons/check.svg");
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}

@@ -1,0 +1,10 @@
+.modal-content {
+  border-radius: 0rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.modal-header {
+  background-color: var(--dashboard-yellow);
+  height: 90px;
+}

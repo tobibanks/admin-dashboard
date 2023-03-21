@@ -1,0 +1,669 @@
+.container {
+  background-color: var(--dashboard-yellow);
+  display: flex;
+  max-width: 1600px;
+  /* width: 100%; */
+  padding: 0rem !important;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.navbar {
+  margin-top: 2rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.rowcontainer {
+  width: 100%;
+}
+
+.navbarTabContainer {
+  margin-bottom: 0.2rem;
+  display: flex;
+  width: fit-content;
+  padding: 1rem 1.7rem;
+}
+
+.navbarTabContainer:hover {
+  background-color: var(--active-selection-black);
+  width: 100%;
+  border-radius: 0.4rem;
+  /* color: var(--SVP-main) !important; */
+}
+
+.navbarTabContainerActive {
+  border-radius: 0.4rem;
+  margin-bottom: 0.2rem;
+  padding: 1rem 1.7rem;
+  width: 100%;
+  /* margin-bottom: 2rem; */
+  display: flex;
+  background-color: var(--active-selection-black);
+}
+
+.centercontainer {
+  /* width: 80%; */
+  padding: 0rem;
+  /* width: 100%; */
+}
+
+.centercontainer1 {
+  padding: 0rem;
+  /* margin-top: 1rem; */
+}
+
+.stickycontainer {
+  position: sticky;
+  margin: 2rem auto;
+  top: 0;
+}
+
+.link:hover {
+  color: var(--SVP-main);
+}
+
+.linktext {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  color: black;
+  margin-bottom: 0px;
+  font-family: "Inter", sans-serif;
+}
+
+.linktextactive {
+  font-size: 1.2rem;
+  margin-bottom: 0px;
+  color: var(--SVP-main);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.linkActive {
+  text-decoration: none;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center1 {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logOutContainer {
+  margin-top: 22rem;
+}
+
+.avatartitle {
+  font-weight: 600;
+  margin-bottom: 0px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: var(--textblack);
+}
+
+.avatarcontext {
+  font-size: 0.8rem;
+  margin-bottom: 0px;
+  margin-top: 0.5rem;
+  font-family: "Inter", sans-serif;
+  color: var(--black400);
+}
+
+.textcontainer {
+  padding-top: 0.3rem;
+}
+
+.button {
+  width: fit-content;
+  gap: 1rem;
+  display: flex;
+}
+
+.contentscontainer {
+  /* margin-top: 2rem; */
+  border-radius: 24px;
+  box-shadow: 4px 20px 50px -4px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+}
+
+.logouttext {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0px;
+  color: var(--SVP-main);
+  font-family: "Inter", sans-serif;
+}
+
+.rightcontainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  padding: 1.5rem 0;
+  background-color: var(--dashboard-yellow);
+  margin: 0 auto;
+}
+
+.alarm {
+  margin-right: 2rem;
+}
+
+.titlecontainer {
+  width: 59%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headertitle {
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+}
+
+/* content.jsx */
+.contentcontainer {
+  width: 92%;
+  margin: 0 auto;
+}
+
+.buttondashboard {
+  font-size: 1rem;
+  border: none;
+  margin-top: 1.4rem;
+  display: block;
+  outline: none;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  float: right;
+  /* text-transform: uppercase; */
+  font-weight: 600;
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  background-color: var(--SVP-main);
+}
+
+.innercontent {
+  padding: 1rem;
+}
+
+.contentcardscontainer {
+  border: 1px solid;
+  margin-top: 2rem;
+  width: 23rem;
+  border-style: dashed;
+  border-radius: 1rem;
+  border-color: var(--SVP-main);
+}
+
+.contentheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentheadertext {
+  font-family: "Inter", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0px;
+  color: var(--SVP-main);
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 6rem;
+  color: var(--SVP-main);
+}
+
+.description {
+  margin-top: 1.6rem;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.arrow {
+  margin-left: 0.5rem;
+}
+
+/* Notification */
+.notificationcontainer {
+  background-color: var(--dashboard-yellow);
+  border-radius: 2.4rem;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 0rem;
+  flex: 1;
+}
+
+.notificationcontainer1 {
+  background-color: var(--white);
+  border-radius: 2.4rem;
+  /* padding-left: 2rem; */
+  padding-top: 2rem;
+  /* padding-right: 2rem; */
+  padding-bottom: 0rem;
+}
+
+.horizontalline {
+  background-color: var(--black100);
+  margin-top: 2rem;
+}
+
+.flexcontainer {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+.flexingcontainer {
+  margin-bottom: 2rem;
+}
+.flexcontainercontents {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.firsttext {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.firsttext1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  text-transform: uppercase;
+}
+
+.flexedcontainer {
+  display: flex;
+  gap: 1rem;
+  /* justify-content: space-between; */
+}
+
+.flexedcontainer1 {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.centernotification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notificationcontenttext {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  color: var(--textblack);
+  margin-bottom: 1rem;
+}
+
+.color {
+  color: var(--SVP-main);
+}
+
+.notificationcontentdescription {
+  color: var(--black400);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0px;
+  font-family: "Inter", sans-serif;
+}
+
+.view {
+  border: 1px solid;
+  background-color: var(--dashboard-yellow);
+  color: var(--SVP-main);
+  border-color: var(--SVP-main);
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0.7rem 1.3rem;
+}
+
+.view:hover {
+  border-color: var(--SVP-main200);
+  color: var(--SVP-main200);
+  background-color: transparent;
+}
+
+.view:focus {
+  border-color: var(--SVP-main400) !important;
+  color: var(--SVP-main400) !important;
+  background-color: transparent !important;
+}
+
+.modalbutton {
+  border-radius: 8px;
+  background-color: var(--SVP-main);
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+}
+
+.modalbutton:hover {
+  background-color: var(--SVP-main200);
+  color: white;
+}
+.modalbutton:hover {
+  background-color: var(--SVP-main400);
+  color: white;
+}
+
+.modalbutton:focus {
+  background-color: var(--SVP-main) !important;
+  color: white;
+}
+
+.modalcontent {
+  border-radius: 0px;
+}
+
+.modal-content {
+  border-top: 0px !important;
+  border-bottom: 25px;
+}
+.modal-content {
+  border-radius: 0px !important;
+}
+
+.arrowdown {
+  margin-left: 0.3rem;
+}
+
+.rightbuttoncontainer {
+  /* margin-top: 0.5rem; */
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+  margin: 0.5rem auto;
+}
+
+.rightbuttoncontainer1 {
+  /* margin-top: 0.5rem; */
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+  margin: 4rem auto;
+}
+
+.containedmodaltitlevcenter {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.navitem > a:hover {
+  color: var(--textblack);
+  text-decoration: underline !important;
+  text-decoration-color: var(--SVP-main) !important;
+  text-underline-offset: 3px;
+}
+
+.navitem > a {
+  text-decoration: underline;
+}
+.navitem {
+  cursor: pointer !important;
+}
+
+.navitem {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.navlink {
+  padding-left: 0rem;
+  color: var(--black200);
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--SVP-main) !important;
+  /* color: var(--black200) !important; */
+}
+
+.nav-link:active {
+  text-decoration: underline;
+  text-decoration-color: var(--SVP-main) !important;
+  color: var(--black200) !important;
+}
+/* .notificationcontent{
+  margin-top: 1.5rem;
+} */
+
+.notificationcontent1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+/* Tasks */
+.taskcontainer {
+  background-color: var(--dashboard-yellow);
+  border-radius: 2.4rem;
+  padding: 2rem;
+  flex: 1;
+}
+
+.header1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.flexcontainer1 {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+th {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--black400);
+  text-transform: uppercase;
+}
+
+.--bs-table-striped-bg {
+  background-color: white !important;
+}
+
+.tablestriped > tbody > tr:nth-child(2n + 1) > td,
+.tablestriped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: white;
+}
+
+.tasktitle {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-bottom: 0px;
+}
+
+td {
+  font-family: "Inter", sans-serif;
+}
+
+.centericon {
+  text-align: center;
+}
+
+.centertext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexcontent {
+  display: flex;
+}
+
+/* project container */
+.projectcontainer {
+  padding: 2rem;
+}
+
+.projectheader {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0px;
+  font-size: 1rem;
+  margin-bottom: 0rem;
+  text-transform: uppercase;
+}
+
+.projectflexcontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.projectbutton {
+  border: 1px solid;
+  border-color: var(--black200);
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+}
+
+.projectbuttonactive {
+  border: 1px solid;
+  border-color: var(--SVP-main);
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+}
+
+.projecttextbutton {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.textbuttonactive {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  color: var(--SVP-main);
+  font-weight: 600;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.projectbuttonicon {
+  margin-right: 0.5rem;
+}
+
+.projectflexbuttonscontainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.tablecontainer {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+  background-color: var(--dashboard-yellow);
+}
+
+.tableheader {
+  background-color: var(--white);
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  border-radius: 50%;
+  margin-bottom: 0px;
+  color: white;
+  background-color: var(--SVP-main);
+  font-family: "Inter", sans-serif;
+}
+
+.modalbody {
+  padding: 0rem !important;
+}
+
+.nav {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.firstext1container1 {
+  background-color: var(--dashboard-yellow);
+  margin-bottom: 1.5rem;
+}
+
+.notificationcontent1 {
+  padding-left: 1rem;
+}
+
+.absoluterightcontainer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2rem;
+}
+
+.align {
+  vertical-align: middle;
+}
+
+.align {
+  vertical-align: middle;
+}

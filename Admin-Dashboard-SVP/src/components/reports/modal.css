@@ -1,0 +1,27 @@
+.modal-content {
+  border-radius: 20px;
+}
+
+.form-check-input:checked[type="radio"] {
+  background-image: url("/icons/dot.svg");
+}
+
+.form-check-input:checked {
+  background-color: white;
+}
+
+.form-check-input:checked[type="checkbox"] {
+  background-image: url("/icons/check-black.svg");
+}
+
+#custom-switch1 {
+  border-color: black;
+  border: 2px solid;
+  border-radius: 0px;
+}
+
+#disabled-custom-switch1 {
+  border-color: black;
+  border: 2px solid;
+  border-radius: 0px;
+}

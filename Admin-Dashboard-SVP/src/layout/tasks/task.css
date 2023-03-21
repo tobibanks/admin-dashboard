@@ -1,0 +1,34 @@
+.rbc-event,
+.rbc-day-slot .rbc-background-event {
+  background-color: var(--SVP-main) !important;
+}
+
+.rbc-toolbar {
+  display: none !important;
+}
+
+.rbc-ellipsis,
+.rbc-show-more,
+.rbc-row-segment .rbc-event-content,
+.rbc-event-label {
+  font-family: "Inter", sans-serif;
+}
+
+.rbc-header {
+  font-family: "Inter", sans-serif;
+}
+
+.rbc-button-link {
+  font-family: "Inter", sans-serif;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}

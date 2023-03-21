@@ -1,0 +1,23 @@
+tr:hover {
+  background-color: var(--dashboard-yellow);
+  font-weight: 700;
+}
+
+tr {
+  color: var(--textblack);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  border-bottom: 1px solid;
+  border-color: var(--black200);
+  /* vertical-align: middle; */
+}
+
+td {
+  vertical-align: middle;
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

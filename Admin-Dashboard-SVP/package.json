@@ -12,7 +12,9 @@
     "@artsy/fresnel": "^6.1.0",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
+    "react-big-calendar": "^1.6.8",
     "react-bootstrap": "^2.7.2",
+    "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0"

@@ -1,0 +1,17 @@
+.maincontainer {
+  padding: 0rem !important;
+  background-color: var(--active-selection-black);
+  display: flex;
+  max-width: 1600px;
+  height: 110vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.centertext {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--textblack);
+  font-family: "Inter", sans-serif;
+}

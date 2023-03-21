@@ -1,0 +1,18 @@
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}
+
+thead > tr {
+  border-bottom: none;
+}
+
+thead > tr:hover {
+  background-color: transparent;
+}

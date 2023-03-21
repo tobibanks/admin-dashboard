@@ -1,0 +1,12 @@
+.container {
+  max-width: 1600px !important;
+  padding: 0rem !important;
+  /* background-color: var(--dashboard-yellow); */
+}
+
+.overallcontainer {
+  background-color: white;
+  margin: 0 auto;
+  /* padding-bottom: 2rem; */
+  width: 90%;
+}
