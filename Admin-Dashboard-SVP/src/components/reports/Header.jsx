@@ -50,9 +50,8 @@ export default Header;
 
 const NavBoxes = (props) => {
   const active = location.pathname === props.pathlink;
-  console.log(active);
-  // console.log(props.imagelink);
-  // console.log(props.title);
+
+
   return (
     <Link
       to={props.pathlink}

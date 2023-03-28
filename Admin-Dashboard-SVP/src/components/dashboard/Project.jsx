@@ -7,7 +7,7 @@ import "./Modal.css";
 
 const Project = () => {
   return (
-    <div className={project.projectContainer}>
+    <div className={project.projectcontainer1}>
       <div className={project.projectflexcontainer}>
         <div className={project.absolutecenter}>
           <p className={project.projectheader}>project</p>
@@ -25,7 +25,7 @@ const Project = () => {
         </div>
       </div>
       <div className={project.tablecontainer}>
-        <Table striped className={project.tablestriped}>
+        <Table className={project.tablestriped}>
           <thead className={project.tableheader}>
             <tr>
               <th>PROJECT NAME</th>
@@ -35,7 +35,7 @@ const Project = () => {
           </thead>
           <tbody>
             {Projects.map((projectdata, index) => (
-              <tr key={index}>
+              <tr key={index} className ={project.pointer}>
                 <td className={project.align}>
                   <div className={project.flexcontent}>
                     {projectdata.star === "starred" ? (

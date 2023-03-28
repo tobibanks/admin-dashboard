@@ -34,21 +34,29 @@ const ReportsTableDashboard = () => {
               <NavCategories
                 name="All Files"
                 total={`(${TablesData.length})`}
+                filter={filter}
+                filter1={null}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Pictures"
+                filter={filter}
+                filter1="image"
                 total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
+                filter={filter}
+                filter1="video"
                 total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
+                filter={filter}
+                filter1="document"
                 total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("document")}
               />
@@ -82,11 +90,14 @@ const ReportsTableDashboard = () => {
 export default ReportsTableDashboard;
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={reporttable.tablenavcontainer} onClick={props.onClick}>
+    <Button className={active ? reporttable.tablenavcontaineractive : reporttable.tablenavcontainer} onClick={props.onClick}>
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>
+      <span className={reporttable.disappear}>{props.filter}</span>
+      <span className={reporttable.disappear}>{props.filter1}</span>
       {/* </p> */}
     </Button>
   );

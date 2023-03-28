@@ -1,5 +1,5 @@
 .container {
-  max-width: 1600px !important;
+  max-width: 1440px !important;
   padding: 0rem !important;
   /* background-color: var(--dashboard-yellow); */
 }
@@ -45,16 +45,31 @@
   margin-left: 0.5rem;
 }
 
-.tablenavcontainer:active {
+.tablenavcontaineractive {
   background-color: var(--SVP-main);
-}
-
-.tablenavcontainer:focus {
-  background-color: var(--SVP-main) !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: none;
+  padding: 0rem;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
   color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 
 .tablenavcontainer:hover {
+  background-color: var(--SVP-main) !important;
+}
+
+.tablenavcontaineractive:hover {
   background-color: var(--SVP-main) !important;
 }
 
@@ -123,7 +138,7 @@
 
 .cardcontainer {
   border-radius: 8px;
-  width: 17rem;
+  width: 15rem;
   padding: 1rem;
   border: 1px solid;
   border-color: var(--black200);
@@ -131,7 +146,7 @@
 
 .cardcontainer:hover {
   border-radius: 8px;
-  width: 17rem;
+  width: 15rem;
   padding: 1rem;
   border: 1px solid;
   border-color: var(--SVP-main);
@@ -153,7 +168,7 @@
 .mainimage {
   padding: 0.5rem 0rem;
   /* width: 100%; */
-  width: 15rem;
+  width: 13rem;
   height: 180px;
 }
 
@@ -178,6 +193,7 @@
 .flexwrapcontainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 2rem;
   background-color: #fffcf4;
   margin-top: 1.5rem;
@@ -200,4 +216,8 @@
 
 .flextable {
   display: flex;
+}
+
+.disappear{
+  display: none;
 }

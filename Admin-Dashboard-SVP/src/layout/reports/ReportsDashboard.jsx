@@ -6,7 +6,6 @@ import Header from "../../components/reports/Header";
 import TableHeaderNav from "../../components/project/TableHeaderNav";
 import FileInputContainer from "@/components/reports/FileInputContainer";
 import { reports } from "../../../data/reports";
-import ModalTask from "../../components/tasks/ModalTask";
 import ReportModal from "@/components/reports/ReportModal";
 
 const ReportsDashboard = () => {
@@ -33,21 +32,29 @@ const ReportsDashboard = () => {
               <NavCategories
                 name="All Files"
                 total={`(${reports.length})`}
+                filter={filter}
+                filter1={null}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Pictures"
+                filter={filter}
+                filter1="image"
                 total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
+                filter={filter}
+                filter1="video"
                 total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
+                filter={filter}
+                filter1="document"
                 total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("document")}
               />
@@ -78,11 +85,19 @@ const ReportsDashboard = () => {
 export default ReportsDashboard;
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={report.tablenavcontainer} onClick={props.onClick}>
+    <Button
+      className={
+        active ? report.tablenavcontaineractive : report.tablenavcontainer
+      }
+      onClick={props.onClick}
+    >
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>
+      <span className={report.disappear}>{props.filter}</span>
+      <span className={report.disappear}>{props.filter1}</span>
       {/* </p> */}
     </Button>
   );

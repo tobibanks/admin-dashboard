@@ -1,5 +1,6 @@
 import React from "react";
 import grid from "./general.module.css";
+import { Image } from "react-bootstrap";
 
 const ProjectGridContainer = (props) => {
   return (
@@ -7,7 +8,15 @@ const ProjectGridContainer = (props) => {
       <div className={grid.innercontainer}>
         <div className={grid.flexcontainer}>
           <p className={grid.gridtext}>{props.text}</p>
-          {props.children}
+          <div>
+            {props.priority === "important" ? (
+              <ImageIcon imagelink="/icons/table/redflag.svg" />
+            ) : props.priority === "normal" ? (
+              <ImageIcon imagelink="/icons/table/normalflag.svg" />
+            ) : props.priority === "warning" ? (
+              <ImageIcon imagelink="/icons/table/warningflag.svg" />
+            ) : null}
+          </div>
         </div>
         <p className={grid.textdate}>
           <span className={grid.titledate}>Due:</span> {props.date}

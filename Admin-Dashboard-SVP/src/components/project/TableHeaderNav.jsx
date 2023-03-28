@@ -12,36 +12,38 @@ const TableHeaderNav = (props) => {
   const [endDate, setEndDate] = useState(new Date("2023/03/01"));
 
   return (
-    <div className={cart.headernavcategoriescontainer}>
-      <div className={cart.leftcontainer}>
-        <div className={cart.rightcontainer}>
-          <DatePicker
-            dateFormat="d MMMM, yyyy"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            customInput={<ExampleCustomInput />}
-            // width={300}
-          />
-          <DatePicker
-            showIcon
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            customInput={<ExampleCustomInput />}
-            dateFormat="d MMMM, yyyy"
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-          />
-        </div>
-        <div className={cart.absolutecenter}>
-          <div className={cart.flexcontent}>
-            <Image src="/icons/header/group.svg" />
-            <p className={cart.grouptext}>Group By: Name</p>
+    <div className={cart.appear}>
+      <div className={cart.headernavcategoriescontainer}>
+        <div className={cart.leftcontainer}>
+          <div className={cart.rightcontainer}>
+            <DatePicker
+              dateFormat="d MMMM, yyyy"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              customInput={<ExampleCustomInput />}
+              // width={300}
+            />
+            <DatePicker
+              showIcon
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              customInput={<ExampleCustomInput />}
+              dateFormat="d MMMM, yyyy"
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+            />
           </div>
+          {/* <div className={cart.absolutecenter}>
+            <div className={cart.flexcontent}>
+              <Image src="/icons/header/group.svg" />
+              <p className={cart.grouptext}>Group By: Name</p>
+            </div>
+          </div> */}
         </div>
       </div>
     </div>

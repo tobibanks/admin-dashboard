@@ -99,7 +99,6 @@ const BoarderHeader = (props) => {
 };
 
 const ContentContainer = (props) => {
-  console.log(props.status);
   return (
     <div className={taskboard.contentcontainer}>
       <div className={taskboard.innercontainer}>

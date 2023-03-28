@@ -31,22 +31,30 @@ const ReportsGridDashboard = () => {
             <div className={reportsgrid.flexwrap}>
               <NavCategories
                 name="All Files"
+                filter={filter}
+                filter1={null}
                 total={`(${reportgriddata.length})`}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Pictures"
+                filter={filter}
+                filter1="image"
                 total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
+                filter={filter}
+                filter1="video"
                 total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
+                filter={filter}
+                filter1="document"
                 total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("document")}
               />
@@ -74,11 +82,20 @@ const ReportsGridDashboard = () => {
 export default ReportsGridDashboard;
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={reportsgrid.tablenavcontainer} onClick={props.onClick}>
-      {/* <p className={project.tablenavtext}> */}
+    <Button
+      className={
+        active
+          ? reportsgrid.tablenavcontaineractive
+          : reportsgrid.tablenavcontainer
+      }
+      onClick={props.onClick}
+    >
       {props.name}
       <span>{props.total}</span>
+      <span className={reportsgrid.disappear}>{props.filter}</span>
+      <span className={reportsgrid.disappear}>{props.filter1}</span>
       {/* </p> */}
     </Button>
   );

@@ -24,9 +24,6 @@ const ProjectDashboard = () => {
     return filteredData;
   }, [filter]);
 
-  // console.log(data);
-
-  console.log(filter);
   return (
     <Container className={project.container}>
       <DashboardLayout name="Projects">
@@ -38,22 +35,30 @@ const ProjectDashboard = () => {
               <NavCategories
                 name="All Projects"
                 total="(23)"
+                filter={filter}
+                filter1={null}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Upcoming"
                 total="(02)"
+                filter={filter}
+                filter1="Upcoming"
                 onClick={() => setFilter("Upcoming")}
               />
               <NavCategories
                 name="In Progress"
                 total="(10)"
+                filter1="In Progress"
+                filter={filter}
                 onClick={() => setFilter("In Progress")}
               />
               <NavCategories
                 name="Completed"
                 total="(11)"
+                filter={filter}
+                filter1="Complete"
                 onClick={() => setFilter("Complete")}
               />
             </div>
@@ -127,11 +132,19 @@ const ImageIcon = (props) => {
 };
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={project.tablenavcontainer} onClick={props.onClick}>
+    <Button
+      className={
+        active ? project.tablenavcontaineractive : project.tablenavcontainer
+      }
+      onClick={props.onClick}
+    >
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>
+      <span className={project.disappear}>{props.filter}</span>
+      <span className={project.disappear}>{props.filter1}</span>
       {/* </p> */}
     </Button>
   );

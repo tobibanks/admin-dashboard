@@ -5,10 +5,10 @@
 }
 
 :root {
-  --SVP-main: #cbab3a;
+  --SVP-main: #e1a450;
   --SVP-main50: #fff07d;
-  --SVP-main200: #e6c452;
-  --SVP-main400: #e6c452;
+  --SVP-main200: #fabb65;
+  --SVP-main400: #ca903d;
   --white: #ffffff;
   --textblack: #3f3f3f;
   --black50: #f3f3f3;
@@ -19,7 +19,7 @@
   --success: #45c000;
   --warning: #fce83a;
   --error: #ff3838;
-  --dashboard-yellow: #fffcf4;
+  --dashboard-yellow: #f0f0f0;
   --active-selection-black: rgba(104, 102, 95, 0.1);
 }
 

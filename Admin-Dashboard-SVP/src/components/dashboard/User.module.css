@@ -1,7 +1,8 @@
+/* @media only screen and (min-width: 1600px) { */
 .container {
   background-color: var(--dashboard-yellow);
   display: flex;
-  max-width: 1600px;
+  max-width: 1440px;
   /* width: 100%; */
   padding: 0rem !important;
   margin: 0 auto;
@@ -9,7 +10,7 @@
 }
 
 .navbar {
-  margin-top: 2rem;
+  margin-top: 5rem;
   width: 100%;
   position: sticky;
   top: 0;
@@ -55,7 +56,7 @@
 
 .centercontainer1 {
   padding: 0rem;
-  /* margin-top: 1rem; */
+  width: 100%;
 }
 
 .stickycontainer {
@@ -70,7 +71,7 @@
 
 .linktext {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-left: 1rem;
   color: black;
   margin-bottom: 0px;
@@ -100,21 +101,22 @@ a {
   gap: 1rem;
 }
 
-.center {
+.centerimage {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .center1 {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logOutContainer {
-  margin-top: 22rem;
+  margin-top: 19rem;
 }
 
 .avatartitle {
@@ -139,6 +141,7 @@ a {
 
 .button {
   width: fit-content;
+  margin-top: 0.5rem;
   gap: 1rem;
   display: flex;
 }
@@ -152,6 +155,7 @@ a {
 
 .logouttext {
   font-size: 1rem;
+  margin-top: 0px;
   font-weight: 600;
   margin-bottom: 0px;
   color: var(--SVP-main);
@@ -160,7 +164,7 @@ a {
 
 .rightcontainer {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   width: 100%;
   position: sticky;
   top: 0;
@@ -174,7 +178,7 @@ a {
 }
 
 .titlecontainer {
-  width: 59%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -188,6 +192,7 @@ a {
 .headertitle {
   font-weight: 700;
   font-size: 1rem;
+  margin-bottom: 0px;
   font-family: "Inter", sans-serif;
   text-transform: uppercase;
 }
@@ -215,13 +220,13 @@ a {
 }
 
 .innercontent {
-  padding: 1rem;
+  padding: 24px;
 }
 
 .contentcardscontainer {
   border: 1px solid;
   margin-top: 2rem;
-  width: 23rem;
+  width: 234px;
   border-style: dashed;
   border-radius: 1rem;
   border-color: var(--SVP-main);
@@ -234,7 +239,7 @@ a {
 
 .contentheadertext {
   font-family: "Inter", sans-serif;
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: 600;
   margin-bottom: 0px;
   color: var(--SVP-main);
@@ -250,9 +255,10 @@ a {
 
 .description {
   margin-top: 1.6rem;
-  font-size: 1rem;
+  font-size: 16px;
+  line-height: 19px;
   font-family: "Inter", sans-serif;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .arrow {
@@ -287,8 +293,9 @@ a {
 .flexcontainer {
   display: flex;
   gap: 2rem;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
+
 .flexingcontainer {
   margin-bottom: 2rem;
 }
@@ -344,6 +351,7 @@ a {
 
 .color {
   color: var(--SVP-main);
+  font-weight: 600;
 }
 
 .notificationcontentdescription {
@@ -562,7 +570,9 @@ td {
   margin-bottom: 0rem;
   text-transform: uppercase;
 }
-
+.projectcontainer1 {
+  padding-bottom: 1rem;
+}
 .projectflexcontainer {
   display: flex;
   justify-content: space-between;
@@ -571,14 +581,14 @@ td {
 .projectbutton {
   border: 1px solid;
   border-color: var(--black200);
-  padding: 0.7rem;
+  padding: 5px 10px;
   border-radius: 0.8rem;
 }
 
 .projectbuttonactive {
   border: 1px solid;
   border-color: var(--SVP-main);
-  padding: 0.7rem;
+  padding: 5px 10px;
   border-radius: 0.8rem;
 }
 
@@ -610,7 +620,8 @@ td {
 
 .tablecontainer {
   margin-top: 1rem;
-  padding-bottom: 2rem;
+  /* margin-bottom: 1rem; */
+  /* padding-bottom: 0.rem; */
   background-color: var(--dashboard-yellow);
 }
 
@@ -625,11 +636,12 @@ td {
 }
 
 .avatar {
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 6px;
+  padding-right: 6px;
   border-radius: 50%;
+  font-size: 16px;
   margin-bottom: 0px;
   color: white;
   background-color: var(--SVP-main);
@@ -666,4 +678,117 @@ td {
 
 .align {
   vertical-align: middle;
+}
+
+.displaytext {
+  display: none;
+}
+
+.welcomemessage {
+  margin-top: 30px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+}
+
+.welcomecolormessage {
+  color: var(--SVP-main);
+}
+
+.hamburgercontainer {
+  cursor: pointer;
+}
+
+.hamburgericon {
+  display: none;
+}
+/* } */
+.closecontainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .navbarTabContainerActive {
+    border-radius: 0.4rem;
+    margin-bottom: 0.2rem;
+    /* padding: 1rem 0.8rem; */
+    width: 100%;
+    display: flex;
+    background-color: var(--active-selection-black);
+  }
+
+  .navbarTabContainer {
+    margin-bottom: 0.2rem;
+    display: flex;
+    width: fit-content;
+    /* padding: 1rem 0.8rem; */
+  }
+
+  /* .navbarTabContainer {
+    border-radius: 0.4rem;
+    margin-bottom: 0.2rem;
+    padding: 1rem 0.4rem;
+    width: 100%;
+    /* margin-bottom: 2rem; */
+  /* display: flex; */
+  /* }  */
+
+  .linktextactive {
+    font-size: 1.1rem;
+    margin-bottom: 0px;
+    color: var(--SVP-main);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 1rem;
+    font-family: "Inter", sans-serif;
+  }
+
+  .linktext {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    color: black;
+    margin-bottom: 0px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .mainnav {
+    height: 100%; /* 100% Full-height */
+    transform: translateX(-100%);
+    width: 20%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: -30px;
+    background-color: var(--dashboard-yellow);
+    overflow: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .activemainnav {
+    height: 100%; /* 100% Full-height */
+    transform: translateX(0%);
+    width: 20%; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0px;
+    background-color: var(--dashboard-yellow);
+    overflow: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .navbar {
+    margin-top: 3rem;
+  }
+  .hamburgericon {
+    display: block;
+    cursor: pointer;
+  }
+  .header {
+    margin-bottom: 1.5rem;
+  }
 }

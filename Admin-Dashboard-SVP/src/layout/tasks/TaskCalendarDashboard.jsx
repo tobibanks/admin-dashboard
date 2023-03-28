@@ -35,7 +35,7 @@ const TaskCalendarDashboard = () => {
               // defaultView={week}
               // views={["week"]}
               defaultDate={new Date(2015, 3, 1)}
-              popup={false}
+              // popup={false}
               //   onShowMore={(events, date) =>
               //     this.setState({ showModal: true, events })
               //   }

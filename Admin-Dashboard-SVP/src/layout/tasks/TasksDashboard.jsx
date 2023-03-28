@@ -32,22 +32,30 @@ const TasksDashboard = () => {
               <NavCategories
                 name="All Projects"
                 total="(23)"
+                filter={filter}
+                filter1={null}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Approved"
                 total="(02)"
+                filter={filter}
+                filter1="Approved"
                 onClick={() => setFilter("Approved")}
               />
               <NavCategories
                 name="Pending"
                 total="(10)"
+                filter1="Pending"
+                filter={filter}
                 onClick={() => setFilter("Pending")}
               />
               <NavCategories
                 name="Declined"
                 total="(11)"
+                filter={filter}
+                filter1="Declined"
                 onClick={() => setFilter("Declined")}
               />
             </div>
@@ -110,11 +118,18 @@ const TasksDashboard = () => {
 export default TasksDashboard;
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={task.tablenavcontainer} onClick={props.onClick}>
+    <Button
+      className={active ? task.tablenavcontaineractive : task.tablenavcontainer}
+      onClick={props.onClick}
+    >
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>
+      <span className={task.disappear}>{props.filter}</span>
+      <span className={task.disappear}>{props.filter1}</span>
+
       {/* </p> */}
     </Button>
   );

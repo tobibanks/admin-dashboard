@@ -42,22 +42,30 @@ const ProjectGridDashboard = () => {
             <div className={project.flexwrap}>
               <NavCategories
                 name="All Projects"
+                filter={filter}
+                filter1={null}
                 total={`(${ProjectsCollection.length})`}
                 onClick={() => setFilter(null)}
               />
 
               <NavCategories
                 name="Upcoming"
+                filter={filter}
+                filter1="Upcoming"
                 total={`(${filteredUpcomingData.length})`}
                 onClick={() => setFilter("Upcoming")}
               />
               <NavCategories
                 name="In Progress"
+                filter1="In Progress"
+                filter={filter}
                 total={`(${filteredInProgressData.length})`}
                 onClick={() => setFilter("In Progress")}
               />
               <NavCategories
                 name="Completed"
+                filter={filter}
+                filter1="Complete"
                 total={`(${filteredCompleteData.length})`}
                 onClick={() => setFilter("Complete")}
               />
@@ -72,14 +80,8 @@ const ProjectGridDashboard = () => {
                 text={projectcollect.name}
                 date={projectcollect.date}
                 status={projectcollect.status}
+                priority={projectcollect.priority}
               >
-                {projectcollect.priority === "important" ? (
-                  <ImageIcon imagelink="/icons/table/redflag.svg" />
-                ) : projectcollect.priority === "normal" ? (
-                  <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                ) : projectcollect.priority === "warning" ? (
-                  <ImageIcon imagelink="/icons/table/warningflag.svg" />
-                ) : null}
               </ProjectGridContainer>
             ))}
           </div>
@@ -96,11 +98,19 @@ const ImageIcon = (props) => {
 };
 
 const NavCategories = (props) => {
+  const active = props.filter === props.filter1;
   return (
-    <Button className={project.tablenavcontainer} onClick={props.onClick}>
+    <Button
+      className={
+        active ? project.tablenavcontaineractive : project.tablenavcontainer
+      }
+      onClick={props.onClick}
+    >
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>
+      <span className={project.disappear}>{props.filter}</span>
+      <span className={project.disappear}>{props.filter1}</span>
       {/* </p> */}
     </Button>
   );

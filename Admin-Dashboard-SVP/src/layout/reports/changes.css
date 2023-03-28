@@ -1,5 +1,6 @@
 tr:hover {
   background-color: var(--dashboard-yellow);
+  cursor: pointer;
   font-weight: 700;
 }
 
