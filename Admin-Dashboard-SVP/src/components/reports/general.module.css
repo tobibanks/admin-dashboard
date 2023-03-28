@@ -438,3 +438,6 @@
   justify-content: flex-end;
   align-items: center;
 }
+.innercontainer{
+  margin-right: 4rem;
+}

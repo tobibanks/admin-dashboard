@@ -2,7 +2,7 @@ import React from "react";
 import modal from "./tasktable.module.css";
 import { TasksCollection } from "../../../data/task";
 import { Modal, Image } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
 
 const ImageAttachment = [
@@ -51,7 +51,26 @@ const ModalTask = (props) => {
               <div className={modal.flexequalcontainer}>
                 <div className={modal.descriptionleftcontainer}>
                   <div className={modal.paddingcontain}>
-                    <p className={modal.nameproject}>{collect.name}</p>
+                    <div className={modal.flexmodalcontainer}>
+                      <div className={modal.firstphase}>
+                        <p className={modal.nameproject}>{collect.task}</p>
+                        {collect.priority === "important" ? (
+                          <Image src="/icons/table/redflag.svg" />
+                        ) : collect.priority === "normal" ? (
+                          <Image src="/icons/table/normalflag.svg" />
+                        ) : collect.priority === "warning" ? (
+                          <Image src="/icons/table/warningflag.svg" />
+                        ) : null}
+                      </div>
+                      <div>
+                        <div className={modal.buttonname}>
+                          <p className={modal.buttontext}>
+                            Upload Attachments{" "}
+                            <MdOutlineCloudUpload />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                     <p className={modal.description}>{collect.description}</p>
                     <p className={modal.assigned}>Assigned to:</p>
                     <div className={modal.yellowbackground}>
@@ -62,53 +81,6 @@ const ModalTask = (props) => {
                       />
                       <div className={modal.absolutecenter}>
                         <p className={modal.textname}>{collect.personname}</p>
-                      </div>
-                    </div>
-                    <p className={modal.taskname}>Tasks</p>
-                    <div className={modal.taskcontainer}>
-                      <div className={modal.taskheader}>
-                        <div className={modal.flexheader}>
-                          <Image
-                            src="/icons/sidebar/tasks-icon.svg"
-                            alt="task-icon"
-                          />
-                          <div className={modal.absolutecenter}>
-                            <p className={modal.headertext1}>All Tasks</p>
-                          </div>
-                        </div>
-                        <div className={modal.absolutecenter}>
-                          <p className={modal.headertext1}>5/10</p>
-                        </div>
-                      </div>
-                      <div className={modal.progressbar}>
-                        <div className={modal.progressyellow}></div>
-                      </div>
-                      <div className={modal.formcontainer}>
-                        <Form>
-                          <Form.Check
-                            defaultChecked
-                            type="checkbox"
-                            id="custom-switch"
-                            label="Site Clearing"
-                          />
-                          <Form.Check
-                            defaultChecked
-                            type="checkbox"
-                            label="Site Clearing"
-                            id="disabled-custom-switch"
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            label="Site Clearing"
-                            id="disabled-custom-switch"
-                          />
-                        </Form>
-                        <div className={modal.flexheader2}>
-                          <div className={modal.absolutecenter}>
-                            <p className={modal.seetext}>See More</p>
-                          </div>
-                          <Image src="/icons/arrow-down.svg" />
-                        </div>
                       </div>
                     </div>
 
@@ -168,7 +140,7 @@ const CalendarText = (props) => {
       <div className={modal.icontextcontainer}>
         <Image
           src="/icons/calendar.svg"
-          className={modal.calendaricon}
+          className={modal.calendaricon1}
           alt="priority"
         />
         <p className={modal.datetext}>{props.date}</p>

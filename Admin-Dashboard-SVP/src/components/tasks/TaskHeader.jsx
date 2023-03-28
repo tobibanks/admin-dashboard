@@ -24,10 +24,10 @@ const TaskHeader = (props) => {
             imagelinkactive="/icons/header/active-board.svg"
           />
           <NavBoxes
-            title="Grid"
+            title="Calendar"
             pathlink="/task/calendar"
-            imagelink="/icons/header/grid.svg"
-            imagelinkactive="/icons/header/active-grid.svg"
+            imagelink="/icons/header/calendar.svg"
+            imagelinkactive="/icons/header/active-calendar.svg"
           />
         </div>
         <div className={task.absolutecenter3}>
@@ -50,9 +50,6 @@ export default TaskHeader;
 
 const NavBoxes = (props) => {
   const active = location.pathname === props.pathlink;
-  console.log(active);
-  // console.log(props.imagelink);
-  // console.log(props.title);
   return (
     <Link
       to={props.pathlink}
