@@ -565,6 +565,7 @@
 .buttonname {
   background-color: var(--SVP-main);
   border-radius: 8px;
+  cursor: pointer;
   /* width: 12rem; */
   display: inline-block;
   margin-left: 0.5rem;

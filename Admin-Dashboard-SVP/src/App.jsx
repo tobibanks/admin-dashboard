@@ -18,6 +18,7 @@ import ProjectBoard from "./pages/projects/ProjectBoard";
 import Reports from "./pages/reports/Reports";
 import ReportsTable from "./pages/reports/ReportsTable";
 import ReportsGrid from "./pages/reports/ReportsGrid";
+import TaskApproval from "./pages/tasks/TaskApproval";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="/reports" element={<Reports />} />
             <Route path="/reports/table" element={<ReportsTable />} />
             <Route path="/reports/grid" element={<ReportsGrid />} />
+            <Route path="/task/approval" element={<TaskApproval />} />
             {/* <Route path="/message" element={<Messages />} /> */}
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>

@@ -234,6 +234,7 @@
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
+  margin-bottom: 0px;
   margin-left: 0.3rem;
 }
 
@@ -320,4 +321,147 @@
 
 .disappear {
   display: none;
+}
+
+.taskapprovaltitle {
+  padding-top: 52px;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.secondtitle {
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0px;
+  font-size: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+  font-weight: 600;
+  /* margin-left: 12px; */
+}
+
+.radiobutton {
+}
+.secondtitlecontainer {
+  background-color: var(--SVP-main);
+  margin-top: 20px;
+}
+
+.descriptioncontainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.descriptiontitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0px;
+  color: var(--textblack);
+}
+
+.descriptioncontent {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: var(--black600);
+  margin-bottom: 0px;
+}
+
+.yellowbackground {
+  border-radius: 25px;
+  background-color: #f0f0f0;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textname {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  /* margin-left: 0.3rem; */
+}
+
+.textarea {
+  background-color: var(--black200);
+  font-family: "Inter", sans-serif;
+}
+
+.textarea :focus {
+  background-color: var(--black200);
+  font-family: "Inter", sans-serif;
+}
+
+
+.absoluterightendcontainer {
+  display: flex;
+  padding: 2rem 0;
+  justify-content: flex-end;
+}
+
+.flexbuttoncontainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancelbutton {
+  border-radius: 8px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
+  border: 1px solid !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
+}
+
+.cancelbutton:hover {
+  border-radius: 8px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
+  border: 1px solid !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
+}
+
+.cancelbutton:focus {
+  border-radius: 8px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
+  border: 1px solid !important;
+  background-color: transparent !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
+}
+
+.sharebutton {
+  border-radius: 8px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  border: 1px solid !important;
+  background-color: var(--SVP-main) !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
 }

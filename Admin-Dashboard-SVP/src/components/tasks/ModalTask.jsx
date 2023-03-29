@@ -76,7 +76,6 @@ const ModalTask = (props) => {
                     <div className={modal.yellowbackground}>
                       <Image
                         src="/images/avatar.png"
-                        className={modal.imageavatar}
                         alt="avatar"
                       />
                       <div className={modal.absolutecenter}>

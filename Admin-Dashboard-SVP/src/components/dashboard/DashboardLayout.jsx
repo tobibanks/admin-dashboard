@@ -54,6 +54,7 @@ const DashboardLayout = (props) => {
                 path="/task"
                 path1="/task/board"
                 path2="/task/calendar"
+                path3="/task/approval"
               />
               <NavbarTab
                 imagelink="/icons/sidebar/reports-icon.svg"

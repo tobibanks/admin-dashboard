@@ -4,6 +4,7 @@ import { ProjectsCollection } from "../../../data/projects";
 import modal from "./general.module.css";
 import Form from "react-bootstrap/Form";
 import "./Modal.css";
+import { Link } from "react-router-dom";
 
 const ImageAttachment = [
   {
@@ -110,6 +111,14 @@ const ModalProject = (props) => {
                           <Image src="/icons/arrow-down.svg" />
                         </div>
                       </div>
+                    </div>
+
+                    <div className={modal.absolutebuttoncenter}>
+                      <Link to="/task/approval">
+                        <div className={modal.buttonname}>
+                          <p className={modal.buttontext}>Add New Task</p>
+                        </div>
+                      </Link>
                     </div>
 
                     <p className={modal.taskname}>Attachment</p>
