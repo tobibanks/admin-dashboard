@@ -19,11 +19,13 @@ import Reports from "./pages/reports/Reports";
 import ReportsTable from "./pages/reports/ReportsTable";
 import ReportsGrid from "./pages/reports/ReportsGrid";
 import TaskApproval from "./pages/tasks/TaskApproval";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
-    sm: 0,
-    md: 768,
+    sm: 400,
+    md: 600,
     lg: 1024,
     xl: 1192,
   },
@@ -35,13 +37,12 @@ const App = () => {
       <Media at="sm">
         <p>lorem</p>
       </Media>
-      <Media at="md">
-        <p>lorem</p>
-      </Media>
-      <Media greaterThanOrEqual="xl">
+      <Media greaterThanOrEqual="md">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Homepage />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/project" element={<Projects />} />
             <Route path="/project/board" element={<ProjectBoard />} />
@@ -54,7 +55,7 @@ const App = () => {
             <Route path="/reports/table" element={<ReportsTable />} />
             <Route path="/reports/grid" element={<ReportsGrid />} />
             <Route path="/task/approval" element={<TaskApproval />} />
-            {/* <Route path="/message" element={<Messages />} /> */}
+            <Route path="/message" element={<Messages />} />
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>
         </BrowserRouter>

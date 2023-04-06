@@ -15,3 +15,141 @@
   color: var(--textblack);
   font-family: "Inter", sans-serif;
 }
+
+.container {
+  max-width: 1440px !important;
+  padding: 0rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--SVP-main);
+}
+
+.logincenteredcontainer {
+  border-radius: 8px;
+  width: 28rem;
+  background-color: white;
+}
+
+.logincenteredcontainer1 {
+  border-radius: 8px;
+  width: 28rem;
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoicon {
+  padding: 1rem 0rem;
+}
+
+.formcontainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.submitbutton {
+  border-radius: 24px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  border: 1px solid !important;
+  background-color: var(--SVP-main) !important;
+  font-weight: 500;
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
+}
+
+.submitbutton1 {
+  border-radius: 24px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  border: 1px solid !important;
+  background-color: var(--SVP-main400);
+  font-weight: 500;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1rem;
+  border-color: transparent !important;
+}
+
+.submitbutton1:hover {
+  border-radius: 24px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  border: 1px solid !important;
+  background-color: var(--SVP-main400);
+  font-weight: 500;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 1rem;
+  border-color: transparent !important;
+}
+
+.text {
+  color: var(--textblack);
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.route {
+  color: var(--SVP-main);
+  margin-left: 0.3rem;
+  font-weight: 600;
+}
+
+.flexcontainer {
+  display: flex;
+  height: 100vh;
+}
+
+.figurecontainer {
+  flex: 1;
+  background-color: var(--dashboard-yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightcontainer {
+  background-color: var(--SVP-main);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formlabel {
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0.2rem;
+}
+
+.error {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: red;
+  padding-top: 10px;
+  font-weight: 500;
+}
+
+.errorcontainer {
+  margin-top: 5px;
+}
+
+.container1 {
+  max-width: 1440px !important;
+  padding: 0rem !important;
+  height: 100vh;
+}

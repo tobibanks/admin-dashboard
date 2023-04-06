@@ -39,8 +39,7 @@ tr {
   border-width: 0px;
 }
 
-@media (min-width: 992px) and (max-width: 1280px) {
-
+@media (min-width: 992px) and (max-width: 1100px) {
   .col-lg-10 {
     width: 100%;
   }

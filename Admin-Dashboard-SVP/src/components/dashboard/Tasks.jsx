@@ -12,11 +12,11 @@ const Tasks = () => {
       <Table striped className={task.tablestriped}>
         <thead>
           <tr>
-            <th>Task</th>
-            <th>Due</th>
-            <th>Approved</th>
-            <th>Pending</th>
-            <th>Declined</th>
+            <th className={task.heading}>Task</th>
+            <th className={task.heading}>Due</th>
+            <th className={task.heading}>Approved</th>
+            <th className={task.heading}>Pending</th>
+            <th className={task.heading}>Declined</th>
           </tr>
         </thead>
         <tbody>

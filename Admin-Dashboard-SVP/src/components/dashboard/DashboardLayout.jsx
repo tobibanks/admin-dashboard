@@ -92,7 +92,7 @@ const DashboardLayout = (props) => {
             </div>
           </div>
         </Col>
-        <Col lg={10} md={9} sm={9} className={side.centercontainer}>
+        <Col lg={10} className={side.centercontainer}>
           <div className={side.rightcontainer}>
             <div className={side.titlecontainer}>
               <div
