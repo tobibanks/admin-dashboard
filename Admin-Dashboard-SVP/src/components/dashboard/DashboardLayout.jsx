@@ -1,11 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import side from "./User.module.css";
 import { Container, Image, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { logout } from "@/features/auth/authSlice";
+import { useGetDetailsQuery } from "@/app/services/auth/authService";
 
 const DashboardLayout = (props) => {
   const [display, setDisplay] = useState(false);
-  // const active = navbarlinksandtitle.
+  // const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data: admin } = useGetDetailsQuery();
+
+  const LogOut = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   return (
     <Container className={side.container}>
       <Row className={side.rowcontainer}>
@@ -29,14 +41,17 @@ const DashboardLayout = (props) => {
             </div>
             <div className={side.centercontainer1}>
               <p className={side.welcomemessage}>
-                Hello,<span className={side.welcomecolormessage}> John</span>
+                Hello,
+                <span className={side.welcomecolormessage}>
+                  {admin?.firstname}
+                </span>
               </p>
               <NavbarTab
                 imagelinkactive="/icons/sidebar/dashboard-icon.svg"
                 imagelink="/icons/sidebar/dashboard.svg"
                 // imagelinkactive = "/icons/sidebar/svp.svg"
                 name="Dashboard"
-                path="/"
+                path="/dashboard"
               />
               <NavbarTab
                 imagelink="/icons/sidebar/project-icon.svg"
@@ -54,7 +69,6 @@ const DashboardLayout = (props) => {
                 path="/task"
                 path1="/task/board"
                 path2="/task/calendar"
-                path3="/task/approval"
               />
               <NavbarTab
                 imagelink="/icons/sidebar/reports-icon.svg"
@@ -78,13 +92,13 @@ const DashboardLayout = (props) => {
                     <Image src="/images/avatar.png" alt="avatar" />
                   </div>
                   <div className={side.textcontainer}>
-                    <p className={side.avatartitle}>John Doe</p>
-                    <p className={side.avatarcontext}>johndoe@gmail.com</p>
+                    <p className={side.avatartitle}>{admin?.firstname}</p>
+                    <p className={side.avatarcontext}>{admin?.email}</p>
                   </div>
                 </div>
               </div>
               <div className={side.center1}>
-                <div className={side.button}>
+                <div className={side.button} onClick={LogOut}>
                   <p className={side.logouttext}>Log Out</p>
                   <Image src="/icons/sidebar/log-out.svg" alt="log-out-icon" />
                 </div>

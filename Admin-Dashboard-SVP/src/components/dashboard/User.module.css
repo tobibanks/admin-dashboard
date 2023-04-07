@@ -142,7 +142,8 @@ a {
 .button {
   width: fit-content;
   margin-top: 0.5rem;
-  gap: 1rem;
+  cursor: pointer;
+  gap: 0.2rem;
   display: flex;
 }
 
@@ -155,7 +156,7 @@ a {
 
 .logouttext {
   font-size: 1rem;
-  margin-top: 0px;
+  margin-top: 2px;
   font-weight: 600;
   margin-bottom: 0px;
   color: var(--SVP-main);
@@ -636,10 +637,7 @@ td {
 }
 
 .avatar {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding: 7px 6px;
   border-radius: 50%;
   font-size: 16px;
   margin-bottom: 0px;
@@ -708,6 +706,63 @@ td {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2rem;
+}
+
+.spinner {
+  padding: 0.6rem 0;
+}
+
+.spinnercircle {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  padding: 0.5rem 1rem;
+}
+
+.spinnercircle:before {
+  z-index: 5;
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  border-radius: 50%;
+  border: 3px dashed #fff;
+  width: 25px;
+  height: 25px;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  animation: loading 1s linear infinite;
+}
+
+.spinnercircle:after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  border-radius: 50%;
+  border: 3px dashed #fff;
+  width: 25px;
+  height: 25px;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  animation: loading 1s ease infinite;
+  z-index: 10;
+}
+
+
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1100px) {
@@ -791,8 +846,4 @@ td {
   .header {
     margin-bottom: 1.5rem;
   }
-}
-
-.heading {
-  font-size: 14px;
 }
