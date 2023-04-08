@@ -2,6 +2,7 @@
   "name": "admin-dashboard-svp",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://account.saharaviewpoint.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
