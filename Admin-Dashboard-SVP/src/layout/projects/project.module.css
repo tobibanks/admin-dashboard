@@ -8,7 +8,8 @@
   background-color: white;
   margin: 0 auto;
   /* padding-bottom: 2rem; */
-  width: 90%;
+  width: 95%;
+  height: 100vh;
 }
 
 .tablenavcontainer {
@@ -503,14 +504,24 @@
 
 .calendaricon {
   margin-right: 0.2rem;
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 }
 
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.middleline {
+  border: 1px solid black;
+  width: 50px;
+}
+
+.dash {
+  border-top: 1px solid black;
+  width: 20px;
 }
 
 @media (min-width: 600px) and (max-width: 1280px) {

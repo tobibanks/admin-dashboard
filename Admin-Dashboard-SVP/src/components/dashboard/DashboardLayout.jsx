@@ -6,6 +6,7 @@ import { Container, Image, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { logout } from "@/features/auth/authSlice";
 import { useGetDetailsQuery } from "@/app/services/auth/authService";
+import { truncateString } from "../../../util/text";
 
 const DashboardLayout = (props) => {
   const [display, setDisplay] = useState(false);
@@ -13,6 +14,8 @@ const DashboardLayout = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: admin } = useGetDetailsQuery();
+
+  const adminInfo = admin || []
 
   const LogOut = () => {
     dispatch(logout());
@@ -41,9 +44,9 @@ const DashboardLayout = (props) => {
             </div>
             <div className={side.centercontainer1}>
               <p className={side.welcomemessage}>
-                Hello,
+                Hello, &nbsp;
                 <span className={side.welcomecolormessage}>
-                  {admin?.firstname}
+                  {adminInfo?.firstname}
                 </span>
               </p>
               <NavbarTab
@@ -90,15 +93,17 @@ const DashboardLayout = (props) => {
                 <div className={side.flex}>
                   <div className={side.absolutecenter}>
                     <p className={side.avatar1}>
-                      {admin?.firstname.charAt(0)}
+                      {adminInfo?.firstname?.charAt(0)}
                       <span className={side.label}>
-                        {admin?.lastname.charAt(0)}
+                        {adminInfo?.lastname?.charAt(0)}
                       </span>
                     </p>
                   </div>
                   <div className={side.textcontainer}>
-                    <p className={side.avatartitle}>{admin?.firstname}</p>
-                    <p className={side.avatarcontext}>{admin?.email}</p>
+                    <p className={side.avatartitle}>{adminInfo?.firstname}</p>
+                    <p className={side.avatarcontext}>
+                      {/* {truncateString(adminInfo?.email, 10)} */}
+                    </p>
                   </div>
                 </div>
               </div>

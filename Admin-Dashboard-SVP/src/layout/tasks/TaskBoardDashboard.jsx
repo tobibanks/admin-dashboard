@@ -16,7 +16,7 @@ const TaskBoardDashboard = () => {
 
   console.log(TasksBoardCollection);
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -34,7 +34,14 @@ const TaskBoardDashboard = () => {
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
-  console.log(inprogressdata);
+  const dataByDateinprogress = useMemo(() => {
+    const filtereddata = inprogressdata.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, inprogressdata]);
 
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
@@ -46,6 +53,15 @@ const TaskBoardDashboard = () => {
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
+  const dataByDateupcoming = useMemo(() => {
+    const filtereddata = upcomingdata.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, upcomingdata]);
+
   const completedata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
       (item) =>
@@ -55,6 +71,15 @@ const TaskBoardDashboard = () => {
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
+
+  const dataByDatecomplete = useMemo(() => {
+    const filtereddata = completedata.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, upcomingdata]);
 
   return (
     <Container className={taskboard.container}>
@@ -72,6 +97,9 @@ const TaskBoardDashboard = () => {
               customInput={<ExampleCustomInput />}
               width={300}
             />
+            <div className={taskboard.absolutecenter}>
+              <div className={taskboard.dash}></div>
+            </div>
             <DatePicker
               showIcon
               selected={endDate}
@@ -87,7 +115,7 @@ const TaskBoardDashboard = () => {
           <div className={taskboard.flexboardcontainer}>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="In Progress" />
-              {inprogressdata.map((filtereddata, index) => (
+              {dataByDateinprogress.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}
@@ -103,7 +131,7 @@ const TaskBoardDashboard = () => {
             </div>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="Upcoming" />
-              {upcomingdata.map((filtereddata, index) => (
+              {dataByDateupcoming.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}
@@ -119,7 +147,7 @@ const TaskBoardDashboard = () => {
             </div>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="Completed" />
-              {completedata.map((filtereddata, index) => (
+              {dataByDatecomplete.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}

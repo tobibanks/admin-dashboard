@@ -8,7 +8,8 @@
   background-color: white;
   margin: 0 auto;
   /* padding-bottom: 2rem; */
-  width: 90%;
+  width: 95%;
+  height: 100vh;
 }
 
 .leftcontainer {
@@ -200,7 +201,7 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 2rem;
-  background-color: #fffcf4;
+  background-color: #f0f0f0;
   margin-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
@@ -229,4 +230,31 @@
 
 .filerightcontainer {
   flex: 1;
+}
+.dash {
+  border-top: 1px solid black;
+  width: 20px;
+}
+
+.datepickerbutton {
+  border: 1px solid;
+  border-color: var(--black100);
+  border-radius: 8px;
+  background-color: white;
+  padding: 0.5rem;
+  white-space: nowrap;
+  display: flex;
+  /* background-color: blue; */
+}
+
+.calendaricon {
+  margin-right: 0.2rem;
+  width: 17px;
+  height: 17px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

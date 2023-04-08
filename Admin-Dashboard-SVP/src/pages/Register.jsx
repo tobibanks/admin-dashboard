@@ -33,7 +33,7 @@ const Register = () => {
     <Container className={registerform.container1}>
       <div className={registerform.flexcontainer}>
         <div className={registerform.figurecontainer}>
-          <Image src="/icons/login-illustration.svg" alt="icons" />
+          <Image src="/icons/login-illustration.svg" className={registerform.largeicon} alt="icons" />
         </div>
         <div className={registerform.rightcontainer}>
           <div className={registerform.logincenteredcontainer1}>
@@ -103,7 +103,7 @@ const Register = () => {
                       )}
                   </div>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicRole">
+                {/* <Form.Group className="mb-3" controlId="formBasicRole">
                   <Form.Label className={registerform.formlabel}>
                     Role
                   </Form.Label>
@@ -121,7 +121,7 @@ const Register = () => {
                     <option>Product Manager</option>
                     <option>Admin</option>
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className={registerform.formlabel}>
                     Email

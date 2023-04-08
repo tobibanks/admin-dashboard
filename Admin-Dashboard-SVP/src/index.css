@@ -161,3 +161,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+:focus {
+  outline: none;
+  box-shadow: none !important;
+}

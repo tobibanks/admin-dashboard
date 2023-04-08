@@ -4,8 +4,16 @@ import Table from "react-bootstrap/Table";
 import { Image } from "react-bootstrap";
 import { TasksData } from "../../../data/task";
 import { truncateString } from "../../../util/text";
+import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 
 const Tasks = () => {
+  const { data: TaskCollection } = useGetTaskDetailsQuery({
+    refetchOnMountArgChange: true,
+  });
+
+  const TasksTableCollection = TaskCollection || [];
+  var options = { day: "numeric", month: "short" };
+  console.log(TasksTableCollection);
   return (
     <div className={task.taskcontainer}>
       <p className={task.header1}>TASKS</p>
@@ -20,23 +28,25 @@ const Tasks = () => {
           </tr>
         </thead>
         <tbody>
-          {TasksData.map((Taskdata, index) => (
+          {TasksTableCollection.map((Taskdata, index) => (
             <tr key={index}>
               <td className={task.align}>
                 <div className={task.flexcontent}>
-                  {Taskdata.star === "starred" ? (
+                  {Taskdata.star === true ? (
                     <Icon imagelink="/icons/dashboard/task/starred.svg" />
                   ) : (
                     <Icon imagelink="/icons/dashboard/task/star.svg" />
                   )}
                   <div className={task.centertext}>
                     <p className={task.tasktitle}>
-                      {truncateString(Taskdata.name, 10)}
+                      {truncateString(Taskdata.name, 13)}
                     </p>
                   </div>
                 </div>
               </td>
-              <td className={task.align}>{Taskdata.date}</td>
+              <td className={task.align}>
+                {new Date(Taskdata.date).toLocaleDateString()}
+              </td>
               <td className={task.centericon}>
                 {Taskdata.approved === true ? (
                   <Icon imagelink="/icons/dashboard/task/progress-true.svg" />

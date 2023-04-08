@@ -22,7 +22,8 @@
   background-color: white;
   margin: 0 auto;
   /* padding-bottom: 2rem; */
-  width: 90%;
+  width: 95%;
+  height: 100vh;
 }
 
 .leftcontainer {
@@ -497,4 +498,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dash {
+  border-top: 1px solid black;
+  width: 20px;
 }

@@ -24,7 +24,7 @@ const TasksDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -42,6 +42,15 @@ const TasksDashboard = () => {
     );
     return filteredData;
   }, [filter, finalStartDate, finalEndDate, TasksTableCollection]);
+
+  const dataByDate = useMemo(() => {
+    const filtereddata = data.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, data]);
 
   const filteredApprovedData = TasksTableCollection.filter(
     (item) => item.status === "approved"
@@ -115,7 +124,7 @@ const TasksDashboard = () => {
             />
           </div>
           <TaskTableDisplay>
-            {data.map((taskcollect, index) => (
+            {dataByDate.map((taskcollect, index) => (
               <tr
                 key={index}
                 onClick={() => {

@@ -6,23 +6,60 @@ import reporttable from "./reports.module.css";
 import "./changes.css";
 import TableHeaderNav from "@/components/project/TableHeaderNav";
 import Header from "@/components/reports/Header";
+import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import ReportsTableContents from "@/components/reports/ReportsTableContents";
 import { TablesData } from "../../../data/reports";
+import { truncateString } from "../../../util/text";
 
 const ReportsTableDashboard = () => {
   const [filter, setFilter] = useState(null);
 
-  const data = useMemo(() => {
-    if (!filter) return TablesData;
-    const filteredData = TablesData.filter((item) => item.file === filter);
-    return filteredData;
-  }, [filter]);
+  const { data: AdminReports } = useGetReportsDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
 
-  const filteredImage = TablesData.filter((item) => item.file === "image");
-  const filteredVideo = TablesData.filter((item) => item.file === "video");
-  const filteredDocument = TablesData.filter(
-    (item) => item.file === "document"
+  const ReportsCollection = AdminReports || [];
+
+  const [modalShow, setModalShow] = React.useState(false);
+
+  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+
+  const convertedStartDate = new Date(startDate).toISOString();
+  const convertedEndDate = new Date(endDate).toISOString();
+
+  const finalStartDate = new Date(convertedStartDate).getTime();
+  const finalEndDate = new Date(convertedEndDate).getTime();
+
+  const data = useMemo(() => {
+    if (!filter) return ReportsCollection;
+    const filteredData = ReportsCollection.map((report) => ({
+      ...report,
+      attachments: report.attachments.filter((attachment) =>
+        attachment.type.startsWith(filter)
+      ),
+    }));
+    return filteredData;
+  }, [filter, ReportsCollection]);
+
+  const filteredImage = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("image")
+    )
   );
+
+  const filteredVideo = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("video")
+    )
+  );
+
+  const filteredDocument = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("document")
+    )
+  );
+
   return (
     <Container className={reporttable.container}>
       <DashboardLayout name="Reports">
@@ -68,16 +105,16 @@ const ReportsTableDashboard = () => {
               <tr key={index}>
                 <td>
                   <div className={reporttable.flextable}>
-                    <Image src={tabledata.src} />
+                    {/* <Image src={tabledata.src} /> */}
                     <div className={reporttable.absolutecenter}>
                       <p className={reporttable.tablename}>{tabledata.name}</p>
                     </div>
                   </div>
                 </td>
-                <td>{tabledata.projectname}</td>
-                <td>{tabledata.sentfrom}</td>
-                <td>{tabledata.sentto}</td>
-                <td>{tabledata.datereceived}</td>
+                <td>{tabledata.project.name}</td>
+                <td>{tabledata?.sent_from?.firstname}</td>
+                <td>{tabledata?.sent_to?.firstname}</td>
+                <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
               </tr>
             ))}
           </ReportsTableContents>
@@ -92,7 +129,14 @@ export default ReportsTableDashboard;
 const NavCategories = (props) => {
   const active = props.filter === props.filter1;
   return (
-    <Button className={active ? reporttable.tablenavcontaineractive : reporttable.tablenavcontainer} onClick={props.onClick}>
+    <Button
+      className={
+        active
+          ? reporttable.tablenavcontaineractive
+          : reporttable.tablenavcontainer
+      }
+      onClick={props.onClick}
+    >
       {/* <p className={project.tablenavtext}> */}
       {props.name}
       <span>{props.total}</span>

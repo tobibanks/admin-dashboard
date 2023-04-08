@@ -3,24 +3,63 @@ import FileInputContainer from "@/components/reports/FileInputContainer";
 import React, { useState, useMemo } from "react";
 import Header from "../../components/reports/Header";
 import reportsgrid from "./reports.module.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Container, Button, Image } from "react-bootstrap";
 import TableHeaderNav from "../../components/project/TableHeaderNav";
 import { reportgriddata } from "../../../data/reports";
+import { truncateString } from "../../../util/text";
+import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 
 const ReportsGridDashboard = () => {
   const [filter, setFilter] = useState(null);
 
-  const data = useMemo(() => {
-    if (!filter) return reportgriddata;
-    const filteredData = reportgriddata.filter((item) => item.file === filter);
-    return filteredData;
-  }, [filter]);
+  const { data: AdminReports } = useGetReportsDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
 
-  const filteredImage = reportgriddata.filter((item) => item.file === "image");
-  const filteredVideo = reportgriddata.filter((item) => item.file === "video");
-  const filteredDocument = reportgriddata.filter(
-    (item) => item.file === "document"
+  const ReportsCollection = AdminReports || [];
+
+  console.log(ReportsCollection);
+
+  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+
+  const convertedStartDate = new Date(startDate).toISOString();
+  const convertedEndDate = new Date(endDate).toISOString();
+
+  const finalStartDate = new Date(convertedStartDate).getTime();
+  const finalEndDate = new Date(convertedEndDate).getTime();
+
+  const data = useMemo(() => {
+    if (!filter) return ReportsCollection;
+    const filteredData = ReportsCollection.map((report) => ({
+      ...report,
+      attachments: report.attachments.filter((attachment) =>
+        attachment.type.startsWith(filter)
+      ),
+    }));
+    return filteredData;
+  }, [filter, ReportsCollection]);
+
+  const filteredImage = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("image")
+    )
   );
+
+  const filteredVideo = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("video")
+    )
+  );
+
+  const filteredDocument = ReportsCollection.map((reportcollection) =>
+    reportcollection.attachments.filter((attachment) =>
+      attachment.type.startsWith("document")
+    )
+  );
+
   return (
     <Container className={reportsgrid.container}>
       <DashboardLayout name="Reports">
@@ -62,16 +101,37 @@ const ReportsGridDashboard = () => {
             <TableHeaderNav />
           </div>
           <div className={reportsgrid.flexwrapcontainer}>
-            {data.map((report, index) => (
+            {/* {data.map((report, index) => (
               <CardGridContainer
-                imagesrc={report.src}
+                key={index}
+                imagesrc={report.type}
                 name={report.name}
-                mainimage={report.mainimage}
-                avatar={report.avatar}
-                avatarname={report.avatarname}
+                // mainimage={report.mainimage}
+                // avatar={report.avatar}
+                // avatarname={report.avatarname}
                 date={report.dateuploaded}
               />
-            ))}
+            ))} */}
+            {data.map((report, index) => {
+              const dateReport = report.date;
+              return (
+                <div key={index} style={{ display: "grid", gap: "2rem" }}>
+                  {report.attachments.map((repo, index) => (
+                    <CardGridContainer
+                      key={index}
+                      url={repo.url}
+                      firstname={repo?.sent_to?.firstname || null}
+                      // lastname = {repo?.sent_to?.lastname}
+                      name={repo.name}
+                      // mainimage={report.mainimage}
+                      // avatar={report.avatar}
+                      // avatarname={report.avatarname}
+                      date={dateReport}
+                    />
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </DashboardLayout>
@@ -105,25 +165,32 @@ const CardGridContainer = (props) => {
   return (
     <div className={reportsgrid.cardcontainer}>
       <div className={reportsgrid.flexcontainer}>
-        <Image src={`${props.imagesrc}`} alt="image-icon" />
+        {/* <img src={props.url} alt="image-icon" /> */}
         <div className={reportsgrid.absolutecenter}>
-          <p className={reportsgrid.filename}>{props.name}</p>
+          <p className={reportsgrid.filename}>
+            {truncateString(props.name, 7)}
+          </p>
+          {/* <span>{truncateString(props.lastname, 1)}</span> */}
         </div>
       </div>
-      <Image
+      {/* <Image
         src={`${props.mainimage}`}
         alt="main-image"
         className={reportsgrid.mainimage}
-      />
+      /> */}
       <div className={reportsgrid.flexjust}>
         <div className={reportsgrid.flexcontainer}>
-          <Image src={`${props.avatar}`} />
+          {/* <Image src={`${props.avatar}`} /> */}
           <div className={reportsgrid.absolutecenter}>
-            <p className={reportsgrid.avatarname}>{props.avatarname}</p>
+            <p className={reportsgrid.avatarname}>{props.firstname}</p>
+            <p className={reportsgrid.avatarname}>{props.lastname}</p>
           </div>
         </div>
         <div className={reportsgrid.absolutecenter}>
-          <p className={reportsgrid.date}>{props.date}</p>
+          <p className={reportsgrid.date}>
+            {" "}
+            {new Date(props.date).toLocaleDateString()}
+          </p>
         </div>
       </div>
     </div>

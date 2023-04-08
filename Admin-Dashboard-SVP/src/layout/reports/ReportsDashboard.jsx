@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, forwardRef } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import report from "./reports.module.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
@@ -7,7 +7,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TableHeaderNav from "../../components/project/TableHeaderNav";
 import FileInputContainer from "@/components/reports/FileInputContainer";
-
 import ReportModal from "@/components/reports/ReportModal";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
@@ -19,12 +18,6 @@ const ReportsDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
-  const AllReports = ReportsCollection.map(
-    (report) => report.attachments
-  ).reduce((prev, curr) => [...prev, ...curr],[]);
-
-  console.log(AllReports);
-
   // console.log(ReportsCollection[0]?.attachments[0]?.type);
 
   console.log(ReportsCollection);
@@ -32,7 +25,7 @@ const ReportsDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -40,22 +33,27 @@ const ReportsDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
-  console.log(
-    ReportsCollection.map((reports) => {
-      return reports.attachments;
-    })
-  );
   const data = useMemo(() => {
     if (!filter) return ReportsCollection;
-    const filteredData = ReportsCollection.map((reportcollection) =>
-      reportcollection.attachments.filter((attachment) =>
+    const filteredData = ReportsCollection.map((report) => ({
+      ...report,
+      attachments: report.attachments.filter((attachment) =>
         attachment.type.startsWith(filter)
-      )
-    );
+      ),
+    }));
     return filteredData;
   }, [filter, ReportsCollection]);
 
-  console.log(data)
+  const dataByDate = useMemo(() => {
+    const filtereddata = data.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, data]);
+
+  console.log(data);
 
   const filteredImage = ReportsCollection.map((reportcollection) =>
     reportcollection.attachments.filter((attachment) =>
@@ -98,24 +96,47 @@ const ReportsDashboard = () => {
                 filter={filter}
                 filter1="image"
                 total={`(${filteredImage.length})`}
-                onClick={() => setFilter("image/jpeg")}
+                onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
-                // total={`(${filteredVideo.length})`}
-                onClick={() => setFilter("video/mp4")}
+                total={`(${filteredVideo.length})`}
+                onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
                 total={`(${filteredDocument.length})`}
-                onClick={() => setFilter("application/pdf")}
+                onClick={() => setFilter("application")}
               />
             </div>
-            <TableHeaderNav />
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              // width={300}
+            />
+            <div className={report.absolutecenter}>
+              <div className={report.dash}></div>
+            </div>
+            <DatePicker
+              showIcon
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+            />
           </div>
           <div className={report.wrapcontainer}>
             {data.map((report, index) => {
@@ -188,3 +209,16 @@ const FileContainer = (props) => {
     </div>
   );
 };
+
+const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  <button className={report.datepickerbutton} onClick={onClick} ref={ref}>
+    <div className={report.center}>
+      <Image
+        src="/icons/calendar.svg"
+        alt="icon"
+        className={report.calendaricon}
+      />
+    </div>
+    {value}
+  </button>
+));

@@ -15,7 +15,7 @@ const ProjectGridDashboard = () => {
   });
   const ProjectGridCollection = UserProjectGrid || [];
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2022"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -35,6 +35,15 @@ const ProjectGridDashboard = () => {
     );
     return filteredData;
   }, [filter, finalStartDate, finalEndDate, ProjectGridCollection]);
+
+  const dataByDate = useMemo(() => {
+    const filtereddata = data.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, data]);
 
   const filteredInProgressData = ProjectGridCollection.filter(
     (item) => item.status === "inprogress"
@@ -96,6 +105,9 @@ const ProjectGridDashboard = () => {
               customInput={<ExampleCustomInput />}
               width={300}
             />
+            <div className={project.absolutecenter}>
+              <div className={project.dash}></div>
+            </div>
             <DatePicker
               showIcon
               selected={endDate}
@@ -110,7 +122,7 @@ const ProjectGridDashboard = () => {
           </div>
           {/* </div> */}
           <div className={project.wrap}>
-            {data.map((projectcollect, index) => (
+            {dataByDate.map((projectcollect, index) => (
               <ProjectGridContainer
                 key={index}
                 text={projectcollect.name}

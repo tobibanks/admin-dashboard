@@ -15,7 +15,7 @@ const ProjectBoardDashboard = () => {
 
   const ProjectsBoardCollection = UserProjectsBoard || [];
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2024"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -25,23 +25,35 @@ const ProjectBoardDashboard = () => {
 
   const inprogressdata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
-      (item) =>
-        item.status === "inprogress" &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.status === "inprogress"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
-  const upcomingdata = useMemo(() => {
-    const filteredData = ProjectsBoardCollection.filter(
+  const dataByDateinprogress = useMemo(() => {
+    const filtereddata = inprogressdata.filter(
       (item) =>
-        item.status === "Upcoming" &&
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, inprogressdata]);
+
+  const upcomingdata = useMemo(() => {
+    const filteredData = ProjectsBoardCollection.filter(
+      (item) => item.status === "Upcoming"
+    );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
+
+  const dataByDateupcoming = useMemo(() => {
+    const filtereddata = upcomingdata.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, upcomingdata]);
 
   const completedata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
@@ -52,6 +64,15 @@ const ProjectBoardDashboard = () => {
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
+
+  const dataByDatecomplete = useMemo(() => {
+    const filtereddata = completedata.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, upcomingdata]);
 
   console.log(inprogressdata);
   return (
@@ -71,6 +92,9 @@ const ProjectBoardDashboard = () => {
               customInput={<ExampleCustomInput />}
               width={300}
             />
+            <div className={grid.absolutecenter}>
+              <div className={grid.dash}></div>
+            </div>
             <DatePicker
               showIcon
               selected={endDate}
@@ -86,7 +110,7 @@ const ProjectBoardDashboard = () => {
           <div className={grid.flexboardcontainer}>
             <div className={grid.sizecontainer}>
               <BoarderHeader text="In Progress" />
-              {inprogressdata.map((filtereddata, index) => (
+              {dataByDateinprogress.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   headertext={filtereddata.name}
@@ -108,7 +132,7 @@ const ProjectBoardDashboard = () => {
             </div>
             <div className={grid.sizecontainer}>
               <BoarderHeader text="Upcoming" />
-              {upcomingdata.map((filtereddata, index) => (
+              {dataByDateupcoming.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   headertext={filtereddata.name}
@@ -130,7 +154,7 @@ const ProjectBoardDashboard = () => {
             </div>
             <div className={grid.sizecontainer}>
               <BoarderHeader text="Completed" />
-              {completedata.map((filtereddata, index) => (
+              {dataByDatecomplete.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   headertext={filtereddata.projectname}
@@ -210,7 +234,7 @@ const ContentContainer = (props) => {
           </div>
           <div
             className={
-              props.status === "inprogress"
+              props.status === "In Progress"
                 ? grid.statusbutton
                 : grid.completebutton
             }

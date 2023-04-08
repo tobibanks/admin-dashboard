@@ -16,15 +16,15 @@ const ProjectDashboard = () => {
     refetchOnMountOrArgChange: true,
   });
 
+  const ProjectsCollection = UserTableProjects || [];
+  console.log(ProjectsCollection.map);
 
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
-  const ProjectsCollection = UserTableProjects || [];
-
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -44,8 +44,17 @@ const ProjectDashboard = () => {
     return filteredData;
   }, [filter, finalStartDate, finalEndDate, ProjectsCollection]);
 
+  const dataByDate = useMemo(() => {
+    const filtereddata = data.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, data]);
+
   const filteredInProgressData = ProjectsCollection.filter(
-    (item) => item.status === "inprogress"
+    (item) => item.status === "In Progress"
   );
 
   const filteredUpcomingData = ProjectsCollection.filter(
@@ -106,6 +115,9 @@ const ProjectDashboard = () => {
               customInput={<ExampleCustomInput />}
               // width={300}
             />
+            <div className={project.absolutecenter}>
+              <div className={project.dash}></div>
+            </div>
             <DatePicker
               showIcon
               selected={endDate}
@@ -119,7 +131,7 @@ const ProjectDashboard = () => {
             />
           </div>
           <TableDisplay>
-            {data.map((projectcollect, index) => (
+            {dataByDate.map((projectcollect, index) => (
               <tr
                 onClick={() => {
                   setSetting(projectcollect._id);
@@ -133,16 +145,17 @@ const ProjectDashboard = () => {
                   <div className={project.absolutecenter}>
                     <p className={project.avatar}>
                       {" "}
-                      {projectcollect.requested_by?.firstname.charAt(0) || null}
+                      {projectcollect?.requested_by?.firstname?.charAt(0) ||
+                        null}
                       <span>
-                        {projectcollect.requested_by?.lastname.charAt(0) ||
+                        {projectcollect?.requested_by?.lastname?.charAt(0) ||
                           null}
                       </span>
                     </p>
                   </div>
                 </td>
                 <td>
-                  <StatusButton text={projectcollect.status} />
+                  <StatusButton text={projectcollect.status.admin} />
                 </td>
                 <td className={project.centericon}>
                   {new Date(projectcollect.date).toLocaleDateString()}
@@ -176,7 +189,7 @@ const StatusButton = (props) => {
   return (
     <div
       className={
-        props.text === "inprogress"
+        props.text === "In Progress"
           ? project.statusbutton
           : props.text === "Complete"
           ? project.completebutton

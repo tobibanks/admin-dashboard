@@ -26,6 +26,16 @@
   background-color: var(--SVP-main);
 }
 
+.container2 {
+  /* max-width: 1440px !important; */
+  padding: 0rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--SVP-main);
+}
+
 .logincenteredcontainer {
   border-radius: 8px;
   width: 28rem;
@@ -152,4 +162,9 @@
   max-width: 1440px !important;
   padding: 0rem !important;
   height: 100vh;
+}
+
+.largeicon {
+  width: 70%;
+  margin: 0 auto;
 }
