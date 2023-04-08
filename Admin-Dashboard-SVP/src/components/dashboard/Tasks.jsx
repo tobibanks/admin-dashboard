@@ -12,7 +12,7 @@ const Tasks = () => {
   });
 
   const TasksTableCollection = TaskCollection || [];
-  var options = { day: "numeric", month: "short" };
+  // var options = { day: "numeric", month: "short" };
   console.log(TasksTableCollection);
   return (
     <div className={task.taskcontainer}>
