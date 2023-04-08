@@ -76,6 +76,7 @@
 .filecontainer {
   /* width: 16rem; */
   border: 1px solid;
+  width: 227px;
   cursor: pointer;
   padding: 0.5rem 0.5rem 0.1rem 0.5rem;
   display: flex;
@@ -134,6 +135,10 @@
   margin-top: 1rem;
   gap: 2rem;
   padding-bottom: 2rem;
+}
+.filegridcontainer {
+  display: grid;
+  gap: 1rem;
 }
 
 .cardcontainer {
@@ -218,6 +223,10 @@
   display: flex;
 }
 
-.disappear{
+.disappear {
   display: none;
+}
+
+.filerightcontainer {
+  flex: 1;
 }

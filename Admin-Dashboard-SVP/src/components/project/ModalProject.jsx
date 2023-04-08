@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Image } from "react-bootstrap";
 import { ProjectsCollection } from "../../../data/projects";
 import modal from "./general.module.css";
 import Form from "react-bootstrap/Form";
 import "./Modal.css";
-import { Link } from "react-router-dom";
-
-const ImageAttachment = [
-  {
-    src: "/icons/pdf.svg",
-    attachmentname: "Site Clearing.pdf",
-    attachmentsize: "2 MB",
-  },
-  {
-    src: "/icons/jpg.svg",
-    attachmentname: "Site Clearing.jpg",
-    attachmentsize: "2 MB",
-  },
-];
+import {
+  useGetProjectDetailsQuery,
+  useGetProjectSpecificTaskQuery,
+} from "@/app/services/auth/authService";
 
 const ModalProject = (props) => {
+  const { data: UserProjects } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { data: UserProjectTask } = useGetProjectSpecificTaskQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const ModalProjectsCollection = UserProjects || [];
+
+  console.log(ModalProjectsCollection);
+
+  const specificUserProjectTask = UserProjectTask || [];
+
   return (
     <Modal
       className={modal.modal}
@@ -28,24 +32,25 @@ const ModalProject = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      {ProjectsCollection.map((collect, index) =>
-        props.id === collect.id ? (
-          <>
+      {ModalProjectsCollection.map((collect, index) =>
+        props.id === collect._id ? (
+          <div key={index}>
             <Modal.Header closeButton>
               <Modal.Title
                 className={modal.containedmodaltitlecenter}
                 id="contained-modal-title-vcenter"
               >
-                {/* <div className={modal.absolutecenter}> */}
                 <div className={modal.flexheader}>
                   <StatusButton text={collect.status} />
                   <CalendarText
                     datetitle="Project created:"
-                    date="02 Feb 2023"
+                    date={new Date(collect.date).toLocaleDateString()}
                   />
-                  <CalendarText datetitle="Due date:" date="02 Apr 2023" />
+                  <CalendarText
+                    datetitle="Due date:"
+                    date={new Date(collect.due).toLocaleDateString()}
+                  />
                 </div>
-                {/* </div> */}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body className={modal.modalbody}>
@@ -53,7 +58,7 @@ const ModalProject = (props) => {
                 <div className={modal.descriptionleftcontainer}>
                   <div className={modal.paddingcontain}>
                     <p className={modal.nameproject}>{collect.name}</p>
-                    <p className={modal.description}>{collect.description}</p>
+                    <p className={modal.description}>{collect.details}</p>
                     <p className={modal.assigned}>Assigned to:</p>
                     <div className={modal.yellowbackground}>
                       <Image
@@ -62,7 +67,11 @@ const ModalProject = (props) => {
                         alt="avatar"
                       />
                       <div className={modal.absolutecenter}>
-                        <p className={modal.textname}>{collect.personname}</p>
+                        <p className={modal.textname}>
+                          {" "}
+                          {collect.requested_by?.firstname || null}
+                          <span>{collect.requested_by?.lastname || null}</span>
+                        </p>
                       </div>
                     </div>
                     <p className={modal.taskname}>Tasks</p>
@@ -113,24 +122,20 @@ const ModalProject = (props) => {
                       </div>
                     </div>
 
-                    <div className={modal.absolutebuttoncenter}>
-                      <Link to="/task/approval">
-                        <div className={modal.buttonname}>
-                          <p className={modal.buttontext}>Add New Task</p>
-                        </div>
-                      </Link>
-                    </div>
-
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
-                      {ImageAttachment.map((attachment, index) => (
-                        <Attachment
-                          key={index}
-                          imagelink={attachment.src}
-                          attachmentname={attachment.attachmentname}
-                          attachmentsize={attachment.attachmentsize}
-                        />
-                      ))}
+                      {collect.attachments.length > 1
+                        ? collect.attachments
+                            .slice(0, 3)
+                            .map((attachment, index) => (
+                              <Attachment
+                                key={index}
+                                imagelink={attachment.type}
+                                attachmentname={attachment.name}
+                                attachmentsize={attachment.size}
+                              />
+                            ))
+                        : null}
                     </div>
                     <div className={modal.absolutebuttoncenter}>
                       <div className={modal.buttonname}>
@@ -178,7 +183,7 @@ const ModalProject = (props) => {
                 </div>
               </div>
             </Modal.Body>
-          </>
+          </div>
         ) : null
       )}
     </Modal>
@@ -191,7 +196,7 @@ const StatusButton = (props) => {
   return (
     <div
       className={
-        props.text === "In Progress"
+        props.text === "inprogress"
           ? modal.statusbutton
           : props.text === "Complete"
           ? modal.completebutton
@@ -225,15 +230,17 @@ const Attachment = (props) => {
   return (
     <div className={modal.attachmentcontainer}>
       <div className={modal.absolutecenter}>
-        <Image
-          src={`${props.imagelink}`}
-          alt="image-link"
-          className={modal.attachmentimage}
-        />
+        {props.imagelink === "image/jpeg" ? (
+          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : props.imagelink === "image/png" ? (
+          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : null}
       </div>
       <div>
         <p className={modal.attachmenttext}>{props.attachmentname}</p>
-        <p className={modal.attachmentsize}>{props.attachmentsize}</p>
+        <p className={modal.attachmentsize}>
+          {Math.round(props.attachmentsize / 1000) + "kb"}
+        </p>
       </div>
     </div>
   );

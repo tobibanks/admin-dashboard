@@ -1,23 +1,60 @@
-import React from "react";
+import React, { useState, forwardRef, useMemo } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
-import TableHeaderNav from "../../components/project/TableHeaderNav";
 import { Container, Image } from "react-bootstrap";
 import taskboard from "./task.module.css";
 import TaskHeader from "../../components/tasks/TaskHeader";
-import { TaskBoardData } from "../../../data/task";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 
 const TaskBoardDashboard = () => {
-  const filteredInProgressData = TaskBoardData.filter(
-    (item) => item.activestatus === "In Progress"
-  );
+  const { data: TaskCollection } = useGetTaskDetailsQuery({
+    refetchOnMountArgChange: true,
+  });
 
-  const filteredUpcomingData = TaskBoardData.filter(
-    (item) => item.activestatus === "Upcoming"
-  );
+  const TasksBoardCollection = TaskCollection || [];
 
-  const filteredCompleteData = TaskBoardData.filter(
-    (item) => item.activestatus === "Complete"
-  );
+  console.log(TasksBoardCollection);
+  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
+
+  const convertedStartDate = new Date(startDate).toISOString();
+  const convertedEndDate = new Date(endDate).toISOString();
+
+  const finalStartDate = new Date(convertedStartDate).getTime();
+  const finalEndDate = new Date(convertedEndDate).getTime();
+
+  const inprogressdata = useMemo(() => {
+    const filteredData = TasksBoardCollection.filter(
+      (item) =>
+        item.status === "In Progress" &&
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filteredData;
+  }, [finalStartDate, finalEndDate, TasksBoardCollection]);
+
+  console.log(inprogressdata);
+
+  const upcomingdata = useMemo(() => {
+    const filteredData = TasksBoardCollection.filter(
+      (item) =>
+        item.status === "upcoming" &&
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filteredData;
+  }, [finalStartDate, finalEndDate, TasksBoardCollection]);
+
+  const completedata = useMemo(() => {
+    const filteredData = TasksBoardCollection.filter(
+      (item) =>
+        item.status === "complete" &&
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filteredData;
+  }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   return (
     <Container className={taskboard.container}>
@@ -25,18 +62,40 @@ const TaskBoardDashboard = () => {
         <div className={taskboard.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskboard.rightboardcontainer}>
-            <TableHeaderNav />
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              width={300}
+            />
+            <DatePicker
+              showIcon
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+            />
           </div>
           <div className={taskboard.flexboardcontainer}>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="In Progress" />
-              {filteredInProgressData.map((filtereddata, index) => (
+              {inprogressdata.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}
+                  firstname={filtereddata.assigned_to?.firstname}
+                  lastname={filtereddata.assigned_to?.lastname}
                   headertext={filtereddata.projectname}
                   content={filtereddata.description}
-                  date={filtereddata.duedate}
+                  date={filtereddata.due}
                   imagelink={filtereddata.imagelink}
                   priority={filtereddata.priority}
                 />
@@ -44,10 +103,12 @@ const TaskBoardDashboard = () => {
             </div>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="Upcoming" />
-              {filteredUpcomingData.map((filtereddata, index) => (
+              {upcomingdata.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}
+                  firstname={filtereddata.assigned_to?.firstname}
+                  lastname={filtereddata.assigned_to?.lastname}
                   headertext={filtereddata.projectname}
                   content={filtereddata.description}
                   date={filtereddata.duedate}
@@ -58,10 +119,12 @@ const TaskBoardDashboard = () => {
             </div>
             <div className={taskboard.sizecontainer}>
               <BoarderHeader text="Completed" />
-              {filteredCompleteData.map((filtereddata, index) => (
+              {completedata.map((filtereddata, index) => (
                 <ContentContainer
                   key={index}
                   name={filtereddata.name}
+                  firstname={filtereddata.assigned_to?.firstname}
+                  lastname={filtereddata.assigned_to?.lastname}
                   headertext={filtereddata.projectname}
                   content={filtereddata.description}
                   date={filtereddata.duedate}
@@ -103,14 +166,22 @@ const ContentContainer = (props) => {
     <div className={taskboard.contentcontainer}>
       <div className={taskboard.innercontainer}>
         <div className={taskboard.flexname}>
-          <p className={taskboard.name}>{props.name}</p>
+          <div className={taskboard.absolutecenter}>
+            <p className={taskboard.name}>{props.name}</p>
+          </div>
           <Image src="/icons/dots.svg" alt="dots" />
         </div>
+        <p className={taskboard.name1}>
+          {props.firstname} <span>{props.lastname}</span>
+        </p>
         <p className={taskboard.contenttext}>{props.headertext}</p>
         <p className={taskboard.content}>{props.content}</p>
         <div className={taskboard.flextext}>
           <p className={taskboard.assigned1}>Due:</p>
-          <p className={taskboard.value}>{props.date}</p>
+          <p className={taskboard.value}>
+            {" "}
+            {new Date(props.date).toLocaleDateString()}
+          </p>
         </div>
         {props.status ? (
           <div className={taskboard.flextext}>
@@ -137,11 +208,11 @@ const ContentContainer = (props) => {
             <div className={taskboard.absolutecenter}>
               <p className={taskboard.assigned1}>Priority</p>
             </div>
-            {props.priority === "important" ? (
+            {props.priority === "red" ? (
               <ImageIcon imagelink="/icons/table/redflag.svg" />
-            ) : props.priority === "normal" ? (
+            ) : props.priority === "gray" ? (
               <ImageIcon imagelink="/icons/table/normalflag.svg" />
-            ) : props.priority === "warning" ? (
+            ) : props.priority === "yellow" ? (
               <ImageIcon imagelink="/icons/table/warningflag.svg" />
             ) : null}
           </div>
@@ -172,3 +243,16 @@ const ImageTextIcon = (props) => {
     </div>
   );
 };
+
+const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  <button className={taskboard.datepickerbutton} onClick={onClick} ref={ref}>
+    <div className={taskboard.center}>
+      <Image
+        src="/icons/calendar.svg"
+        alt="icon"
+        className={taskboard.calendaricon}
+      />
+    </div>
+    {value}
+  </button>
+));

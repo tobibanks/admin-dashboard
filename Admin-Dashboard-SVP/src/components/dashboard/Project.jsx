@@ -4,8 +4,17 @@ import { Image } from "react-bootstrap";
 import { Projects } from "../../../data/projects";
 import Table from "react-bootstrap/Table";
 import "./Modal.css";
+import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 
 const Project = () => {
+  const { data: UserProjects } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const NeededProjects = UserProjects?.slice(0, 5) || [];
+
+  console.log(UserProjects);
+
   return (
     <div className={project.projectcontainer1}>
       <div className={project.projectflexcontainer}>
@@ -34,15 +43,11 @@ const Project = () => {
             </tr>
           </thead>
           <tbody>
-            {Projects.map((projectdata, index) => (
-              <tr key={index} className ={project.pointer}>
+            {NeededProjects.map((projectdata, index) => (
+              <tr key={index} className={project.pointer}>
                 <td className={project.align}>
                   <div className={project.flexcontent}>
-                    {projectdata.star === "starred" ? (
-                      <Icon imagelink="/icons/dashboard/task/starred.svg" />
-                    ) : (
-                      <Icon imagelink="/icons/dashboard/task/star.svg" />
-                    )}
+                    <Icon imagelink="/icons/dashboard/task/star.svg" />
                     <div className={project.centertext}>
                       <p className={project.tasktitle}>{projectdata.name}</p>
                     </div>
@@ -50,10 +55,17 @@ const Project = () => {
                 </td>
                 <td className={project.centericon}>
                   <div className={project.absolutecenter}>
-                    <p className={project.avatar}>{projectdata.initials}</p>
+                    <p className={project.avatar}>
+                      {projectdata.requested_by.firstname.charAt(0)}
+                      <span className={project.label}>
+                        {projectdata.requested_by.lastname.charAt(0)}
+                      </span>
+                    </p>
                   </div>
                 </td>
-                <td className={project.centericon}>{projectdata.date}</td>
+                <td className={project.centericon}>
+                  {new Date(projectdata.date).toLocaleDateString()}
+                </td>
               </tr>
             ))}
           </tbody>

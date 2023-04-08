@@ -236,6 +236,21 @@
   /* margin-left: 0.3rem; */
 }
 
+.instructionheading {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+.instruction {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 19.38px;
+  margin-bottom: 32px;
+}
+
 .flexheader {
   display: flex;
   gap: 1rem;

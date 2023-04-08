@@ -33,11 +33,32 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    getTaskDetails: build.query({
+      query: () => ({
+        url: "/admin/tasks",
+        method: "GET",
+      }),
+    }),
+    getProjectSpecificTask: build.query({
+      query: (id) => ({
+        url: `/admin/projects/${id}`,
+        method: "GET",
+      }),
+    }),
+    getReportsDetails: build.query({
+      query: () => ({
+        url: "/admin/reports",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetDetailsQuery,
   useGetProjectDetailsQuery,
+  useGetTaskDetailsQuery,
   useAddTaskDetailsMutation,
+  useGetReportsDetailsQuery,
+  useGetProjectSpecificTaskQuery,
 } = authApi;

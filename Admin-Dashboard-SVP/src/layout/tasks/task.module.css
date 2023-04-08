@@ -114,7 +114,7 @@
 }
 
 .avatar {
-  padding: 7px 6px;
+  padding: 10px 8px;
   font-size: 16px;
   border-radius: 50%;
   color: white;
@@ -302,7 +302,18 @@
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 1rem;
+  margin-bottom: 0px;
   color: var(--black400);
+}
+
+.name1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  font-weight: 700;
+  color: var(--textblack);
 }
 
 .rightcontainer {
@@ -406,7 +417,6 @@
   font-family: "Inter", sans-serif;
 }
 
-
 .absoluterightendcontainer {
   display: flex;
   padding: 2rem 0;
@@ -464,4 +474,27 @@
   font-weight: 500;
   font-size: 1rem;
   border-color: var(--SVP-main);
+}
+
+.datepickerbutton {
+  border: 1px solid;
+  border-color: var(--black100);
+  border-radius: 8px;
+  background-color: white;
+  padding: 0.5rem;
+  white-space: nowrap;
+  display: flex;
+  /* background-color: blue; */
+}
+
+.calendaricon {
+  margin-right: 0.2rem;
+  width: 15px;
+  height: 15px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

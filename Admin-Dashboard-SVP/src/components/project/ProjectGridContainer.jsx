@@ -9,17 +9,18 @@ const ProjectGridContainer = (props) => {
         <div className={grid.flexcontainer}>
           <p className={grid.gridtext}>{props.text}</p>
           <div>
-            {props.priority === "important" ? (
+            {props.priority === "red" ? (
               <ImageIcon imagelink="/icons/table/redflag.svg" />
-            ) : props.priority === "normal" ? (
+            ) : props.priority === "gray" ? (
               <ImageIcon imagelink="/icons/table/normalflag.svg" />
-            ) : props.priority === "warning" ? (
+            ) : props.priority === "yellow" ? (
               <ImageIcon imagelink="/icons/table/warningflag.svg" />
             ) : null}
           </div>
         </div>
         <p className={grid.textdate}>
-          <span className={grid.titledate}>Due:</span> {props.date}
+          <span className={grid.titledate}>Due:</span>{" "}
+          {new Date(props.date).toLocaleDateString()}
         </p>
         <div className={grid.space}>
           <div className={grid.absolutecenter}>
@@ -42,7 +43,7 @@ const Button = (props) => {
   return (
     <div
       className={
-        props.text === "In Progress"
+        props.text === "inprogress"
           ? grid.statusbutton
           : props.text === "Complete"
           ? grid.completebutton

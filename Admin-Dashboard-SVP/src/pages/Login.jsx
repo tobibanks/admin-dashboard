@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Image, Form, Button, Spinner } from "react-bootstrap";
-import { EMAIL_VALIDATION } from "@/constants/regex";
+import { EMAIL_VALIDATION } from "@/constants/Regex";
 import { adminLogin } from "../features/auth/authActions";
 import { useSelector, useDispatch } from "react-redux";
 

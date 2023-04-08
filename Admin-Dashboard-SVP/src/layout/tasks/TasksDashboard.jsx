@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, forwardRef } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import task from "./task.module.css";
 import "./task.css";
@@ -6,21 +6,54 @@ import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import TableHeaderNav from "../../components/project/TableHeaderNav";
 import TaskTableDisplay from "../../components/tasks/TaskTableDisplay";
 import TaskHeader from "../../components/tasks/TaskHeader";
-import { TasksCollection } from "../../../data/task";
 import ModalTask from "@/components/tasks/ModalTask";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 
 const TasksDashboard = () => {
+  const { data: TaskCollection } = useGetTaskDetailsQuery({
+    refetchOnMountArgChange: true,
+  });
+
+  const TasksTableCollection = TaskCollection || [];
+
+  console.log(TasksTableCollection);
   const [filter, setFilter] = useState(null);
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
-  const filtereddata = useMemo(() => {
-    if (!filter) return TasksCollection;
-    const filteredData = TasksCollection.filter(
-      (item) => item.activestatus === filter
+  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+
+  const convertedStartDate = new Date(startDate).toISOString();
+  const convertedEndDate = new Date(endDate).toISOString();
+
+  const finalStartDate = new Date(convertedStartDate).getTime();
+  const finalEndDate = new Date(convertedEndDate).getTime();
+
+  const data = useMemo(() => {
+    if (!filter) return TasksTableCollection;
+    const filteredData = TasksTableCollection.filter(
+      (item) =>
+        item.status === filter &&
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
     );
     return filteredData;
-  }, [filter]);
+  }, [filter, finalStartDate, finalEndDate, TasksTableCollection]);
+
+  const filteredApprovedData = TasksTableCollection.filter(
+    (item) => item.status === "approved"
+  );
+
+  const filteredPendingData = TasksTableCollection.filter(
+    (item) => item.status === "pending"
+  );
+
+  const filteredDeclinedData = TasksTableCollection.filter(
+    (item) => item.status === "declined"
+  );
 
   return (
     <Container className={task.container}>
@@ -31,7 +64,7 @@ const TasksDashboard = () => {
             <div className={task.flexwrap}>
               <NavCategories
                 name="All Projects"
-                total="(23)"
+                total={`(${TasksTableCollection.length})`}
                 filter={filter}
                 filter1={null}
                 onClick={() => setFilter(null)}
@@ -39,40 +72,60 @@ const TasksDashboard = () => {
 
               <NavCategories
                 name="Approved"
-                total="(02)"
+                total={`(${filteredApprovedData.length})`}
                 filter={filter}
                 filter1="Approved"
                 onClick={() => setFilter("Approved")}
               />
               <NavCategories
                 name="Pending"
-                total="(10)"
+                total={`(${filteredPendingData.length})`}
                 filter1="Pending"
                 filter={filter}
                 onClick={() => setFilter("Pending")}
               />
               <NavCategories
                 name="Declined"
-                total="(11)"
+                total={`(${filteredDeclinedData.length})`}
                 filter={filter}
                 filter1="Declined"
                 onClick={() => setFilter("Declined")}
               />
             </div>
-            <TableHeaderNav />
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              width={300}
+            />
+            <DatePicker
+              showIcon
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              dateFormat="dd/MM/yyyy"
+              customInput={<ExampleCustomInput />}
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+            />
           </div>
           <TaskTableDisplay>
-            {filtereddata.map((taskcollect, index) => (
+            {data.map((taskcollect, index) => (
               <tr
                 key={index}
                 onClick={() => {
-                  setSetting(taskcollect.id);
+                  setSetting(taskcollect._id);
                   setModalShow(true);
                 }}
               >
                 <td>
                   <div className={task.flexcontent}>
-                    {taskcollect.star === "starred" ? (
+                    {taskcollect.star === "true" ? (
                       <Icon imagelink="/icons/dashboard/task/starred.svg" />
                     ) : (
                       <Icon imagelink="/icons/dashboard/task/star.svg" />
@@ -85,19 +138,26 @@ const TasksDashboard = () => {
                 <td>{taskcollect.name}</td>
                 <td>
                   <div className={task.absolutecenter}>
-                    <p className={task.avatar}>{taskcollect.initials}</p>
+                    <p className={task.avatar}>
+                      {" "}
+                      {taskcollect.assigned_to?.firstname.charAt(0)}
+                      <span>{taskcollect.assigned_to?.lastname.charAt(0)}</span>
+                    </p>
                   </div>
                 </td>
                 <td>
                   <StatusButton text={taskcollect.status} />
                 </td>
-                <td className={task.centericon}>{taskcollect.date}</td>
                 <td className={task.centericon}>
-                  {taskcollect.priority === "important" ? (
+                  {" "}
+                  {new Date(taskcollect.date).toLocaleDateString()}
+                </td>
+                <td className={task.centericon}>
+                  {taskcollect.priority === "red" ? (
                     <ImageIcon imagelink="/icons/table/redflag.svg" />
-                  ) : taskcollect.priority === "normal" ? (
+                  ) : taskcollect.priority === "gray" ? (
                     <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                  ) : taskcollect.priority === "warning" ? (
+                  ) : taskcollect.priority === "yellow" ? (
                     <ImageIcon imagelink="/icons/table/warningflag.svg" />
                   ) : null}
                 </td>
@@ -162,3 +222,16 @@ const ImageIcon = (props) => {
 const Icon = (props) => {
   return <Image src={`${props.imagelink}`} alt="icon" />;
 };
+
+const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  <button className={task.datepickerbutton} onClick={onClick} ref={ref}>
+    <div className={task.center}>
+      <Image
+        src="/icons/calendar.svg"
+        alt="icon"
+        className={task.calendaricon}
+      />
+    </div>
+    {value}
+  </button>
+));

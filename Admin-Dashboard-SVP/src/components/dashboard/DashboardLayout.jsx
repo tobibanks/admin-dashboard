@@ -88,8 +88,13 @@ const DashboardLayout = (props) => {
             <div className={side.logOutContainer}>
               <div className={side.center}>
                 <div className={side.flex}>
-                  <div>
-                    <Image src="/images/avatar.png" alt="avatar" />
+                  <div className={side.absolutecenter}>
+                    <p className={side.avatar1}>
+                      {admin?.firstname.charAt(0)}
+                      <span className={side.label}>
+                        {admin?.lastname.charAt(0)}
+                      </span>
+                    </p>
                   </div>
                   <div className={side.textcontainer}>
                     <p className={side.avatartitle}>{admin?.firstname}</p>

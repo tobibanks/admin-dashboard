@@ -1,35 +1,29 @@
 import React from "react";
 import modal from "./tasktable.module.css";
-import { TasksCollection } from "../../../data/task";
 import { Modal, Image } from "react-bootstrap";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
-
-const ImageAttachment = [
-  {
-    src: "/icons/pdf.svg",
-    attachmentname: "Site Clearing.pdf",
-    attachmentsize: "2 MB",
-  },
-  {
-    src: "/icons/jpg.svg",
-    attachmentname: "Site Clearing.jpg",
-    attachmentsize: "2 MB",
-  },
-];
+import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 
 const ModalTask = (props) => {
+  const { data: AdminTasks } = useGetTaskDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const ModalTaskCollection = AdminTasks || [];
+
+  // console.log(ModalTaskCollection[4].attachments);
   return (
     <Modal
       className={modal.modal}
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      {TasksCollection.map((collect, index) =>
-        props.id === collect.id ? (
-          <>
+      {ModalTaskCollection.map((collect, index) =>
+        props.id === collect._id ? (
+          <div key={index}>
             <Modal.Header closeButton>
               <Modal.Title
                 className={modal.containedmodaltitlecenter}
@@ -40,9 +34,12 @@ const ModalTask = (props) => {
                   <StatusButton text={collect.status} />
                   <CalendarText
                     datetitle="Project created:"
-                    date="02 Feb 2023"
+                    date={new Date(collect.date).toLocaleDateString()}
                   />
-                  <CalendarText datetitle="Due date:" date="02 Apr 2023" />
+                  <CalendarText
+                    datetitle="Due date:"
+                    date={new Date(collect.due).toLocaleDateString()}
+                  />
                 </div>
                 {/* </div> */}
               </Modal.Title>
@@ -53,20 +50,19 @@ const ModalTask = (props) => {
                   <div className={modal.paddingcontain}>
                     <div className={modal.flexmodalcontainer}>
                       <div className={modal.firstphase}>
-                        <p className={modal.nameproject}>{collect.task}</p>
-                        {collect.priority === "important" ? (
+                        <p className={modal.nameproject}>{collect.name}</p>
+                        {collect.priority === "red" ? (
                           <Image src="/icons/table/redflag.svg" />
-                        ) : collect.priority === "normal" ? (
+                        ) : collect.priority === "gray" ? (
                           <Image src="/icons/table/normalflag.svg" />
-                        ) : collect.priority === "warning" ? (
+                        ) : collect.priority === "yellow" ? (
                           <Image src="/icons/table/warningflag.svg" />
                         ) : null}
                       </div>
                       <div>
                         <div className={modal.buttonname}>
                           <p className={modal.buttontext}>
-                            Upload Attachments{" "}
-                            <MdOutlineCloudUpload />
+                            Upload Attachments <MdOutlineCloudUpload />
                           </p>
                         </div>
                       </div>
@@ -74,25 +70,47 @@ const ModalTask = (props) => {
                     <p className={modal.description}>{collect.description}</p>
                     <p className={modal.assigned}>Assigned to:</p>
                     <div className={modal.yellowbackground}>
-                      <Image
-                        src="/images/avatar.png"
-                        alt="avatar"
-                      />
+                      <Image src="/images/avatar.png" alt="avatar" />
                       <div className={modal.absolutecenter}>
-                        <p className={modal.textname}>{collect.personname}</p>
+                        <p className={modal.textname}>
+                          {" "}
+                          {collect.assigned_to?.firstname || null}
+                          <span>{collect.assigned_to?.lastname || null}</span>
+                        </p>
                       </div>
                     </div>
+                    <p className={modal.instructionheading}>Instruction</p>
+                    <p className={modal.instruction}>{collect.instruction}</p>
 
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
-                      {ImageAttachment.map((attachment, index) => (
-                        <Attachment
-                          key={index}
-                          imagelink={attachment.src}
-                          attachmentname={attachment.attachmentname}
-                          attachmentsize={attachment.attachmentsize}
-                        />
-                      ))}
+                      {collect.attachments.length > 1 ? (
+                        collect.attachments.map((attachments, index) => {
+                          return (
+                            <div
+                              key={index}
+                              style={{ display: "flex", gap: "2rem" }}
+                            >
+                              {console.log(attachments)}
+                              {attachments
+                                .slice(0, 2)
+                                .map((attachment, index) => (
+                                  <div>
+                                    {console.log(attachment)}
+                                    <Attachment
+                                      key={index}
+                                      name={attachment.name}
+                                      imagelink={attachment.type}
+                                      size={attachment.size}
+                                    />
+                                  </div>
+                                ))}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <p>No attachments</p>
+                      )}
                     </div>
                     <div className={modal.absolutebuttoncenter}>
                       <div className={modal.buttonname}>
@@ -103,7 +121,7 @@ const ModalTask = (props) => {
                 </div>
               </div>
             </Modal.Body>
-          </>
+          </div>
         ) : null
       )}
     </Modal>
@@ -151,16 +169,16 @@ const CalendarText = (props) => {
 const Attachment = (props) => {
   return (
     <div className={modal.attachmentcontainer}>
-      <div className={modal.absolutecenter}>
-        <Image
-          src={`${props.imagelink}`}
-          alt="image-link"
-          className={modal.attachmentimage}
-        />
-      </div>
+      {/* <div className={modal.absolutecenter}> */}
+      {props.imagelink === "image/jpeg" ? (
+        <Image src="/icons/jpg.svg" alt="jpg" />
+      ) : props.imagelink === "image/png" ? (
+        <Image src="/icons/jpg.svg" alt="jpg" />
+      ) : null}
+      {/* </div> */}
       <div>
-        <p className={modal.attachmenttext}>{props.attachmentname}</p>
-        <p className={modal.attachmentsize}>{props.attachmentsize}</p>
+        <p className={modal.attachmenttext}>{props.name}</p>
+        <p className={modal.attachmentsize}>{Math.round(props.size / 1000) + "kb"}</p>
       </div>
     </div>
   );
