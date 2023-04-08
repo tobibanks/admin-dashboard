@@ -102,7 +102,7 @@ const DashboardLayout = (props) => {
                   <div className={side.textcontainer}>
                     <p className={side.avatartitle}>{adminInfo?.firstname}</p>
                     <p className={side.avatarcontext}>
-                      {adminInfo?.email.substring(0,10)}
+                      {/* {adminInfo?.email.substring(0,10)} */}
                     </p>
                   </div>
                 </div>
