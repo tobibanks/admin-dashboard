@@ -6,12 +6,13 @@
 .react-datepicker-wrapper,
 .react-datepicker__input-container,
 .react-datepicker__input-container input {
-  width: 119px;
+  width: 140px;
   border-radius: 8px;
   font-family: "Inter", sans-serif;
   font-size: 1rem;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
+  /* padding: 10px 30px; */
   /* background: url(./calendar.svg) no-repeat; */
   /* padding-left: 30px; */
   /* background-repeat: no-repeat; */

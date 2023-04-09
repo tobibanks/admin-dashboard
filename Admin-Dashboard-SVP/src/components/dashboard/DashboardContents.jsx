@@ -61,8 +61,8 @@ const DashboardContents = () => {
         />
         <Cards
           imagelink="/icons/dashboard/messages-cards-icon.svg"
-          // text={ReportsCollection.length}
-          title="Reports"
+          text="0"
+          title="Messages"
           // description={ProjectsCollection.description}
         />
       </div>

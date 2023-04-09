@@ -39,7 +39,7 @@ const Tasks = () => {
                   )}
                   <div className={task.centertext}>
                     <p className={task.tasktitle}>
-                      {truncateString(Taskdata.name, 13)}
+                      {Taskdata?.name?.substring?.(0, 9)}
                     </p>
                   </div>
                 </div>

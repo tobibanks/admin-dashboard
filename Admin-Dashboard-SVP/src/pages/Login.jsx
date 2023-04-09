@@ -14,13 +14,10 @@ const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onnTouched" });
   const { loading, adminInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const password = useRef({});
-  password.current = watch("password", "");
 
   useEffect(() => {
     if (adminInfo) {
@@ -30,6 +27,8 @@ const Login = () => {
   const submitForm = (data) => {
     dispatch(adminLogin(data));
   };
+
+  const password = watch("password");
   return (
     <div className={login.container2}>
       <div className={login.logincenteredcontainer}>
@@ -88,19 +87,26 @@ const Login = () => {
                 )}
               </div>
             </Form.Group>
-            <Form.Label>Repeat password</Form.Label>
-            <Form.Control
-              name="password_repeat"
-              type="password"
-              {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: (val) => {
-                  if (watch("password") !== val) {
-                    return "Your passwords do no match";
-                  }
-                },
-              })}
-            />
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Confirm password</Form.Label>
+              <Form.Control
+                name="password"
+                type="password"
+                placeholder=""
+                {...register("confirmPassword", {
+                  required: "Confirm password is required",
+                  validate: (value) =>
+                    value === password || "The passwords do not match",
+                })}
+              />
+              <div className={login.errorcontainer}>
+                {errors.confirmPassword && (
+                  <span className={login.error}>
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+              </div>
+            </Form.Group>
             {errors.password_repeat && errors.password_repeat?.message}
             {console.log(errors.password_repeat?.message)}
             {/* {console.log(errors.password_repeat.message)} */}

@@ -9,6 +9,9 @@
   justify-content: center;
 }
 
+.pointer {
+  cursor: pointer;
+}
 .navbar {
   margin-top: 5rem;
   width: 100%;
@@ -129,8 +132,8 @@ a {
 
 .avatarcontext {
   font-size: 0.8rem;
-  margin-bottom: 0px;
-  margin-top: 0.5rem;
+  margin-bottom: 0px !important;
+  margin-top: 5px;
   font-family: "Inter", sans-serif;
   color: var(--black400);
 }
@@ -169,6 +172,7 @@ a {
   width: 100%;
   position: sticky;
   top: 0;
+  z-index: 100;
   padding: 1.5rem 0;
   background-color: var(--dashboard-yellow);
   margin: 0 auto;
@@ -548,6 +552,17 @@ td {
   text-align: center;
 }
 
+.tableheading {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tableheading1 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .centertext {
   display: flex;
   justify-content: center;
@@ -637,20 +652,14 @@ td {
 }
 
 .avatar {
-  padding: 7px 6px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 0px;
-  color: white;
-  background-color: var(--SVP-main);
-  font-family: "Inter", sans-serif;
-}
-
-.avatar1 {
-  padding: 15px 11px;
-  border-radius: 50%;
-  font-size: 16px;
-  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   background-color: var(--SVP-main);
   font-family: "Inter", sans-serif;
@@ -763,8 +772,6 @@ td {
   animation: loading 1s ease infinite;
   z-index: 10;
 }
-
-
 
 @keyframes loading {
   0% {

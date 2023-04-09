@@ -4,9 +4,10 @@ import { useDispatch } from "react-redux";
 import side from "./User.module.css";
 import { Container, Image, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 import { logout } from "@/features/auth/authSlice";
 import { useGetDetailsQuery } from "@/app/services/auth/authService";
-import { truncateString } from "../../../util/text";
+import { authApi } from "../../app/services/auth/authService";
 
 const DashboardLayout = (props) => {
   const [display, setDisplay] = useState(false);
@@ -15,9 +16,10 @@ const DashboardLayout = (props) => {
   const navigate = useNavigate();
   const { data: admin } = useGetDetailsQuery();
 
-  const adminInfo = admin || []
+  const adminInfo = admin || [];
 
   const LogOut = () => {
+    dispatch(authApi.util.resetApiState());
     dispatch(logout());
     navigate("/");
   };
@@ -46,7 +48,13 @@ const DashboardLayout = (props) => {
               <p className={side.welcomemessage}>
                 Hello, &nbsp;
                 <span className={side.welcomecolormessage}>
-                  {adminInfo?.firstname}
+                  {adminInfo.firstname || (
+                    <Skeleton
+                      baseColor="#ebab34"
+                      highlightColor="#f2cb07"
+                      width={100}
+                    />
+                  )}
                 </span>
               </p>
               <NavbarTab
@@ -92,17 +100,35 @@ const DashboardLayout = (props) => {
               <div className={side.center}>
                 <div className={side.flex}>
                   <div className={side.absolutecenter}>
-                    <p className={side.avatar1}>
-                      {adminInfo?.firstname?.charAt(0)}
+                    <p className={side.avatar}>
+                      {adminInfo?.firstname?.charAt(0) || (
+                        <Skeleton
+                          baseColor="#ebab34"
+                          highlightColor="#f2cb07"
+                          width={50}
+                        />
+                      )}
                       <span className={side.label}>
-                        {adminInfo?.lastname?.charAt(0)}
+                        {adminInfo?.lastname?.charAt(0) || (
+                          <Skeleton
+                            baseColor="#ebab34"
+                            highlightColor="#f2cb07"
+                            width={50}
+                          />
+                        )}
                       </span>
                     </p>
                   </div>
                   <div className={side.textcontainer}>
                     <p className={side.avatartitle}>{adminInfo?.firstname}</p>
                     <p className={side.avatarcontext}>
-                      {/* {adminInfo?.email.substring(0,10)} */}
+                      {adminInfo?.email?.substring?.(0, 17) || (
+                        <Skeleton
+                          baseColor="#ebab34"
+                          highlightColor="#f2cb07"
+                          width={100}
+                        />
+                      )}
                     </p>
                   </div>
                 </div>

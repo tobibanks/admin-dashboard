@@ -9,7 +9,7 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .tablenavcontainer {
@@ -18,7 +18,8 @@
   border-top-right-radius: 5px;
   border: none;
   padding: 0rem;
-  flex: 1;
+  /* flex: 1;  */
+  height: 56px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   cursor: pointer;
@@ -38,7 +39,8 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: none;
-  flex: 1;
+  height: 56px;
+  /* flex: 1; */
   padding: 0rem;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -116,11 +118,14 @@
 }
 
 .avatar {
-  padding: 10px 8px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   margin-bottom: 0px;
   font-size: 15px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   background-color: var(--SVP-main);
   font-family: "Inter", sans-serif;
@@ -496,7 +501,8 @@
   border-color: var(--black100);
   border-radius: 8px;
   background-color: white;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  padding: 10px 20px;
   white-space: nowrap;
   display: flex;
   /* background-color: blue; */
@@ -506,6 +512,14 @@
   margin-right: 0.2rem;
   width: 17px;
   height: 17px;
+}
+
+.datevalue {
+  margin-bottom: 0px;
+  padding-top: 3px;
+  padding-left: 3px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
 }
 
 .center {
@@ -520,8 +534,9 @@
 }
 
 .dash {
-  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   width: 20px;
+  padding-top: 17px;
 }
 
 @media (min-width: 600px) and (max-width: 1280px) {
@@ -532,4 +547,17 @@
   .tabscreen1 {
     display: block;
   }
+}
+
+.datepickertitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.datepickertitlelabel {
+  margin-bottom: 0px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding-bottom: 5px;
 }

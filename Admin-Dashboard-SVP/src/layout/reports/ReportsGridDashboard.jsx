@@ -168,7 +168,7 @@ const CardGridContainer = (props) => {
         {/* <img src={props.url} alt="image-icon" /> */}
         <div className={reportsgrid.absolutecenter}>
           <p className={reportsgrid.filename}>
-            {truncateString(props.name, 7)}
+            {/* {truncateString(props.name, 7)} */}
           </p>
           {/* <span>{truncateString(props.lastname, 1)}</span> */}
         </div>

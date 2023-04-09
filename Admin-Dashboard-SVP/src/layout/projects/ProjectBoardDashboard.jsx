@@ -7,9 +7,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
+import SkeleteonGrid from "../../components/dashboard/SkeletonGrid";
 
 const ProjectBoardDashboard = () => {
-  const { data: UserProjectsBoard } = useGetProjectDetailsQuery({
+  const { data: UserProjectsBoard, isLoading } = useGetProjectDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -25,7 +26,7 @@ const ProjectBoardDashboard = () => {
 
   const inprogressdata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
-      (item) => item.status === "inprogress"
+      (item) => item.admin_Status === "In Progress"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
@@ -41,7 +42,7 @@ const ProjectBoardDashboard = () => {
 
   const upcomingdata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
-      (item) => item.status === "Upcoming"
+      (item) => item.admin_Status === "Upcoming"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
@@ -58,7 +59,7 @@ const ProjectBoardDashboard = () => {
   const completedata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
       (item) =>
-        item.status === "Complete" &&
+        item.admin_Status === "Complete" &&
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
@@ -82,98 +83,116 @@ const ProjectBoardDashboard = () => {
           <ButtonProject />
           <Header name="My Projects" />
           <div className={grid.rightboardcontainer}>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              width={300}
-            />
+            <div className={grid.datepickertitle}>
+              <p className={grid.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                width={300}
+              />
+            </div>
             <div className={grid.absolutecenter}>
               <div className={grid.dash}></div>
             </div>
-            <DatePicker
-              showIcon
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
+            <div className={grid.datepickertitle}>
+              <p className={grid.datepickertitlelabel}>End Date</p>
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
           <div className={grid.flexboardcontainer}>
-            <div className={grid.sizecontainer}>
-              <BoarderHeader text="In Progress" />
-              {dataByDateinprogress.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  headertext={filtereddata.name}
-                  content={filtereddata.details}
-                  firstname={filtereddata.requested_by?.firstname}
-                  lastname={filtereddata.requested_by?.lastname}
-                  firstnamefirstletter={filtereddata.requested_by?.firstname.charAt(
-                    0
-                  )}
-                  lastnamefirstletter={filtereddata.requested_by?.lastname.charAt(
-                    0
-                  )}
-                  date={filtereddata.date}
-                  status={filtereddata.status}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
-            <div className={grid.sizecontainer}>
-              <BoarderHeader text="Upcoming" />
-              {dataByDateupcoming.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  headertext={filtereddata.name}
-                  content={filtereddata.details}
-                  firstname={filtereddata.requested_by?.firstname}
-                  lastname={filtereddata.requested_by?.lastname}
-                  firstnamefirstletter={filtereddata.requested_by?.firstname.charAt(
-                    0
-                  )}
-                  lastnamefirstletter={filtereddata.requested_by?.lastname.charAt(
-                    0
-                  )}
-                  date={filtereddata.duedate}
-                  status={filtereddata.status}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
-            <div className={grid.sizecontainer}>
-              <BoarderHeader text="Completed" />
-              {dataByDatecomplete.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  headertext={filtereddata.projectname}
-                  content={filtereddata.description}
-                  firstname={filtereddata.requested_by?.firstname}
-                  lastname={filtereddata.requested_by?.lastname}
-                  firstnamefirstletter={filtereddata.requested_by?.firstname.charAt(
-                    0
-                  )}
-                  lastnamefirstletter={filtereddata.requested_by?.lastname.charAt(
-                    0
-                  )}
-                  date={filtereddata.duedate}
-                  status={filtereddata.status}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={grid.sizecontainer}>
+                <BoarderHeader text="In Progress" />
+                {dataByDateinprogress.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    headertext={filtereddata.name}
+                    content={filtereddata.details}
+                    firstname={filtereddata.requested_by?.firstname}
+                    lastname={filtereddata.requested_by?.lastname}
+                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                      0
+                    )}
+                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                      0
+                    )}
+                    date={filtereddata.date}
+                    status={filtereddata.admin_Status}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={grid.sizecontainer}>
+                <BoarderHeader text="Upcoming" />
+                {dataByDateupcoming.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    headertext={filtereddata.name}
+                    content={filtereddata.details}
+                    firstname={filtereddata.requested_by?.firstname}
+                    lastname={filtereddata.requested_by?.lastname}
+                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                      0
+                    )}
+                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                      0
+                    )}
+                    date={filtereddata.duedate}
+                    status={filtereddata.admin_Status}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={grid.sizecontainer}>
+                <BoarderHeader text="Completed" />
+                {dataByDatecomplete.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    headertext={filtereddata.projectname}
+                    content={filtereddata.description}
+                    firstname={filtereddata.requested_by?.firstname}
+                    lastname={filtereddata.requested_by?.lastname}
+                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                      0
+                    )}
+                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                      0
+                    )}
+                    date={filtereddata.duedate}
+                    status={filtereddata.admin_Status}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </DashboardLayout>

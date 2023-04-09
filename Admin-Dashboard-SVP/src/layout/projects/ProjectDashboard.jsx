@@ -10,21 +10,22 @@ import TableDisplay from "../../components/project/TableDisplay";
 import ModalProject from "../../components/project/ModalProject";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
+import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const ProjectDashboard = () => {
-  const { data: UserTableProjects } = useGetProjectDetailsQuery({
+  const { data: UserTableProjects, isLoading } = useGetProjectDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
   const ProjectsCollection = UserTableProjects || [];
-  console.log(ProjectsCollection.map);
+  console.log(ProjectsCollection);
 
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2024"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -37,7 +38,7 @@ const ProjectDashboard = () => {
     if (!filter) return ProjectsCollection;
     const filteredData = ProjectsCollection.filter(
       (item) =>
-        item.status === filter &&
+        item.admin_Status === filter &&
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
@@ -54,15 +55,15 @@ const ProjectDashboard = () => {
   }, [finalStartDate, finalEndDate, data]);
 
   const filteredInProgressData = ProjectsCollection.filter(
-    (item) => item.status === "In Progress"
+    (item) => item.admin_Status === "In Progress"
   );
 
   const filteredUpcomingData = ProjectsCollection.filter(
-    (item) => item.status === "Upcoming"
+    (item) => item.admin_Status === "Upcoming"
   );
 
   const filteredCompleteData = ProjectsCollection.filter(
-    (item) => item.status === "Complete"
+    (item) => item.admin_Status === "Complete"
   );
 
   return (
@@ -90,11 +91,11 @@ const ProjectDashboard = () => {
               />
               <NavCategories
                 name="In Progress"
-                filter1="inprogress"
+                filter1="In Progress"
                 filter={filter}
                 total={`(${filteredInProgressData.length})`}
                 onClick={() => {
-                  setFilter("inprogress");
+                  setFilter("In Progress");
                 }}
               />
               <NavCategories
@@ -105,73 +106,83 @@ const ProjectDashboard = () => {
                 onClick={() => setFilter("Complete")}
               />
             </div>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              // width={300}
-            />
+            <div className={project.datepickertitle}>
+              <p className={project.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                // width={300}
+              />
+            </div>
             <div className={project.absolutecenter}>
               <div className={project.dash}></div>
             </div>
-            <DatePicker
-              showIcon
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
+            <div className={project.datepickertitle}>
+              <p className={project.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
-          <TableDisplay>
-            {dataByDate.map((projectcollect, index) => (
-              <tr
-                onClick={() => {
-                  setSetting(projectcollect._id);
-                  setModalShow(true);
-                }}
-                key={index}
-                className={project.tablerow}
-              >
-                <td className={project.align}>{projectcollect.name}</td>
-                <td>
-                  <div className={project.absolutecenter}>
-                    <p className={project.avatar}>
-                      {" "}
-                      {projectcollect?.requested_by?.firstname?.charAt(0) ||
-                        null}
-                      <span>
-                        {projectcollect?.requested_by?.lastname?.charAt(0) ||
+          {isLoading ? (
+            <SkeleteonLoaderTable />
+          ) : (
+            <TableDisplay>
+              {dataByDate.map((projectcollect, index) => (
+                <tr
+                  onClick={() => {
+                    setSetting(projectcollect._id);
+                    setModalShow(true);
+                  }}
+                  key={index}
+                  className={project.tablerow}
+                >
+                  <td className={project.align}>{projectcollect.name}</td>
+                  <td>
+                    <div className={project.absolutecenter}>
+                      <p className={project.avatar}>
+                        {" "}
+                        {projectcollect?.requested_by?.firstname?.charAt(0) ||
                           null}
-                      </span>
-                    </p>
-                  </div>
-                </td>
-                <td>
-                  <StatusButton text={projectcollect.status.admin} />
-                </td>
-                <td className={project.centericon}>
-                  {new Date(projectcollect.date).toLocaleDateString()}
-                </td>
-                <td className={project.centericon}>
-                  {projectcollect.priority === "red" ? (
-                    <ImageIcon imagelink="/icons/table/redflag.svg" />
-                  ) : projectcollect.priority === "gray" ? (
-                    <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                  ) : projectcollect.priority === "yellow" ? (
-                    <ImageIcon imagelink="/icons/table/warningflag.svg" />
-                  ) : null}
-                </td>
-              </tr>
-            ))}
-          </TableDisplay>
+                        <span>
+                          {projectcollect?.requested_by?.lastname?.charAt(0) ||
+                            null}
+                        </span>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <StatusButton text={projectcollect.admin_Status} />
+                  </td>
+                  <td className={project.centericon}>
+                    {new Date(projectcollect.date).toLocaleDateString()}
+                  </td>
+                  <td className={project.centericon}>
+                    {projectcollect.priority === "red" ? (
+                      <ImageIcon imagelink="/icons/table/redflag.svg" />
+                    ) : projectcollect.priority === "gray" ? (
+                      <ImageIcon imagelink="/icons/table/normalflag.svg" />
+                    ) : projectcollect.priority === "yellow" ? (
+                      <ImageIcon imagelink="/icons/table/warningflag.svg" />
+                    ) : null}
+                  </td>
+                </tr>
+              ))}
+            </TableDisplay>
+          )}
         </div>
       </DashboardLayout>
       <ModalProject
@@ -235,6 +246,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={project.calendaricon}
       />
     </div>
-    {value}
+    <p className={project.datevalue}>{value}</p>
   </button>
 ));
