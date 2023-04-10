@@ -2,8 +2,6 @@ import React from "react";
 import task from "./User.module.css";
 import Table from "react-bootstrap/Table";
 import { Image } from "react-bootstrap";
-import { TasksData } from "../../../data/task";
-import { truncateString } from "../../../util/text";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 
 const Tasks = () => {

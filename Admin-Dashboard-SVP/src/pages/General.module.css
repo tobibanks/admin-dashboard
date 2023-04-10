@@ -3,7 +3,7 @@
   background-color: var(--active-selection-black);
   display: flex;
   max-width: 1440px;
-  height: 110vh;
+  /* height: 110vh; */
   justify-content: center;
   align-items: center;
   width: 100%;

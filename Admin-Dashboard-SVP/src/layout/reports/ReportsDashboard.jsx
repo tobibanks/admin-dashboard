@@ -1,7 +1,7 @@
 import React, { useState, useMemo, forwardRef } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import report from "./reports.module.css";
-import './projects.css'
+import "./projects.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import Header from "../../components/reports/Header";
 import DatePicker from "react-datepicker";
@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import FileInputContainer from "@/components/reports/FileInputContainer";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ReportsDashboard = () => {
   const { data: AdminReports } = useGetReportsDetailsQuery({
@@ -75,7 +76,7 @@ const ReportsDashboard = () => {
   console.log(ReportsCollection);
   return (
     <Container className={report.container}>
-      <DashboardLayout name="Reports">
+      <DashboardLayoutContents name="Reports">
         <FileInputContainer />
         <div className={report.overallcontainer}>
           <Header name="My Reports" />
@@ -161,7 +162,7 @@ const ReportsDashboard = () => {
             })}
           </div>
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
     </Container>
   );
 };

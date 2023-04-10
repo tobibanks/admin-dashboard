@@ -12,6 +12,7 @@ import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import ReportsTableContents from "@/components/reports/ReportsTableContents";
 import { TablesData } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ReportsTableDashboard = () => {
   const [filter, setFilter] = useState(null);
@@ -64,7 +65,7 @@ const ReportsTableDashboard = () => {
 
   return (
     <Container className={reporttable.container}>
-      <DashboardLayout name="Reports">
+      <DashboardLayoutContents name="Reports">
         <FileInputContainer />
         <div className={reporttable.overallcontainer}>
           <Header name="My Reports" />
@@ -150,7 +151,7 @@ const ReportsTableDashboard = () => {
             ))}
           </ReportsTableContents>
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
     </Container>
   );
 };

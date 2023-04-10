@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import projectform from "./project.module.css";
 import Form from "react-bootstrap/Form";
 import { Container, Button } from "react-bootstrap";
-import "./Projects.css";
+import "./ProjectsForm.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useAddProjectDetailsMutation,
   useGetDetailsQuery,
 } from "@/app/services/auth/authService";
 import toast, { Toaster } from "react-hot-toast";
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ProjectFormDashboard = () => {
   const [type, setType] = useState("");
@@ -91,8 +91,8 @@ const ProjectFormDashboard = () => {
   }
   return (
     <Container className={projectform.container}>
-      <DashboardLayout name="Projects">
-        <div className={projectform.overallcontainer}>
+      <DashboardLayoutContents name="Projects">
+        <div className={projectform.overallcontainer1}>
           <p className={projectform.header}>Project Request Form</p>
           <div className={projectform.secondheader}>
             <p className={projectform.header1}>PROJECT INFORMATION</p>
@@ -292,7 +292,7 @@ const ProjectFormDashboard = () => {
             </div>
           </form>
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
     </Container>
   );
 };

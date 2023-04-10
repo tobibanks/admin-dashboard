@@ -11,6 +11,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
+import DashboardLayoutContents from '../../components/dashboard/DashboardLayoutContents';
+
 
 const TasksDashboard = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -67,7 +69,7 @@ const TasksDashboard = () => {
 
   return (
     <Container className={task.container}>
-      <DashboardLayout name="Tasks">
+      <DashboardLayoutContents name="Tasks">
         <div className={task.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={task.leftcontainer}>
@@ -190,7 +192,7 @@ const TasksDashboard = () => {
             </TaskTableDisplay>
           )}
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
       <ModalTask
         show={modalShow}
         onHide={() => setModalShow(false)}

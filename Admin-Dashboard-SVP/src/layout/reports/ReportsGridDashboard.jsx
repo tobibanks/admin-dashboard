@@ -9,6 +9,7 @@ import { Container, Button, Image } from "react-bootstrap";
 import { reportgriddata } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ReportsGridDashboard = () => {
   const [filter, setFilter] = useState(null);
@@ -61,7 +62,7 @@ const ReportsGridDashboard = () => {
 
   return (
     <Container className={reportsgrid.container}>
-      <DashboardLayout name="Reports">
+      <DashboardLayoutContents name="Reports">
         <FileInputContainer />
         <div className={reportsgrid.overallcontainer}>
           <Header name="My Reports" />
@@ -162,7 +163,7 @@ const ReportsGridDashboard = () => {
             })}
           </div>
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
     </Container>
   );
 };

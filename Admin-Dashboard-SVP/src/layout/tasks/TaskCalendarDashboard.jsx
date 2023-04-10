@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Container, Image } from "react-bootstrap";
 import { calendarevents } from "../../../data/calendarevents";
+import DashboardLayoutContents from '../../components/dashboard/DashboardLayoutContents';
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -25,11 +26,11 @@ const TaskCalendarDashboard = () => {
 
   return (
     <Container className={taskcalendar.container}>
-      <DashboardLayout name="Tasks">
+      <DashboardLayoutContents name="Tasks">
         <div className={taskcalendar.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskcalendar.rightboardcontainer}>
-            <div className={taskcalendar.datepickertitle}>
+            {/* <div className={taskcalendar.datepickertitle}>
               <p className={taskcalendar.datepickertitlelabel}>Start Date</p>
               <DatePicker
                 selected={startDate}
@@ -58,9 +59,9 @@ const TaskCalendarDashboard = () => {
                 endDate={endDate}
                 minDate={startDate}
               />
-            </div>
+            </div> */}
           </div>
-          <div style={{ height: 700, marginTop: "2rem" }}>
+          <div style={{ height: 700, marginTop: "1rem" }}>
             <Calendar
               events={calendarevents}
               step={60}
@@ -76,7 +77,7 @@ const TaskCalendarDashboard = () => {
             />
           </div>
         </div>
-      </DashboardLayout>
+      </DashboardLayoutContents>
     </Container>
   );
 };

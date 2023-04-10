@@ -3,7 +3,9 @@
   background-color: var(--dashboard-yellow);
   display: flex;
   max-width: 1440px;
+  /* height: 100vh; */
   /* width: 100%; */
+  /* height: 100vh; */
   padding: 0rem !important;
   margin: 0 auto;
   justify-content: center;
@@ -73,7 +75,7 @@
 }
 
 .linktext {
-  font-size: 1.2rem;
+  font-size: 16px;
   font-weight: 400;
   margin-left: 1rem;
   color: black;
@@ -82,7 +84,7 @@
 }
 
 .linktextactive {
-  font-size: 1.2rem;
+  font-size: 16px;
   margin-bottom: 0px;
   color: var(--SVP-main);
   text-decoration: none;
@@ -170,9 +172,9 @@ a {
   display: flex;
   /* justify-content: flex-end; */
   width: 100%;
+  z-index: 100;
   position: sticky;
   top: 0;
-  z-index: 100;
   padding: 1.5rem 0;
   background-color: var(--dashboard-yellow);
   margin: 0 auto;
@@ -253,7 +255,7 @@ a {
 .title {
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 24px;
   margin-top: 6rem;
   color: var(--SVP-main);
 }
@@ -349,7 +351,7 @@ a {
 
 .notificationcontenttext {
   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   color: var(--textblack);
   margin-bottom: 1rem;
 }
@@ -361,7 +363,7 @@ a {
 
 .notificationcontentdescription {
   color: var(--black400);
-  font-size: 0.8rem;
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;

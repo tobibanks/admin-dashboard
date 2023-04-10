@@ -1,17 +1,15 @@
 .container {
   max-width: 1440px !important;
   padding: 0rem !important;
-  height: 100vh;
-  position: sticky;
-  top: 0;
   /* background-color: var(--dashboard-yellow); */
 }
 
 .overallcontainer {
-  background-color: white;
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
+  height: 71vh;
+  background-color: white;
 }
 
 .leftcontainer {

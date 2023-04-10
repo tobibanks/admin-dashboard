@@ -31,9 +31,21 @@
 tbody,
 td,
 tfoot,
-th,
-thead,
+thead {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}
+
 tr {
+  font-size: 14px;
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}
+
+th {
+  font-size: 12px;
   border-color: none;
   border-style: none;
   border-width: 0px;

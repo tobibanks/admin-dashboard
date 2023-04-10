@@ -1,0 +1,89 @@
+.form-label {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#formBasicName {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicTitle {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicDetails {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicSize {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicBudget {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicSite {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+#formBasicLocation {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicEmail {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#due {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+#formBasicEmail:focus {
+  box-shadow: none;
+  border-color: transparent;
+  background-color: var(--black50);
+  border-radius: 0px;
+  color: var(--black400);
+}
+
+.form-check-input:checked {
+  background-color: var(--SVP-main);
+  border-color: var(--SVP-main);
+}
+
+.btn-primary:hover {
+  background-color: none !important;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}

@@ -9,6 +9,8 @@ import ProjectGridContainer from "../../components/project/ProjectGridContainer"
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import SkeleteonBoard from "@/components/dashboard/SkeletonBoard";
+import DashboardLayoutContents from '../../components/dashboard/DashboardLayoutContents';
+
 
 const ProjectGridDashboard = () => {
   const { data: UserProjectGrid, isLoading } = useGetProjectDetailsQuery({
@@ -60,7 +62,7 @@ const ProjectGridDashboard = () => {
   return (
     <Container className={project.container}>
       <DashboardLayout name="Projects">
-        <div className={project.overallcontainer}>
+        <div className={project.overallcontainer1}>
           {/* <ButtonProject /> */}
           <Header name="My Projects" />
           {/* <div className={project.absolutecenter}> */}
