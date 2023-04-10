@@ -1,0 +1,39 @@
+.form-label {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#formBasicEmail {
+  font-family: "Inter", sans-serif;
+  background-color: var(--black50);
+  font-size: 1rem;
+}
+
+#formBasicEmail:focus {
+  box-shadow: none;
+  border-color: transparent;
+  background-color: var(--black50);
+  border-radius: 0px;
+  color: var(--black400);
+}
+
+.form-check-input:checked {
+  background-color: var(--SVP-main);
+  border-color: var(--SVP-main);
+}
+
+.btn-primary:hover {
+  background-color: none !important;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}

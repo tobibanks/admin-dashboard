@@ -183,6 +183,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={project.calendaricon}
       />
     </div>
-    {value}
+    <p className={project.datevalue}>{value}</p>
   </button>
 ));

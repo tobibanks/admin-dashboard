@@ -123,7 +123,7 @@ const ProjectDashboard = () => {
               <div className={project.dash}></div>
             </div>
             <div className={project.datepickertitle}>
-              <p className={project.datepickertitlelabel}>Start Date</p>
+              <p className={project.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
                 selected={endDate}

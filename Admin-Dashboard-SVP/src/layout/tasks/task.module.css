@@ -114,6 +114,11 @@
   align-items: center;
 }
 
+.dash {
+  border-bottom: 1px solid black;
+  width: 20px;
+  padding-top: 14px;
+}
 .avatar {
   width: 35px;
   height: 35px;
@@ -498,13 +503,29 @@
   height: 15px;
 }
 
+.datevalue {
+  margin-bottom: 0px;
+  padding-top: 3px;
+  padding-left: 3px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+}
+
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dash {
-  border-top: 1px solid black;
-  width: 20px;
+.datepickertitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.datepickertitlelabel {
+  margin-bottom: 0px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding-bottom: 5px;
 }

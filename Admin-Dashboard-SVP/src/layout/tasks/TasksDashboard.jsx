@@ -10,9 +10,10 @@ import ModalTask from "@/components/tasks/ModalTask";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const TasksDashboard = () => {
-  const { data: TaskCollection } = useGetTaskDetailsQuery({
+  const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -101,78 +102,93 @@ const TasksDashboard = () => {
                 onClick={() => setFilter("Declined")}
               />
             </div>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              width={300}
-            />
-            <DatePicker
-              showIcon
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
+            <div className={task.datepickertitle}>
+              <p className={task.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                width={300}
+              />
+            </div>
+            <div className={task.absolutecenter}>
+              <div className={task.dash}></div>
+            </div>
+            <div className={task.datepickertitle}>
+              <p className={task.datepickertitlelabel}>End Date</p>
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
-          <TaskTableDisplay>
-            {dataByDate.map((taskcollect, index) => (
-              <tr
-                key={index}
-                onClick={() => {
-                  setSetting(taskcollect._id);
-                  setModalShow(true);
-                }}
-              >
-                <td>
-                  <div className={task.flexcontent}>
-                    {taskcollect.star === "true" ? (
-                      <Icon imagelink="/icons/dashboard/task/starred.svg" />
-                    ) : (
-                      <Icon imagelink="/icons/dashboard/task/star.svg" />
-                    )}
-                    <div className={task.centertext}>
-                      <p className={task.tasktitle}>{taskcollect.task}</p>
+          {isLoading ? (
+            <SkeleteonLoaderTable />
+          ) : (
+            <TaskTableDisplay>
+              {dataByDate.map((taskcollect, index) => (
+                <tr
+                  key={index}
+                  onClick={() => {
+                    setSetting(taskcollect._id);
+                    setModalShow(true);
+                  }}
+                >
+                  <td>
+                    <div className={task.flexcontent}>
+                      {taskcollect.star === "true" ? (
+                        <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                      ) : (
+                        <Icon imagelink="/icons/dashboard/task/star.svg" />
+                      )}
+                      <div className={task.centertext}>
+                        <p className={task.tasktitle}>{taskcollect.task}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>{taskcollect.name}</td>
-                <td>
-                  <div className={task.absolutecenter}>
-                    <p className={task.avatar}>
-                      {" "}
-                      {taskcollect.assigned_to?.firstname.charAt(0)}
-                      <span>{taskcollect.assigned_to?.lastname.charAt(0)}</span>
-                    </p>
-                  </div>
-                </td>
-                <td>
-                  <StatusButton text={taskcollect.status} />
-                </td>
-                <td className={task.centericon}>
-                  {" "}
-                  {new Date(taskcollect.date).toLocaleDateString()}
-                </td>
-                <td className={task.centericon}>
-                  {taskcollect.priority === "red" ? (
-                    <ImageIcon imagelink="/icons/table/redflag.svg" />
-                  ) : taskcollect.priority === "gray" ? (
-                    <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                  ) : taskcollect.priority === "yellow" ? (
-                    <ImageIcon imagelink="/icons/table/warningflag.svg" />
-                  ) : null}
-                </td>
-              </tr>
-            ))}
-          </TaskTableDisplay>
+                  </td>
+                  <td>{taskcollect.name}</td>
+                  <td>
+                    <div className={task.absolutecenter}>
+                      <p className={task.avatar}>
+                        {" "}
+                        {taskcollect.assigned_to?.firstname.charAt(0)}
+                        <span>
+                          {taskcollect.assigned_to?.lastname.charAt(0)}
+                        </span>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <StatusButton text={taskcollect.status} />
+                  </td>
+                  <td className={task.centericon}>
+                    {" "}
+                    {new Date(taskcollect.date).toLocaleDateString()}
+                  </td>
+                  <td className={task.centericon}>
+                    {taskcollect.priority === "red" ? (
+                      <ImageIcon imagelink="/icons/table/redflag.svg" />
+                    ) : taskcollect.priority === "gray" ? (
+                      <ImageIcon imagelink="/icons/table/normalflag.svg" />
+                    ) : taskcollect.priority === "yellow" ? (
+                      <ImageIcon imagelink="/icons/table/warningflag.svg" />
+                    ) : null}
+                  </td>
+                </tr>
+              ))}
+            </TaskTableDisplay>
+          )}
         </div>
       </DashboardLayout>
       <ModalTask
@@ -241,6 +257,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={task.calendaricon}
       />
     </div>
-    {value}
+    <p className={task.datevalue}>{value}</p>
   </button>
 ));

@@ -1,11 +1,11 @@
 import React, { useState, useMemo, forwardRef } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import report from "./reports.module.css";
+import './projects.css'
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import Header from "../../components/reports/Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import TableHeaderNav from "../../components/project/TableHeaderNav";
 import FileInputContainer from "@/components/reports/FileInputContainer";
 import ReportModal from "@/components/reports/ReportModal";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
@@ -113,30 +113,36 @@ const ReportsDashboard = () => {
                 onClick={() => setFilter("application")}
               />
             </div>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              // width={300}
-            />
+            <div className={report.datepickertitle}>
+              <p className={report.datepickertitlelabel}>End Date</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                // width={300}
+              />
+            </div>
             <div className={report.absolutecenter}>
               <div className={report.dash}></div>
             </div>
-            <DatePicker
-              showIcon
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
+            <div className={report.datepickertitle}>
+              <p className={report.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
           <div className={report.wrapcontainer}>
             {data.map((report, index) => {
@@ -219,6 +225,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={report.calendaricon}
       />
     </div>
-    {value}
+    <p className={report.datevalue}>{value}</p>
   </button>
 ));

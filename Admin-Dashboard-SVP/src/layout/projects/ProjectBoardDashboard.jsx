@@ -311,6 +311,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={grid.calendaricon}
       />
     </div>
-    {value}
+    <p className={grid.datevalue}>{value}</p>
   </button>
 ));

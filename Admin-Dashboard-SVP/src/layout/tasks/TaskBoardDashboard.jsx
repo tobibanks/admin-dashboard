@@ -6,9 +6,10 @@ import TaskHeader from "../../components/tasks/TaskHeader";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import SkeleteonGrid from "@/components/dashboard/SkeletonGrid";
 
 const TaskBoardDashboard = () => {
-  const { data: TaskCollection } = useGetTaskDetailsQuery({
+  const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -87,81 +88,100 @@ const TaskBoardDashboard = () => {
         <div className={taskboard.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskboard.rightboardcontainer}>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              width={300}
-            />
+            <div className={taskboard.datepickertitle}>
+              <p className={taskboard.datepickertitlelabel}>Start Date</p>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                width={300}
+              />
+            </div>
             <div className={taskboard.absolutecenter}>
               <div className={taskboard.dash}></div>
             </div>
-            <DatePicker
-              showIcon
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              dateFormat="dd/MM/yyyy"
-              customInput={<ExampleCustomInput />}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
+            <div className={taskboard.datepickertitle}>
+              <p className={taskboard.datepickertitlelabel}>End Date</p>
+              <DatePicker
+                showIcon
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                dateFormat="dd/MM/yyyy"
+                customInput={<ExampleCustomInput />}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
           <div className={taskboard.flexboardcontainer}>
-            <div className={taskboard.sizecontainer}>
-              <BoarderHeader text="In Progress" />
-              {dataByDateinprogress.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  name={filtereddata.name}
-                  firstname={filtereddata.assigned_to?.firstname}
-                  lastname={filtereddata.assigned_to?.lastname}
-                  headertext={filtereddata.projectname}
-                  content={filtereddata.description}
-                  date={filtereddata.due}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
-            <div className={taskboard.sizecontainer}>
-              <BoarderHeader text="Upcoming" />
-              {dataByDateupcoming.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  name={filtereddata.name}
-                  firstname={filtereddata.assigned_to?.firstname}
-                  lastname={filtereddata.assigned_to?.lastname}
-                  headertext={filtereddata.projectname}
-                  content={filtereddata.description}
-                  date={filtereddata.duedate}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
-            <div className={taskboard.sizecontainer}>
-              <BoarderHeader text="Completed" />
-              {dataByDatecomplete.map((filtereddata, index) => (
-                <ContentContainer
-                  key={index}
-                  name={filtereddata.name}
-                  firstname={filtereddata.assigned_to?.firstname}
-                  lastname={filtereddata.assigned_to?.lastname}
-                  headertext={filtereddata.projectname}
-                  content={filtereddata.description}
-                  date={filtereddata.duedate}
-                  status={filtereddata.status}
-                  imagelink={filtereddata.imagelink}
-                  priority={filtereddata.priority}
-                />
-              ))}
-            </div>
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={taskboard.sizecontainer}>
+                <BoarderHeader text="In Progress" />
+                {dataByDateinprogress.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    name={filtereddata.name}
+                    firstname={filtereddata.assigned_to?.firstname}
+                    lastname={filtereddata.assigned_to?.lastname}
+                    headertext={filtereddata.projectname}
+                    content={filtereddata.description}
+                    date={filtereddata.due}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
+
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={taskboard.sizecontainer}>
+                <BoarderHeader text="Upcoming" />
+                {dataByDateupcoming.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    name={filtereddata.name}
+                    firstname={filtereddata.assigned_to?.firstname}
+                    lastname={filtereddata.assigned_to?.lastname}
+                    headertext={filtereddata.projectname}
+                    content={filtereddata.description}
+                    date={filtereddata.duedate}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
+            {isLoading ? (
+              <SkeleteonGrid />
+            ) : (
+              <div className={taskboard.sizecontainer}>
+                <BoarderHeader text="Completed" />
+                {dataByDatecomplete.map((filtereddata, index) => (
+                  <ContentContainer
+                    key={index}
+                    name={filtereddata.name}
+                    firstname={filtereddata.assigned_to?.firstname}
+                    lastname={filtereddata.assigned_to?.lastname}
+                    headertext={filtereddata.projectname}
+                    content={filtereddata.description}
+                    date={filtereddata.duedate}
+                    status={filtereddata.status}
+                    imagelink={filtereddata.imagelink}
+                    priority={filtereddata.priority}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </DashboardLayout>
@@ -281,6 +301,6 @@ const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         className={taskboard.calendaricon}
       />
     </div>
-    {value}
+    <p className={taskboard.datevalue}>{value}</p>
   </button>
 ));

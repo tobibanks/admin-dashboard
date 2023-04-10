@@ -9,7 +9,7 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  /* height: 100vh; */
+  height: 100vh;
 }
 
 .tablenavcontainer {
@@ -178,6 +178,12 @@
   align-items: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.dash {
+  border-bottom: 1px solid black;
+  width: 20px;
+  padding-top: 17px;
 }
 
 .flexboardcontainer {
@@ -531,12 +537,6 @@
 .middleline {
   border: 1px solid black;
   width: 50px;
-}
-
-.dash {
-  border-bottom: 1px solid black;
-  width: 20px;
-  padding-top: 17px;
 }
 
 @media (min-width: 600px) and (max-width: 1280px) {
