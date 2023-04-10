@@ -29,14 +29,7 @@
   top: 0; */
 }
 
-.overallcontainer1 {
-  margin: 0 auto;
-  /* padding-bottom: 2rem; */
-  width: 95%;
-  /* height: 91vh; */
-  /* position: sticky;
-  top: 0; */
-}
+
 
 .leftcontainer {
   display: flex;

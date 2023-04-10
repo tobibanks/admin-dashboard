@@ -6,8 +6,7 @@ import TaskHeader from "../../components/tasks/TaskHeader";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
-import SkeleteonGrid from "@/components/dashboard/SkeletonGrid";;
-
+import SkeleteonGrid from "@/components/dashboard/SkeletonGrid";
 
 const TaskBoardDashboard = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -86,7 +85,7 @@ const TaskBoardDashboard = () => {
   return (
     <Container className={taskboard.container}>
       <DashboardLayout name="Tasks">
-        <div className={taskboard.overallcontainer1}>
+        <div className={taskboard.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskboard.rightboardcontainer}>
             <div className={taskboard.datepickertitle}>
@@ -126,7 +125,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="In Progress" />
-                {dataByDateinprogress.map((filtereddata, index) => (
+                {dataByDateinprogress.slice(0, 1).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}
@@ -147,7 +146,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Upcoming" />
-                {dataByDateupcoming.map((filtereddata, index) => (
+                {dataByDateupcoming.slice(0, 1).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}
@@ -167,7 +166,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Completed" />
-                {dataByDatecomplete.map((filtereddata, index) => (
+                {dataByDatecomplete.slice(0, 1).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}

@@ -121,7 +121,7 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="In Progress" />
-                {dataByDateinprogress.map((filtereddata, index) => (
+                {dataByDateinprogress.slice(0,2).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     headertext={filtereddata.name}
@@ -147,7 +147,7 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="Upcoming" />
-                {dataByDateupcoming.map((filtereddata, index) => (
+                {dataByDateupcoming.slice(0, 1).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     headertext={filtereddata.name}
@@ -173,7 +173,7 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="Completed" />
-                {dataByDatecomplete.map((filtereddata, index) => (
+                {dataByDatecomplete.slice(0, 1).map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     headertext={filtereddata.projectname}
