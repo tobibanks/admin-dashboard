@@ -54,15 +54,15 @@ const TasksDashboard = () => {
   }, [finalStartDate, finalEndDate, data]);
 
   const filteredApprovedData = TasksTableCollection.filter(
-    (item) => item.status === "approved"
+    (item) => item.status === "Approved"
   );
 
   const filteredPendingData = TasksTableCollection.filter(
-    (item) => item.status === "pending"
+    (item) => item.status === "Pending"
   );
 
   const filteredDeclinedData = TasksTableCollection.filter(
-    (item) => item.status === "declined"
+    (item) => item.status === "Declined"
   );
 
   return (
