@@ -125,7 +125,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="In Progress" />
-                {dataByDateinprogress.slice(0, 1).map((filtereddata, index) => (
+                {dataByDateinprogress.map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}
@@ -146,7 +146,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Upcoming" />
-                {dataByDateupcoming.slice(0, 1).map((filtereddata, index) => (
+                {dataByDateupcoming.map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}
@@ -166,7 +166,7 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Completed" />
-                {dataByDatecomplete.slice(0, 1).map((filtereddata, index) => (
+                {dataByDatecomplete.map((filtereddata, index) => (
                   <ContentContainer
                     key={index}
                     name={filtereddata.name}

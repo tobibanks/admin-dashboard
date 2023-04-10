@@ -8,8 +8,12 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  height: 71vh;
-  background-color: white;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.overallcontainer::-webkit-scrollbar {
+  display: none;
 }
 
 .leftcontainer {
@@ -34,6 +38,7 @@
   border-bottom-right-radius: 0px;
   border: none;
   padding: 0rem;
+  height: 56px;
   cursor: pointer;
   white-space: nowrap;
   padding: 1rem;
@@ -54,6 +59,7 @@
   border-bottom-right-radius: 0px;
   border: none;
   padding: 0rem;
+  height: 56px;
   cursor: pointer;
   white-space: nowrap;
   padding: 1rem;

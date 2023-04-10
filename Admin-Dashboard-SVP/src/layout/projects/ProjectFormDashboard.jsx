@@ -92,7 +92,7 @@ const ProjectFormDashboard = () => {
   return (
     <Container className={projectform.container}>
       <DashboardLayoutContents name="Projects">
-        <div className={projectform.overallcontainer1}>
+        <div className={projectform.overallcontainer}>
           <p className={projectform.header}>Project Request Form</p>
           <div className={projectform.secondheader}>
             <p className={projectform.header1}>PROJECT INFORMATION</p>

@@ -208,6 +208,11 @@ a {
 .contentcontainer {
   width: 92%;
   margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.contentcontainer::-webkit-scrollbar {
+  display: none;
 }
 
 .buttondashboard {

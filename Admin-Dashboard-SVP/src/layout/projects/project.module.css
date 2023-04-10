@@ -9,22 +9,12 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  height: 90vh;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-
-
-.overallcontainer1 {
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  width: 95%;
-}
-
-.overallcontainer2 {
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  width: 95%;
-  height: 90vh;
+.overallcontainer::-webkit-scrollbar {
+  display: none;
 }
 
 .tablenavcontainer {
