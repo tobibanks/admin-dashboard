@@ -1,15 +1,17 @@
 .container {
   max-width: 1440px !important;
   padding: 0rem !important;
+  height: 100vh;
   /* background-color: var(--dashboard-yellow); */
 }
 
 .overallcontainer {
   background-color: white;
   margin: 0 auto;
+  position: sticky;
+  top: 0;
   /* padding-bottom: 2rem; */
   width: 95%;
-  /* height: 100vh; */
 }
 
 .tablenavcontainer {
