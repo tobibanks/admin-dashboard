@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import modal from "./tasktable.module.css";
 import { Modal, Image } from "react-bootstrap";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import { generatePath, useNavigate } from "react-router-dom";
 
 const ModalTask = (props) => {
   const { data: AdminTasks } = useGetTaskDetailsQuery({
@@ -12,7 +13,10 @@ const ModalTask = (props) => {
 
   const ModalTaskCollection = AdminTasks || [];
 
+  const [id, setId] = useState();
+  const navigate = useNavigate();
   // console.log(ModalTaskCollection[4].attachments);
+
   return (
     <Modal
       className={modal.modal}
@@ -113,8 +117,22 @@ const ModalTask = (props) => {
                       )}
                     </div>
                     <div className={modal.absolutebuttoncenter}>
-                      <div className={modal.buttonname}>
-                        <p className={modal.buttontext}>See All Attachments</p>
+                      <div className={modal.buttonname1}>
+                        <p className={modal.buttontext1}>See All Attachments</p>
+                      </div>
+                    </div>
+                    <div className={modal.bottomcontainer}>
+                      <div
+                        className={modal.buttonname}
+                        onClick={() => {
+                          setId(props.id);
+                          id &&
+                            navigate(generatePath("/taskapproval/:id", { id }));
+                        }}
+                      >
+                        <p className={modal.buttontext}>
+                          Review Approval Request
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -178,7 +196,9 @@ const Attachment = (props) => {
       {/* </div> */}
       <div>
         <p className={modal.attachmenttext}>{props.name}</p>
-        <p className={modal.attachmentsize}>{Math.round(props.size / 1000) + "kb"}</p>
+        <p className={modal.attachmentsize}>
+          {Math.round(props.size / 1000) + "kb"}
+        </p>
       </div>
     </div>
   );

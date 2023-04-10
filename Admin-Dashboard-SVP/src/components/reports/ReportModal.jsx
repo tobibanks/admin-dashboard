@@ -3,21 +3,28 @@ import { Modal, Image, Button } from "react-bootstrap";
 import modal from "./general.module.css";
 import "./modal.css";
 import Form from "react-bootstrap/Form";
-
-const ImageAttachment = [
-  {
-    src: "/icons/pdf.svg",
-    attachmentname: "Site Clearing.pdf",
-    attachmentsize: "2 MB",
-  },
-  {
-    src: "/icons/jpg.svg",
-    attachmentname: "Site Clearing.jpg",
-    attachmentsize: "2 MB",
-  },
-];
+import {
+  useGetAllUsersQuery,
+  useGetTaskDetailsQuery,
+} from "../../app/services/auth/authService";
 
 const ReportModal = (props) => {
+  const [modalShow, setModalShow] = React.useState(true);
+  const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
+    refetchOnMountArgChange: true,
+  });
+
+  const { data: Users } = useGetAllUsersQuery({
+    refetchOnMountArgChange: true,
+  });
+
+  const TaskCollections = TaskCollection || [];
+  console.log(TaskCollections);
+
+  const UserCollection = Users || [];
+
+  console.log(UserCollection);
+
   return (
     <Modal
       className={modal.modal}
@@ -27,7 +34,7 @@ const ReportModal = (props) => {
       centered
     >
       <Modal.Body className={modal.modalbody}>
-        <div className={modal.attachmentflex}>
+        {/* <div className={modal.attachmentflex}>
           {ImageAttachment.map((attachment, index) => (
             <Attachment
               key={index}
@@ -36,38 +43,21 @@ const ReportModal = (props) => {
               attachmentsize={attachment.attachmentsize}
             />
           ))}
-        </div>
+        </div> */}
         <div className={modal.absolutecenter2}>
           <Button className={modal.addfile}>Add New File</Button>
         </div>
         <p className={modal.title}>Tasks</p>
         <Form>
-          <Form.Check
-            defaultChecked
-            type="radio"
-            id="custom-switch"
-            label="Site Clearing"
-          />
-          <Form.Check
-            type="radio"
-            label="Site hoarding"
-            id="disabled-custom-switch"
-          />
-          <Form.Check
-            type="radio"
-            label="Plant procurement"
-            id="disabled-custom-switch"
-          />
-          <Form.Check
-            type="radio"
-            label="Sand procurement"
-            id="disabled-custom-switch"
-          />
-          <Form.Check
-            type="radio"
-            label="Cement procurement"
-            id="disabled-custom-switch"
-          />
+          {TaskCollections.map((task, index) => (
+            <Form.Check
+              type="radio"
+              key={index}
+              name="task"
+              id="custom-switch"
+              label={task.name}
+            />
+          ))}
         </Form>
         <div className={modal.flexcontainer}>
           <p className={modal.title}>Send to:</p>
@@ -83,37 +73,15 @@ const ReportModal = (props) => {
           </div>
         </div>
         <Form>
-          <Form.Check
-            defaultChecked
-            type="checkbox"
-            id="custom-switch1"
-            label="Anthony"
-          />
-          <Form.Check
-            type="checkbox"
-            label="Anthony"
-            id="disabled-custom-switch1"
-          />
-          <Form.Check
-            type="checkbox"
-            label="Annabelle"
-            id="disabled-custom-switch1"
-          />
-          <Form.Check
-            type="checkbox"
-            label="Annabelle"
-            id="disabled-custom-switch1"
-          />
-          <Form.Check
-            type="checkbox"
-            label="Amara"
-            id="disabled-custom-switch1"
-          />
-          <Form.Check
-            type="checkbox"
-            label="Amara"
-            id="disabled-custom-switch1"
-          />
+          {UserCollection.map((usercollect, index) => (
+            <Form.Check
+              defaultChecked
+              type="checkbox"
+              key={index}
+              id="custom-switch1"
+              label={usercollect?.firstname}
+            />
+          ))}
         </Form>
         <p className={modal.title}>Note</p>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -126,12 +94,14 @@ const ReportModal = (props) => {
         </Form.Group>
         <div className={modal.absoluterightendcontainer}>
           <div className={modal.flexbuttoncontainer}>
-            <Button
+            {/* <Button
               className={modal.cancelbutton}
-              onClick={() => navigate(-1)}
+              onClick={() => {
+                setModalShow();
+              }}
             >
               Cancel
-            </Button>
+            </Button> */}
             <Button className={modal.sharebutton}>Submit Form</Button>
           </div>
         </div>

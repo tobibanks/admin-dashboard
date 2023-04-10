@@ -338,6 +338,18 @@
   border-radius: 8px;
   width: 12rem;
   display: inline-block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.buttonname1 {
+  background-color: transparent;
+  border-color: var(--SVP-main);
+  color: var(--SVP-main);
+  border-radius: 8px;
+  width: 12rem;
+  border: 1px solid;
+  display: inline-block;
   margin-left: 0.5rem;
 }
 
@@ -348,6 +360,18 @@
   text-align: center;
   padding: 10px 20px;
   color: var(--white);
+  margin-bottom: 0rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.buttontext1 {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px 20px;
+  color: var(--SVP-main);
   margin-bottom: 0rem;
   font-weight: 600;
   white-space: nowrap;
@@ -491,4 +515,10 @@
 
 .firstphase {
   display: flex;
+}
+
+.bottomcontainer {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
 }

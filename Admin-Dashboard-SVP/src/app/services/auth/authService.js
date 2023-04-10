@@ -57,6 +57,12 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    getAllUsers: build.query({
+      query: () => {
+        url: "/admin/users";
+        method: "GET";
+      },
+    }),
   }),
 });
 
@@ -67,5 +73,6 @@ export const {
   useAddTaskDetailsMutation,
   useAddProjectDetailsMutation,
   useGetReportsDetailsQuery,
+  useGetAllUsersQuery,
   useGetProjectSpecificTaskQuery,
 } = authApi;

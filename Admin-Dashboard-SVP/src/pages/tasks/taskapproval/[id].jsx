@@ -1,5 +1,5 @@
 import React from "react";
-import TaskApprovalDashboard from "../../layout/tasks/TaskApprovalDashboard";
+import TaskApprovalDashboard from "../../../layout/tasks/TaskApprovalDashboard";
 
 const TaskApproval = () => {
   return <TaskApprovalDashboard />;

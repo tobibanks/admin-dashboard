@@ -7,7 +7,6 @@ import Header from "../../components/reports/Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import FileInputContainer from "@/components/reports/FileInputContainer";
-import ReportModal from "@/components/reports/ReportModal";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
 
@@ -22,7 +21,6 @@ const ReportsDashboard = () => {
 
   console.log(ReportsCollection);
   const [filter, setFilter] = useState(null);
-  const [modalShow, setModalShow] = React.useState(false);
 
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
   const [endDate, setEndDate] = useState(new Date("01/01/2077"));
@@ -114,7 +112,7 @@ const ReportsDashboard = () => {
               />
             </div>
             <div className={report.datepickertitle}>
-              <p className={report.datepickertitlelabel}>End Date</p>
+              <p className={report.datepickertitlelabel}>Start Date</p>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -164,7 +162,6 @@ const ReportsDashboard = () => {
           </div>
         </div>
       </DashboardLayout>
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
     </Container>
   );
 };
