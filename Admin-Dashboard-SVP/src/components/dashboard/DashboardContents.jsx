@@ -36,7 +36,7 @@ const DashboardContents = () => {
         <ButtonProject />
       </div> */}
 
-      <ButtonProject />
+      {/* <ButtonProject /> */}
       <div className={user.flexcontainer}>
         <Cards
           imagelink="/icons/dashboard/project-cards-icon.svg"

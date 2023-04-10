@@ -3,6 +3,8 @@ import { Modal, Image } from "react-bootstrap";
 import { ProjectsCollection } from "../../../data/projects";
 import modal from "./general.module.css";
 import Form from "react-bootstrap/Form";
+
+import { Link } from "react-router-dom";
 import "./Modal.css";
 import {
   useGetProjectDetailsQuery,
@@ -35,6 +37,7 @@ const ModalProject = (props) => {
       {ModalProjectsCollection.map((collect, index) =>
         props.id === collect._id ? (
           <div key={index}>
+            {console.log(collect)}
             <Modal.Header closeButton>
               <Modal.Title
                 className={modal.containedmodaltitlecenter}
@@ -60,20 +63,30 @@ const ModalProject = (props) => {
                     <p className={modal.nameproject}>{collect.name}</p>
                     <p className={modal.description}>{collect.details}</p>
                     <p className={modal.assigned}>Assigned to:</p>
-                    <div className={modal.yellowbackground}>
-                      <Image
-                        src="/images/avatar.png"
-                        className={modal.imageavatar}
-                        alt="avatar"
-                      />
-                      <div className={modal.absolutecenter}>
-                        <p className={modal.textname}>
-                          {" "}
-                          {collect.requested_by?.firstname || null}
-                          <span>{collect.requested_by?.lastname || null}</span>
-                        </p>
+                    {collect.assigned_to ? (
+                      <div className={modal.yellowbackground}>
+                        <Image
+                          src="/images/avatar.png"
+                          className={modal.imageavatar}
+                          alt="avatar"
+                        />
+                        <div className={modal.absolutecenter}>
+                          <p className={modal.textname}>
+                            {" "}
+                            {collect.assigned_to?.firstname || null}
+                            <span>{collect.assigned_to?.lastname || null}</span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <Link to="/project/form">
+                        <div className={modal.absolutebuttoncenter}>
+                          <div className={modal.buttonname}>
+                            <p className={modal.buttontext}>Add New Project</p>
+                          </div>
+                        </div>
+                      </Link>
+                    )}
                     <p className={modal.taskname}>Tasks</p>
                     <div className={modal.taskcontainer}>
                       <div className={modal.taskheader}>
@@ -121,26 +134,37 @@ const ModalProject = (props) => {
                         </div>
                       </div>
                     </div>
-
+                    {/* {collect.assigned_to ? null : (
+                      <Link to="/project/form">
+                        <div className={modal.absolutebuttoncenter}>
+                          <div className={modal.buttonname}>
+                            <p className={modal.buttontext}>Add New Project</p>
+                          </div>
+                        </div>
+                      </Link>
+                    )} */}
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
-                      {collect.attachments.length > 1
-                        ? collect.attachments
-                            .slice(0, 3)
-                            .map((attachment, index) => (
-                              <Attachment
-                                key={index}
-                                imagelink={attachment.type}
-                                attachmentname={attachment.name}
-                                attachmentsize={attachment.size}
-                              />
-                            ))
-                        : null}
-                    </div>
-                    <div className={modal.absolutebuttoncenter}>
-                      <div className={modal.buttonname}>
-                        <p className={modal.buttontext}>See All Attachments</p>
-                      </div>
+                      {collect.attachments.length > 1 ? (
+                        collect.attachments
+                          .slice(0, 3)
+                          .map((attachment, index) => (
+                            <Attachment
+                              key={index}
+                              imagelink={attachment.type}
+                              attachmentname={attachment.name}
+                              attachmentsize={attachment.size}
+                            />
+                          ))
+                      ) : (
+                        <div className={modal.absolutebuttoncenter}>
+                          <div className={modal.buttonname}>
+                            <p className={modal.buttontext}>
+                              See All Attachments
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -4,7 +4,7 @@ import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import projectform from "./project.module.css";
 import Form from "react-bootstrap/Form";
 import { Container, Button } from "react-bootstrap";
-import "./projects.css";
+import "./Projects.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useAddProjectDetailsMutation,

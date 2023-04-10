@@ -9,7 +9,7 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .tablenavcontainer {
@@ -508,7 +508,7 @@
   border-radius: 8px;
   background-color: white;
   /* padding: 0.5rem; */
-  padding: 10px 20px;
+  padding: 10px 9px;
   white-space: nowrap;
   display: flex;
   /* background-color: blue; */

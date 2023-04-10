@@ -6,7 +6,6 @@ import reportsgrid from "./reports.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Container, Button, Image } from "react-bootstrap";
-import TableHeaderNav from "../../components/project/TableHeaderNav";
 import { reportgriddata } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";

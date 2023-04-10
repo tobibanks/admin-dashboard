@@ -80,7 +80,7 @@ const ProjectBoardDashboard = () => {
     <Container className={grid.container}>
       <DashboardLayout name="Projects">
         <div className={grid.overallcontainer}>
-          <ButtonProject />
+          {/* <ButtonProject /> */}
           <Header name="My Projects" />
           <div className={grid.rightboardcontainer}>
             <div className={grid.datepickertitle}>

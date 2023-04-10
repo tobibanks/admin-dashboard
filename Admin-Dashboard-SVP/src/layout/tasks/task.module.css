@@ -23,7 +23,7 @@
   margin: 0 auto;
   /* padding-bottom: 2rem; */
   width: 95%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .leftcontainer {
@@ -491,7 +491,7 @@
   border-color: var(--black100);
   border-radius: 8px;
   background-color: white;
-  padding: 0.5rem;
+  padding: 3px 8px;
   white-space: nowrap;
   display: flex;
   /* background-color: blue; */
