@@ -1,54 +1,54 @@
 .form-label {
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicName {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicTitle {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicDetails {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicSize {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicBudget {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicSite {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 #formBasicLocation {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #formBasicEmail {
   font-family: "Inter", sans-serif;
   background-color: var(--black50);
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 #due {
