@@ -128,7 +128,7 @@ const ReportsDashboard = () => {
               <div className={report.dash}></div>
             </div>
             <div className={report.datepickertitle}>
-              <p className={report.datepickertitlelabel}>Start Date</p>
+              <p className={report.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
                 selected={endDate}
