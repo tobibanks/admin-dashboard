@@ -87,7 +87,7 @@ const Login = () => {
                 )}
               </div>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Confirm password</Form.Label>
               <Form.Control
                 name="password"
@@ -108,7 +108,7 @@ const Login = () => {
               </div>
             </Form.Group>
             {errors.password_repeat && errors.password_repeat?.message}
-            {console.log(errors.password_repeat?.message)}
+            {console.log(errors.password_repeat?.message)} */}
             {/* {console.log(errors.password_repeat.message)} */}
             {/* <Spinner /> */}
             <Button
@@ -119,12 +119,12 @@ const Login = () => {
               {loading ? <Spinner /> : "Login"}
             </Button>
           </form>
-          <p className={login.text}>
+          {/* <p className={login.text}>
             First time here?
             <Link className={login.route} to="/register">
               Sign Up
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
