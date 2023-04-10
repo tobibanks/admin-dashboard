@@ -18,7 +18,13 @@
   margin: 0 auto;
   padding-bottom: 1rem;
   width: 95%;
+}
 
+.overallcontainer2 {
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  width: 95%;
+  height: 90vh;
 }
 
 .tablenavcontainer {
@@ -183,7 +189,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   margin-top: 2rem;
   margin-bottom: 2rem;

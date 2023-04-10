@@ -82,7 +82,7 @@ const ModalProject = (props) => {
                       <Link to="/project/form">
                         <div className={modal.absolutebuttoncenter}>
                           <div className={modal.buttonname}>
-                            <p className={modal.buttontext}>Add New Project</p>
+                            <p className={modal.buttontext}>Assign Project</p>
                           </div>
                         </div>
                       </Link>
