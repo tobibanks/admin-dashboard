@@ -127,25 +127,35 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="In Progress" />
-                {dataByDateinprogress.map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    headertext={filtereddata.name}
-                    content={filtereddata.details}
-                    firstname={filtereddata.requested_by?.firstname}
-                    lastname={filtereddata.requested_by?.lastname}
-                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
-                      0
-                    )}
-                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
-                      0
-                    )}
-                    date={filtereddata.date}
-                    status={filtereddata.admin_Status}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDateinprogress.length >= 1 ? (
+                    <>
+                      {dataByDateinprogress.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          headertext={filtereddata.name}
+                          content={filtereddata.details}
+                          firstname={filtereddata.requested_by?.firstname}
+                          lastname={filtereddata.requested_by?.lastname}
+                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                            0
+                          )}
+                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                            0
+                          )}
+                          date={filtereddata.date}
+                          status={filtereddata.admin_Status}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "3rem" }}>
+                      <p className={grid.nothing}>There are no projects</p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
             {isLoading ? (
@@ -153,25 +163,35 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="Upcoming" />
-                {dataByDateupcoming.slice(0, 1).map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    headertext={filtereddata.name}
-                    content={filtereddata.details}
-                    firstname={filtereddata.requested_by?.firstname}
-                    lastname={filtereddata.requested_by?.lastname}
-                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
-                      0
-                    )}
-                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
-                      0
-                    )}
-                    date={filtereddata.duedate}
-                    status={filtereddata.admin_Status}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDateupcoming.length >= 1 ? (
+                    <>
+                      {dataByDateupcoming.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          headertext={filtereddata.name}
+                          content={filtereddata.details}
+                          firstname={filtereddata.requested_by?.firstname}
+                          lastname={filtereddata.requested_by?.lastname}
+                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                            0
+                          )}
+                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                            0
+                          )}
+                          date={filtereddata.duedate}
+                          status={filtereddata.admin_Status}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "2rem" }}>
+                      <p className={grid.nothing}>There are no upcoming projects</p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
             {isLoading ? (
@@ -179,25 +199,35 @@ const ProjectBoardDashboard = () => {
             ) : (
               <div className={grid.sizecontainer}>
                 <BoarderHeader text="Completed" />
-                {dataByDatecomplete.map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    headertext={filtereddata.projectname}
-                    content={filtereddata.description}
-                    firstname={filtereddata.requested_by?.firstname}
-                    lastname={filtereddata.requested_by?.lastname}
-                    firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
-                      0
-                    )}
-                    lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
-                      0
-                    )}
-                    date={filtereddata.duedate}
-                    status={filtereddata.admin_Status}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDatecomplete.length >= 1 ? (
+                    <>
+                      {dataByDatecomplete.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          headertext={filtereddata.projectname}
+                          content={filtereddata.description}
+                          firstname={filtereddata.requested_by?.firstname}
+                          lastname={filtereddata.requested_by?.lastname}
+                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                            0
+                          )}
+                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                            0
+                          )}
+                          date={filtereddata.duedate}
+                          status={filtereddata.admin_Status}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "2rem" }}>
+                      <p className={grid.nothing}>There are no completed projects</p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
           </div>

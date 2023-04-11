@@ -20,7 +20,7 @@ const Project = () => {
       (item) => item.user_status === filter
     );
     return filteredData;
-  }, [filter]);
+  }, [filter,UserProjectsCollection]);
 
   console.log(data);
 

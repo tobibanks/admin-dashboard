@@ -34,7 +34,7 @@ const Header = (props) => {
           <div className={head.searchiconcontainer}>
             <input
               type="text"
-              placeholder="Search Clients"
+              placeholder="Search Projects"
               className={head.search}
             ></input>
             <Image src="/icons/search.svg" className={head.searchicon} />

@@ -144,48 +144,58 @@ const ProjectDashboard = () => {
           {isLoading ? (
             <SkeleteonLoaderTable />
           ) : (
-            <TableDisplay>
-              {dataByDate.map((projectcollect, index) => (
-                <tr
-                  onClick={() => {
-                    setSetting(projectcollect._id);
-                    setModalShow(true);
-                  }}
-                  key={index}
-                  className={project.tablerow}
-                >
-                  <td className={project.align}>{projectcollect.name}</td>
-                  <td>
-                    <div className={project.absolutecenter}>
-                      <p className={project.avatar}>
-                        {" "}
-                        {projectcollect?.requested_by?.firstname?.charAt(0) ||
-                          null}
-                        <span>
-                          {projectcollect?.requested_by?.lastname?.charAt(0) ||
-                            null}
-                        </span>
-                      </p>
-                    </div>
-                  </td>
-                  <td>
-                    <StatusButton text={projectcollect.admin_Status} />
-                  </td>
-                  <td className={project.centericon}>
-                    {new Date(projectcollect.date).toLocaleDateString()}
-                  </td>
-                  <td className={project.centericon}>
-                    {projectcollect.priority === "red" ? (
-                      <ImageIcon imagelink="/icons/table/redflag.svg" />
-                    ) : projectcollect.priority === "gray" ? (
-                      <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                    ) : projectcollect.priority === "yellow" ? (
-                      <ImageIcon imagelink="/icons/table/warningflag.svg" />
-                    ) : null}
-                  </td>
-                </tr>
-              ))}
-            </TableDisplay>
+            <div>
+              {dataByDate.length >= 1 ? (
+                <TableDisplay>
+                  {dataByDate.map((projectcollect, index) => (
+                    <tr
+                      onClick={() => {
+                        setSetting(projectcollect._id);
+                        setModalShow(true);
+                      }}
+                      key={index}
+                      className={project.tablerow}
+                    >
+                      <td className={project.align}>{projectcollect.name}</td>
+                      <td>
+                        <div className={project.absolutecenter}>
+                          <p className={project.avatar}>
+                            {" "}
+                            {projectcollect?.requested_by?.firstname?.charAt(
+                              0
+                            ) || null}
+                            <span>
+                              {projectcollect?.requested_by?.lastname?.charAt(
+                                0
+                              ) || null}
+                            </span>
+                          </p>
+                        </div>
+                      </td>
+                      <td>
+                        <StatusButton text={projectcollect.admin_Status} />
+                      </td>
+                      <td className={project.centericon}>
+                        {new Date(projectcollect.date).toLocaleDateString()}
+                      </td>
+                      <td className={project.centericon}>
+                        {projectcollect.priority === "red" ? (
+                          <ImageIcon imagelink="/icons/table/redflag.svg" />
+                        ) : projectcollect.priority === "gray" ? (
+                          <ImageIcon imagelink="/icons/table/normalflag.svg" />
+                        ) : projectcollect.priority === "yellow" ? (
+                          <ImageIcon imagelink="/icons/table/warningflag.svg" />
+                        ) : null}
+                      </td>
+                    </tr>
+                  ))}
+                </TableDisplay>
+              ) : (
+                <div style={{ marginTop: "3rem" }}>
+                  <p className={project.nothing}>There are no projects</p>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </DashboardLayoutContents>

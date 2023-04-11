@@ -34,7 +34,7 @@ const TaskHeader = (props) => {
           <div className={task.searchiconcontainer}>
             <input
               type="text"
-              placeholder="Search Clients"
+              placeholder="Search Tasks"
               className={task.search}
             ></input>
             <Image src="/icons/search.svg" className={task.searchicon} />

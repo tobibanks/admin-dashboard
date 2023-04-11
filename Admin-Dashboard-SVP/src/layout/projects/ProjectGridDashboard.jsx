@@ -138,17 +138,25 @@ const ProjectGridDashboard = () => {
           {isLoading ? (
             <SkeleteonBoard />
           ) : (
-            <div className={project.wrap}>
-              {dataByDate.slice(0, 6).map((projectcollect, index) => (
-                <ProjectGridContainer
-                  key={index}
-                  text={projectcollect.name}
-                  date={projectcollect.due}
-                  status={projectcollect.admin_Status}
-                  priority={projectcollect.priority}
-                ></ProjectGridContainer>
-              ))}
-            </div>
+            <>
+              {dataByDate.length >= 1 ? (
+                <div className={project.wrap}>
+                  {dataByDate.map((projectcollect, index) => (
+                    <ProjectGridContainer
+                      key={index}
+                      text={projectcollect.name}
+                      date={projectcollect.due}
+                      status={projectcollect.admin_Status}
+                      priority={projectcollect.priority}
+                    ></ProjectGridContainer>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ marginTop: "2rem" }}>
+                  <p className={project.nothing}>There are no projects</p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </DashboardLayout>

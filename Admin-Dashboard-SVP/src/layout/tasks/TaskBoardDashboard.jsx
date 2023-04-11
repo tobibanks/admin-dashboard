@@ -131,19 +131,29 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="In Progress" />
-                {dataByDateinprogress.map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    name={filtereddata.name}
-                    firstname={filtereddata.assigned_to?.firstname}
-                    lastname={filtereddata.assigned_to?.lastname}
-                    headertext={filtereddata.projectname}
-                    content={filtereddata.description}
-                    date={filtereddata.due}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDateinprogress.length >= 1 ? (
+                    <>
+                      {dataByDateinprogress.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          name={filtereddata.name}
+                          firstname={filtereddata.assigned_to?.firstname}
+                          lastname={filtereddata.assigned_to?.lastname}
+                          headertext={filtereddata.projectname}
+                          content={filtereddata.description}
+                          date={filtereddata.due}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "3rem" }}>
+                      <p className={taskboard.nothing}>There are no projects</p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
 
@@ -152,19 +162,31 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Upcoming" />
-                {dataByDateupcoming.map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    name={filtereddata.name}
-                    firstname={filtereddata.assigned_to?.firstname}
-                    lastname={filtereddata.assigned_to?.lastname}
-                    headertext={filtereddata.projectname}
-                    content={filtereddata.description}
-                    date={filtereddata.duedate}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDateupcoming.length >= 1 ? (
+                    <>
+                      {dataByDateupcoming.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          name={filtereddata.name}
+                          firstname={filtereddata.assigned_to?.firstname}
+                          lastname={filtereddata.assigned_to?.lastname}
+                          headertext={filtereddata.projectname}
+                          content={filtereddata.description}
+                          date={filtereddata.duedate}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "2rem" }}>
+                      <p className={taskboard.nothing}>
+                        There are no upcoming tasks
+                      </p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
             {isLoading ? (
@@ -172,20 +194,32 @@ const TaskBoardDashboard = () => {
             ) : (
               <div className={taskboard.sizecontainer}>
                 <BoarderHeader text="Completed" />
-                {dataByDatecomplete.map((filtereddata, index) => (
-                  <ContentContainer
-                    key={index}
-                    name={filtereddata.name}
-                    firstname={filtereddata.assigned_to?.firstname}
-                    lastname={filtereddata.assigned_to?.lastname}
-                    headertext={filtereddata.projectname}
-                    content={filtereddata.description}
-                    date={filtereddata.duedate}
-                    status={filtereddata.status}
-                    imagelink={filtereddata.imagelink}
-                    priority={filtereddata.priority}
-                  />
-                ))}
+                <>
+                  {dataByDatecomplete.length >= 1 ? (
+                    <>
+                      {dataByDatecomplete.map((filtereddata, index) => (
+                        <ContentContainer
+                          key={index}
+                          name={filtereddata.name}
+                          firstname={filtereddata.assigned_to?.firstname}
+                          lastname={filtereddata.assigned_to?.lastname}
+                          headertext={filtereddata.projectname}
+                          content={filtereddata.description}
+                          date={filtereddata.duedate}
+                          status={filtereddata.status}
+                          imagelink={filtereddata.imagelink}
+                          priority={filtereddata.priority}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <div style={{ marginTop: "2rem" }}>
+                      <p className={taskboard.nothing}>
+                        There are no completed tasks
+                      </p>
+                    </div>
+                  )}
+                </>
               </div>
             )}
           </div>

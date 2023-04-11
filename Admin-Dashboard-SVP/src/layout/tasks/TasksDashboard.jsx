@@ -11,8 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
-import DashboardLayoutContents from '../../components/dashboard/DashboardLayoutContents';
-
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const TasksDashboard = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -144,58 +143,66 @@ const TasksDashboard = () => {
           {isLoading ? (
             <SkeleteonLoaderTable />
           ) : (
-            <TaskTableDisplay>
-              {dataByDate.map((taskcollect, index) => (
-                <tr
-                  key={index}
-                  onClick={() => {
-                    setSetting(taskcollect._id);
-                    setModalShow(true);
-                  }}
-                >
-                  <td>
-                    <div className={task.flexcontent}>
-                      {taskcollect.star === "true" ? (
-                        <Icon imagelink="/icons/dashboard/task/starred.svg" />
-                      ) : (
-                        <Icon imagelink="/icons/dashboard/task/star.svg" />
-                      )}
-                      <div className={task.centertext}>
-                        <p className={task.tasktitle}>{taskcollect.name}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{taskcollect.project.name}</td>
-                  <td>
-                    <div className={task.absolutecenter}>
-                      <p className={task.avatar}>
+            <div>
+              {dataByDate.length >= 1 ? (
+                <TaskTableDisplay>
+                  {dataByDate.map((taskcollect, index) => (
+                    <tr
+                      key={index}
+                      onClick={() => {
+                        setSetting(taskcollect._id);
+                        setModalShow(true);
+                      }}
+                    >
+                      <td>
+                        <div className={task.flexcontent}>
+                          {taskcollect.star === "true" ? (
+                            <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                          ) : (
+                            <Icon imagelink="/icons/dashboard/task/star.svg" />
+                          )}
+                          <div className={task.centertext}>
+                            <p className={task.tasktitle}>{taskcollect.name}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{taskcollect.project.name}</td>
+                      <td>
+                        <div className={task.absolutecenter}>
+                          <p className={task.avatar}>
+                            {" "}
+                            {taskcollect.assigned_to?.firstname.charAt(0)}
+                            <span>
+                              {taskcollect.assigned_to?.lastname.charAt(0)}
+                            </span>
+                          </p>
+                        </div>
+                      </td>
+                      <td>
+                        <StatusButton text={taskcollect.status} />
+                      </td>
+                      <td className={task.centericon}>
                         {" "}
-                        {taskcollect.assigned_to?.firstname.charAt(0)}
-                        <span>
-                          {taskcollect.assigned_to?.lastname.charAt(0)}
-                        </span>
-                      </p>
-                    </div>
-                  </td>
-                  <td>
-                    <StatusButton text={taskcollect.status} />
-                  </td>
-                  <td className={task.centericon}>
-                    {" "}
-                    {new Date(taskcollect.date).toLocaleDateString()}
-                  </td>
-                  <td className={task.centericon}>
-                    {taskcollect.priority === "red" ? (
-                      <ImageIcon imagelink="/icons/table/redflag.svg" />
-                    ) : taskcollect.priority === "gray" ? (
-                      <ImageIcon imagelink="/icons/table/normalflag.svg" />
-                    ) : taskcollect.priority === "yellow" ? (
-                      <ImageIcon imagelink="/icons/table/warningflag.svg" />
-                    ) : null}
-                  </td>
-                </tr>
-              ))}
-            </TaskTableDisplay>
+                        {new Date(taskcollect.date).toLocaleDateString()}
+                      </td>
+                      <td className={task.centericon}>
+                        {taskcollect.priority === "red" ? (
+                          <ImageIcon imagelink="/icons/table/redflag.svg" />
+                        ) : taskcollect.priority === "gray" ? (
+                          <ImageIcon imagelink="/icons/table/normalflag.svg" />
+                        ) : taskcollect.priority === "yellow" ? (
+                          <ImageIcon imagelink="/icons/table/warningflag.svg" />
+                        ) : null}
+                      </td>
+                    </tr>
+                  ))}
+                </TaskTableDisplay>
+              ) : (
+                <div style={{ marginTop: "3rem" }}>
+                  <p className={task.nothing}>There are no tasks</p>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </DashboardLayoutContents>

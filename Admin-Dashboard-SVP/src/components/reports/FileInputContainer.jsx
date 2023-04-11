@@ -13,7 +13,6 @@ const FileInputContainer = () => {
 
   const TaskCollections = TaskCollection || [];
 
-  
   return (
     <div className={input.absolutecenter}>
       <div className={input.innercontainer}>
@@ -27,8 +26,6 @@ const FileInputContainer = () => {
             Upload
             <MdOutlineCloudUpload className={input.icon} />
           </Button>
-          <p className={input.text}>or</p>
-          <p className={input.text}>Drag files here</p>
         </div>
       </div>
       <ReportModal show={modalShow} onHide={() => setModalShow(false)} />

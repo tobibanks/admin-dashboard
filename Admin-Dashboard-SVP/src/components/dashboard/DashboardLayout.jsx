@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import side from "./User.module.css";
-import { Container, Image, Row, Col } from "react-bootstrap";
+import { Container, Image, Row, Col, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { logout } from "@/features/auth/authSlice";
 import { useGetDetailsQuery } from "@/app/services/auth/authService";
 import { authApi } from "../../app/services/auth/authService";
+import ModalContainer from "./ModalContainer";
 
 const DashboardLayout = (props) => {
   const [display, setDisplay] = useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
   // const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +25,8 @@ const DashboardLayout = (props) => {
     dispatch(logout());
     navigate("/");
   };
+
+  const handleClick = () => setModalShow(true);
   return (
     <Container className={side.container}>
       <Row className={side.rowcontainer}>
@@ -160,12 +164,14 @@ const DashboardLayout = (props) => {
               <Image
                 src="/icons/dashboard/alarm-icon.svg"
                 className={side.alarm}
+                onClick={handleClick}
               />
             </div>
           </div>
           <div className={side.contentscontainer}>{props.children}</div>
         </Col>
       </Row>
+      <ModalContainer show={modalShow} onHide={() => setModalShow(false)} />
     </Container>
   );
 };
