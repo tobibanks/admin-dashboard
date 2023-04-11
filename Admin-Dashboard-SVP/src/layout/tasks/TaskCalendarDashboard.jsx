@@ -30,12 +30,15 @@ const TaskCalendarDashboard = () => {
         <div className={taskcalendar.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskcalendar.rightboardcontainer}>
-            {/* <div className={taskcalendar.datepickertitle}>
+            <div className={taskcalendar.datepickertitle}>
               <p className={taskcalendar.datepickertitlelabel}>Start Date</p>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 startDate={startDate}
                 endDate={endDate}
                 dateFormat="dd/MM/yyyy"
@@ -53,13 +56,16 @@ const TaskCalendarDashboard = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 startDate={startDate}
                 endDate={endDate}
                 minDate={startDate}
               />
-            </div> */}
+            </div>
           </div>
           <div style={{ height: 700, marginTop: "1rem" }}>
             <Calendar

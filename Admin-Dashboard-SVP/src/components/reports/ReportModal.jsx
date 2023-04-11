@@ -4,7 +4,7 @@ import modal from "./general.module.css";
 import "./modal.css";
 import Form from "react-bootstrap/Form";
 import {
-  useGetAllUsersQuery,
+  useGetAllUsersDetailsQuery,
   useGetTaskDetailsQuery,
 } from "../../app/services/auth/authService";
 
@@ -14,7 +14,7 @@ const ReportModal = (props) => {
     refetchOnMountArgChange: true,
   });
 
-  const { data: Users } = useGetAllUsersQuery({
+  const { data: Users } = useGetAllUsersDetailsQuery({
     refetchOnMountArgChange: true,
   });
 

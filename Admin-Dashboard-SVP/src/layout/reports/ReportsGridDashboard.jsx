@@ -20,6 +20,7 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
+  console.log("Batman");
   console.log(ReportsCollection);
 
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
@@ -106,6 +107,9 @@ const ReportsGridDashboard = () => {
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 // width={300}
@@ -121,6 +125,9 @@ const ReportsGridDashboard = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 startDate={startDate}
@@ -194,7 +201,7 @@ const CardGridContainer = (props) => {
   return (
     <div className={reportsgrid.cardcontainer}>
       <div className={reportsgrid.flexcontainer}>
-        {/* <img src={props.url} alt="image-icon" /> */}
+        <img src={props.url} alt="image-icon" />
         <div className={reportsgrid.absolutecenter}>
           <p className={reportsgrid.filename}>
             {/* {truncateString(props.name, 7)} */}

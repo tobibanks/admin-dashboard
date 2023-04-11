@@ -11,7 +11,7 @@ const Tasks = () => {
 
   const TasksTableCollection = TaskCollection || [];
   // var options = { day: "numeric", month: "short" };
-  console.log(TasksTableCollection);
+  console.log(TasksTableCollection[0]?.status);
   return (
     <div className={task.taskcontainer}>
       <p className={task.header1}>TASKS</p>
@@ -46,21 +46,21 @@ const Tasks = () => {
                 {new Date(Taskdata.date).toLocaleDateString()}
               </td>
               <td className={task.centericon}>
-                {Taskdata.approved === true ? (
+                {Taskdata.status === "Approved" ? (
                   <Icon imagelink="/icons/dashboard/task/progress-true.svg" />
                 ) : (
                   <Icon imagelink="/icons/dashboard/task/progress-failed.svg" />
                 )}
               </td>
               <td className={task.centericon}>
-                {Taskdata.pending === true ? (
+                {Taskdata.status === "In Progress"   ? (
                   <Icon imagelink="/icons/dashboard/task/pending-true.svg" />
                 ) : (
                   <Icon imagelink="/icons/dashboard/task/pending-failed.svg" />
                 )}
               </td>
               <td className={task.centericon}>
-                {Taskdata.declined === true ? (
+                {Taskdata.status === "Declined" ? (
                   <Icon imagelink="/icons/dashboard/task/close-true.svg" />
                 ) : (
                   <Icon imagelink="/icons/dashboard/task/close-failed.svg" />

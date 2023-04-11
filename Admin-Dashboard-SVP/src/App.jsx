@@ -21,6 +21,7 @@ import ReportsGrid from "./pages/reports/ReportsGrid";
 import TaskApproval from "./pages/tasks/taskapproval/[id]";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import TaskForm from "./pages/tasks/TaskForm";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -55,6 +56,7 @@ const App = () => {
             <Route path="/reports/table" element={<ReportsTable />} />
             <Route path="/reports/grid" element={<ReportsGrid />} />
             <Route path="/taskapproval/:id" element={<TaskApproval />} />
+            <Route path="/taskform/:id" element={<TaskForm />} />
             <Route path="/message" element={<Messages />} />
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>

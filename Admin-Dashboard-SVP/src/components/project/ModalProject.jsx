@@ -8,15 +8,17 @@ import { Link } from "react-router-dom";
 import "./Modal.css";
 import {
   useGetProjectDetailsQuery,
+  useGetTaskDetailsQuery,
   useGetProjectSpecificTaskQuery,
 } from "@/app/services/auth/authService";
+import ModalTask from "../tasks/ModalTask";
 
 const ModalProject = (props) => {
   const { data: UserProjects } = useGetProjectDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
-  const { data: UserProjectTask } = useGetProjectSpecificTaskQuery({
+  const { data: UserProjectTask } = useGetTaskDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -24,7 +26,9 @@ const ModalProject = (props) => {
 
   console.log(ModalProjectsCollection);
 
-  const specificUserProjectTask = UserProjectTask || [];
+  const ModalTasks = UserProjectTask || [];
+
+  // console.log(ModalTasks.project.length);
 
   return (
     <Modal
@@ -64,108 +68,99 @@ const ModalProject = (props) => {
                     <p className={modal.description}>{collect.details}</p>
                     <p className={modal.assigned}>Assigned to:</p>
                     {collect.assigned_to ? (
-                      <div className={modal.yellowbackground}>
-                        <Image
-                          src="/images/avatar.png"
-                          className={modal.imageavatar}
-                          alt="avatar"
-                        />
-                        <div className={modal.absolutecenter}>
-                          <p className={modal.textname}>
-                            {" "}
-                            {collect.assigned_to?.firstname || null} &nbsp;
-                            <span>{collect.assigned_to?.lastname || null}</span>
-                          </p>
+                      <div>
+                        <div className={modal.yellowbackground}>
+                          <Image
+                            src="/images/avatar.png"
+                            className={modal.imageavatar}
+                            alt="avatar"
+                          />
+                          <div className={modal.absolutecenter}>
+                            <p className={modal.textname}>
+                              {" "}
+                              {collect.assigned_to?.firstname || null} &nbsp;
+                              <span>
+                                {collect.assigned_to?.lastname || null}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <p className={modal.taskname}>Tasks</p>
+                        <div className={modal.taskcontainer}>
+                          <div className={modal.taskheader}>
+                            <div className={modal.flexheader}>
+                              <Image
+                                src="/icons/sidebar/tasks-icon.svg"
+                                alt="task-icon"
+                              />
+                              <div className={modal.absolutecenter}>
+                                <p className={modal.headertext1}>All Tasks</p>
+                              </div>
+                            </div>
+                            <div className={modal.absolutecenter}>
+                              <p className={modal.headertext1}>
+                                {/* 0 / {ModalTasks.map((task,index) => props.id === task.project.id ? )} */}
+                              </p>
+                            </div>
+                          </div>
+                          {/* <div className={modal.progressbar}>
+                            <div className={modal.progressyellow}></div>
+                          </div> */}
+                          <div className={modal.formcontainer}>
+                            <Form>
+                              {console.log(props.id)}
+                              {ModalTasks.map((task, index) =>
+                                props.id === task.project.id ? (
+                                  <Form.Check
+                                    type="checkbox"
+                                    key={index}
+                                    id="custom-switch"
+                                    label={task?.name}
+                                  />
+                                ) : null
+                              )}
+                            </Form>
+                            <div className={modal.flexheader2}>
+                              <div className={modal.absolutecenter}>
+                                <p className={modal.seetext}>See More</p>
+                              </div>
+                              <Image src="/icons/arrow-down.svg" />
+                            </div>
+                          </div>
+                        </div>
+                        <p className={modal.taskname}>Attachment</p>
+                        <div className={modal.attachmentflex}>
+                          {collect.attachments.length > 1 ? (
+                            collect.attachments
+                              .slice(0, 3)
+                              .map((attachment, index) => (
+                                <Attachment
+                                  key={index}
+                                  imagelink={attachment.type}
+                                  attachmentname={attachment.name}
+                                  attachmentsize={attachment.size}
+                                />
+                              ))
+                          ) : (
+                            <div className={modal.absolutebuttoncenter}>
+                              <div className={modal.buttonname}>
+                                <p className={modal.buttontext}>
+                                  See All Attachments
+                                </p>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ) : (
                       <Link to="/project/form">
                         <div className={modal.absolutebuttoncenter}>
                           <div className={modal.buttonname}>
-                            <p className={modal.buttontext}>Assign Project</p>
+                            <p className={modal.buttontext}>Assign Task</p>
                           </div>
                         </div>
                       </Link>
                     )}
-                    <p className={modal.taskname}>Tasks</p>
-                    <div className={modal.taskcontainer}>
-                      <div className={modal.taskheader}>
-                        <div className={modal.flexheader}>
-                          <Image
-                            src="/icons/sidebar/tasks-icon.svg"
-                            alt="task-icon"
-                          />
-                          <div className={modal.absolutecenter}>
-                            <p className={modal.headertext1}>All Tasks</p>
-                          </div>
-                        </div>
-                        <div className={modal.absolutecenter}>
-                          <p className={modal.headertext1}>5/10</p>
-                        </div>
-                      </div>
-                      <div className={modal.progressbar}>
-                        <div className={modal.progressyellow}></div>
-                      </div>
-                      <div className={modal.formcontainer}>
-                        <Form>
-                          <Form.Check
-                            defaultChecked
-                            type="checkbox"
-                            id="custom-switch"
-                            label="Site Clearing"
-                          />
-                          <Form.Check
-                            defaultChecked
-                            type="checkbox"
-                            label="Site Clearing"
-                            id="disabled-custom-switch"
-                          />
-                          <Form.Check
-                            type="checkbox"
-                            label="Site Clearing"
-                            id="disabled-custom-switch"
-                          />
-                        </Form>
-                        <div className={modal.flexheader2}>
-                          <div className={modal.absolutecenter}>
-                            <p className={modal.seetext}>See More</p>
-                          </div>
-                          <Image src="/icons/arrow-down.svg" />
-                        </div>
-                      </div>
-                    </div>
-                    {/* {collect.assigned_to ? null : (
-                      <Link to="/project/form">
-                        <div className={modal.absolutebuttoncenter}>
-                          <div className={modal.buttonname}>
-                            <p className={modal.buttontext}>Add New Project</p>
-                          </div>
-                        </div>
-                      </Link>
-                    )} */}
-                    <p className={modal.taskname}>Attachment</p>
-                    <div className={modal.attachmentflex}>
-                      {collect.attachments.length > 1 ? (
-                        collect.attachments
-                          .slice(0, 3)
-                          .map((attachment, index) => (
-                            <Attachment
-                              key={index}
-                              imagelink={attachment.type}
-                              attachmentname={attachment.name}
-                              attachmentsize={attachment.size}
-                            />
-                          ))
-                      ) : (
-                        <div className={modal.absolutebuttoncenter}>
-                          <div className={modal.buttonname}>
-                            <p className={modal.buttontext}>
-                              See All Attachments
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
                 <div className={modal.descriptionrightcontainer}>
@@ -261,7 +256,9 @@ const Attachment = (props) => {
         ) : null}
       </div>
       <div>
-        <p className={modal.attachmenttext}>{props.attachmentname}</p>
+        <p className={modal.attachmenttext}>
+          {props.attachmentname.substring(0, 7)}
+        </p>
         <p className={modal.attachmentsize}>
           {Math.round(props.attachmentsize / 1000) + "kb"}
         </p>

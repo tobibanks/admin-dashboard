@@ -60,7 +60,7 @@ const TasksDashboard = () => {
   );
 
   const filteredPendingData = TasksTableCollection.filter(
-    (item) => item.status === "Pending"
+    (item) => item.status === "In Progress"
   );
 
   const filteredDeclinedData = TasksTableCollection.filter(
@@ -92,9 +92,9 @@ const TasksDashboard = () => {
               <NavCategories
                 name="Pending"
                 total={`(${filteredPendingData.length})`}
-                filter1="Pending"
+                filter1="In Progress"
                 filter={filter}
-                onClick={() => setFilter("Pending")}
+                onClick={() => setFilter("In Progress")}
               />
               <NavCategories
                 name="Declined"
@@ -112,6 +112,9 @@ const TasksDashboard = () => {
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 width={300}
@@ -127,6 +130,9 @@ const TasksDashboard = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 startDate={startDate}
@@ -155,11 +161,11 @@ const TasksDashboard = () => {
                         <Icon imagelink="/icons/dashboard/task/star.svg" />
                       )}
                       <div className={task.centertext}>
-                        <p className={task.tasktitle}>{taskcollect.task}</p>
+                        <p className={task.tasktitle}>{taskcollect.name}</p>
                       </div>
                     </div>
                   </td>
-                  <td>{taskcollect.name}</td>
+                  <td>{taskcollect.project.name}</td>
                   <td>
                     <div className={task.absolutecenter}>
                       <p className={task.avatar}>

@@ -57,11 +57,17 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
-    getAllUsers: build.query({
-      query: () => {
-        url: "/admin/users";
-        method: "GET";
-      },
+    getAllUsersDetails: build.query({
+      query: () => ({
+        url: "/admin/users",
+        method: "GET",
+      }),
+    }),
+    useUpdateTaskApproval: build.mutation({
+      query: (id) => ({
+        url: `/admin/approvals/${id}`,
+        method: "POST",
+      }),
     }),
   }),
 });
@@ -73,6 +79,7 @@ export const {
   useAddTaskDetailsMutation,
   useAddProjectDetailsMutation,
   useGetReportsDetailsQuery,
-  useGetAllUsersQuery,
+  useUseUpdateTaskApprovalMutation,
+  useGetAllUsersDetailsQuery,
   useGetProjectSpecificTaskQuery,
 } = authApi;

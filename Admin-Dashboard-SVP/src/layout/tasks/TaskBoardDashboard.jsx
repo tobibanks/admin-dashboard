@@ -94,6 +94,9 @@ const TaskBoardDashboard = () => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 startDate={startDate}
                 endDate={endDate}
                 dateFormat="dd/MM/yyyy"
@@ -111,6 +114,9 @@ const TaskBoardDashboard = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 startDate={startDate}

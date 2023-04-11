@@ -11,7 +11,7 @@ import ModalProject from "../../components/project/ModalProject";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
-import DashboardLayoutContents from '../../components/dashboard/DashboardLayoutContents';
+import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ProjectDashboard = () => {
   const { data: UserTableProjects, isLoading } = useGetProjectDetailsQuery({
@@ -38,13 +38,10 @@ const ProjectDashboard = () => {
   const data = useMemo(() => {
     if (!filter) return ProjectsCollection;
     const filteredData = ProjectsCollection.filter(
-      (item) =>
-        item.admin_Status === filter &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.admin_Status === filter
     );
     return filteredData;
-  }, [filter, finalStartDate, finalEndDate, ProjectsCollection]);
+  }, [filter, ProjectsCollection]);
 
   const dataByDate = useMemo(() => {
     const filtereddata = data.filter(
@@ -115,6 +112,9 @@ const ProjectDashboard = () => {
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 // width={300}
@@ -130,6 +130,9 @@ const ProjectDashboard = () => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
+                showYearDropdown
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 startDate={startDate}
