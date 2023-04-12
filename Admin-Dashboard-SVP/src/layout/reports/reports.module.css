@@ -283,7 +283,8 @@
 .datepickertitlelabel {
   margin-bottom: 0px;
   text-align: center;
-  margin-left: 10px;
+  margin-left: 35px;
+  white-space: nowrap;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   padding-bottom: 5px;

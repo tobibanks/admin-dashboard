@@ -33,7 +33,11 @@ const Register = () => {
     <Container className={registerform.container1}>
       <div className={registerform.flexcontainer}>
         <div className={registerform.figurecontainer}>
-          <Image src="/icons/login-illustration.svg" className={registerform.largeicon} alt="icons" />
+          <Image
+            src="/icons/login-illustration.svg"
+            className={registerform.largeicon}
+            alt="icons"
+          />
         </div>
         <div className={registerform.rightcontainer}>
           <div className={registerform.logincenteredcontainer1}>
@@ -176,7 +180,9 @@ const Register = () => {
                     )}
                     {errors.password && errors.password.type === "pattern" && (
                       <span className={registerform.error}>
-                        Password is invalid
+                        "Password should be at least 8 characters, At least 1
+                        uppercase character, 1 lowercase character and 1
+                        number",
                       </span>
                     )}
                   </div>

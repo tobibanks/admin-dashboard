@@ -83,7 +83,11 @@ const Login = () => {
                   <span className={login.error}>Max length exceeded</span>
                 )}
                 {errors.password && errors.password.type === "pattern" && (
-                  <span className={login.error}>Password is invalid</span>
+                  <span className={login.error}>
+                    {" "}
+                    Password should be at least 8 characters, At least 1
+                    uppercase character, 1 lowercase character and 1 number,
+                  </span>
                 )}
               </div>
             </Form.Group>

@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import table from "./general.module.css";
-import "./changes.css";
+// import "./changes.css";
 
 const TableDisplay = (props) => {
   return (

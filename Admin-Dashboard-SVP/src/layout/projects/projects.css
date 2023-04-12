@@ -37,3 +37,58 @@ tr {
   border-style: none;
   border-width: 0px;
 }
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range{
+  background-color: var(--SVP-main) !important;
+}
+
+.react-datepicker-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  width: 140px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  /* padding: 10px 30px; */
+  /* background: url(./calendar.svg) no-repeat; */
+  /* padding-left: 30px; */
+  /* background-repeat: no-repeat; */
+  border-color: var(--black100);
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input::placeholder {
+  /* padding-left: 12px; */
+  padding-left: 0px;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+}

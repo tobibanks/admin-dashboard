@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import cart from "./general.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import "./changes.css";
+// import "./changes.css";
 import { Image } from "react-bootstrap";
 
 // import { ToggleButton } from "@progress/kendo-react-dateinputs";
