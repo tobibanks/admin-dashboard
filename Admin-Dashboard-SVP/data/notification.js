@@ -1,7 +1,7 @@
 export const Today = [
   {
     name: "Anthony",
-    id:'1',
+    id: "1",
     time: "5 mins ago",
     image: "/images/notification/boy.png",
   },
@@ -25,5 +25,15 @@ export const week = [
     id: "2",
     time: "5 days ago",
     image: "/images/notification/admin.svg",
+  },
+];
+
+export const weekModal = [
+  {
+    name: "Anthony",
+    id: "1",
+    time: "2 days ago",
+    project: "Home Construction Project",
+    image: "/images/notification/boy.png",
   },
 ];

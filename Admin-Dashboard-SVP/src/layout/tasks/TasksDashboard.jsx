@@ -43,7 +43,7 @@ const TasksDashboard = () => {
         new Date(item.due).getTime() <= finalEndDate
     );
     return filteredData;
-  }, [filter, finalStartDate, finalEndDate, TasksTableCollection]);
+  }, [filter, TasksTableCollection]);
 
   const dataByDate = useMemo(() => {
     const filtereddata = data.filter(

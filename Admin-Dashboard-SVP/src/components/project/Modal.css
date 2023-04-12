@@ -8,3 +8,31 @@
   background-color: var(--dashboard-yellow);
   height: 90px;
 }
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  background-color: transparent;
+  color: var(--textblack);
+  font-family: "Inter", sans-serif;
+  text-decoration: underline !important;
+  text-decoration-color: var(--SVP-main) !important;
+  text-underline-offset: 5px;
+}
+
+.nav-pills .nav-link {
+  font-family: "Inter", sans-serif;
+  color: var(--black200);
+}
+
+.nav-link:hover {
+  font-family: "Inter", sans-serif;
+  color: var(--textblack);
+  text-decoration: underline !important;
+  text-decoration-color: var(--SVP-main) !important;
+  text-underline-offset: 5px;
+}
+
+
+.modal-content {
+  height: 832px;
+}
