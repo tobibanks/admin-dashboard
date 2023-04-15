@@ -97,9 +97,9 @@ const TasksDashboard = () => {
               <NavCategories
                 name="Awaiting Approval"
                 total={`(${filteredPendingData.length})`}
-                filter1="In Progress"
+                filter1="Awaiting Approval"
                 filter={filter}
-                onClick={() => setFilter("Pending")}
+                onClick={() => setFilter("Awaiting Approval")}
               />
               <NavCategories
                 name="In Progress"
@@ -258,7 +258,7 @@ const StatusButton = (props) => {
           ? task.declinedbutton
           : props.text == "Approved"
           ? task.approvedbutton
-          : props.text == "Pending"
+          : props.text == "Awaiting Approval"
           ? task.pendingbutton
           : null
       }

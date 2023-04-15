@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import message from "./message.module.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 
@@ -8,7 +8,7 @@ const MessageDashboard = () => {
     <Container className={message.container}>
       <DashboardLayout name="Messages">
         <div className={message.overallcontainer}>
-          <Image src="/icons/construction.svg" />
+          <Image src="/icons/frame.png" />
         </div>
       </DashboardLayout>
     </Container>

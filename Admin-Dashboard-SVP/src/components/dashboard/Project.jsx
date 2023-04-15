@@ -20,7 +20,7 @@ const Project = () => {
       (item) => item.user_status === filter
     );
     return filteredData;
-  }, [filter,UserProjectsCollection]);
+  }, [filter, UserProjectsCollection]);
 
   console.log(data);
 
@@ -63,7 +63,7 @@ const Project = () => {
                 <thead className={project.tableheader}>
                   <tr>
                     <th>PROJECT NAME</th>
-                    <th className={project.centericon}>ASSIGNED BY</th>
+                    <th className={project.centericon}>ASSIGNED TO</th>
                     <th className={project.centericon}>DUE DATE</th>
                   </tr>
                 </thead>
@@ -83,9 +83,9 @@ const Project = () => {
                       <td className={project.centericon}>
                         <div className={project.absolutecenter}>
                           <p className={project.avatar}>
-                            {projectdata?.requested_by?.firstname?.charAt(0)}
+                            {projectdata?.assigned_to?.firstname?.charAt(0)}
                             <span className={project.label}>
-                              {projectdata?.requested_by?.lastname?.charAt(0)}
+                              {projectdata?.assigned_to?.lastname?.charAt(0)}
                             </span>
                           </p>
                         </div>

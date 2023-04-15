@@ -161,7 +161,7 @@ const TaskBoardDashboard = () => {
               <SkeleteonGrid />
             ) : (
               <div className={taskboard.sizecontainer}>
-                <BoarderHeader text="Pending" />
+                <BoarderHeader text="Awaiting Approval" />
                 <>
                   {dataByDateupcoming.length >= 1 ? (
                     <>
@@ -237,7 +237,7 @@ const BoarderHeader = (props) => {
       className={
         props.text === "In Progress"
           ? taskboard.boarderheadercontainer
-          : props.text === "Pending"
+          : props.text === "Awaiting Approval"
           ? taskboard.boarderheadercontainerpurple
           : props.text === "Completed"
           ? taskboard.borderheadercontainerblue

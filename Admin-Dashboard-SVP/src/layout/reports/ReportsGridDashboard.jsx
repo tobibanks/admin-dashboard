@@ -34,31 +34,22 @@ const ReportsGridDashboard = () => {
 
   const data = useMemo(() => {
     if (!filter) return ReportsCollection;
-    const filteredData = ReportsCollection.map((report) => ({
-      ...report,
-      attachments: report.attachments.filter((attachment) =>
-        attachment.type.startsWith(filter)
-      ),
-    }));
+    const filteredData = ReportsCollection.filter((item) =>
+      item.type.startsWith(filter)
+    );
     return filteredData;
   }, [filter, ReportsCollection]);
 
-  const filteredImage = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("image")
-    )
+  const filteredDocument = ReportsCollection.filter((item) =>
+    item.type.startsWith("application")
   );
 
-  const filteredVideo = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("video")
-    )
+  const filteredImage = ReportsCollection.filter((item) =>
+    item.type.startsWith("image")
   );
 
-  const filteredDocument = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("document")
-    )
+  const filteredVideo = ReportsCollection.filter((item) =>
+    item.type.startsWith("video")
   );
 
   return (
@@ -73,7 +64,7 @@ const ReportsGridDashboard = () => {
                 name="All Files"
                 filter={filter}
                 filter1={null}
-                // total={`(${reportgriddata.length})`}
+                total={`(${ReportsCollection.length})`}
                 onClick={() => setFilter(null)}
               />
 
@@ -81,21 +72,21 @@ const ReportsGridDashboard = () => {
                 name="Pictures"
                 filter={filter}
                 filter1="image"
-                // total={`(${filteredImage.length})`}
+                total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
-                // total={`(${filteredVideo.length})`}
+                total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
-                // total={`(${filteredDocument.length})`}
+                total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("document")}
               />
             </div>
@@ -137,18 +128,18 @@ const ReportsGridDashboard = () => {
             </div>
           </div>
           <div>
-            {data.map((report, index) => {
-              const dateReport = report.date;
-              return (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    marginTop: "2rem",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  {report.attachments.map((repo, index) => (
+            {data.length >= 1 ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  gap: "3rem",
+                  marginTop: "2rem",
+                  flexWrap: "wrap",
+                }}
+              >
+                {data.map((repo, index) => {
+                  return (
                     <CardGridContainer
                       key={index}
                       url={repo.url}
@@ -159,12 +150,16 @@ const ReportsGridDashboard = () => {
                       // mainimage={report.mainimage}
                       // avatar={report.avatar}
                       // avatarname={report.avatarname}
-                      date={dateReport}
+                      date={repo.date}
                     />
-                  ))}
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            ) : (
+              <div style={{ marginTop: "3rem" }}>
+                <p className={reportsgrid.nothing}>There are no reports</p>
+              </div>
+            )}
           </div>
         </div>
       </DashboardLayoutContents>

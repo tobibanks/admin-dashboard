@@ -36,31 +36,22 @@ const ReportsTableDashboard = () => {
 
   const data = useMemo(() => {
     if (!filter) return ReportsCollection;
-    const filteredData = ReportsCollection.map((report) => ({
-      ...report,
-      attachments: report.attachments.filter((attachment) =>
-        attachment.type.startsWith(filter)
-      ),
-    }));
+    const filteredData = ReportsCollection.filter((item) =>
+      item.type.startsWith(filter)
+    );
     return filteredData;
   }, [filter, ReportsCollection]);
 
-  const filteredImage = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("image")
-    )
+  const filteredDocument = ReportsCollection.filter((item) =>
+    item.type.startsWith("application")
   );
 
-  const filteredVideo = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("video")
-    )
+  const filteredImage = ReportsCollection.filter((item) =>
+    item.type.startsWith("image")
   );
 
-  const filteredDocument = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("document")
-    )
+  const filteredVideo = ReportsCollection.filter((item) =>
+    item.type.startsWith("video")
   );
 
   console.log(ReportsCollection);
@@ -75,7 +66,7 @@ const ReportsTableDashboard = () => {
             <div className={reporttable.flexwrap}>
               <NavCategories
                 name="All Files"
-                total={`(${TablesData.length})`}
+                total={`(${ReportsCollection.length})`}
                 filter={filter}
                 filter1={null}
                 onClick={() => setFilter(null)}
@@ -140,12 +131,11 @@ const ReportsTableDashboard = () => {
               />
             </div>
           </div>
-          <ReportsTableContents>
-            {data.map((report, index) => {
-              const projectname = report.project.name;
-              return (
-                <>
-                  {report.attachments.map((tabledata, index) => (
+          <div>
+            {data.length >= 1 ? (
+              <ReportsTableContents>
+                {data.map((tabledata, index) => {
+                  return (
                     <tr key={index}>
                       <td>
                         <div style={{ display: "flex" }}>
@@ -161,39 +151,20 @@ const ReportsTableDashboard = () => {
                           </div>
                         </div>
                       </td>
-                      <td>{projectname}</td>
+                      <td>{tabledata?.project_name}</td>
                       <td>{tabledata?.send_from}</td>
                       <td>{tabledata?.sent_to}</td>
                       <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
                     </tr>
-                  ))}
-                </>
-              );
-            })}
-            {/* {data.map((tabledata, index) => (
-              <tr key={index}>
-                <td>
-                  <div className={reporttable.flextable}> */}
-            {/* <div className={reportsgrid.centergridicon}> */}
-
-            {/* </div> */}
-            {/* <Image src={tabledata.src} /> */}
-            {/* <div className={reporttable.absolutecenter}>
-                      <p className={reporttable.tablename}> */}
-            {/* {tabledata.attachment.name.map((image,index)=> {
-
-                        )} */}
-            {/* </p>
-                    </div>
-                  </div>
-                </td>
-                <td>{tabledata.project.name}</td>
-                <td>{tabledata?.sent_from?.firstname}</td>
-                <td>{tabledata?.sent_to?.firstname}</td>
-                <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
-              </tr>
-            ))} */}
-          </ReportsTableContents>
+                  );
+                })}
+              </ReportsTableContents>
+            ) : (
+              <div style={{ marginTop: "3rem" }}>
+                <p className={reporttable.nothing}>There are no projects</p>
+              </div>
+            )}
+          </div>
         </div>
       </DashboardLayoutContents>
     </Container>

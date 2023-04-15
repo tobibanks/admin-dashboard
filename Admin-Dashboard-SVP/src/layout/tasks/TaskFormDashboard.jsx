@@ -67,14 +67,14 @@ const TaskFormDashboard = () => {
         <div className={taskform.overallcontainer}>
           <p className={taskform.taskapprovaltitle}>New Task Form</p>
           <div className={taskform.secondtitlecontainer}>
-            <p className={taskform.secondtitle}>PROJECT NAME</p>
+            <p className={taskform.secondtitle}>{filtereddatarevised.name}</p>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className={taskform.formcontainer}>
               <Form.Group className="mb-3" controlId="formBasicName">
                 <div className={taskform.formcontainer1}>
                   <Form.Label className={taskform.form1}>
-                    Requested By
+                    Assigned To
                   </Form.Label>
                   <Form.Control
                     type="text"

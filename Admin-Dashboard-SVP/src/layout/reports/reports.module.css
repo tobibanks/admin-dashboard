@@ -299,3 +299,44 @@
   font-size: 14px;
   padding-bottom: 5px;
 }
+
+.nothing {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: var(--dashboard-yellow);
+  text-align: center;
+}
+
+.filecontainergrid {
+  display: grid;
+  margin-top: 2rem;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
+}
+
+.formselect {
+  height: 50px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  border-radius: 24px;
+  width: 200px;
+  /* background-color: var(--SVP-main); */
+  /* color: white; */
+  border: 1px solid;
+  border-color: var(--black100) !important;
+  outline: transparent;
+}
+
+.formselect:focus {
+  border: 1px solid;
+  border-color: var(--black100) !important;
+}
+
+.options {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}

@@ -55,13 +55,15 @@ const ModalTask = (props) => {
                     <div className={modal.flexmodalcontainer}>
                       <div className={modal.firstphase}>
                         <p className={modal.nameproject}>{collect.name}</p>
-                        {collect.priority === "red" ? (
-                          <Image src="/icons/table/redflag.svg" />
-                        ) : collect.priority === "gray" ? (
-                          <Image src="/icons/table/normalflag.svg" />
-                        ) : collect.priority === "yellow" ? (
-                          <Image src="/icons/table/warningflag.svg" />
-                        ) : null}
+                        <div className={modal.absolutecenter}>
+                          {collect.priority === "red" ? (
+                            <Image src="/icons/table/redflag.svg" />
+                          ) : collect.priority === "gray" ? (
+                            <Image src="/icons/table/normalflag.svg" />
+                          ) : collect.priority === "yellow" ? (
+                            <Image src="/icons/table/warningflag.svg" />
+                          ) : null}
+                        </div>
                       </div>
                       <div>
                         <div className={modal.buttonname}>
@@ -131,9 +133,12 @@ const ModalTask = (props) => {
                       <div
                         className={modal.buttonname}
                         onClick={() => {
-                          setId(props.id);
-                          id &&
-                            navigate(generatePath("/taskapproval/:id", { id }));
+                          props.id &&
+                            navigate(
+                              generatePath("/taskapproval/:id", {
+                                id: props.id,
+                              })
+                            );
                         }}
                       >
                         <p className={modal.buttontext}>
@@ -164,7 +169,7 @@ const StatusButton = (props) => {
           ? modal.declinedbutton
           : props.text == "Approved"
           ? modal.approvedbutton
-          : props.text == "Pending"
+          : props.text == "Awaiting Approval"
           ? modal.pendingbutton
           : null
       }

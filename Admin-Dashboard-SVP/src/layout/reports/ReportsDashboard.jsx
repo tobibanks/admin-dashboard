@@ -1,5 +1,5 @@
 import React, { useState, useMemo, forwardRef } from "react";
-import { Container, Button, Image } from "react-bootstrap";
+import { Container, Button, Image, Form } from "react-bootstrap";
 import report from "./reports.module.css";
 import "./projects.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
@@ -23,6 +23,7 @@ const ReportsDashboard = () => {
 
   console.log(ReportsCollection);
   const [filter, setFilter] = useState(null);
+  const [select, setSelect] = useState("");
 
   const [startDate, setStartDate] = useState(new Date("01/01/2023"));
   const [endDate, setEndDate] = useState(new Date("01/01/2026"));
@@ -33,33 +34,28 @@ const ReportsDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
-  const data = useMemo(() => {
-    if (!filter) return ReportsCollection;
-    const filteredData = ReportsCollection.map((report) => ({
-      ...report,
-      attachments: report.attachments.filter((attachment) =>
-        attachment.type.startsWith(filter)
-      ),
-    }));
-    return filteredData;
-  }, [filter, ReportsCollection]);
+  // const data = useMemo(() => {
+  //   if (!filter) return ReportsCollection;
+  //   const filteredData = ReportsCollection.map((report) => ({
+  //     ...report,
+  //     attachments: report.attachments.filter((attachment) =>
+  //       attachment.type.startsWith(filter)
+  //     ),
+  //   }));
+  //   return filteredData;
+  // }, [filter, ReportsCollection]);
 
-  const dataByDate = useMemo(() => {
-    const filtereddata = data.filter(
-      (item) =>
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
-    );
-    return filtereddata;
-  }, [finalStartDate, finalEndDate, data]);
+  // const dataByDate = useMemo(() => {
+  //   const filtereddata = data.filter(
+  //     (item) =>
+  //       finalStartDate <= new Date(item.due).getTime() &&
+  //       new Date(item.due).getTime() <= finalEndDate
+  //   );
+  //   return filtereddata;
+  // }, [finalStartDate, finalEndDate, data]);
 
-  console.log(data);
-
-  // const filteredImage = ReportsCollection.map((report) =>
-  //   report.attachments.filter((attachment) =>
-  //     attachment.type.startsWith("image")
-  //   )
-  // );
+  // console.log(data?.length);
+  // console.log(ReportsCollection?.length);
 
   // const filteredImage = ReportsCollection.map((report) => ({
   //   ...report,
@@ -67,31 +63,60 @@ const ReportsDashboard = () => {
   //     attachment.type.startsWith("image")
   //   ),
   // }));
-
-  const filteredImage = ReportsCollection.map((report) =>
-    report.attachments.filter((attachment) =>
-      attachment.type.startsWith("image")
-    )
-  );
-  console.log(filteredImage.length);
-
-  const filteredImageRevised = ReportsCollection.filter(
-    (item) => item.type === "image/png"
-  );
-  const filteredVideo = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("video")
-    )
-  );
-
-  const filteredDocument = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
-      attachment.type.startsWith("document")
-    )
-  );
-
   // console.log(filteredImage);
-  console.log(ReportsCollection);
+
+  // const filteredImageRevised = ReportsCollection.filter(
+  //   (item) => item.type === "image/png"
+  // );
+  // const filteredVideo = ReportsCollection.map((reportcollection) =>
+  //   reportcollection.attachments.filter((attachment) =>
+  //     attachment.type.startsWith("video")
+  //   )
+  // );
+
+  // console.log(filteredVideo?.length);
+  // console.log(ReportsCollection);
+
+  // const filteredDocument = ReportsCollection.map((reportcollection) =>
+  //   reportcollection.attachments.filter((attachment) =>
+  //     attachment.type.startsWith("document")
+  //   )
+  // );
+
+  const data = useMemo(() => {
+    if (!filter) return ReportsCollection;
+    const filteredData = ReportsCollection.filter((item) =>
+      item.type.startsWith(filter)
+    );
+    return filteredData;
+  }, [filter, ReportsCollection]);
+
+  const selectData = useMemo(() => {
+    const filteredselectdata = data.filter((item) =>
+      item.hasOwnProperty(select)
+    );
+    return filteredselectdata;
+  }, [select, data]);
+
+  console.log(selectData);
+
+  const filteredDocument = ReportsCollection.filter((item) =>
+    item.type.startsWith("application")
+  );
+
+  const filteredImage = ReportsCollection.filter((item) =>
+    item.type.startsWith("image")
+  );
+
+  const filteredVideo = ReportsCollection.filter((item) =>
+    item.type.startsWith("video")
+  );
+
+  const handleProject = (e) => {
+    setSelect(e.target.value);
+    console.log(select);
+  };
+  // console.log(filteredImage);
   return (
     <Container className={report.container}>
       <DashboardLayoutContents name="Reports">
@@ -102,7 +127,7 @@ const ReportsDashboard = () => {
             <div className={report.flexwrap}>
               <NavCategories
                 name="All Files"
-                // total={`(${ReportsCollection.attachment})`}
+                total={`(${ReportsCollection.length})`}
                 filter={filter}
                 filter1={null}
                 onClick={() => setFilter(null)}
@@ -112,22 +137,22 @@ const ReportsDashboard = () => {
                 name="Pictures"
                 filter={filter}
                 filter1="image"
-                // total={`(${filteredImageRevised.length})`}
+                total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
-                // total={`(${filteredVideo.length})`}
+                total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
-                // total={`(${filteredDocument.length})`}
-                onClick={() => setFilter("application")}
+                total={`(${filteredDocument.length})`}
+                onClick={() => setFilter("document")}
               />
             </div>
             <div className={report.datepickertitle}>
@@ -166,30 +191,29 @@ const ReportsDashboard = () => {
                 minDate={startDate}
               />
             </div>
+
+            {/* )} */}
           </div>
           <div>
-            {data.map((report, index) => {
-              const dateReport = report.date;
-              return (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "2rem",
-                  }}
-                >
-                  {report.attachments.map((repo, index) => (
+            {data.length >= 1 ? (
+              <div className={report.filecontainergrid}>
+                {data.map((repo, index) => {
+                  return (
                     <FileContainer
                       key={index}
                       name={repo.name}
                       size={repo.size}
-                      date={dateReport}
+                      date={repo.date}
                       imagelink={repo.type}
                     />
-                  ))}
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            ) : (
+              <div style={{ marginTop: "3rem" }}>
+                <p className={report.nothing}>There are no reports</p>
+              </div>
+            )}
           </div>
         </div>
       </DashboardLayoutContents>

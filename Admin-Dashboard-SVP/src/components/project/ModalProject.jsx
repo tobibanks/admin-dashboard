@@ -22,6 +22,7 @@ const ModalProject = (props) => {
     refetchOnMountOrArgChange: true,
   });
 
+  const [more, setMore] = useState(false);
   const ModalProjectsCollection = UserProjects || [];
 
   console.log(ModalProjectsCollection);
@@ -33,6 +34,12 @@ const ModalProject = (props) => {
 
   // console.log(ModalTasks.project.length);
 
+  const addTask = () => {
+    console.log("batmanaaa");
+    setId(props.id);
+    console.log("batman");
+    navigate(generatePath("/addtask/:id", { id }));
+  };
   return (
     <Modal
       className={modal.modal}
@@ -88,7 +95,20 @@ const ModalProject = (props) => {
                             </p>
                           </div>
                         </div>
-                        <p className={modal.taskname}>Tasks</p>
+                        <div className={modal.absolutebuttoncenter}>
+                          <p className={modal.taskname}>Tasks</p>
+                          <div
+                            className={modal.buttonname}
+                            onClick={() => {
+                              props.id &&
+                                navigate(
+                                  generatePath("/addtask/:id", { id: props.id })
+                                );
+                            }}
+                          >
+                            <p className={modal.buttontext}>Add Task</p>
+                          </div>
+                        </div>
                         <div className={modal.taskcontainer}>
                           <div className={modal.taskheader}>
                             <div className={modal.flexheader}>
@@ -112,37 +132,55 @@ const ModalProject = (props) => {
                           <div className={modal.formcontainer}>
                             <Form>
                               {console.log(props.id)}
-                              {ModalTasks.map((task, index) =>
-                                props.id === task.project.id ? (
-                                  <Form.Check
-                                    type="checkbox"
-                                    key={index}
-                                    id="custom-switch"
-                                    label={task?.name}
-                                  />
-                                ) : null
+                              {more ? (
+                                <div>
+                                  {ModalTasks?.map((task, index) =>
+                                    props.id === task.project.id ? (
+                                      <Form.Check
+                                        type="checkbox"
+                                        key={index}
+                                        id="custom-switch"
+                                        label={task?.name}
+                                      />
+                                    ) : null
+                                  )}
+                                </div>
+                              ) : (
+                                <div>
+                                  {ModalTasks?.slice(0, 3).map((task, index) =>
+                                    props.id === task.project.id ? (
+                                      <div>
+                                        <Form.Check
+                                          type="checkbox"
+                                          key={index}
+                                          id="custom-switch"
+                                          label={task?.name}
+                                        />
+                                      </div>
+                                    ) : null
+                                  )}
+                                </div>
                               )}
+                              <p
+                                className={modal.title1}
+                                onClick={() => setMore(!more)}
+                              >
+                                See More
+                              </p>
                             </Form>
-                            <div className={modal.flexheader2}>
+                            {/* <div className={modal.flexheader2}>
                               <div className={modal.absolutecenter}>
                                 <p className={modal.seetext}>See More</p>
                               </div>
                               <Image src="/icons/arrow-down.svg" />
-                            </div>
+                            </div> */}
                           </div>
                         </div>
-                        <div className={modal.absolutebuttoncenter}>
-                          <div
-                            className={modal.buttonname}
-                            onClick={() => {
-                              setId(props.id);
-                              id &&
-                                navigate(generatePath("/addtask/:id", { id }));
-                            }}
-                          >
+                        {/* <div className={modal.absolutebuttoncenter}>
+                          <div className={modal.buttonname} onClick={addTask}>
                             <p className={modal.buttontext}>Add Task</p>
                           </div>
-                        </div>
+                        </div> */}
                         <p className={modal.taskname}>Attachment</p>
                         <div className={modal.attachmentflex}>
                           {collect.attachments.length > 1 ? (
@@ -173,10 +211,11 @@ const ModalProject = (props) => {
                         <div
                           className={modal.buttonname}
                           onClick={() => {
-                            setId(props.id);
-                            id &&
+                            props.id &&
                               navigate(
-                                generatePath("/assignproject/:id", { id })
+                                generatePath("/assignproject/:id", {
+                                  id: props.id,
+                                })
                               );
                           }}
                         >
@@ -197,63 +236,21 @@ const ModalProject = (props) => {
                           key={index}
                         >
                           {/* {console.log(collect)} */}
-                          {
-                            collect?.activities?.map((activities, index) => {
-                              return (
-                                <div>
-                                  {activities.action === "assigned" ? (
-                                    <AssignedActivitycontainer
-                                      src="/icons/activity/add.svg"
-                                      date={activities.date}
-                                      type={activities.action_type}
-                                      name={activities.initiator}
-                                      assignee={activities.ref.name}
-                                    />
-                                  ) : null}
-                                </div>
-                              );
-                            })
-                            /* <Activitycontainer
-                            src="/icons/activity/activity.svg"
-                            description="Admin declined task:"
-                            name="Raise Center Pavement"
-                            date="Added at 02/02/2023 - 10 AM"
-                          />
-                          <Activitycontainer
-                            src="/icons/activity/check.svg"
-                            description="Admin approved task:"
-                            name="Raise Center Pavement"
-                            date="Added at 02/02/2023 - 10 AM"
-                          />
-                          <Activitycontainer
-                            src="/icons/activity/time.svg"
-                            description="John Doe requested task approval"
-                            // name="Raise Center Pavement"
-                            date="Added at 02/02/2023 - 10 AM"
-                          />
-                          <Activitycontainer
-                            src="/icons/activity/add.svg"
-                            description="Admin assigned Tasks to John doe"
-                            // name="Raise Center Pavement"
-                            date="Added at 02/02/2023 - 10 AM"
-                          />
-                          <Activitycontainer
-                            src="/icons/activity/user.svg"
-                            description="Admin assigned John Doe as new project manager"
-                            // name="Raise Center Pavement"
-                            date="Added at 02/02/2023 - 10 AM"
-                          /> */
-                          }
-                          {/* <div
-                        className={modal.buttonname}
-                        onClick={() => {
-                          setId(props.id);
-                          id &&
-                            navigate(generatePath("/addtask/:id", { id }));
-                        }}
-                      >
-                        <p className={modal.buttontext}>Assign Project</p>
-                      </div> */}
+                          {collect?.activities?.map((activities, index) => {
+                            return (
+                              <div>
+                                {activities.action === "assigned" ? (
+                                  <AssignedActivitycontainer
+                                    src="/icons/activity/add.svg"
+                                    date={activities.date}
+                                    type={activities.action_type}
+                                    name={activities.initiator}
+                                    assignee={activities.ref.name}
+                                  />
+                                ) : null}
+                              </div>
+                            );
+                          })}
                         </div>
                       ) : null
                     )}

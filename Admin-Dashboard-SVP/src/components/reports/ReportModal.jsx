@@ -44,43 +44,33 @@ const ReportModal = (props) => {
   //   setFile(e.target.files[0]);
   // };
 
-  const [Files, setFiles] = useState([]);
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setFiles([...Files, file]);
+  const [file, setFiles] = useState(null);
+  const handleFileChange = (e) => {
+    setFiles(e.target.files[0]);
   };
 
   const submitForm = async (data) => {
-    if (!Files) return toast.error("Select a file");
-    // const formData = new FormData();
-    // formData.append("attachments", file);
-
-    // console.log(formData);
-
+    if (!file) return toast.error("Select a file");
     const conversion = { ...data };
+    console.log(conversion);
     const stringid = conversion.send_to.toString();
     const formData = new FormData();
-    formData.append("attachments", Files);
-    console.log(Files);
-    const newdetails = {
-      ...data,
-      attachments: Files,
-      send_to: stringid,
-    };
+    formData.append("attachments", file);
+    formData.append("send_to", stringid);
+    formData.append("project", conversion.project);
+    formData.append("task", conversion.task);
+    formData.append("note", conversion.note);
 
-    console.log(newdetails);
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
 
     try {
-      await toast.promise(
-        addReportsMutation({
-          newdetails,
-        }).unwrap(),
-        {
-          loading: "Saving Form",
-          success: "File Uploaded Successfully",
-          error: "Failed to create form",
-        }
-      );
+      await toast.promise(addReportsMutation(formData).unwrap(), {
+        loading: "Saving Form",
+        success: "File Uploaded Successfully",
+        error: "Failed to create form",
+      });
       reset();
       setfile(null);
       // toast.success("Project Registered Successfully");

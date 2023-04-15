@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   useGetTaskDetailsQuery,
   useUseUpdateTaskApprovalMutation,
+  useGetApprovalRequestQuery,
 } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,12 +20,17 @@ const TaskApprovalDashboard = () => {
   const [updatedTask, setUpdatedTask] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { data: specificTask } = useGetApprovalRequestQuery(id);
+  const specifictaskcollection = specificTask || [];
+  console.log(specifictaskcollection);
   const [updateTaskMutation] = useUseUpdateTaskApprovalMutation();
   const TaskCollection = AdminTasks || [];
 
   const { register, control, reset, handleSubmit } = useForm();
 
   const taskapprovalid = id;
+
+  console.log(id);
 
   const submitForm = async (data) => {
     console.log(updatedTask);
@@ -46,7 +52,8 @@ const TaskApprovalDashboard = () => {
       );
       navigate("/task");
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
+      console.log(error);
     }
   };
 

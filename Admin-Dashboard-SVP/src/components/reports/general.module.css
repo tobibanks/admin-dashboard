@@ -1,5 +1,3 @@
-
-
 .overallnavigation {
   /* background-color: white; */
   padding-top: 2rem;
@@ -455,13 +453,10 @@
 .innercontainer {
   margin-right: 4rem;
 }
-/* 
 
-/* 
- .customfileinput::-webkit-file-upload-button {
+.customfileinput::-webkit-file-upload-button {
   visibility: hidden;
-} 
-
+}
 
 .customfileinput::before {
   content: "Add New File";
@@ -482,4 +477,8 @@
 }
 .customfileinput:hover::before {
   border-color: var(--SVP-main);
-} */
+}
+
+.customfileinput:active::before {
+  border-color: var(--SVP-main);
+}

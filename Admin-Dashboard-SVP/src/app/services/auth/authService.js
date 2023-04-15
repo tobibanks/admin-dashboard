@@ -47,7 +47,7 @@ export const authApi = createApi({
     }),
     getReportsDetails: build.query({
       query: () => ({
-        url: "/admin/reports",
+        url: "/admin/reports/attachments/all",
         method: "GET",
       }),
     }),
@@ -62,6 +62,12 @@ export const authApi = createApi({
         url: `/admin/approvals/${id}`,
         method: "POST",
         body: data,
+      }),
+    }),
+    getApprovalRequest: build.query({
+      query: (id) => ({
+        url: `/admin/approvals/${id}`,
+        method: "GET",
       }),
     }),
     addProjectDetails: build.mutation({
@@ -106,6 +112,7 @@ export const {
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
   useAddpmDetailsMutation,
+  useGetApprovalRequestQuery,
   useGetPMDetailsQuery,
   useAddProjectDetailsMutation,
   useAddTaskDetailsMutation,
