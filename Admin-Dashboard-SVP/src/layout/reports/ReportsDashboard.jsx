@@ -10,6 +10,7 @@ import FileInputContainer from "@/components/reports/FileInputContainer";
 import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+import { ProjectsCollection } from "../../../data/projects";
 
 const ReportsDashboard = () => {
   const { data: AdminReports } = useGetReportsDetailsQuery({
@@ -23,8 +24,8 @@ const ReportsDashboard = () => {
   console.log(ReportsCollection);
   const [filter, setFilter] = useState(null);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2026"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -54,12 +55,29 @@ const ReportsDashboard = () => {
 
   console.log(data);
 
-  const filteredImage = ReportsCollection.map((reportcollection) =>
-    reportcollection.attachments.filter((attachment) =>
+  // const filteredImage = ReportsCollection.map((report) =>
+  //   report.attachments.filter((attachment) =>
+  //     attachment.type.startsWith("image")
+  //   )
+  // );
+
+  // const filteredImage = ReportsCollection.map((report) => ({
+  //   ...report,
+  //   attachments: report.attachments.filter((attachment) =>
+  //     attachment.type.startsWith("image")
+  //   ),
+  // }));
+
+  const filteredImage = ReportsCollection.map((report) =>
+    report.attachments.filter((attachment) =>
       attachment.type.startsWith("image")
     )
   );
+  console.log(filteredImage.length);
 
+  const filteredImageRevised = ReportsCollection.filter(
+    (item) => item.type === "image/png"
+  );
   const filteredVideo = ReportsCollection.map((reportcollection) =>
     reportcollection.attachments.filter((attachment) =>
       attachment.type.startsWith("video")
@@ -72,7 +90,7 @@ const ReportsDashboard = () => {
     )
   );
 
-  console.log(filteredImage);
+  // console.log(filteredImage);
   console.log(ReportsCollection);
   return (
     <Container className={report.container}>
@@ -84,7 +102,7 @@ const ReportsDashboard = () => {
             <div className={report.flexwrap}>
               <NavCategories
                 name="All Files"
-                total={`(${ReportsCollection.length})`}
+                // total={`(${ReportsCollection.attachment})`}
                 filter={filter}
                 filter1={null}
                 onClick={() => setFilter(null)}
@@ -94,21 +112,21 @@ const ReportsDashboard = () => {
                 name="Pictures"
                 filter={filter}
                 filter1="image"
-                total={`(${filteredImage.length})`}
+                // total={`(${filteredImageRevised.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
-                total={`(${filteredVideo.length})`}
+                // total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
-                total={`(${filteredDocument.length})`}
+                // total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("application")}
               />
             </div>
@@ -149,11 +167,17 @@ const ReportsDashboard = () => {
               />
             </div>
           </div>
-          <div className={report.wrapcontainer}>
+          <div>
             {data.map((report, index) => {
               const dateReport = report.date;
               return (
-                <div key={index} style={{ display: "grid", gap: "2rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "2rem",
+                  }}
+                >
                   {report.attachments.map((repo, index) => (
                     <FileContainer
                       key={index}

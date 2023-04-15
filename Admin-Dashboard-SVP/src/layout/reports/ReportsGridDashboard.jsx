@@ -23,8 +23,8 @@ const ReportsGridDashboard = () => {
   console.log("Batman");
   console.log(ReportsCollection);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -73,7 +73,7 @@ const ReportsGridDashboard = () => {
                 name="All Files"
                 filter={filter}
                 filter1={null}
-                total={`(${reportgriddata.length})`}
+                // total={`(${reportgriddata.length})`}
                 onClick={() => setFilter(null)}
               />
 
@@ -81,21 +81,21 @@ const ReportsGridDashboard = () => {
                 name="Pictures"
                 filter={filter}
                 filter1="image"
-                total={`(${filteredImage.length})`}
+                // total={`(${filteredImage.length})`}
                 onClick={() => setFilter("image")}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
-                total={`(${filteredVideo.length})`}
+                // total={`(${filteredVideo.length})`}
                 onClick={() => setFilter("video")}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
-                total={`(${filteredDocument.length})`}
+                // total={`(${filteredDocument.length})`}
                 onClick={() => setFilter("document")}
               />
             </div>
@@ -136,29 +136,26 @@ const ReportsGridDashboard = () => {
               />
             </div>
           </div>
-          <div className={reportsgrid.flexwrapcontainer}>
-            {/* {data.map((report, index) => (
-              <CardGridContainer
-                key={index}
-                imagesrc={report.type}
-                name={report.name}
-                // mainimage={report.mainimage}
-                // avatar={report.avatar}
-                // avatarname={report.avatarname}
-                date={report.dateuploaded}
-              />
-            ))} */}
+          <div>
             {data.map((report, index) => {
               const dateReport = report.date;
               return (
-                <div key={index} style={{ display: "grid", gap: "2rem" }}>
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    marginTop: "2rem",
+                    justifyContent: "space-between",
+                  }}
+                >
                   {report.attachments.map((repo, index) => (
                     <CardGridContainer
                       key={index}
                       url={repo.url}
-                      firstname={repo?.sent_to?.firstname || null}
+                      firstname={repo?.send_from || null}
                       // lastname = {repo?.sent_to?.lastname}
                       name={repo.name}
+                      imagelink={repo.type}
                       // mainimage={report.mainimage}
                       // avatar={report.avatar}
                       // avatarname={report.avatarname}
@@ -200,12 +197,28 @@ const NavCategories = (props) => {
 const CardGridContainer = (props) => {
   return (
     <div className={reportsgrid.cardcontainer}>
-      <div className={reportsgrid.flexcontainer}>
-        <img src={props.url} alt="image-icon" />
+      <div className={reportsgrid.fleximageicon}>
+        <div className={reportsgrid.centergridicon}>
+          {props.imagelink === "image/jpeg" ? (
+            <Image src="/icons/jpg.svg" alt="jpg" />
+          ) : props.imagelink === "image/png" ? (
+            <Image src="/icons/jpg.svg" alt="jpg" />
+          ) : props.imagelink === "image/svg+xml" ? (
+            <Image src="/icons/jpg.svg" alt="jpg" />
+          ) : null}
+        </div>
         <div className={reportsgrid.absolutecenter}>
-          <p className={reportsgrid.filename}>
-            {/* {truncateString(props.name, 7)} */}
-          </p>
+          <p className={reportsgrid.filename}>{props.name?.substring(0, 12)}</p>
+        </div>
+      </div>
+      <div className={reportsgrid.flexcontainer}>
+        <Image
+          src={`${props.url}`}
+          className={reportsgrid.gridimage}
+          alt="image-icon"
+        />
+        <div className={reportsgrid.absolutecenter}>
+          {/* <p className={reportsgrid.filename}>{props.name?.substring(0, 7)}</p> */}
           {/* <span>{truncateString(props.lastname, 1)}</span> */}
         </div>
       </div>

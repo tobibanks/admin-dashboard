@@ -57,18 +57,20 @@ const ProjectDashboard = () => {
   );
 
   const filteredUpcomingData = ProjectsCollection.filter(
-    (item) => item.admin_Status === "Upcoming"
+    (item) => item.admin_Status === "Requested"
   );
 
   const filteredCompleteData = ProjectsCollection.filter(
     (item) => item.admin_Status === "Complete"
   );
 
+  // console.log(pro)
+
   return (
     <Container className={project.container}>
       <DashboardLayoutContents name="Projects">
         <div className={project.overallcontainer}>
-          {/* <ButtonProject /> */}
+          <ButtonProject />
           <Header name="My Projects" />
           <div className={project.leftcontainer}>
             <div className={project.flexwrap}>
@@ -81,11 +83,11 @@ const ProjectDashboard = () => {
               />
 
               <NavCategories
-                name="Upcoming"
+                name="Requested"
                 total={`(${filteredUpcomingData.length})`}
                 filter={filter}
-                filter1="Upcoming"
-                onClick={() => setFilter("Upcoming")}
+                filter1="Requested"
+                onClick={() => setFilter("Requested")}
               />
               <NavCategories
                 name="In Progress"
@@ -161,11 +163,11 @@ const ProjectDashboard = () => {
                         <div className={project.absolutecenter}>
                           <p className={project.avatar}>
                             {" "}
-                            {projectcollect?.requested_by?.firstname?.charAt(
+                            {projectcollect?.assigned_to?.firstname?.charAt(
                               0
                             ) || null}
                             <span>
-                              {projectcollect?.requested_by?.lastname?.charAt(
+                              {projectcollect?.assigned_?.lastname?.charAt(
                                 0
                               ) || null}
                             </span>
@@ -218,7 +220,7 @@ const StatusButton = (props) => {
           ? project.statusbutton
           : props.text === "Complete"
           ? project.completebutton
-          : props.text == "Upcoming"
+          : props.text == "Requested"
           ? project.upcoming
           : null
       }

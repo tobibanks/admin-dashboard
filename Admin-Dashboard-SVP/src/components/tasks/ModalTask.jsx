@@ -4,7 +4,7 @@ import { Modal, Image } from "react-bootstrap";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
-import { generatePath, useNavigate } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 
 const ModalTask = (props) => {
   const { data: AdminTasks } = useGetTaskDetailsQuery({
@@ -107,19 +107,25 @@ const ModalTask = (props) => {
                                       imagelink={attachment.type}
                                       size={attachment.size}
                                     />
+                                    <Link to="/reports">
+                                      <div
+                                        className={modal.absolutebuttoncenter}
+                                      >
+                                        <div className={modal.buttonname1}>
+                                          <p className={modal.buttontext1}>
+                                            See All Attachments
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </Link>
                                   </div>
                                 ))}
                             </div>
                           );
                         })
                       ) : (
-                        <p>No attachments</p>
+                        <p className={modal.attachmentempty}>No attachments</p>
                       )}
-                    </div>
-                    <div className={modal.absolutebuttoncenter}>
-                      <div className={modal.buttonname1}>
-                        <p className={modal.buttontext1}>See All Attachments</p>
-                      </div>
                     </div>
                     <div className={modal.bottomcontainer}>
                       <div

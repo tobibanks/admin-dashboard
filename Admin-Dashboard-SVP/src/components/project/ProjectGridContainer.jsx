@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 
 const ProjectGridContainer = (props) => {
   return (
-    <div className={grid.gridcontainer}>
+    <div className={grid.gridcontainer} onClick={props.onClick}>
       <div className={grid.innercontainer}>
         <div className={grid.flexcontainer}>
           <p className={grid.gridtext}>{props.text}</p>
@@ -47,8 +47,8 @@ const Button = (props) => {
           ? grid.statusbutton
           : props.text === "Complete"
           ? grid.completebutton
-          : props.text == "Upcoming"
-          ? grid.upcoming
+          : props.text == "Requested"
+          ? grid.requestedbutton
           : null
       }
     >

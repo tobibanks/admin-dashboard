@@ -1,8 +1,4 @@
-.linkcontainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .overallnavigation {
   /* background-color: white; */
@@ -25,7 +21,7 @@
 }
 .textcontainer {
   /* margin-top: 0.4rem; */
-  padding-top: 1.5rem;
+  padding-top: 2.5rem;
   padding-bottom: 1.2rem;
   margin-bottom: 0.4rem;
 }
@@ -110,6 +106,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 1rem;
 }
 
 .linkcontainer:hover {
@@ -121,6 +118,7 @@
   border-bottom: 2px solid;
   padding-bottom: 0.5rem;
   display: flex;
+  padding-top: 1rem;
   justify-content: center;
   align-items: center;
   border-color: var(--SVP-main);
@@ -177,8 +175,6 @@
   background-color: var(--SVP-main400);
   color: white;
 }
-
-
 
 .innercontainer1 {
   width: fit-content;
@@ -292,11 +288,29 @@
   margin-top: 2rem;
 }
 
+.absolutecenter3 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
 .title {
   font-family: "Inter", sans-serif;
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 1rem;
+  font-weight: 700;
+  color: var(--textblack);
+}
+
+.title1 {
+  font-family: "Inter", sans-serif;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
   font-weight: 700;
   color: var(--textblack);
 }
@@ -438,6 +452,34 @@
   justify-content: flex-end;
   align-items: center;
 }
-.innercontainer{
+.innercontainer {
   margin-right: 4rem;
 }
+/* 
+
+/* 
+ .customfileinput::-webkit-file-upload-button {
+  visibility: hidden;
+} 
+
+
+.customfileinput::before {
+  content: "Add New File";
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--SVP-main);
+  border-radius: 3px;
+  padding: 10px 15px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+  color: var(--SVP-main);
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 500;
+  font-size: 12px;
+}
+.customfileinput:hover::before {
+  border-color: var(--SVP-main);
+} */

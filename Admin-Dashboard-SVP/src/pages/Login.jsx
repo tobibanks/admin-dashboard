@@ -7,6 +7,7 @@ import { Container, Image, Form, Button, Spinner } from "react-bootstrap";
 import { EMAIL_VALIDATION } from "@/constants/Regex";
 import { adminLogin } from "../features/auth/authActions";
 import { useSelector, useDispatch } from "react-redux";
+import { toast, Toaster } from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -14,7 +15,7 @@ const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ mode: "onnTouched" });
+  } = useForm({ mode: "onTouched" });
   const { loading, adminInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Login = () => {
       navigate("/dashboard");
     }
   }, [navigate, adminInfo]);
+
   const submitForm = (data) => {
     dispatch(adminLogin(data));
   };
@@ -129,6 +131,31 @@ const Login = () => {
               Sign Up
             </Link>
           </p> */}
+          <Toaster
+            position="top-left"
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: "",
+              duration: 5000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+                fontFamily: "Inter, sans-serif",
+              },
+
+              // Default options for specific types
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "green",
+                  secondary: "black",
+                },
+              },
+            }}
+          />
         </div>
       </div>
     </div>

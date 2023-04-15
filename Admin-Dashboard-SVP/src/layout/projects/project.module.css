@@ -153,10 +153,17 @@
 
 .completebutton {
   background-color: var(--success);
+  /* background-color: #2d9cdb; */
   border-radius: 8px;
 }
+
+.requestedbutton {
+  background-color: #2d9cdb;
+  border-radius: 8px;
+}
+
 .upcoming {
-  background-color: orange;
+  background-color: #2d9cdb;
   border-radius: 8px;
 }
 
@@ -251,6 +258,7 @@
 
 .contentcontainer {
   margin-top: 2rem;
+  margin-bottom: 2rem;
   height: 360px;
   display: flex;
   flex-direction: column;
@@ -524,7 +532,7 @@
   border-radius: 8px;
   background-color: white;
   /* padding: 0.5rem; */
-  padding: 10px 9px;
+  padding: 5px 5px;
   white-space: nowrap;
   display: flex;
   /* background-color: blue; */

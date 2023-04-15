@@ -22,6 +22,9 @@ import TaskApproval from "./pages/tasks/taskapproval/[id]";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import TaskForm from "./pages/tasks/TaskForm";
+import AssignProjectForm from "./layout/projects/AssignProjectForm";
+import TaskFormDashboard from "./layout/tasks/TaskFormDashboard";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -42,22 +45,146 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
+            {/* <ProtectedRoute exact path="/"> */}
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Homepage />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Homepage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
-            <Route path="/project" element={<Projects />} />
-            <Route path="/project/board" element={<ProjectBoard />} />
-            <Route path="/project/grid" element={<ProjectGrid />} />
-            <Route path="/project/form" element={<ProjectForm />} />
-            <Route path="/task" element={<Tasks />} />
-            <Route path="/task/board" element={<TaskBoard />} />
-            <Route path="/task/calendar" element={<TaskCalendar />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/reports/table" element={<ReportsTable />} />
-            <Route path="/reports/grid" element={<ReportsGrid />} />
-            <Route path="/taskapproval/:id" element={<TaskApproval />} />
-            <Route path="/taskform/:id" element={<TaskForm />} />
-            <Route path="/message" element={<Messages />} />
+            <Route
+              path="/project"
+              element={
+                <ProtectedRoute>
+                  <Projects />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/project/board"
+              element={
+                <ProtectedRoute>
+                  <ProjectBoard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/project/grid"
+              element={
+                <ProtectedRoute>
+                  <ProjectGrid />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/project/form"
+              element={
+                <ProtectedRoute>
+                  <ProjectForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/task"
+              element={
+                <ProtectedRoute>
+                  <Tasks />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/task/board"
+              element={
+                <ProtectedRoute>
+                  <TaskBoard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/task/calendar"
+              element={
+                <ProtectedRoute>
+                  <TaskCalendar />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoute>
+                  <Reports />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports/table"
+              element={
+                <ProtectedRoute>
+                  <ReportsTable />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports/grid"
+              element={
+                <ProtectedRoute>
+                  <ReportsGrid />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/taskapproval/:id"
+              element={
+                <ProtectedRoute>
+                  <TaskApproval />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/taskform/:id"
+              element={
+                <ProtectedRoute>
+                  <TaskForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/message"
+              element={
+                <ProtectedRoute>
+                  <Messages />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="addtask/:id"
+              element={
+                <ProtectedRoute>
+                  <TaskFormDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/assignproject/:id"
+              element={
+                <ProtectedRoute>
+                  <AssignProjectForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/addtask/:id"
+              element={
+                <ProtectedRoute>
+                  <TaskFormDashboard />
+                </ProtectedRoute>
+              }
+            />
+            {/* </ProtectedRoute> */}
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>
         </BrowserRouter>

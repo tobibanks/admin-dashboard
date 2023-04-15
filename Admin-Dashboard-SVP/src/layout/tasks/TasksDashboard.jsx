@@ -34,6 +34,7 @@ const TasksDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
+  console.log(TasksTableCollection);
   const data = useMemo(() => {
     if (!filter) return TasksTableCollection;
     const filteredData = TasksTableCollection.filter(
@@ -59,6 +60,10 @@ const TasksDashboard = () => {
   );
 
   const filteredPendingData = TasksTableCollection.filter(
+    (item) => item.status === "Pending"
+  );
+
+  const filteredInProgressData = TasksTableCollection.filter(
     (item) => item.status === "In Progress"
   );
 
@@ -74,7 +79,7 @@ const TasksDashboard = () => {
           <div className={task.leftcontainer}>
             <div className={task.flexwrap}>
               <NavCategories
-                name="All Projects"
+                name="All Tasks"
                 total={`(${TasksTableCollection.length})`}
                 filter={filter}
                 filter1={null}
@@ -86,11 +91,19 @@ const TasksDashboard = () => {
                 total={`(${filteredApprovedData.length})`}
                 filter={filter}
                 filter1="Approved"
+
                 onClick={() => setFilter("Approved")}
               />
               <NavCategories
-                name="Pending"
+                name="Awaiting Approval"
                 total={`(${filteredPendingData.length})`}
+                filter1="In Progress"
+                filter={filter}
+                onClick={() => setFilter("Pending")}
+              />
+              <NavCategories
+                name="In Progress"
+                total={`(${filteredInProgressData.length})`}
                 filter1="In Progress"
                 filter={filter}
                 onClick={() => setFilter("In Progress")}

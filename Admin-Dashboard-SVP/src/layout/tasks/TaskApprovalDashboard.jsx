@@ -24,6 +24,8 @@ const TaskApprovalDashboard = () => {
 
   const { register, control, reset, handleSubmit } = useForm();
 
+  const taskapprovalid = id;
+
   const submitForm = async (data) => {
     console.log(updatedTask);
     console.log(data);
@@ -32,16 +34,20 @@ const TaskApprovalDashboard = () => {
       ...data,
     };
     console.log(completeform);
-    // try {
-    //   await toast.promise(updateTaskMutation(completeform).unwrap(), {
-    //     loading: "Saving Form",
-    //     success: "Project Form Created Successfully",
-    //     error: "Failed to create form",
-    //   });
-    //   navigate("/task");
-    // } catch (error) {
-    //   toast.error(error);
-    // }
+    console.log(taskapprovalid);
+    try {
+      await toast.promise(
+        updateTaskMutation({ data: completeform, id: taskapprovalid }).unwrap(),
+        {
+          loading: "Saving Form",
+          success: "Project Form Created Successfully",
+          error: "Failed to create form",
+        }
+      );
+      navigate("/task");
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

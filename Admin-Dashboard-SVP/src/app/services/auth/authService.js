@@ -45,12 +45,6 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
-    addProjectDetails: build.mutation({
-      query: (id) => ({
-        url: `/admin/projects/assign/${id}`,
-        method: "POST",
-      }),
-    }),
     getReportsDetails: build.query({
       query: () => ({
         url: "/admin/reports",
@@ -64,9 +58,44 @@ export const authApi = createApi({
       }),
     }),
     useUpdateTaskApproval: build.mutation({
-      query: (id) => ({
+      query: ({ id, data }) => ({
         url: `/admin/approvals/${id}`,
         method: "POST",
+        body: data,
+      }),
+    }),
+    addProjectDetails: build.mutation({
+      query: (data) => ({
+        url: "/admin/projects/new",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    addpmDetails: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/admin/projects/assign/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getPMDetails: build.query({
+      query: () => ({
+        url: "/admin/pms",
+        method: "GET",
+      }),
+    }),
+    addTaskDetails: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/admin/tasks/new/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    addReportsDetails: build.mutation({
+      query: (data) => ({
+        url: "/admin/reports",
+        method: "POST",
+        body: data,
       }),
     }),
   }),
@@ -76,8 +105,11 @@ export const {
   useGetDetailsQuery,
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
-  useAddTaskDetailsMutation,
+  useAddpmDetailsMutation,
+  useGetPMDetailsQuery,
   useAddProjectDetailsMutation,
+  useAddTaskDetailsMutation,
+  useAddReportsDetailsMutation,
   useGetReportsDetailsQuery,
   useUseUpdateTaskApprovalMutation,
   useGetAllUsersDetailsQuery,

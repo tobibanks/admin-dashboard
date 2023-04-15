@@ -241,8 +241,8 @@
   margin-left: 0.5rem;
 }
 
-.upcoming {
-  background-color: orange;
+.requestedbutton {
+  background-color: #2d9cdb;
   border-radius: 8px;
   width: 10rem;
   display: inline-block;

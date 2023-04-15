@@ -10,3 +10,9 @@
   /* padding-bottom: 2rem; */
   width: 90%;
 }
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

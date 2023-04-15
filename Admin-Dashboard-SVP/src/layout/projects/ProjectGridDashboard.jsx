@@ -9,7 +9,8 @@ import ProjectGridContainer from "../../components/project/ProjectGridContainer"
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import SkeleteonBoard from "@/components/dashboard/SkeletonBoard";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+// import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+import ModalProject from "../../components/project/ModalProject";
 
 const ProjectGridDashboard = () => {
   const { data: UserProjectGrid, isLoading } = useGetProjectDetailsQuery({
@@ -26,6 +27,8 @@ const ProjectGridDashboard = () => {
   const finalEndDate = new Date(convertedEndDate).getTime();
 
   const [filter, setFilter] = useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [setting, setSetting] = useState("");
 
   const data = useMemo(() => {
     if (!filter) return ProjectGridCollection;
@@ -52,7 +55,7 @@ const ProjectGridDashboard = () => {
   );
 
   const filteredUpcomingData = ProjectGridCollection.filter(
-    (item) => item.admin_Status === "Upcoming"
+    (item) => item.admin_Status === "Requested"
   );
 
   const filteredCompleteData = ProjectGridCollection.filter(
@@ -62,7 +65,7 @@ const ProjectGridDashboard = () => {
     <Container className={project.container}>
       <DashboardLayout name="Projects">
         <div className={project.overallcontainer}>
-          {/* <ButtonProject /> */}
+          <ButtonProject />
           <Header name="My Projects" />
           {/* <div className={project.absolutecenter}> */}
           <div className={project.leftcontainer}>
@@ -76,11 +79,11 @@ const ProjectGridDashboard = () => {
               />
 
               <NavCategories
-                name="Upcoming"
+                name="Requested"
                 filter={filter}
-                filter1="Upcoming"
+                filter1="Requested"
                 total={`(${filteredUpcomingData.length})`}
-                onClick={() => setFilter("Upcoming")}
+                onClick={() => setFilter("Requested")}
               />
               <NavCategories
                 name="In Progress"
@@ -148,6 +151,10 @@ const ProjectGridDashboard = () => {
                       date={projectcollect.due}
                       status={projectcollect.admin_Status}
                       priority={projectcollect.priority}
+                      onClick={() => {
+                        setSetting(projectcollect._id);
+                        setModalShow(true);
+                      }}
                     ></ProjectGridContainer>
                   ))}
                 </div>
@@ -160,6 +167,11 @@ const ProjectGridDashboard = () => {
           )}
         </div>
       </DashboardLayout>
+      <ModalProject
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id={setting}
+      />
     </Container>
   );
 };

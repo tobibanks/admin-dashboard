@@ -47,7 +47,7 @@ const TaskBoardDashboard = () => {
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
       (item) =>
-        item.status === "upcoming" &&
+        item.status === "Pending" &&
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
@@ -161,7 +161,7 @@ const TaskBoardDashboard = () => {
               <SkeleteonGrid />
             ) : (
               <div className={taskboard.sizecontainer}>
-                <BoarderHeader text="Upcoming" />
+                <BoarderHeader text="Pending" />
                 <>
                   {dataByDateupcoming.length >= 1 ? (
                     <>
@@ -173,7 +173,7 @@ const TaskBoardDashboard = () => {
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
                           content={filtereddata.description}
-                          date={filtereddata.duedate}
+                          date={filtereddata.due}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
                         />
@@ -205,7 +205,7 @@ const TaskBoardDashboard = () => {
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
                           content={filtereddata.description}
-                          date={filtereddata.duedate}
+                          date={filtereddata.due}
                           status={filtereddata.status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -237,7 +237,7 @@ const BoarderHeader = (props) => {
       className={
         props.text === "In Progress"
           ? taskboard.boarderheadercontainer
-          : props.text === "Upcoming"
+          : props.text === "Pending"
           ? taskboard.boarderheadercontainerpurple
           : props.text === "Completed"
           ? taskboard.borderheadercontainerblue
@@ -280,7 +280,7 @@ const ContentContainer = (props) => {
               className={
                 props.status === "Approved"
                   ? taskboard.approvedbutton
-                  : props.status === "Pending"
+                  : props.status === "Awaiting Approval"
                   ? taskboard.pendingbutton
                   : props.status === "Declined"
                   ? taskboard.declinedbutton

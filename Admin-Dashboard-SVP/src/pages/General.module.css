@@ -9,10 +9,22 @@
   width: 100%;
 }
 
+.maincontainer1 {
+  padding: 0rem !important;
+  background-color: var(--SVP-main);
+  display: flex;
+  height: 100vh;
+  /* max-width: 1440px; */
+  /* height: 110vh; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .centertext {
   font-size: 2rem;
   font-weight: 600;
-  color: var(--textblack);
+  color: var(--white);
   font-family: "Inter", sans-serif;
 }
 

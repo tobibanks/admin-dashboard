@@ -1,43 +1,85 @@
 import React, { useState } from "react";
+import { Container, Image, Form, Button } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
-import projectform from "./project.module.css";
-import Form from "react-bootstrap/Form";
-import { Container, Button } from "react-bootstrap";
-import "./ProjectsForm.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useGetAllUsersDetailsQuery } from "@/app/services/auth/authService";
 import toast, { Toaster } from "react-hot-toast";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
-import { useAddProjectDetailsMutation } from "../../app/services/auth/authService";
+import projectform from "./project.module.css";
+import "./ProjectsForm.css";
+import {
+  useGetPMDetailsQuery,
+  useGetProjectDetailsQuery,
+  useAddpmDetailsMutation,
+} from "../../app/services/auth/authService";
+import { useNavigate, useParams } from "react-router-dom";
+import DashboardLayout from "../../components/dashboard/DashboardLayout";
 
-const ProjectFormDashboard = () => {
+const AssignProjectForm = () => {
+  const { id } = useParams();
   const [type, setType] = useState("");
-  const [addProjectDetailsMutation] = useAddProjectDetailsMutation();
   const navigate = useNavigate();
-  // const { data: admin } = useGetDetailsQuery();
-  // toast.configure();
+  const [projectid, setProject] = useState("");
 
-  const { register, control, reset, handleSubmit } = useForm();
+  const [assignpmDetailsMutation] = useAddpmDetailsMutation();
 
-  const { data: Users } = useGetAllUsersDetailsQuery({
+  const { data: ProjectManager } = useGetPMDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
-  const UserCollection = Users || [];
+  const ProjectManagerCollection = ProjectManager || [];
 
-  console.log(UserCollection);
+  console.log(ProjectManagerCollection);
+
+  const { data: Projects } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const ProjectsCollection = Projects || [];
+
+  const filtereddata = ProjectsCollection.filter((item) => item._id === id);
+
+  // console.log(filtereddata);
+
+  const filtereddatarevised = filtereddata.find((obj) => {
+    return obj._id === id;
+  });
+
+  const projectcurrentid = id;
+
+  const { register, control, reset, handleSubmit } = useForm();
 
   const submitForm = async (data) => {
     console.log(data);
+
+    const useradditionaldetails = {
+      requested_by: {
+        firstname: filtereddatarevised.requested_by.firstname,
+        lastname: filtereddatarevised.requested_by.lastname,
+        id: filtereddatarevised.requested_by.id,
+      },
+    };
+
+    const completeform = {
+      ...useradditionaldetails,
+      ...data,
+    };
+
+    console.log(projectcurrentid);
+    console.log(completeform);
+
     try {
-      await toast.promise(addProjectDetailsMutation(data).unwrap(), {
-        loading: "Saving Form",
-        success: "File Uploaded Successfully",
-        error: "Failed to create form",
-      });
+      await toast.promise(
+        assignpmDetailsMutation({
+          id: projectcurrentid,
+          data: completeform,
+        }).unwrap(),
+        {
+          loading: "Saving Form",
+          success: "Project Assigned Successfully",
+          // success: "Project Form Created Successfully",
+          error: "Failed to create form",
+        }
+      );
       reset();
-      // toast.success("Project Registered Successfully");
-      navigate("/project");
+      navigate("/dashboard");
     } catch (error) {
       console.log("error", error);
     }
@@ -81,9 +123,9 @@ const ProjectFormDashboard = () => {
   }
   return (
     <Container className={projectform.container}>
-      <DashboardLayoutContents name="Projects">
+      <DashboardLayout name="Projects">
         <div className={projectform.overallcontainer}>
-          <p className={projectform.header}>Project Request Form</p>
+          <p className={projectform.header}>Project Assign Form</p>
           <div className={projectform.secondheader}>
             <p className={projectform.header1}>PROJECT INFORMATION</p>
           </div>
@@ -96,11 +138,11 @@ const ProjectFormDashboard = () => {
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
-                    {...register("user_id")}
+                    {...register("assigned_to")}
                   >
-                    {UserCollection.map((usercollect, index) => (
-                      <option key={index} value={usercollect._id}>
-                        {usercollect.firstname} {usercollect.lastname}
+                    {ProjectManagerCollection.map((pmcollect, index) => (
+                      <option key={index} value={pmcollect._id}>
+                        {pmcollect.firstname} {pmcollect.lastname}
                       </option>
                     ))}
                   </Form.Select>
@@ -276,9 +318,9 @@ const ProjectFormDashboard = () => {
             </div>
           </form>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };
 
-export default ProjectFormDashboard;
+export default AssignProjectForm;

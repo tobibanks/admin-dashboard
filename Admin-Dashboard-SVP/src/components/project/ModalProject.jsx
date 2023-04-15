@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Modal, Image } from "react-bootstrap";
 import { ProjectsCollection } from "../../../data/projects";
 import modal from "./general.module.css";
+import "./Modal.css";
 import Form from "react-bootstrap/Form";
-
-import { Link } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import "./Modal.css";
 import {
   useGetProjectDetailsQuery,
@@ -27,6 +27,9 @@ const ModalProject = (props) => {
   console.log(ModalProjectsCollection);
 
   const ModalTasks = UserProjectTask || [];
+
+  const [id, setId] = useState();
+  const navigate = useNavigate();
 
   // console.log(ModalTasks.project.length);
 
@@ -128,6 +131,18 @@ const ModalProject = (props) => {
                             </div>
                           </div>
                         </div>
+                        <div className={modal.absolutebuttoncenter}>
+                          <div
+                            className={modal.buttonname}
+                            onClick={() => {
+                              setId(props.id);
+                              id &&
+                                navigate(generatePath("/addtask/:id", { id }));
+                            }}
+                          >
+                            <p className={modal.buttontext}>Add Task</p>
+                          </div>
+                        </div>
                         <p className={modal.taskname}>Attachment</p>
                         <div className={modal.attachmentflex}>
                           {collect.attachments.length > 1 ? (
@@ -153,51 +168,95 @@ const ModalProject = (props) => {
                         </div>
                       </div>
                     ) : (
-                      <Link to="/project/form">
-                        <div className={modal.absolutebuttoncenter}>
-                          <div className={modal.buttonname}>
-                            <p className={modal.buttontext}>Assign Task</p>
-                          </div>
+                      // <Link to="/project/form">
+                      <div className={modal.absolutebuttoncenter}>
+                        <div
+                          className={modal.buttonname}
+                          onClick={() => {
+                            setId(props.id);
+                            id &&
+                              navigate(
+                                generatePath("/assignproject/:id", { id })
+                              );
+                          }}
+                        >
+                          <p className={modal.buttontext}>Assign Project</p>
                         </div>
-                      </Link>
+                      </div>
+                      // </Link>
                     )}
                   </div>
                 </div>
                 <div className={modal.descriptionrightcontainer}>
                   <div className={modal.activitycontainer1}>
                     <p className={modal.activitytext}>Recent Activity</p>
-                    <div className={modal.activityboardcontainer}>
-                      <Activitycontainer
-                        src="/icons/activity/activity.svg"
-                        description="Admin declined task:"
-                        name="Raise Center Pavement"
-                        date="Added at 02/02/2023 - 10 AM"
-                      />
-                      <Activitycontainer
-                        src="/icons/activity/check.svg"
-                        description="Admin approved task:"
-                        name="Raise Center Pavement"
-                        date="Added at 02/02/2023 - 10 AM"
-                      />
-                      <Activitycontainer
-                        src="/icons/activity/time.svg"
-                        description="John Doe requested task approval"
-                        // name="Raise Center Pavement"
-                        date="Added at 02/02/2023 - 10 AM"
-                      />
-                      <Activitycontainer
-                        src="/icons/activity/add.svg"
-                        description="Admin assigned Tasks to John doe"
-                        // name="Raise Center Pavement"
-                        date="Added at 02/02/2023 - 10 AM"
-                      />
-                      <Activitycontainer
-                        src="/icons/activity/user.svg"
-                        description="Admin assigned John Doe as new project manager"
-                        // name="Raise Center Pavement"
-                        date="Added at 02/02/2023 - 10 AM"
-                      />
-                    </div>
+                    {ModalProjectsCollection.map((collect, index) =>
+                      props.id === collect._id ? (
+                        <div
+                          className={modal.activityboardcontainer}
+                          key={index}
+                        >
+                          {/* {console.log(collect)} */}
+                          {
+                            collect?.activities?.map((activities, index) => {
+                              return (
+                                <div>
+                                  {activities.action === "assigned" ? (
+                                    <AssignedActivitycontainer
+                                      src="/icons/activity/add.svg"
+                                      date={activities.date}
+                                      type={activities.action_type}
+                                      name={activities.initiator}
+                                      assignee={activities.ref.name}
+                                    />
+                                  ) : null}
+                                </div>
+                              );
+                            })
+                            /* <Activitycontainer
+                            src="/icons/activity/activity.svg"
+                            description="Admin declined task:"
+                            name="Raise Center Pavement"
+                            date="Added at 02/02/2023 - 10 AM"
+                          />
+                          <Activitycontainer
+                            src="/icons/activity/check.svg"
+                            description="Admin approved task:"
+                            name="Raise Center Pavement"
+                            date="Added at 02/02/2023 - 10 AM"
+                          />
+                          <Activitycontainer
+                            src="/icons/activity/time.svg"
+                            description="John Doe requested task approval"
+                            // name="Raise Center Pavement"
+                            date="Added at 02/02/2023 - 10 AM"
+                          />
+                          <Activitycontainer
+                            src="/icons/activity/add.svg"
+                            description="Admin assigned Tasks to John doe"
+                            // name="Raise Center Pavement"
+                            date="Added at 02/02/2023 - 10 AM"
+                          />
+                          <Activitycontainer
+                            src="/icons/activity/user.svg"
+                            description="Admin assigned John Doe as new project manager"
+                            // name="Raise Center Pavement"
+                            date="Added at 02/02/2023 - 10 AM"
+                          /> */
+                          }
+                          {/* <div
+                        className={modal.buttonname}
+                        onClick={() => {
+                          setId(props.id);
+                          id &&
+                            navigate(generatePath("/addtask/:id", { id }));
+                        }}
+                      >
+                        <p className={modal.buttontext}>Assign Project</p>
+                      </div> */}
+                        </div>
+                      ) : null
+                    )}
                   </div>
                 </div>
               </div>
@@ -219,8 +278,8 @@ const StatusButton = (props) => {
           ? modal.statusbutton
           : props.text === "Complete"
           ? modal.completebutton
-          : props.text == "Upcoming"
-          ? modal.upcoming
+          : props.text == "Requested"
+          ? modal.requestedbutton
           : null
       }
     >
@@ -267,16 +326,22 @@ const Attachment = (props) => {
   );
 };
 
-const Activitycontainer = (props) => {
+const AssignedActivitycontainer = (props) => {
   return (
     <div className={modal.activitycontainer}>
       <Image src={`${props.src}`} className={modal.imageactivity} />
       <div className={modal.spacecontainer}>
         <p className={modal.activitydescription}>
-          {props.description}
-          <span className={modal.spantext}>{props.name}</span>
+          {props.name} assigned {props.type} to {props.assignee}
+          {/* <span className={modal.spantext}>{props.name}</span> */}
         </p>
-        <p className={modal.activitydate}>{props.date}</p>
+        <p className={modal.activitydate}>
+          {" "}
+          Added at{" "}
+          {new Date(props.date).toLocaleDateString("en-GB", {
+            timeZone: "UTC",
+          })}
+        </p>
       </div>
     </div>
   );

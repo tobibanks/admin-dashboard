@@ -25,8 +25,8 @@ const ReportsTableDashboard = () => {
 
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2023"));
+  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -62,6 +62,8 @@ const ReportsTableDashboard = () => {
       attachment.type.startsWith("document")
     )
   );
+
+  console.log(ReportsCollection);
 
   return (
     <Container className={reporttable.container}>
@@ -139,13 +141,49 @@ const ReportsTableDashboard = () => {
             </div>
           </div>
           <ReportsTableContents>
-            {data.map((tabledata, index) => (
+            {data.map((report, index) => {
+              const projectname = report.project.name;
+              return (
+                <>
+                  {report.attachments.map((tabledata, index) => (
+                    <tr key={index}>
+                      <td>
+                        <div style={{ display: "flex" }}>
+                          {tabledata.type === "image/jpeg" ? (
+                            <Image src="/icons/jpg.svg" alt="jpg" />
+                          ) : tabledata.type === "image/png" ? (
+                            <Image src="/icons/jpg.svg" alt="jpg" />
+                          ) : tabledata.type === "image/svg+xml" ? (
+                            <Image src="/icons/jpg.svg" alt="jpg" />
+                          ) : null}
+                          <div className={reporttable.absolutecenter}>
+                            {tabledata?.name?.substring(0, 10)}
+                          </div>
+                        </div>
+                      </td>
+                      <td>{projectname}</td>
+                      <td>{tabledata?.send_from}</td>
+                      <td>{tabledata?.sent_to}</td>
+                      <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                </>
+              );
+            })}
+            {/* {data.map((tabledata, index) => (
               <tr key={index}>
                 <td>
-                  <div className={reporttable.flextable}>
-                    {/* <Image src={tabledata.src} /> */}
-                    <div className={reporttable.absolutecenter}>
-                      <p className={reporttable.tablename}>{tabledata.name}</p>
+                  <div className={reporttable.flextable}> */}
+            {/* <div className={reportsgrid.centergridicon}> */}
+
+            {/* </div> */}
+            {/* <Image src={tabledata.src} /> */}
+            {/* <div className={reporttable.absolutecenter}>
+                      <p className={reporttable.tablename}> */}
+            {/* {tabledata.attachment.name.map((image,index)=> {
+
+                        )} */}
+            {/* </p>
                     </div>
                   </div>
                 </td>
@@ -154,7 +192,7 @@ const ReportsTableDashboard = () => {
                 <td>{tabledata?.sent_to?.firstname}</td>
                 <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
               </tr>
-            ))}
+            ))} */}
           </ReportsTableContents>
         </div>
       </DashboardLayoutContents>

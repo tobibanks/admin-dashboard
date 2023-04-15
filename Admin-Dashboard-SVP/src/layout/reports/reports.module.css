@@ -156,6 +156,11 @@
   border-color: var(--black200);
 }
 
+.fleximageicon {
+  display: flex;
+  gap: 1rem;
+}
+
 .cardcontainer:hover {
   border-radius: 8px;
   width: 15rem;
@@ -170,6 +175,11 @@
   gap: 1rem;
 }
 
+.gridimage {
+  width: 192px;
+  height: 144px;
+  object-fit: contain;
+}
 .filename {
   font-family: "Inter", sans-serif;
   font-weight: 700;
@@ -247,7 +257,7 @@
   border-color: var(--black100);
   border-radius: 8px;
   background-color: white;
-  padding: 0.5rem;
+  padding: 5px 5px;
   white-space: nowrap;
   display: flex;
   /* background-color: blue; */

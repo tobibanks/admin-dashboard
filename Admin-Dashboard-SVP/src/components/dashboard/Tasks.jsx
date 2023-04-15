@@ -95,7 +95,6 @@ const Tasks = () => {
                     </button>
                   </Link>
                 </div>
-                ;
               </>
             ) : (
               <div style={{ marginBottom: "3rem" }}>

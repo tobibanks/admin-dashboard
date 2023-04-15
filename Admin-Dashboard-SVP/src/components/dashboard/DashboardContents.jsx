@@ -32,6 +32,7 @@ const DashboardContents = () => {
   const ProjectsCollection = AdminProjects || [];
   return (
     <div className={user.contentcontainer}>
+      <ButtonProject />
       <div className={user.flexcontainer}>
         <Link to="/project">
           <Cards

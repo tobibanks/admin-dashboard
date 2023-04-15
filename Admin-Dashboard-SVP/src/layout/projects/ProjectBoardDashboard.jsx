@@ -43,7 +43,7 @@ const ProjectBoardDashboard = () => {
 
   const upcomingdata = useMemo(() => {
     const filteredData = ProjectsBoardCollection.filter(
-      (item) => item.admin_Status === "Upcoming"
+      (item) => item.admin_Status === "Requested"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
@@ -81,7 +81,7 @@ const ProjectBoardDashboard = () => {
     <Container className={grid.container}>
       <DashboardLayoutContents name="Projects">
         <div className={grid.overallcontainer}>
-          {/* <ButtonProject /> */}
+          <ButtonProject />
           <Header name="My Projects" />
           <div className={grid.rightboardcontainer}>
             <div className={grid.datepickertitle}>
@@ -162,7 +162,7 @@ const ProjectBoardDashboard = () => {
               <SkeleteonGrid />
             ) : (
               <div className={grid.sizecontainer}>
-                <BoarderHeader text="Upcoming" />
+                <BoarderHeader text="Requested" />
                 <>
                   {dataByDateupcoming.length >= 1 ? (
                     <>
@@ -179,7 +179,7 @@ const ProjectBoardDashboard = () => {
                           lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
                             0
                           )}
-                          date={filtereddata.duedate}
+                          date={filtereddata.due}
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -188,7 +188,9 @@ const ProjectBoardDashboard = () => {
                     </>
                   ) : (
                     <div style={{ marginTop: "2rem" }}>
-                      <p className={grid.nothing}>There are no upcoming projects</p>
+                      <p className={grid.nothing}>
+                        There are no upcoming projects
+                      </p>
                     </div>
                   )}
                 </>
@@ -215,7 +217,7 @@ const ProjectBoardDashboard = () => {
                           lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
                             0
                           )}
-                          date={filtereddata.duedate}
+                          date={filtereddata.due}
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -224,7 +226,9 @@ const ProjectBoardDashboard = () => {
                     </>
                   ) : (
                     <div style={{ marginTop: "2rem" }}>
-                      <p className={grid.nothing}>There are no completed projects</p>
+                      <p className={grid.nothing}>
+                        There are no completed projects
+                      </p>
                     </div>
                   )}
                 </>
@@ -245,7 +249,7 @@ const BoarderHeader = (props) => {
       className={
         props.text === "In Progress"
           ? grid.boarderheadercontainer
-          : props.text === "Upcoming"
+          : props.text === "Requested"
           ? grid.boarderheadercontainerpurple
           : props.text === "Completed"
           ? grid.borderheadercontainerblue
@@ -292,7 +296,11 @@ const ContentContainer = (props) => {
             className={
               props.status === "In Progress"
                 ? grid.statusbutton
-                : grid.completebutton
+                : props.status === "Completed"
+                ? grid.completebutton
+                : props.status === "Requested"
+                ? grid.requestedbutton
+                : null
             }
           >
             <p className={grid.statusbuttontext1}>{props.status}</p>

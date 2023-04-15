@@ -377,6 +377,10 @@
   white-space: nowrap;
 }
 
+.attachmentempty {
+  font-family: "Inter", sans-serif;
+}
+
 .calendartextcontainer {
   border-left: 1px solid;
   border-color: var(--black200);
