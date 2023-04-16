@@ -213,8 +213,9 @@
 
 .yellowbackground {
   border-radius: 25px;
-  background-color: var(--dashboardyellow);
+  background-color: var(--dashboard-yellow);
   display: flex;
+  width: 13rem;
   gap: 0.5rem;
   margin-top: 1rem;
   padding-top: 0.5rem;
@@ -232,6 +233,7 @@
 .textname {
   font-family: "Inter", sans-serif;
   font-weight: 600;
+  margin-bottom: 0px;
   font-size: 0.9rem;
   /* margin-left: 0.3rem; */
 }

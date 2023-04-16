@@ -12,13 +12,22 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+import { useNavigate } from "react-router-dom";
 
 const TasksDashboard = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
+  const navigate = useNavigate();
+
   const TasksTableCollection = TaskCollection || [];
+
+  console.log(TasksTableCollection);
+
+  // window.location.reload();
+  // location.reload();
+  
 
   console.log(TasksTableCollection);
   const [filter, setFilter] = useState(null);
@@ -91,7 +100,6 @@ const TasksDashboard = () => {
                 total={`(${filteredApprovedData.length})`}
                 filter={filter}
                 filter1="Approved"
-
                 onClick={() => setFilter("Approved")}
               />
               <NavCategories

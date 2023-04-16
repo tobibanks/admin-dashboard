@@ -90,6 +90,7 @@ const App = () => {
             />
             <Route
               path="/task"
+              // forceRefresh={true}
               element={
                 <ProtectedRoute>
                   <Tasks />

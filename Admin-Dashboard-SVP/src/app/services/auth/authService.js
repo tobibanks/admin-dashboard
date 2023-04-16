@@ -104,6 +104,12 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    getAllApprovals: build.query({
+      query: () => ({
+        url: "/admin/approvals",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -112,6 +118,7 @@ export const {
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
   useAddpmDetailsMutation,
+  useGetAllApprovalsQuery,
   useGetApprovalRequestQuery,
   useGetPMDetailsQuery,
   useAddProjectDetailsMutation,

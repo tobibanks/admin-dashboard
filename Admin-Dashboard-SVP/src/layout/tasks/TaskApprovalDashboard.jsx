@@ -8,6 +8,7 @@ import {
   useGetTaskDetailsQuery,
   useUseUpdateTaskApprovalMutation,
   useGetApprovalRequestQuery,
+  useGetAllApprovalsQuery,
 } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
@@ -16,6 +17,12 @@ const TaskApprovalDashboard = () => {
   const { data: AdminTasks } = useGetTaskDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
+
+  const { data: approvalRequest } = useGetAllApprovalsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const approvalRequestCollection = approvalRequest || [];
   // const updatedTask = React.useRef(new Array());
   const [updatedTask, setUpdatedTask] = useState();
   const { id } = useParams();
@@ -32,6 +39,8 @@ const TaskApprovalDashboard = () => {
 
   console.log(id);
 
+  console.log(approvalRequestCollection);
+
   const submitForm = async (data) => {
     console.log(updatedTask);
     console.log(data);
@@ -46,8 +55,8 @@ const TaskApprovalDashboard = () => {
         updateTaskMutation({ data: completeform, id: taskapprovalid }).unwrap(),
         {
           loading: "Saving Form",
-          success: "Project Form Created Successfully",
-          error: "Failed to create form",
+        success: "File Uploaded Successfully",
+        error: "Failed to create form",
         }
       );
       navigate("/task");
@@ -66,7 +75,7 @@ const TaskApprovalDashboard = () => {
             <p className={taskapproval.secondtitle}>Approval Information</p>
           </div>
           {TaskCollection.map((task, index) =>
-            id === task._id ? (
+            id === task.approval_id ? (
               <div key={index}>
                 <Descritption title="Approval requested on:">
                   <p className={taskapproval.descriptioncontent}>
@@ -115,7 +124,7 @@ const TaskApprovalDashboard = () => {
                       {...register("status")}
                       required
                       name="status"
-                      value="Approved"
+                      value="approved"
                       id="custom-switch"
                       label="Approved"
                     />
@@ -123,7 +132,7 @@ const TaskApprovalDashboard = () => {
                       {...register("status")}
                       type="radio"
                       name="status"
-                      value="Declined"
+                      value="declined"
                       id="custom-switch2"
                       label="Declined"
                     />

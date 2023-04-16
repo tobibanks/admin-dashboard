@@ -130,21 +130,23 @@ const ModalTask = (props) => {
                       )}
                     </div>
                     <div className={modal.bottomcontainer}>
-                      <div
-                        className={modal.buttonname}
-                        onClick={() => {
-                          props.id &&
-                            navigate(
-                              generatePath("/taskapproval/:id", {
-                                id: props.id,
-                              })
-                            );
-                        }}
-                      >
-                        <p className={modal.buttontext}>
-                          Review Approval Request
-                        </p>
-                      </div>
+                      {collect.approval_id ? (
+                        <div
+                          className={modal.buttonname}
+                          onClick={() => {
+                            props.id &&
+                              navigate(
+                                generatePath("/taskapproval/:id", {
+                                  id: collect.approval_id,
+                                })
+                              );
+                          }}
+                        >
+                          <p className={modal.buttontext}>
+                            Review Approval Request
+                          </p>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>

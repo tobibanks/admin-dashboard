@@ -31,13 +31,14 @@ const ProjectFormDashboard = () => {
     console.log(data);
     try {
       await toast.promise(addProjectDetailsMutation(data).unwrap(), {
-        loading: "Saving Form",
-        success: "File Uploaded Successfully",
+        loading: "Saving Approval",
+        success: "Approval Accepted",
         error: "Failed to create form",
       });
       reset();
       // toast.success("Project Registered Successfully");
       navigate("/project");
+      navigate(0);
     } catch (error) {
       console.log("error", error);
     }

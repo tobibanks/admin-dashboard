@@ -15,6 +15,8 @@ const ProjectBoardDashboard = () => {
     refetchOnMountArgChange: true,
   });
 
+  const isEnabled = Boolean(filter);
+
   const ProjectsBoardCollection = UserProjectsBoard || [];
   const [startDate, setStartDate] = useState(new Date("01/01/1998"));
   const [endDate, setEndDate] = useState(new Date("01/01/2077"));
