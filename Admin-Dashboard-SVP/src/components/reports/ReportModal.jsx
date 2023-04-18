@@ -127,9 +127,17 @@ const ReportModal = (props) => {
               ))}
             </div>
           )}
-          <p className={modal.title1} onClick={() => setMore(!more)}>
-            See More
-          </p>
+          {ProjectCollections.length > 3 ? (
+            more ? (
+              <p className={modal.title1} onClick={() => setMore(!more)}>
+                See Less
+              </p>
+            ) : (
+              <p className={modal.title1} onClick={() => setMore(!more)}>
+                See More
+              </p>
+            )
+          ) : null}
           <p className={modal.title}>Tasks</p>
           {TaskCollections.map((task, index) => (
             <Form.Check

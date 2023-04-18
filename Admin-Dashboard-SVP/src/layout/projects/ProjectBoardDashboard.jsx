@@ -15,11 +15,9 @@ const ProjectBoardDashboard = () => {
     refetchOnMountArgChange: true,
   });
 
-  const isEnabled = Boolean(filter);
-
   const ProjectsBoardCollection = UserProjectsBoard || [];
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2027"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -35,6 +33,7 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDateinprogress = useMemo(() => {
+    if (!startDate && !endDate) return inprogressdata;
     const filtereddata = inprogressdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -51,6 +50,7 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDateupcoming = useMemo(() => {
+    if (!startDate && !endDate) return upcomingdata;
     const filtereddata = upcomingdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -70,6 +70,7 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDatecomplete = useMemo(() => {
+    if (!startDate && !endDate) return completedata;
     const filtereddata = completedata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&

@@ -16,8 +16,8 @@ const TaskBoardDashboard = () => {
   const TasksBoardCollection = TaskCollection || [];
 
   console.log(TasksBoardCollection);
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2027"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();

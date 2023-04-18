@@ -1,14 +1,18 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import FileInputContainer from "@/components/reports/FileInputContainer";
 import React, { useState, useMemo, forwardRef } from "react";
-import { Container, Button, Image } from "react-bootstrap";
+import { Container, Button, Image, Form } from "react-bootstrap";
 import reporttable from "./reports.module.css";
 import "./changes.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TableHeaderNav from "@/components/project/TableHeaderNav";
 import Header from "@/components/reports/Header";
-import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
+import {
+  useGetReportsDetailsQuery,
+  useGetProjectDetailsQuery,
+  useGetTaskDetailsQuery,
+} from "../../app/services/auth/authService";
 import ReportsTableContents from "@/components/reports/ReportsTableContents";
 import { TablesData } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
@@ -16,17 +20,32 @@ import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutC
 
 const ReportsTableDashboard = () => {
   const [filter, setFilter] = useState(null);
+  const [select, setSelect] = useState("");
+  const [task, setTask] = useState("");
+  const [display, setDisplay] = useState(false);
+  const [message, setMessage] = useState(false);
 
   const { data: AdminReports } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
+  const { data: projects } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { data: tasks } = useGetTaskDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
   const ReportsCollection = AdminReports || [];
+
+  const projectsCollection = projects || [];
+
+  const taskCollection = tasks || [];
 
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
+  const [startDate, setStartDate] = useState(new Date("01/01/2021"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -42,6 +61,22 @@ const ReportsTableDashboard = () => {
     return filteredData;
   }, [filter, ReportsCollection]);
 
+  const filteredCollection = useMemo(() => {
+    if (!task) return data;
+    const filteredData = data.filter((item) => item.task_id === task);
+    console.log(filteredData);
+    return filteredData;
+  }, [task, data]);
+
+  // const dataByDate = useMemo(() => {
+  //   const filtereddata = data.filter(
+  //     (item) =>
+  //       finalStartDate <= new Date(item.date).getTime() &&
+  //       new Date(item.date).getTime() <= finalEndDate
+  //   );
+  //   return filtereddata;
+  // }, [finalStartDate, finalEndDate, data]);
+
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
   );
@@ -56,6 +91,27 @@ const ReportsTableDashboard = () => {
 
   console.log(ReportsCollection);
 
+  const handleProject = (e) => {
+    setSelect(e.target.value);
+    console.log(select);
+    setDisplay(true);
+  };
+
+  const handleTask = (e) => {
+    setTask(e.target.value);
+    console.log(task);
+    setMessage("There are no reports for selected task");
+  };
+
+  console.log(taskCollection);
+
+  const filteredtasks = useMemo(() => {
+    const filtereddata = taskCollection.filter(
+      (item) => item.project.id === select
+    );
+    return filtereddata;
+  }, [select, ReportsCollection]);
+
   return (
     <Container className={reporttable.container}>
       <DashboardLayoutContents name="Reports">
@@ -69,7 +125,10 @@ const ReportsTableDashboard = () => {
                 total={`(${ReportsCollection.length})`}
                 filter={filter}
                 filter1={null}
-                onClick={() => setFilter(null)}
+                onClick={() => {
+                  setFilter(null);
+                  setMessage("There are no reports");
+                }}
               />
 
               <NavCategories
@@ -77,24 +136,33 @@ const ReportsTableDashboard = () => {
                 filter={filter}
                 filter1="image"
                 total={`(${filteredImage.length})`}
-                onClick={() => setFilter("image")}
+                onClick={() => {
+                  setFilter("image");
+                  setMessage("There are no images");
+                }}
               />
               <NavCategories
                 name="Video"
                 filter={filter}
                 filter1="video"
                 total={`(${filteredVideo.length})`}
-                onClick={() => setFilter("video")}
+                onClick={() => {
+                  setFilter("video");
+                  setMessage("There are no videos");
+                }}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
                 total={`(${filteredDocument.length})`}
-                onClick={() => setFilter("document")}
+                onClick={() => {
+                  setFilter("document");
+                  setMessage("There are no documents");
+                }}
               />
             </div>
-            <div className={reporttable.datepickertitle}>
+            {/* <div className={reporttable.datepickertitle}>
               <p className={reporttable.datepickertitlelabel}>Start Date</p>
               <DatePicker
                 selected={startDate}
@@ -129,12 +197,41 @@ const ReportsTableDashboard = () => {
                 endDate={endDate}
                 minDate={startDate}
               />
+            </div> */}
+            <div className={reporttable.absolutecenter}>
+              <Form.Select
+                onChange={handleProject}
+                // value={select}
+                aria-label="Default select example"
+              >
+                <option>Select A Project</option>
+                {projectsCollection.map((pcollect, index) => (
+                  <option key={index} value={pcollect._id}>
+                    {pcollect.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+            <div className={reporttable.absolutecenter}>
+              {display ? (
+                <Form.Select
+                  onChange={handleTask}
+                  aria-label="Default select example"
+                >
+                  <option>Select A Task</option>
+                  {filteredtasks.map((task, index) => (
+                    <option key={index} value={task._id}>
+                      {task.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              ) : null}
             </div>
           </div>
           <div>
-            {data.length >= 1 ? (
+            {filteredCollection.length >= 1 ? (
               <ReportsTableContents>
-                {data.map((tabledata, index) => {
+                {filteredCollection.map((tabledata, index) => {
                   return (
                     <tr key={index}>
                       <td>
@@ -161,7 +258,9 @@ const ReportsTableDashboard = () => {
               </ReportsTableContents>
             ) : (
               <div style={{ marginTop: "3rem" }}>
-                <p className={reporttable.nothing}>There are no projects</p>
+                <p className={reporttable.nothing}>
+                  {message || "there are no reports"}
+                </p>
               </div>
             )}
           </div>

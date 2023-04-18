@@ -37,3 +37,15 @@ tr {
   border-style: none;
   border-width: 0px;
 }
+
+.form-select {
+  height: 4vh;
+  width: 8rem;
+  /* border-radius: 24px; */
+  font-family: "Inter", sans-serif;
+}
+
+.form-select:focus {
+  border: 1px solid;
+  border-color: var(--SVP-main);
+}

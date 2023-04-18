@@ -5,26 +5,46 @@ import Header from "../../components/reports/Header";
 import reportsgrid from "./reports.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Container, Button, Image } from "react-bootstrap";
+import { Container, Button, Image, Form } from "react-bootstrap";
 import { reportgriddata } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
-import { useGetReportsDetailsQuery } from "../../app/services/auth/authService";
+import {
+  useGetReportsDetailsQuery,
+  useGetProjectDetailsQuery,
+  useGetTaskDetailsQuery,
+} from "../../app/services/auth/authService";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ReportsGridDashboard = () => {
   const [filter, setFilter] = useState(null);
+  const [select, setSelect] = useState("");
+  const [task, setTask] = useState("");
+  const [display, setDisplay] = useState(false);
+  const [message, setMessage] = useState(false);
 
   const { data: AdminReports } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
+
+  const { data: projects } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { data: tasks } = useGetTaskDetailsQuery({
+    refetchOnMountOrArgChange: true,
+  });
+
+  const projectsCollection = projects || [];
+
+  const taskCollection = tasks || [];
 
   const ReportsCollection = AdminReports || [];
 
   console.log("Batman");
   console.log(ReportsCollection);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2025"));
+  const [startDate, setStartDate] = useState(new Date("01/01/2022"));
+  const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -40,6 +60,23 @@ const ReportsGridDashboard = () => {
     return filteredData;
   }, [filter, ReportsCollection]);
 
+  const filteredCollection = useMemo(() => {
+    if (!task) return data;
+    const filteredData = data.filter((item) => item.task_id === task);
+    console.log(filteredData);
+    return filteredData;
+  }, [task, data]);
+
+  // const dataByDate = useMemo(() => {
+  //   const filtereddata = data.filter(
+  //     (item) =>
+  //       finalStartDate <= new Date(item.date).getTime() &&
+  //       new Date(item.date).getTime() <= finalEndDate
+  //   );
+  //   return filtereddata;
+  // }, [finalStartDate, finalEndDate, data]);
+
+  // console.log(dataByDate);
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
   );
@@ -51,6 +88,25 @@ const ReportsGridDashboard = () => {
   const filteredVideo = ReportsCollection.filter((item) =>
     item.type.startsWith("video")
   );
+
+  const handleProject = (e) => {
+    setSelect(e.target.value);
+    console.log(select);
+    setDisplay(true);
+  };
+
+  const handleTask = (e) => {
+    setTask(e.target.value);
+    console.log(task);
+    setMessage("There are no reports for selected task");
+  };
+
+  const filteredtasks = useMemo(() => {
+    const filtereddata = taskCollection.filter(
+      (item) => item.project.id === select
+    );
+    return filtereddata;
+  }, [select, ReportsCollection]);
 
   return (
     <Container className={reportsgrid.container}>
@@ -90,7 +146,7 @@ const ReportsGridDashboard = () => {
                 onClick={() => setFilter("document")}
               />
             </div>
-            <div className={reportsgrid.datepickertitle}>
+            {/* <div className={reportsgrid.datepickertitle}>
               <p className={reportsgrid.datepickertitlelabel}>Start Date</p>
               <DatePicker
                 selected={startDate}
@@ -125,10 +181,39 @@ const ReportsGridDashboard = () => {
                 endDate={endDate}
                 minDate={startDate}
               />
+            </div> */}
+            <div className={reportsgrid.absolutecenter}>
+              <Form.Select
+                onChange={handleProject}
+                // value={select}
+                aria-label="Default select example"
+              >
+                <option>Select A Project</option>
+                {projectsCollection.map((pcollect, index) => (
+                  <option key={index} value={pcollect._id}>
+                    {pcollect.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+            <div className={reportsgrid.absolutecenter}>
+              {display ? (
+                <Form.Select
+                  onChange={handleTask}
+                  aria-label="Default select example"
+                >
+                  <option>Select A Task</option>
+                  {filteredtasks.map((task, index) => (
+                    <option key={index} value={task._id}>
+                      {task.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              ) : null}
             </div>
           </div>
           <div>
-            {data.length >= 1 ? (
+            {filteredCollection.length >= 1 ? (
               <div
                 style={{
                   display: "flex",
@@ -138,7 +223,7 @@ const ReportsGridDashboard = () => {
                   flexWrap: "wrap",
                 }}
               >
-                {data.map((repo, index) => {
+                {filteredCollection.map((repo, index) => {
                   return (
                     <CardGridContainer
                       key={index}
@@ -157,7 +242,9 @@ const ReportsGridDashboard = () => {
               </div>
             ) : (
               <div style={{ marginTop: "3rem" }}>
-                <p className={reportsgrid.nothing}>There are no reports</p>
+                <p className={reportsgrid.nothing}>
+                  {message || "there are no reports"}
+                </p>
               </div>
             )}
           </div>

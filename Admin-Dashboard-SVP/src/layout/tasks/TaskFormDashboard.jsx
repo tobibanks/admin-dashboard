@@ -38,16 +38,13 @@ const TaskFormDashboard = () => {
   const { register, control, reset, handleSubmit } = useForm();
 
   const submitForm = async (data) => {
-    const completeform = {
-      ...filtereddatarevised,
-      ...data,
-    };
+    // console.log("batman");
 
     try {
       await toast.promise(
         addtaskdetailsmutation({
           id: projectcurrentid,
-          data: completeform,
+          data: data,
         }).unwrap(),
         {
           loading: "Saving Form",
@@ -67,7 +64,7 @@ const TaskFormDashboard = () => {
         <div className={taskform.overallcontainer}>
           <p className={taskform.taskapprovaltitle}>New Task Form</p>
           <div className={taskform.secondtitlecontainer}>
-            <p className={taskform.secondtitle}>{filtereddatarevised.name}</p>
+            <p className={taskform.secondtitle}>{filtereddatarevised?.name}</p>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className={taskform.formcontainer}>
@@ -98,7 +95,7 @@ const TaskFormDashboard = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  {...register("title")}
+                  {...register("name")}
                   placeholder="Type here..."
                   required
                 />

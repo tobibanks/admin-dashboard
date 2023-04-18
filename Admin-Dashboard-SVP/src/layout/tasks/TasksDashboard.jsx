@@ -34,8 +34,8 @@ const TasksDashboard = () => {
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();

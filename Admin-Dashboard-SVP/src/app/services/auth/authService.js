@@ -26,13 +26,6 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
-    addTaskDetails: build.mutation({
-      query: (id, data) => ({
-        url: `/admin/tasks/new/${id}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
     getTaskDetails: build.query({
       query: () => ({
         url: "/admin/tasks",

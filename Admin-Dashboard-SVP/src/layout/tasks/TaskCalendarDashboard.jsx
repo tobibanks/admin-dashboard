@@ -21,8 +21,8 @@ const localizer = momentLocalizer(moment);
 // );
 
 const TaskCalendarDashboard = () => {
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2027"));
 
   return (
     <Container className={taskcalendar.container}>

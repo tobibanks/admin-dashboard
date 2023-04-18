@@ -31,14 +31,14 @@ const ProjectFormDashboard = () => {
     console.log(data);
     try {
       await toast.promise(addProjectDetailsMutation(data).unwrap(), {
-        loading: "Saving Approval",
-        success: "Approval Accepted",
+        loading: "Saving Form",
+        success: "Project Form Created Successfully",
         error: "Failed to create form",
       });
       reset();
       // toast.success("Project Registered Successfully");
       navigate("/project");
-      navigate(0);
+      window.location.reload();
     } catch (error) {
       console.log("error", error);
     }
@@ -250,15 +250,6 @@ const ProjectFormDashboard = () => {
                   background: "#363636",
                   color: "#fff",
                   fontFamily: "Inter, sans-serif",
-                },
-
-                // Default options for specific types
-                success: {
-                  duration: 3000,
-                  theme: {
-                    primary: "green",
-                    secondary: "black",
-                  },
                 },
               }}
             />

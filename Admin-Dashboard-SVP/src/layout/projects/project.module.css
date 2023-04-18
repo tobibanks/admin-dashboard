@@ -118,6 +118,14 @@
   align-items: center;
 }
 
+.absolutecenter1 {
+  display: flex;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
 .centericon {
   text-align: center;
 }
@@ -584,4 +592,9 @@
   font-family: "Inter", sans-serif;
   font-size: 14px;
   padding-bottom: 5px;
+}
+
+.form1 {
+  width: 100%;
+  text-align: center;
 }

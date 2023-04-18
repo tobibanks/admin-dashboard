@@ -165,6 +165,10 @@
   border: none;
 }
 
+.button:active {
+  background-color:var(--SVP-main400) !important;
+}
+
 .button:hover {
   background-color: var(--SVP-main200);
   color: white;

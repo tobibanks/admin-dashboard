@@ -25,8 +25,8 @@ const ProjectDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2024"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2028"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -51,6 +51,8 @@ const ProjectDashboard = () => {
     );
     return filtereddata;
   }, [finalStartDate, finalEndDate, data]);
+
+
 
   const filteredInProgressData = ProjectsCollection.filter(
     (item) => item.admin_Status === "In Progress"
@@ -167,9 +169,8 @@ const ProjectDashboard = () => {
                               0
                             ) || null}
                             <span>
-                              {projectcollect?.assigned_?.lastname?.charAt(
-                                0
-                              ) || null}
+                              {projectcollect?.assigned_?.lastname?.charAt(0) ||
+                                null}
                             </span>
                           </p>
                         </div>

@@ -17,8 +17,8 @@ const ProjectGridDashboard = () => {
     refetchOnMountArgChange: true,
   });
   const ProjectGridCollection = UserProjectGrid || [];
-  const [startDate, setStartDate] = useState(new Date("01/01/1998"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2077"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date("01/01/2026"));
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -29,6 +29,8 @@ const ProjectGridDashboard = () => {
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
+
+  console.log(startDate, endDate);
 
   const data = useMemo(() => {
     if (!filter) return ProjectGridCollection;
@@ -42,6 +44,7 @@ const ProjectGridDashboard = () => {
   }, [filter, finalStartDate, finalEndDate, ProjectGridCollection]);
 
   const dataByDate = useMemo(() => {
+    if (!startDate && !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
