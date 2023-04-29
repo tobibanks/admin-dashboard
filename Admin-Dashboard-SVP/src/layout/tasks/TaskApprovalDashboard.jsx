@@ -42,21 +42,17 @@ const TaskApprovalDashboard = () => {
   console.log(approvalRequestCollection);
 
   const submitForm = async (data) => {
-    console.log(updatedTask);
-    console.log(data);
     const completeform = {
       ...updatedTask,
       ...data,
     };
-    console.log(completeform);
-    console.log(taskapprovalid);
     try {
       await toast.promise(
         updateTaskMutation({ data: completeform, id: taskapprovalid }).unwrap(),
         {
           loading: "Saving Form",
-        success: "File Uploaded Successfully",
-        error: "Failed to create form",
+          success: "File Uploaded Successfully",
+          error: "Failed to create form",
         }
       );
       navigate("/task");

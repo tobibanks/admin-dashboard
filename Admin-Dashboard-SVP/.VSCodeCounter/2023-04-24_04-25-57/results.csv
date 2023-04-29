@@ -1,0 +1,205 @@
+"filename", "language", "JavaScript", "JSON", "JavaScript JSX", "encodingImgTargetFile", "XML", "CSS", "HTML", "comment", "blank", "total"
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\calendarevents.js", "JavaScript", 87, 0, 0, 0, 0, 0, 0, 1, 4, 92
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\data.js", "JavaScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 26
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\notification.js", "JavaScript", 37, 0, 0, 0, 0, 0, 0, 0, 3, 40
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\projects.js", "JavaScript", 268, 0, 0, 0, 0, 0, 0, 0, 3, 271
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\reports.js", "JavaScript", 294, 0, 0, 0, 0, 0, 0, 0, 3, 297
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\task.js", "JavaScript", 318, 0, 0, 0, 0, 0, 0, 0, 3, 321
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\data\user.js", "JavaScript", 16, 0, 0, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\index.html", "HTML", 0, 0, 0, 0, 0, 0, 21, 0, 1, 22
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\package-lock.json", "JSON", 0, 3795, 0, 0, 0, 0, 0, 0, 1, 3796
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\package.json", "JSON", 0, 36, 0, 0, 0, 0, 0, 0, 1, 37
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\activity\activity.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\activity\add.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\activity\check.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\activity\time.svg", "XML", 0, 0, 0, 0, 5, 0, 0, 0, 1, 6
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\activity\user.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\arrow-down-yellow.svg", "XML", 0, 0, 0, 0, 10, 0, 0, 0, 1, 11
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\arrow-down.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\attach.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\calendar.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\check-black.svg", "XML", 0, 0, 0, 0, 8, 0, 0, 1, 0, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\check.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\active-project-cards.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\alarm-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\arrow.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\messages-cards-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\project-cards-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\project\cancel.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\project\tick.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\reports-cards-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\close-failed.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\close-true.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\pending-failed.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\pending-true.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\progress-failed.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\progress-true.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\star.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\task\starred.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\tasks-cards-icon.png", "encodingImgTargetFile", 0, 0, 0, 8, 0, 0, 0, 0, 0, 8
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dashboard\tasks-cards-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dot.svg", "XML", 0, 0, 0, 0, 4, 0, 0, 0, 0, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\dots.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\frame.png", "encodingImgTargetFile", 0, 0, 0, 781, 0, 0, 0, 0, 7, 788
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\active-board.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\active-calendar.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\active-grid.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\active-table.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\board.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\calendar.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\grid.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\group.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\svp.png", "encodingImgTargetFile", 0, 0, 0, 42, 0, 0, 0, 0, 0, 42
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\header\table.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\icons8-done-30.png", "encodingImgTargetFile", 0, 0, 0, 6, 0, 0, 0, 0, 0, 6
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\icons8-done.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\jpg.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\login-illustration.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\message.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\notification\arrow-down.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\pdf.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\reports\document.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\reports\image.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\reports\video.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\search.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\active-messages.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\active-project.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\active-reports.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\active-tasks.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\close.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\dashboard-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\dashboard.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\hamburger.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\log-out.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\messages-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\project-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\reports-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\svp.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 1, 10
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\sidebar\tasks-icon.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\table\normalflag.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\table\redflag.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\table\warningflag.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\icons\three-dots.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\avatar.png", "encodingImgTargetFile", 0, 0, 0, 38, 0, 0, 0, 0, 2, 40
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\notification\admin.svg", "XML", 0, 0, 0, 0, 12, 0, 0, 0, 1, 13
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\notification\boy.png", "encodingImgTargetFile", 0, 0, 0, 48, 0, 0, 0, 0, 0, 48
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\notification\girl.png", "encodingImgTargetFile", 0, 0, 0, 46, 0, 0, 0, 0, 0, 46
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\document.png", "encodingImgTargetFile", 0, 0, 0, 7, 0, 0, 0, 0, 0, 7
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\foundation.png", "encodingImgTargetFile", 0, 0, 0, 582, 0, 0, 0, 0, 3, 585
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\jane.png", "encodingImgTargetFile", 0, 0, 0, 25, 0, 0, 0, 0, 1, 26
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\roof.png", "encodingImgTargetFile", 0, 0, 0, 543, 0, 0, 0, 0, 11, 554
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\sylvester.png", "encodingImgTargetFile", 0, 0, 0, 29, 0, 0, 0, 0, 0, 29
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\reports\window.png", "encodingImgTargetFile", 0, 0, 0, 479, 0, 0, 0, 0, 1, 480
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\svp.png", "encodingImgTargetFile", 0, 0, 0, 42, 0, 0, 0, 0, 0, 42
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\images\svp.svg", "XML", 0, 0, 0, 0, 9, 0, 0, 0, 1, 10
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\logo.png", "encodingImgTargetFile", 0, 0, 0, 109, 0, 0, 0, 0, 1, 110
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\logo.svg", "XML", 0, 0, 0, 0, 3, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\logo1.svg", "XML", 0, 0, 0, 0, 89, 0, 0, 0, 0, 89
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\svp-Logo-Favicon.png", "encodingImgTargetFile", 0, 0, 0, 89, 0, 0, 0, 0, 0, 89
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\public\vite.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\App.css", "CSS", 0, 0, 0, 0, 0, 37, 0, 0, 6, 43
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\App.jsx", "JavaScript JSX", 0, 0, 189, 0, 0, 0, 0, 5, 4, 198
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\app\services\auth\authService.js", "JavaScript", 121, 0, 0, 0, 0, 0, 0, 1, 3, 125
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\app\services\store.js", "JavaScript", 12, 0, 0, 0, 0, 0, 0, 0, 3, 15
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\assets\react.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\DashboardContents.jsx", "JavaScript JSX", 0, 0, 106, 0, 0, 0, 0, 1, 10, 117
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\DashboardLayout.jsx", "JavaScript JSX", 0, 0, 204, 0, 0, 0, 0, 3, 8, 215
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\DashboardLayoutContents.jsx", "JavaScript JSX", 0, 0, 199, 0, 0, 0, 0, 2, 6, 207
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\Modal.css", "CSS", 0, 0, 0, 0, 0, 70, 0, 2, 12, 84
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\ModalContainer.jsx", "JavaScript JSX", 0, 0, 189, 0, 0, 0, 0, 2, 4, 195
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\Notification.jsx", "JavaScript JSX", 0, 0, 81, 0, 0, 0, 0, 1, 6, 88
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\Project.jsx", "JavaScript JSX", 0, 0, 132, 0, 0, 0, 0, 3, 9, 144
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\SkeleteonLoaderTable.jsx", "JavaScript JSX", 0, 0, 40, 0, 0, 0, 0, 1, 5, 46
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\SkeletonBoard.jsx", "JavaScript JSX", 0, 0, 35, 0, 0, 0, 0, 0, 4, 39
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\SkeletonGrid.jsx", "JavaScript JSX", 0, 0, 33, 0, 0, 0, 0, 1, 4, 38
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\SkeletonLoader.jsx", "JavaScript JSX", 0, 0, 37, 0, 0, 0, 0, 1, 5, 43
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\Tasks.jsx", "JavaScript JSX", 0, 0, 109, 0, 0, 0, 0, 1, 6, 116
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\User.module.css", "CSS", 0, 0, 0, 0, 0, 734, 0, 40, 120, 894
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\dashboard\index.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\Categories.jsx", "JavaScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 3, 8
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\Header.jsx", "JavaScript JSX", 0, 0, 68, 0, 0, 0, 0, 1, 5, 74
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\Modal.css", "CSS", 0, 0, 0, 0, 0, 9, 0, 0, 3, 12
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\ModalProject.jsx", "JavaScript JSX", 0, 0, 312, 0, 0, 0, 0, 20, 14, 346
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\ProjectGridContainer.jsx", "JavaScript JSX", 0, 0, 54, 0, 0, 0, 0, 0, 5, 59
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\TableDisplay.jsx", "JavaScript JSX", 0, 0, 22, 0, 0, 0, 0, 1, 3, 26
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\TableHeaderNav.jsx", "JavaScript JSX", 0, 0, 62, 0, 0, 0, 0, 9, 7, 78
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\general.module.css", "CSS", 0, 0, 0, 0, 0, 578, 0, 29, 98, 705
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\project\index.js", "JavaScript", 5, 0, 0, 0, 0, 0, 0, 0, 1, 6
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\FileInputContainer.jsx", "JavaScript JSX", 0, 0, 32, 0, 0, 0, 0, 0, 5, 37
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\Header.jsx", "JavaScript JSX", 0, 0, 68, 0, 0, 0, 0, 1, 6, 75
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\ReportModal.jsx", "JavaScript JSX", 0, 0, 220, 0, 0, 0, 0, 9, 20, 249
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\ReportsTableContents.jsx", "JavaScript JSX", 0, 0, 23, 0, 0, 0, 0, 0, 3, 26
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\changes.css", "CSS", 0, 0, 0, 0, 0, 16, 0, 0, 3, 19
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\general.module.css", "CSS", 0, 0, 0, 0, 0, 418, 0, 7, 64, 489
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\reports\modal.css", "CSS", 0, 0, 0, 0, 0, 48, 0, 6, 7, 61
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\ModalTask.jsx", "JavaScript JSX", 0, 0, 204, 0, 0, 0, 0, 5, 10, 219
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\TaskHeader.jsx", "JavaScript JSX", 0, 0, 68, 0, 0, 0, 0, 1, 4, 73
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\TaskTableDisplay.jsx", "JavaScript JSX", 0, 0, 24, 0, 0, 0, 0, 0, 3, 27
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\index.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\table.css", "CSS", 0, 0, 0, 0, 0, 10, 0, 0, 1, 11
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\components\tasks\tasktable.module.css", "CSS", 0, 0, 0, 0, 0, 437, 0, 23, 72, 532
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\constants\Regex.js", "JavaScript", 9, 0, 0, 0, 0, 0, 0, 0, 2, 11
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\features\auth\authActions.js", "JavaScript", 55, 0, 0, 0, 0, 0, 0, 0, 6, 61
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\features\auth\authSlice.js", "JavaScript", 55, 0, 0, 0, 0, 0, 0, 1, 7, 63
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\index.css", "CSS", 0, 0, 0, 0, 0, 155, 0, 5, 13, 173
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\Dashboard.jsx", "JavaScript JSX", 0, 0, 15, 0, 0, 0, 0, 0, 3, 18
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\Layout.module.css", "CSS", 0, 0, 0, 0, 0, 4, 0, 1, 1, 6
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\index.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\messages\MessageDashboard.jsx", "JavaScript JSX", 0, 0, 68, 0, 0, 0, 0, 0, 5, 73
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\messages\message.module.css", "CSS", 0, 0, 0, 0, 0, 102, 0, 5, 20, 127
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\AssignProjectForm.jsx", "JavaScript JSX", 0, 0, 300, 0, 0, 0, 0, 6, 21, 327
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\ProjectBoardDashboard.jsx", "JavaScript JSX", 0, 0, 346, 0, 0, 0, 0, 0, 19, 365
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\ProjectDashboard.jsx", "JavaScript JSX", 0, 0, 243, 0, 0, 0, 0, 4, 22, 269
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\ProjectFormDashboard.jsx", "JavaScript JSX", 0, 0, 262, 0, 0, 0, 0, 6, 9, 277
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\ProjectGridDashboard.jsx", "JavaScript JSX", 0, 0, 198, 0, 0, 0, 0, 5, 16, 219
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\ProjectsForm.css", "CSS", 0, 0, 0, 0, 0, 98, 0, 1, 17, 116
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\index.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\project.module.css", "CSS", 0, 0, 0, 0, 0, 501, 0, 20, 80, 601
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\projects\projects.css", "CSS", 0, 0, 0, 0, 0, 79, 0, 5, 10, 94
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\ReportsDashboard.jsx", "JavaScript JSX", 0, 0, 244, 0, 0, 0, 0, 51, 33, 328
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\ReportsGridDashboard.jsx", "JavaScript JSX", 0, 0, 257, 0, 0, 0, 0, 59, 27, 343
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\ReportsTableDashboard.jsx", "JavaScript JSX", 0, 0, 234, 0, 0, 0, 0, 47, 27, 308
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\changes.css", "CSS", 0, 0, 0, 0, 0, 20, 0, 1, 4, 25
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\projects.css", "CSS", 0, 0, 0, 0, 0, 43, 0, 1, 8, 52
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\reports\reports.module.css", "CSS", 0, 0, 0, 0, 0, 292, 0, 9, 42, 343
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\TaskApprovalDashboard.jsx", "JavaScript JSX", 0, 0, 204, 0, 0, 0, 0, 4, 14, 222
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\TaskBoardDashboard.jsx", "JavaScript JSX", 0, 0, 326, 0, 0, 0, 0, 0, 21, 347
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\TaskCalendarDashboard.jsx", "JavaScript JSX", 0, 0, 88, 0, 0, 0, 0, 10, 7, 105
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\TaskFormDashboard.jsx", "JavaScript JSX", 0, 0, 162, 0, 0, 0, 0, 6, 15, 183
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\TasksDashboard.jsx", "JavaScript JSX", 0, 0, 269, 0, 0, 0, 0, 4, 26, 299
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\index.js", "JavaScript", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\task.css", "CSS", 0, 0, 0, 0, 0, 29, 0, 0, 6, 35
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\task.module.css", "CSS", 0, 0, 0, 0, 0, 505, 0, 8, 77, 590
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\taskapproval.css", "CSS", 0, 0, 0, 0, 0, 3, 0, 0, 0, 3
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\layout\tasks\taskform.css", "CSS", 0, 0, 0, 0, 0, 99, 0, 0, 17, 116
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\main.jsx", "JavaScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\General.module.css", "CSS", 0, 0, 0, 0, 0, 156, 0, 4, 23, 183
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\Homepage.jsx", "JavaScript JSX", 0, 0, 8, 0, 0, 0, 0, 1, 3, 12
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\HomepageAdmin.jsx", "JavaScript JSX", 0, 0, 8, 0, 0, 0, 0, 0, 3, 11
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\Login.jsx", "JavaScript JSX", 0, 0, 127, 0, 0, 0, 0, 32, 7, 166
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\NotFound.jsx", "JavaScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\ProtectedRoute.jsx", "JavaScript JSX", 0, 0, 11, 0, 0, 0, 0, 1, 4, 16
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\Register.jsx", "JavaScript JSX", 0, 0, 172, 0, 0, 0, 0, 24, 7, 203
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\form.css", "CSS", 0, 0, 0, 0, 0, 6, 0, 0, 1, 7
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\homepageadmin.module.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\index.js", "JavaScript", 2, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\messages\Messages.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\projects\ProjectBoard.jsx", "JavaScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 3, 13
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\projects\ProjectForm.jsx", "JavaScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 3, 13
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\projects\ProjectGrid.jsx", "JavaScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 3, 13
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\projects\Projects.jsx", "JavaScript JSX", 0, 0, 10, 0, 0, 0, 0, 0, 3, 13
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\projects\index.js", "JavaScript", 4, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\reports\Reports.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\reports\ReportsGrid.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\reports\ReportsTable.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\TaskBoard.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\TaskCalendar.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\TaskForm.jsx", "JavaScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 3, 8
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\Tasks.jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\index.js", "JavaScript", 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\taskapproval\[id].jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\src\pages\tasks\taskcreation\[id].jsx", "JavaScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\util\text.js", "JavaScript", 4, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\vercel.json", "JSON", 0, 1, 0, 0, 0, 0, 0, 0, 1, 2
+"c:\Users\USER\Documents\admin-dashboard\Admin-Dashboard-SVP\vite.config.js", "JavaScript", 11, 0, 0, 0, 0, 0, 0, 1, 2, 14
+"Total", "-", 1336, 3832, 6183, 2874, 333, 4449, 21, 500, 1342, 20870

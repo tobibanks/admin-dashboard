@@ -1,18 +1,281 @@
 .container {
   max-width: 1440px !important;
   padding: 0rem !important;
-  /* background-color: var(--dashboard-yellow); */
-}
-
-.overallcontainer {
   background-color: white;
-  margin: 0 auto;
-  /* padding-bottom: 2rem; */
-  width: 90%;
+  /* background-color: var(--dashboard-yellow); */
 }
 
 .absolutecenter {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.overallcontainer {
+  margin: 0 auto;
+  /* padding-bottom: 2rem; */
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.overallcontainer::-webkit-scrollbar {
+  display: none;
+}
+
+.messagecontentcontainer {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  height: 90vh;
+  margin-top: 3rem;
+  border-radius: 8px;
+  border: 1px solid var(--black200);
+}
+
+.usercontainer {
+  width: 25%;
+}
+
+.messagesviewcontainer {
+  width: 75%;
+  border-left: 1px solid var(--black200);
+}
+
+.userheadercontainer {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 1rem auto;
+}
+
+.searchiconcontainer {
+  position: relative;
+}
+
+.searchicon {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+}
+
+.search {
+  border-radius: 25px;
+  width: 80px;
+  border-color: var(--black200);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  text-indent: 30px;
+  height: 32px;
+}
+
+.date {
+  color: var(--SVP-main);
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  margin-right: 0.3rem;
+  margin-bottom: 0px;
+}
+
+.datecontainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userslistcontainer {
+  margin: 1rem 0;
+}
+
+.userviewcontainer {
+  display: flex;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  justify-content: space-between;
+}
+
+.userviewcontaineractive {
+  display: flex;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  justify-content: space-between;
+  background-color: var(--SVP-main);
+}
+.userinfocontainer {
+  display: flex;
+  /* padding: 0rem 0.3rem; */
+  gap: 0.4rem;
+}
+
+.username {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  padding-top: 0.3rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.usernameactive {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: white;
+  padding-top: 0.3rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.time {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  margin-bottom: 0px;
+  /* color: var(--black50); */
+  /* font-weight: 600; */
+}
+
+.userflex {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.messageheadercontainer {
+  padding-left: 0.5rem;
+}
+
+.flexmessageheadercontainer {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0rem;
+  border-bottom: 1px solid var(--black200);
+}
+.headertitle {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: #3f3f3f;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.listpeople {
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: #3f3f3f;
+}
+
+.detailsmessagecontainer {
+  padding: 1rem 0rem;
+  position: absolute;
+  background-color: white;
+  z-index: 30;
+  border-bottom: 1px solid var(--black200);
+}
+
+.close {
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  cursor: pointer;
+}
+.messagedetailscontainer {
+  display: flex;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1rem;
+  gap: 4rem;
+}
+
+.messagetitle {
+  font-weight: 600;
+  font-size: 16px;
+  flex: 15%;
+  margin-bottom: 0px;
+  font-family: "Inter", sans-serif;
+}
+
+.messagedescription {
+  font-size: 16px;
+  flex: 85%;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0px;
+}
+
+.messagedescription1 {
+  font-weight: 600;
+  flex: 85%;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
+  margin-bottom: 0px;
+}
+
+.chatcontainer {
+  background-color: #f0f0f0;
+  position: relative;
+  height: 72vh;
+  display: flex;
+  /* width: 100%; */
+  overflow-y: scroll;
+  z-index: 5;
+  /* height: calc(100vh - 110px); */
+}
+.chatcontainer::-webkit-scrollbar {
+  display: none;
+}
+
+.inputcontainer {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0rem;
+}
+
+.textarea {
+  height: 35px;
+  width: 650px;
+  border-radius: 24px;
+  background-color: #f0f0f0;
+}
+
+.attachmentsend {
+  cursor: pointer;
+}
+
+.incoming {
+  padding: 1rem;
+  border-radius: 16px 16px 16px 4px;
+  background-color: white;
+  margin-left: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.incomingcontainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sendingcontainer {
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: flex-end;
+}
+.sending {
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+  margin-right: 1rem;
+  color: white;
+  background-color: var(--SVP-main);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.bottomcontainer {
+  display: flex;
+}
+
+.sendbutton {
+  border: none;
 }

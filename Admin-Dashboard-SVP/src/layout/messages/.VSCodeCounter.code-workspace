@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../../.VSCodeCounter"
+		},
+		{
+			"path": "../../../data"
+		},
+		{
+			"path": "../../../node_modules"
+		},
+		{
+			"path": "../../../public"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../util"
+		}
+	]
+}

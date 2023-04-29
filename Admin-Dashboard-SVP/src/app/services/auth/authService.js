@@ -103,6 +103,25 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    getAllMessages: build.query({
+      query: () => ({
+        url: "/admin/messages",
+        method: "GET",
+      }),
+    }),
+    AddMessages: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/admin/messages/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getAllChats: build.query({
+      query: (id) => ({
+        url: `/admin/messages/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -112,6 +131,9 @@ export const {
   useGetTaskDetailsQuery,
   useAddpmDetailsMutation,
   useGetAllApprovalsQuery,
+  useGetAllChatsQuery,
+  useGetAllMessagesQuery,
+  useAddMessagesMutation,
   useGetApprovalRequestQuery,
   useGetPMDetailsQuery,
   useAddProjectDetailsMutation,
