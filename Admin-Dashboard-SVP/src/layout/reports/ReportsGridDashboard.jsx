@@ -40,9 +40,6 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
-  console.log("Batman");
-  console.log(ReportsCollection);
-
   const [startDate, setStartDate] = useState(new Date("01/01/2022"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
@@ -63,7 +60,6 @@ const ReportsGridDashboard = () => {
   const filteredCollection = useMemo(() => {
     if (!task) return data;
     const filteredData = data.filter((item) => item.task_id === task);
-    console.log(filteredData);
     return filteredData;
   }, [task, data]);
 
@@ -91,13 +87,11 @@ const ReportsGridDashboard = () => {
 
   const handleProject = (e) => {
     setSelect(e.target.value);
-    console.log(select);
     setDisplay(true);
   };
 
   const handleTask = (e) => {
     setTask(e.target.value);
-    console.log(task);
     setMessage("There are no reports for selected task");
   };
 

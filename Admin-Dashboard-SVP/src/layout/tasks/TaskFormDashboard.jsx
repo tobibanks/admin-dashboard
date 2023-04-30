@@ -24,13 +24,9 @@ const TaskFormDashboard = () => {
 
   const filtereddata = ProjectCollection.filter((item) => item._id === id);
 
-  console.log(filtereddata);
-
   const filtereddatarevised = filtereddata.find((obj) => {
     return obj._id === id;
   });
-
-  console.log(filtereddatarevised);
 
   const projectcurrentid = id;
 
@@ -38,8 +34,6 @@ const TaskFormDashboard = () => {
   const { register, control, reset, handleSubmit } = useForm();
 
   const submitForm = async (data) => {
-    // console.log("batman");
-
     try {
       await toast.promise(
         addtaskdetailsmutation({

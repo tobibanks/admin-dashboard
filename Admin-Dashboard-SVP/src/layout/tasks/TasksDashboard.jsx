@@ -23,13 +23,9 @@ const TasksDashboard = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
-  console.log(TasksTableCollection);
-
   // window.location.reload();
   // location.reload();
-  
 
-  console.log(TasksTableCollection);
   const [filter, setFilter] = useState(null);
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
@@ -43,7 +39,6 @@ const TasksDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
-  console.log(TasksTableCollection);
   const data = useMemo(() => {
     if (!filter) return TasksTableCollection;
     const filteredData = TasksTableCollection.filter(

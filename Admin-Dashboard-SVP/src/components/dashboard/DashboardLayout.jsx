@@ -20,8 +20,6 @@ const DashboardLayout = (props) => {
 
   const adminInfo = admin || [];
 
-  // console.log(adminInfo);
-
   const LogOut = () => {
     dispatch(authApi.util.resetApiState());
     dispatch(logout());

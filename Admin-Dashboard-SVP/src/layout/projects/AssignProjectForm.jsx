@@ -26,8 +26,6 @@ const AssignProjectForm = () => {
 
   const ProjectManagerCollection = ProjectManager || [];
 
-  console.log(ProjectManagerCollection);
-
   const { data: Projects } = useGetProjectDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
@@ -47,8 +45,6 @@ const AssignProjectForm = () => {
   const { register, control, reset, handleSubmit } = useForm();
 
   const submitForm = async (data) => {
-    console.log(data);
-
     const useradditionaldetails = {
       requested_by: {
         firstname: filtereddatarevised.requested_by.firstname,
@@ -61,9 +57,6 @@ const AssignProjectForm = () => {
       ...useradditionaldetails,
       ...data,
     };
-
-    console.log(projectcurrentid);
-    console.log(completeform);
 
     try {
       await toast.promise(

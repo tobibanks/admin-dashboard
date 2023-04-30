@@ -15,7 +15,6 @@ const TaskBoardDashboard = () => {
 
   const TasksBoardCollection = TaskCollection || [];
 
-  console.log(TasksBoardCollection);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date("01/01/2027"));
 

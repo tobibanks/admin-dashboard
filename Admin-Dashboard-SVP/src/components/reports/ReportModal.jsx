@@ -20,7 +20,6 @@ const ReportModal = (props) => {
     refetchOnMountArgChange: true,
   });
   const TaskCollections = TaskCollection || [];
-  console.log(TaskCollections);
 
   const { data: Users } = useGetAllUsersDetailsQuery({
     refetchOnMountArgChange: true,
@@ -28,15 +27,11 @@ const ReportModal = (props) => {
 
   const UserCollection = Users || [];
 
-  console.log(UserCollection);
-
   const { data: Projects } = useGetProjectDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
   const ProjectCollections = Projects || [];
-
-  console.log(ProjectCollections);
 
   const { register, reset, handleSubmit } = useForm();
 
@@ -52,7 +47,6 @@ const ReportModal = (props) => {
   const submitForm = async (data) => {
     if (!file) return toast.error("Select a file");
     const conversion = { ...data };
-    console.log(conversion);
     const stringid = conversion.send_to.toString();
     const formData = new FormData();
     formData.append("attachments", file);
@@ -60,10 +54,6 @@ const ReportModal = (props) => {
     formData.append("project", conversion.project);
     formData.append("task", conversion.task);
     formData.append("note", conversion.note);
-
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
 
     try {
       await toast.promise(addReportsMutation(formData).unwrap(), {
@@ -164,7 +154,6 @@ const ReportModal = (props) => {
           </div>
 
           {UserCollection.map((usercollect, index) => {
-            console.log(usercollect?._id);
             return (
               <Form.Check
                 type="checkbox"

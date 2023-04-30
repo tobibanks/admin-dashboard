@@ -12,11 +12,9 @@ const Tasks = () => {
     refetchOnMountArgChange: true,
   });
 
-  console.log(TaskCollection?.length);
-
   const TasksTableCollection = TaskCollection || [];
   // var options = { day: "numeric", month: "short" };
-  console.log(TasksTableCollection?.length);
+
   return (
     <div className={task.taskcontainer}>
       <p className={task.header1}>TASKS</p>

@@ -79,7 +79,6 @@ const ProjectBoardDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, upcomingdata]);
 
-  console.log(inprogressdata);
   return (
     <Container className={grid.container}>
       <DashboardLayoutContents name="Projects">

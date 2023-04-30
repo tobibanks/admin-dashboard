@@ -25,21 +25,11 @@ const ModalProject = (props) => {
   const [more, setMore] = useState(false);
   const ModalProjectsCollection = UserProjects || [];
 
-  console.log(ModalProjectsCollection);
-
   const ModalTasks = UserProjectTask || [];
 
   const [id, setId] = useState();
   const navigate = useNavigate();
 
-  // console.log(ModalTasks.project.length);
-
-  const addTask = () => {
-    console.log("batmanaaa");
-    setId(props.id);
-    console.log("batman");
-    navigate(generatePath("/addtask/:id", { id }));
-  };
   return (
     <Modal
       className={modal.modal}
@@ -51,7 +41,6 @@ const ModalProject = (props) => {
       {ModalProjectsCollection.map((collect, index) =>
         props.id === collect._id ? (
           <div key={index}>
-            {console.log(collect)}
             <Modal.Header closeButton>
               <Modal.Title
                 className={modal.containedmodaltitlecenter}
@@ -131,7 +120,6 @@ const ModalProject = (props) => {
                           </div> */}
                           <div className={modal.formcontainer}>
                             <Form>
-                              {console.log(props.id)}
                               {more ? (
                                 <div>
                                   {ModalTasks?.map((task, index) =>
@@ -235,7 +223,6 @@ const ModalProject = (props) => {
                           className={modal.activityboardcontainer}
                           key={index}
                         >
-                          {/* {console.log(collect)} */}
                           {collect?.activities?.map((activities, index) => {
                             return (
                               <div>

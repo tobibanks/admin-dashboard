@@ -25,10 +25,7 @@ const ProjectFormDashboard = () => {
 
   const UserCollection = Users || [];
 
-  console.log(UserCollection);
-
   const submitForm = async (data) => {
-    console.log(data);
     try {
       await toast.promise(addProjectDetailsMutation(data).unwrap(), {
         loading: "Saving Form",

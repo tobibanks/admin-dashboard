@@ -29,7 +29,6 @@ const TaskApprovalDashboard = () => {
   const navigate = useNavigate();
   const { data: specificTask } = useGetApprovalRequestQuery(id);
   const specifictaskcollection = specificTask || [];
-  console.log(specifictaskcollection);
   const [updateTaskMutation] = useUseUpdateTaskApprovalMutation();
   const TaskCollection = AdminTasks || [];
 
@@ -37,9 +36,7 @@ const TaskApprovalDashboard = () => {
 
   const taskapprovalid = id;
 
-  console.log(id);
 
-  console.log(approvalRequestCollection);
 
   const submitForm = async (data) => {
     const completeform = {

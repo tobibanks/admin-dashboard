@@ -30,8 +30,6 @@ const ProjectGridDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
-  console.log(startDate, endDate);
-
   const data = useMemo(() => {
     if (!filter) return ProjectGridCollection;
     const filteredData = ProjectGridCollection.filter(

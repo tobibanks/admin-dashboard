@@ -34,10 +34,6 @@ const ReportsDashboard = () => {
 
   const taskCollection = tasks || [];
 
-  console.log(taskCollection);
-
-  console.log(ReportsCollection);
-
   const [filter, setFilter] = useState(null);
   const [select, setSelect] = useState("");
   const [task, setTask] = useState("");
@@ -61,14 +57,10 @@ const ReportsDashboard = () => {
     return filteredData;
   }, [filter, ReportsCollection]);
 
-  console.log(data);
-
-  console.log(task);
-
   const filteredCollection = useMemo(() => {
     if (!task) return data;
     const filteredData = data.filter((item) => item.task_id === task);
-    console.log(filteredData);
+
     return filteredData;
   }, [task, data]);
 
@@ -82,8 +74,6 @@ const ReportsDashboard = () => {
   //     );
   //   return filtereddata;
   // }, [finalStartDate, finalEndDate, data]);
-
-  console.log(projectsCollection);
 
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
@@ -99,17 +89,15 @@ const ReportsDashboard = () => {
 
   const handleProject = (e) => {
     setSelect(e.target.value);
-    console.log(select);
+
     setDisplay(true);
   };
 
   const handleTask = (e) => {
     setTask(e.target.value);
-    console.log(task);
+
     setMessage("There are no reports for selected task");
   };
-
-  console.log(taskCollection);
 
   const filteredtasks = useMemo(() => {
     const filtereddata = taskCollection.filter(

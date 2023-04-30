@@ -97,12 +97,10 @@ const ModalTask = (props) => {
                               key={index}
                               style={{ display: "flex", gap: "2rem" }}
                             >
-                              {console.log(attachments)}
                               {attachments
                                 .slice(0, 2)
                                 .map((attachment, index) => (
                                   <div>
-                                    {console.log(attachment)}
                                     <Attachment
                                       key={index}
                                       name={attachment.name}

@@ -19,7 +19,6 @@ const ProjectDashboard = () => {
   });
 
   const ProjectsCollection = UserTableProjects || [];
-  console.log(ProjectsCollection);
 
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
@@ -34,7 +33,6 @@ const ProjectDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
-  console.log(ProjectsCollection);
   const data = useMemo(() => {
     if (!filter) return ProjectsCollection;
     const filteredData = ProjectsCollection.filter(
@@ -52,8 +50,6 @@ const ProjectDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, data]);
 
-
-
   const filteredInProgressData = ProjectsCollection.filter(
     (item) => item.admin_Status === "In Progress"
   );
@@ -65,8 +61,6 @@ const ProjectDashboard = () => {
   const filteredCompleteData = ProjectsCollection.filter(
     (item) => item.admin_Status === "Complete"
   );
-
-  // console.log(pro)
 
   return (
     <Container className={project.container}>
