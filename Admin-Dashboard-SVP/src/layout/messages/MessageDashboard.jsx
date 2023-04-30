@@ -122,23 +122,27 @@ const MessageDashboard = () => {
                             alt="avatar"
                           />
                         )}
-                        <div>
-                          <p
-                            className={
-                              active ? message.usernameactive : message.username
-                            }
-                          >
-                            {messageDetail.admin.name}
-                          </p>
-                          <p
-                            className={
-                              active
-                                ? message.projectnameactive
-                                : message.projectname
-                            }
-                          >
-                            {messageDetail?.project?.name}
-                          </p>
+                        <div className={message.absolutecenter}>
+                          <div>
+                            <p
+                              className={
+                                active
+                                  ? message.usernameactive
+                                  : message.username
+                              }
+                            >
+                              {messageDetail.admin.name}
+                            </p>
+                            <p
+                              className={
+                                active
+                                  ? message.projectnameactive
+                                  : message.projectname
+                              }
+                            >
+                              {messageDetail?.project?.name}
+                            </p>
+                          </div>
                         </div>
                       </div>
                       <div>
