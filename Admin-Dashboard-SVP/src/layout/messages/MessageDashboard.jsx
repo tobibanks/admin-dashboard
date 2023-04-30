@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import message from "./message.module.css";
+import { AiOutlineUser } from "react-icons/ai";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import {
   useGetAllMessagesQuery,
@@ -114,13 +115,37 @@ const MessageDashboard = () => {
                         flex={message.userinfocontainer}
                         style={{ display: "flex", gap: "1rem" }}
                       >
-                        {active ? (
-                          <img src="/icons/profile-icon.svg" alt="avatar" />
+                        {messageDetail?.project?.name ? (
+                          <>
+                            {active ? (
+                              <img src="/icons/profile-icon.svg" alt="avatar" />
+                            ) : (
+                              <img
+                                src="/icons/profile-icon-black.svg"
+                                alt="avatar"
+                              />
+                            )}
+                          </>
                         ) : (
-                          <img
-                            src="/icons/profile-icon-black.svg"
-                            alt="avatar"
-                          />
+                          <>
+                            {active ? (
+                              <AiOutlineUser
+                                style={{
+                                  color: "white",
+                                  width: "48px",
+                                  height: "48px",
+                                }}
+                              />
+                            ) : (
+                              <AiOutlineUser
+                                style={{
+                                  color: "#3F3F3F",
+                                  width: "48px",
+                                  height: "48px",
+                                }}
+                              />
+                            )}
+                          </>
                         )}
                         <div className={message.absolutecenter}>
                           <div>
