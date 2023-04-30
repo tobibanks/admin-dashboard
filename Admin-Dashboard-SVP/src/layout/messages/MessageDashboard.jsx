@@ -13,9 +13,7 @@ import { useForm } from "react-hook-form";
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
   // fetching users and details about them
-  const { data: allMessagesDetails } = useGetAllMessagesQuery({
-    refetchOnMountArgChange: true,
-  });
+  const { data: allMessagesDetails } = useGetAllMessagesQuery();
   // sending messages
   const [updateMsg] = useAddMessagesMutation();
 
@@ -49,7 +47,7 @@ const MessageDashboard = () => {
   const chats = allChats || [];
 
   // useForm hook
-  const { register, control, reset, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   //closing of messages that involves group chats
   const [open, setOpen] = useState(true);
@@ -69,7 +67,12 @@ const MessageDashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
+  console.log(data);
+
   const [defaultState, setDefaultState] = useState(true);
+
+  console.log(data);
+  console.log(chats);
 
   return (
     <Container className={message.container}>
@@ -203,184 +206,358 @@ const MessageDashboard = () => {
                   <div className={message.chatcontainerempty}>
                     <p className={message.chatempty}>No Messages Selected</p>
                   </div>
-                ) : null}
-                {data.map((project, index) => {
-                  return project?.project ? (
-                    <>
-                      <div key={index} className={message.chatcontainer}>
-                        {open ? (
-                          <div className={message.detailsmessagecontainer}>
-                            <Image
-                              src="/icons/close.svg"
-                              className={message.close}
-                              alt="close"
-                              onClick={() => setOpen(false)}
-                            />
-                            <div className={message.messagedetailscontainer}>
-                              <p className={message.messagetitle}>Project:</p>
-                              <div className={message.messagedescription}>
-                                <p className={message.messagedescription1}>
-                                  {project?.project?.name}
-                                </p>
-                              </div>
-                            </div>
+                ) : (
+                  <>
+                    <div className={message.chatcontainer}>
+                      {data.map((project, index) => {
+                        return (
+                          <div
+                            key={index}
+                            style={{
+                              alignSelf: "flex-end",
+                              width: "100%",
+                            }}
+                          >
+                            {project?.project ? (
+                              <>
+                                {open ? (
+                                  <div
+                                    className={message.detailsmessagecontainer}
+                                  >
+                                    <Image
+                                      src="/icons/close.svg"
+                                      className={message.close}
+                                      alt="close"
+                                      onClick={() => setOpen(false)}
+                                    />
+                                    <div
+                                      className={
+                                        message.messagedetailscontainer
+                                      }
+                                    >
+                                      <p className={message.messagetitle}>
+                                        Project:
+                                      </p>
+                                      <div
+                                        className={message.messagedescription}
+                                      >
+                                        <p
+                                          className={
+                                            message.messagedescription1
+                                          }
+                                        >
+                                          {project?.project?.name}
+                                        </p>
+                                      </div>
+                                    </div>
 
-                            <div className={message.messagedetailscontainer}>
-                              <div className={message.title}>
-                                <p className={message.initialtitle}>Status:</p>
-                              </div>
-                              <div className={message.messagedescription}>
-                                <div className={message.statusbutton}>
-                                  <p className={message.statusbuttontext}>
-                                    In Progress
-                                  </p>
+                                    <div
+                                      className={
+                                        message.messagedetailscontainer
+                                      }
+                                    >
+                                      <div className={message.title}>
+                                        <p className={message.initialtitle}>
+                                          Status:
+                                        </p>
+                                      </div>
+                                      <div
+                                        className={message.messagedescription}
+                                      >
+                                        <div className={message.statusbutton}>
+                                          <p
+                                            className={message.statusbuttontext}
+                                          >
+                                            In Progress
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      className={
+                                        message.messagedetailscontainer
+                                      }
+                                    >
+                                      <p className={message.messagetitle}>
+                                        Due Date:
+                                      </p>
+                                      <div
+                                        className={message.messagedescription}
+                                      >
+                                        <Image
+                                          src="/icons/calendar.svg"
+                                          alt="calendar"
+                                          style={{
+                                            marginRight: "0.2rem",
+                                            width: "18px",
+                                            height: "20px",
+                                          }}
+                                        />
+                                        <div className={message.absolutecenter}>
+                                          <p
+                                            className={
+                                              message.messagedescriptioncontent
+                                            }
+                                          >
+                                            {new Date(
+                                              project?.project?.due
+                                            ).toLocaleDateString()}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      className={
+                                        message.messagedetailscontainer
+                                      }
+                                    >
+                                      <p className={message.messagetitle}>
+                                        Description:
+                                      </p>
+                                      <p
+                                        className={
+                                          message.messagedescriptioncontent
+                                        }
+                                      >
+                                        Lorem ipsum dolor sit amet consectetur.
+                                        Lectus le leo enim quis facilisis. Elit
+                                        ut facilisi arcu nibh. Etia posuere
+                                        posuere rhoncus nam. Molestie lorem qui
+                                        id sed quis eu etiam commodo.
+                                      </p>
+                                    </div>
+                                  </div>
+                                ) : null}
+
+                                <div>
+                                  {chats.map((chat, index) => {
+                                    return (
+                                      <div>
+                                        <div key={index}>
+                                          {chat.fromSelf ? (
+                                            <div
+                                              className={
+                                                message.sendingcontainer
+                                              }
+                                            >
+                                              <p className={message.sending}>
+                                                {chat.message}
+                                              </p>
+                                            </div>
+                                          ) : (
+                                            <div
+                                              className={
+                                                message.incomingcontainer
+                                              }
+                                            >
+                                              <p className={message.incoming}>
+                                                {chat.message}
+                                              </p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
                                 </div>
+                              </>
+                            ) : (
+                              <div
+                                style={{
+                                  alignSelf: "flex-end",
+                                  width: "100%",
+                                }}
+                              >
+                                {chats.map((chat, index) => {
+                                  return (
+                                    <div>
+                                      <div key={index}>
+                                        {chat.fromSelf ? (
+                                          <div
+                                            className={message.sendingcontainer}
+                                          >
+                                            <p className={message.sending}>
+                                              {chat.message}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <div
+                                            className={
+                                              message.incomingcontainer
+                                            }
+                                          >
+                                            <p className={message.incoming}>
+                                              {chat.message}
+                                            </p>
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  );
+                                })}
                               </div>
-                            </div>
-                            <div className={message.messagedetailscontainer}>
-                              <p className={message.messagetitle}>Due Date:</p>
-                              <div className={message.messagedescription}>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <form onSubmit={handleSubmit(submitForm)}>
+                      <div className={message.inputcontainer}>
+                        <div style={{ flex: "1" }}>
+                          <Image
+                            className={message.attachment}
+                            src="/icons/attachment.svg"
+                            alt="attach"
+                          />
+                        </div>
+                        <div style={{ flex: "14" }}>
+                          <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Control
+                              type="text"
+                              className={message.textarea}
+                              {...register("message")}
+                              // value={msg}
+                              placeholder=""
+                            />
+                          </Form.Group>
+                        </div>
+                        <div style={{ flex: "1" }}>
+                          <button className={message.sendbutton} type="submit">
+                            <Image
+                              type="submit"
+                              // onClick={handleMessage}
+                              src="/icons/send1.svg"
+                              className={message.attachmentsend}
+                              alt="send"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </>
+                )}
+                {/* // <> */}
+                {/* //   {data.map((project, index) => { */}
+                {/* //     <>
+                  //       <div key={index} className={message.chatcontainer}> */}
+                {/* <div>
+                        {project?.project ? (
+                          <>
+                            {open ? (
+                              <div className={message.detailsmessagecontainer}>
                                 <Image
-                                  src="/icons/calendar.svg"
-                                  alt="calendar"
-                                  style={{
-                                    marginRight: "0.2rem",
-                                    width: "18px",
-                                    height: "20px",
-                                  }}
+                                  src="/icons/close.svg"
+                                  className={message.close}
+                                  alt="close"
+                                  onClick={() => setOpen(false)}
                                 />
-                                <div className={message.absolutecenter}>
+                                <div
+                                  className={message.messagedetailscontainer}
+                                >
+                                  <p className={message.messagetitle}>
+                                    Project:
+                                  </p>
+                                  <div className={message.messagedescription}>
+                                    <p className={message.messagedescription1}>
+                                      {project?.project?.name}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div
+                                  className={message.messagedetailscontainer}
+                                >
+                                  <div className={message.title}>
+                                    <p className={message.initialtitle}>
+                                      Status:
+                                    </p>
+                                  </div>
+                                  <div className={message.messagedescription}>
+                                    <div className={message.statusbutton}>
+                                      <p className={message.statusbuttontext}>
+                                        In Progress
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  className={message.messagedetailscontainer}
+                                >
+                                  <p className={message.messagetitle}>
+                                    Due Date:
+                                  </p>
+                                  <div className={message.messagedescription}>
+                                    <Image
+                                      src="/icons/calendar.svg"
+                                      alt="calendar"
+                                      style={{
+                                        marginRight: "0.2rem",
+                                        width: "18px",
+                                        height: "20px",
+                                      }}
+                                    />
+                                    <div className={message.absolutecenter}>
+                                      <p
+                                        className={
+                                          message.messagedescriptioncontent
+                                        }
+                                      >
+                                        {new Date(
+                                          project?.project?.due
+                                        ).toLocaleDateString()}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  className={message.messagedetailscontainer}
+                                >
+                                  <p className={message.messagetitle}>
+                                    Description:
+                                  </p>
                                   <p
                                     className={
                                       message.messagedescriptioncontent
                                     }
                                   >
-                                    {new Date(
-                                      project?.project?.due
-                                    ).toLocaleDateString()}
+                                    Lorem ipsum dolor sit amet consectetur.
+                                    Lectus le leo enim quis facilisis. Elit ut
+                                    facilisi arcu nibh. Etia posuere posuere
+                                    rhoncus nam. Molestie lorem qui id sed quis
+                                    eu etiam commodo.
                                   </p>
                                 </div>
                               </div>
-                            </div>
-                            <div className={message.messagedetailscontainer}>
-                              <p className={message.messagetitle}>
-                                Description:
-                              </p>
-                              <p className={message.messagedescriptioncontent}>
-                                Lorem ipsum dolor sit amet consectetur. Lectus
-                                le leo enim quis facilisis. Elit ut facilisi
-                                arcu nibh. Etia posuere posuere rhoncus nam.
-                                Molestie lorem qui id sed quis eu etiam commodo.
-                              </p>
-                            </div>
-                          </div>
-                        ) : null}
+                            ) : null}
+                          </>
+                        ) : (
+                          <p>parle</p>
+                        )}
                       </div>
-                      <form onSubmit={handleSubmit(submitForm)}>
-                        <div className={message.inputcontainer}>
-                          <div style={{ flex: "1" }}>
-                            <Image
-                              className={message.attachment}
-                              src="/icons/attachment.svg"
-                              alt="attach"
-                            />
-                          </div>
-                          <div style={{ flex: "14" }}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                              <Form.Control
-                                type="text"
-                                className={message.textarea}
-                                {...register("message")}
-                                // value={msg}
-                                placeholder=""
-                              />
-                            </Form.Group>
-                          </div>
-                          <div style={{ flex: "1" }}>
-                            <button
-                              className={message.sendbutton}
-                              type="submit"
-                            >
-                              <Image
-                                type="submit"
-                                // onClick={handleMessage}
-                                src="/icons/send1.svg"
-                                className={message.attachmentsend}
-                                alt="send"
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </>
-                  ) : (
-                    <>
-                      <div className={message.chatcontainer}>
-                        {/* <div style={{ display: "flex" }}> */}
-                        <div style={{ alignSelf: "flex-end", width: "100%" }}>
-                          {chats.map((chat, index) => {
-                            return (
-                              <div>
-                                <div key={index}>
-                                  {chat.fromSelf ? (
-                                    <div className={message.sendingcontainer}>
-                                      <p className={message.sending}>
-                                        {chat.message}
-                                      </p>
-                                    </div>
-                                  ) : (
-                                    <div className={message.incomingcontainer}>
-                                      <p className={message.incoming}>
-                                        {chat.message}
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
+
+                      <div style={{ alignSelf: "flex-end", width: "100%" }}>
+                        {chats.map((chat, index) => {
+                          return (
+                            <div>
+                              <div key={index}>
+                                {chat.fromSelf ? (
+                                  <div className={message.sendingcontainer}>
+                                    <p className={message.sending}>
+                                      {chat.message}
+                                    </p>
+                                  </div>
+                                ) : (
+                                  <div className={message.incomingcontainer}>
+                                    <p className={message.incoming}>
+                                      {chat.message}
+                                    </p>
+                                  </div>
+                                )}
                               </div>
-                            );
-                          })}
-                        </div>
-                        {/* </div> */}
-                      </div>
-                      <form onSubmit={handleSubmit(submitForm)}>
-                        <div className={message.inputcontainer}>
-                          <div style={{ flex: "1" }}>
-                            <Image
-                              className={message.attachment}
-                              src="/icons/attachment.svg"
-                              alt="attach"
-                            />
-                          </div>
-                          <div style={{ flex: "14" }}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                              <Form.Control
-                                type="text"
-                                className={message.textarea}
-                                {...register("message")}
-                                // value={msg}
-                                placeholder=""
-                              />
-                            </Form.Group>
-                          </div>
-                          <div style={{ flex: "1" }}>
-                            <button
-                              className={message.sendbutton}
-                              type="submit"
-                            >
-                              <Image
-                                type="submit"
-                                // onClick={handleMessage}
-                                src="/icons/send1.svg"
-                                className={message.attachmentsend}
-                                alt="send"
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </>
-                  );
-                })}
+                            </div>
+                          );
+                        })}
+                      </div> */}
               </div>
             </div>
           </div>
