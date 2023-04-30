@@ -51,6 +51,7 @@
 
 .searchiconcontainer {
   position: relative;
+  width: 100%;
 }
 
 .searchicon {
@@ -61,7 +62,7 @@
 
 .search {
   border-radius: 25px;
-  width: 80px;
+  width: 100%;
   border-color: var(--black200);
   font-family: "Inter", sans-serif;
   font-size: 12px;
@@ -223,6 +224,28 @@
   z-index: 5;
   /* height: calc(100vh - 110px); */
 }
+
+.chatempty {
+  font-family: "Inter", sans-serif;
+  font-size: 1.2rem;
+}
+
+.chatcontainerempty {
+  /* background-color: #f0f0f0; */
+  height: 72vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-y: scroll;
+  z-index: 5;
+  /* height: calc(100vh - 110px); */
+}
+
+.chatcontainerempty::-webkit-scrollbar {
+  display: none;
+}
+
 .chatcontainer::-webkit-scrollbar {
   display: none;
 }
@@ -236,8 +259,13 @@
 .textarea {
   height: 35px;
   width: 650px;
+  font-family: "Inter", sans-serif;
   border-radius: 24px;
   background-color: #f0f0f0;
+}
+
+.textarea::-webkit-scrollbar {
+  display: none;
 }
 
 .attachmentsend {
@@ -248,6 +276,7 @@
   padding: 1rem;
   border-radius: 16px 16px 16px 4px;
   background-color: white;
+  font-family: "Inter", sans-serif;
   margin-left: 1rem;
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
@@ -256,6 +285,8 @@
 .incomingcontainer {
   display: flex;
   gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .sendingcontainer {
