@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+.title {
+  flex: 15%;
+  display: flex;
+  align-items: center;
+}
 .overallcontainer {
   margin: 0 auto;
   /* padding-bottom: 2rem; */
@@ -98,13 +103,15 @@
   display: flex;
   cursor: pointer;
   padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--black50);
+  border-top: 1px solid var(--black50);
   justify-content: space-between;
 }
 
 .userviewcontaineractive {
   display: flex;
   cursor: pointer;
-  border: 1px solid var(--black50);
+  /* border: 5px solid var(--black200); */
   padding: 0.6rem 1rem;
   justify-content: space-between;
   background-color: var(--SVP-main);
@@ -119,7 +126,7 @@
   font-family: "Inter", sans-serif;
   font-size: 16px;
   /* padding-top: 0.3rem; */
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .usernameactive {
@@ -127,12 +134,12 @@
   font-size: 16px;
   color: white;
   /* padding-top: 0.3rem; */
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 
 .time {
   font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--black200);
   /* padding-top: 0.3rem; */
   margin-bottom: 0px;
@@ -140,7 +147,7 @@
 
 .activetime {
   font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   /* padding-top: 0.3rem; */
   color: white;
   margin-bottom: 0px;
@@ -162,14 +169,14 @@
   font-size: 16px;
   font-family: "Inter", sans-serif;
   color: #3f3f3f;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .listpeople {
   font-size: 14px;
   margin-top: 16px;
-  margin-bottom: 0px;
+  margin-bottom: 1rem;
   font-family: "Inter", sans-serif;
   color: #3f3f3f;
 }
@@ -202,6 +209,12 @@
   font-weight: 600;
   font-size: 16px;
   flex: 15%;
+  margin-bottom: 0px;
+  font-family: "Inter", sans-serif;
+}
+.initialtitle {
+  font-weight: 600;
+  font-size: 16px;
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
 }
@@ -241,7 +254,7 @@
 .chatcontainer {
   background-color: #f0f0f0;
   position: relative;
-  height: 72vh;
+  height: 70vh;
   display: flex;
   /* width: 100%; */
   overflow-y: scroll;
@@ -286,6 +299,11 @@
   font-family: "Inter", sans-serif;
   border-radius: 24px;
   background-color: #f0f0f0;
+}
+
+.textarea:focus {
+  background-color: #f0f0f0;
+  border: 1px solid #f0f0f0;
 }
 
 .textarea::-webkit-scrollbar {
@@ -335,17 +353,39 @@
 
 .sendbutton {
   border: none;
+  background-color: transparent;
 }
 
 .projectname {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   color: var(--textblack);
-  margin-bottom: 0px;
+  margin-top: 8px;
 }
 .projectnameactive {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   color: white;
   margin-bottom: 0px;
+  padding-top: 8px;
+}
+
+.statusbutton {
+  background-color: var(--black400);
+  border-radius: 8px;
+  width: 106px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statusbuttontext {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0px;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--white);
+  font-weight: 600;
 }

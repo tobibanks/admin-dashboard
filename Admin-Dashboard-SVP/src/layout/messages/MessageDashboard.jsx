@@ -48,10 +48,6 @@ const MessageDashboard = () => {
   // prevents code breaks
   const chats = allChats || [];
 
-  console.log(chats);
-
-  console.log(messageDetails);
-
   // useForm hook
   const { register, control, reset, handleSubmit } = useForm();
 
@@ -97,7 +93,6 @@ const MessageDashboard = () => {
               <div className={message.userslistcontainer}>
                 {messageDetails.map((messageDetail, index) => {
                   const active = filter === messageDetail._id;
-                  console.log(messageDetail);
                   return (
                     <div
                       className={
@@ -231,13 +226,15 @@ const MessageDashboard = () => {
                             </div>
 
                             <div className={message.messagedetailscontainer}>
-                              <p className={message.messagetitle}>Status:</p>
+                              <div className={message.title}>
+                                <p className={message.initialtitle}>Status:</p>
+                              </div>
                               <div className={message.messagedescription}>
-                                <p
-                                  className={message.messagedescriptioncontent}
-                                >
-                                  In Progress
-                                </p>
+                                <div className={message.statusbutton}>
+                                  <p className={message.statusbuttontext}>
+                                    In Progress
+                                  </p>
+                                </div>
                               </div>
                             </div>
                             <div className={message.messagedetailscontainer}>
@@ -291,7 +288,7 @@ const MessageDashboard = () => {
                           <div style={{ flex: "14" }}>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                               <Form.Control
-                                as="textarea"
+                                type="text"
                                 className={message.textarea}
                                 {...register("message")}
                                 // value={msg}
@@ -357,7 +354,7 @@ const MessageDashboard = () => {
                           <div style={{ flex: "14" }}>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                               <Form.Control
-                                as="textarea"
+                                type="text"
                                 className={message.textarea}
                                 {...register("message")}
                                 // value={msg}
