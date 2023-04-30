@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import message from "./message.module.css";
-import { io } from "socket.io-client";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import {
   useGetAllMessagesQuery,
@@ -50,6 +49,8 @@ const MessageDashboard = () => {
 
   console.log(chats);
 
+  console.log(messageDetails);
+
   // useForm hook
   const { register, control, reset, handleSubmit } = useForm();
 
@@ -95,6 +96,7 @@ const MessageDashboard = () => {
               <div className={message.userslistcontainer}>
                 {messageDetails.map((messageDetail, index) => {
                   const active = filter === messageDetail._id;
+                  console.log(messageDetail);
                   return (
                     <div
                       className={
@@ -112,11 +114,14 @@ const MessageDashboard = () => {
                         flex={message.userinfocontainer}
                         style={{ display: "flex", gap: "1rem" }}
                       >
-                        <img
-                          src={`${messageDetail.avatar}`}
-                          style={{ width: "40px", height: "36px" }}
-                          alt="avatar"
-                        />
+                        {active ? (
+                          <img src="/icons/profile-icon.svg" alt="avatar" />
+                        ) : (
+                          <img
+                            src="/icons/profile-icon-black.svg"
+                            alt="avatar"
+                          />
+                        )}
                         <div>
                           <p
                             className={
@@ -125,10 +130,23 @@ const MessageDashboard = () => {
                           >
                             {messageDetail.admin.name}
                           </p>
-                          {/* <p className={message.time}>Just Now</p> */}
+                          <p
+                            className={
+                              active
+                                ? message.projectnameactive
+                                : message.projectname
+                            }
+                          >
+                            {messageDetail?.project?.name}
+                          </p>
                         </div>
                       </div>
                       <div>
+                        <p
+                          className={active ? message.activetime : message.time}
+                        >
+                          Just Now
+                        </p>
                         {/* <Image src="/icons/three-dots.svg" alt="options" /> */}
                       </div>
                     </div>
@@ -139,17 +157,19 @@ const MessageDashboard = () => {
             <div className={message.messagesviewcontainer}>
               <div className={message.messageheadercontainer}>
                 <div className={message.flexmessageheadercontainer}>
-                  <div>
+                  <div className={message.absolutecenter}>
                     <Image src="/icons/mail.svg" alt="mail" />
                   </div>
                   <div>
                     {data.map((dat, index) => {
                       return (
-                        <div key={index}>
-                          <p className={message.headertitle}>{dat?.title}</p>
-                          <p className={message.listpeople}>
-                            {dat?.admin?.participants}
-                          </p>
+                        <div key={index} className={message.absolutecenter}>
+                          <div>
+                            <p className={message.headertitle}>{dat?.title}</p>
+                            <p className={message.listpeople}>
+                              {dat?.admin?.participants}
+                            </p>
+                          </div>
                         </div>
                       );
                     })}
@@ -174,37 +194,53 @@ const MessageDashboard = () => {
                             />
                             <div className={message.messagedetailscontainer}>
                               <p className={message.messagetitle}>Project:</p>
-                              <p className={message.messagedescription1}>
-                                Skyline Building Construction
-                              </p>
+                              <div className={message.messagedescription}>
+                                <p className={message.messagedescription1}>
+                                  {project?.project?.name}
+                                </p>
+                              </div>
                             </div>
 
                             <div className={message.messagedetailscontainer}>
                               <p className={message.messagetitle}>Status:</p>
-                              <p className={message.messagedescription}>
-                                In Progress
-                              </p>
+                              <div className={message.messagedescription}>
+                                <p
+                                  className={message.messagedescriptioncontent}
+                                >
+                                  In Progress
+                                </p>
+                              </div>
                             </div>
                             <div className={message.messagedetailscontainer}>
                               <p className={message.messagetitle}>Due Date:</p>
-                              <p className={message.messagedescription}>
+                              <div className={message.messagedescription}>
                                 <Image
                                   src="/icons/calendar.svg"
                                   alt="calendar"
                                   style={{
                                     marginRight: "0.2rem",
-                                    width: "15px",
-                                    height: "15px",
+                                    width: "18px",
+                                    height: "20px",
                                   }}
                                 />
-                                18 Aug 2023
-                              </p>
+                                <div className={message.absolutecenter}>
+                                  <p
+                                    className={
+                                      message.messagedescriptioncontent
+                                    }
+                                  >
+                                    {new Date(
+                                      project?.project?.due
+                                    ).toLocaleDateString()}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                             <div className={message.messagedetailscontainer}>
                               <p className={message.messagetitle}>
                                 Description:
                               </p>
-                              <p className={message.messagedescription}>
+                              <p className={message.messagedescriptioncontent}>
                                 Lorem ipsum dolor sit amet consectetur. Lectus
                                 le leo enim quis facilisis. Elit ut facilisi
                                 arcu nibh. Etia posuere posuere rhoncus nam.
@@ -216,29 +252,38 @@ const MessageDashboard = () => {
                       </div>
                       <form onSubmit={handleSubmit(submitForm)}>
                         <div className={message.inputcontainer}>
-                          <Image
-                            className={message.attachment}
-                            src="/icons/attachment.svg"
-                            alt="attach"
-                          />
-                          <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Control
-                              as="textarea"
-                              className={message.textarea}
-                              {...register("message")}
-                              // value={msg}
-                              placeholder=""
-                            />
-                          </Form.Group>
-                          <button className={message.sendbutton} type="submit">
+                          <div style={{ flex: "1" }}>
                             <Image
-                              type="submit"
-                              // onClick={handleMessage}
-                              src="/icons/send1.svg"
-                              className={message.attachmentsend}
-                              alt="send"
+                              className={message.attachment}
+                              src="/icons/attachment.svg"
+                              alt="attach"
                             />
-                          </button>
+                          </div>
+                          <div style={{ flex: "14" }}>
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                              <Form.Control
+                                as="textarea"
+                                className={message.textarea}
+                                {...register("message")}
+                                // value={msg}
+                                placeholder=""
+                              />
+                            </Form.Group>
+                          </div>
+                          <div style={{ flex: "1" }}>
+                            <button
+                              className={message.sendbutton}
+                              type="submit"
+                            >
+                              <Image
+                                type="submit"
+                                // onClick={handleMessage}
+                                src="/icons/send1.svg"
+                                className={message.attachmentsend}
+                                alt="send"
+                              />
+                            </button>
+                          </div>
                         </div>
                       </form>
                     </>
@@ -273,29 +318,38 @@ const MessageDashboard = () => {
                       </div>
                       <form onSubmit={handleSubmit(submitForm)}>
                         <div className={message.inputcontainer}>
-                          <Image
-                            className={message.attachment}
-                            src="/icons/attachment.svg"
-                            alt="attach"
-                          />
-                          <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Control
-                              as="textarea"
-                              className={message.textarea}
-                              {...register("message")}
-                              // value={msg}
-                              placeholder=""
-                            />
-                          </Form.Group>
-                          <button className={message.sendbutton} type="submit">
+                          <div style={{ flex: "1" }}>
                             <Image
-                              type="submit"
-                              // onClick={handleMessage}
-                              src="/icons/send1.svg"
-                              className={message.attachmentsend}
-                              alt="send"
+                              className={message.attachment}
+                              src="/icons/attachment.svg"
+                              alt="attach"
                             />
-                          </button>
+                          </div>
+                          <div style={{ flex: "14" }}>
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                              <Form.Control
+                                as="textarea"
+                                className={message.textarea}
+                                {...register("message")}
+                                // value={msg}
+                                placeholder=""
+                              />
+                            </Form.Group>
+                          </div>
+                          <div style={{ flex: "1" }}>
+                            <button
+                              className={message.sendbutton}
+                              type="submit"
+                            >
+                              <Image
+                                type="submit"
+                                // onClick={handleMessage}
+                                src="/icons/send1.svg"
+                                className={message.attachmentsend}
+                                alt="send"
+                              />
+                            </button>
+                          </div>
                         </div>
                       </form>
                     </>
