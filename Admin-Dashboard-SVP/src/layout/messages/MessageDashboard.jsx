@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import message from "./message.module.css";
-import { AiOutlineUser } from "react-icons/ai";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import {
   useGetAllMessagesQuery,
@@ -9,6 +8,7 @@ import {
   useAddMessagesMutation,
 } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
+import { getInitials } from "../../../util/text";
 
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
@@ -67,12 +67,9 @@ const MessageDashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(data);
-
   const [defaultState, setDefaultState] = useState(true);
 
-  console.log(data);
-  console.log(chats);
+  console.log(messageDetails);
 
   return (
     <Container className={message.container}>
@@ -127,21 +124,21 @@ const MessageDashboard = () => {
                         ) : (
                           <>
                             {active ? (
-                              <AiOutlineUser
-                                style={{
-                                  color: "white",
-                                  width: "48px",
-                                  height: "48px",
-                                }}
-                              />
+                              <div className={message.absolutecenter}>
+                                <p className={message.avataractive}>
+                                  {getInitials(
+                                    messageDetail?.admin?.name || ""
+                                  )}
+                                </p>
+                              </div>
                             ) : (
-                              <AiOutlineUser
-                                style={{
-                                  color: "#3F3F3F",
-                                  width: "48px",
-                                  height: "48px",
-                                }}
-                              />
+                              <div className={message.absolutecenter}>
+                                <p className={message.avatar}>
+                                  {getInitials(
+                                    messageDetail?.admin?.name || ""
+                                  )}
+                                </p>
+                              </div>
                             )}
                           </>
                         )}
@@ -156,15 +153,17 @@ const MessageDashboard = () => {
                             >
                               {messageDetail.admin.name}
                             </p>
-                            <p
-                              className={
-                                active
-                                  ? message.projectnameactive
-                                  : message.projectname
-                              }
-                            >
-                              {messageDetail?.project?.name}
-                            </p>
+                            {messageDetail?.project?.name ? (
+                              <p
+                                className={
+                                  active
+                                    ? message.projectnameactive
+                                    : message.projectname
+                                }
+                              >
+                                {messageDetail?.project?.name}
+                              </p>
+                            ) : null}
                           </div>
                         </div>
                       </div>
@@ -385,11 +384,11 @@ const MessageDashboard = () => {
                               </>
                             ) : (
                               <div
-                                // style={{
-                                  // alignSelf: "flex-end",
-                                  // width: "100%",
-                                  // height: "30vh",
-                                // }}
+                              // style={{
+                              // alignSelf: "flex-end",
+                              // width: "100%",
+                              // height: "30vh",
+                              // }}
                               >
                                 {chats.map((chat, index) => {
                                   return (

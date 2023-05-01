@@ -11,6 +11,34 @@
   align-items: center;
 }
 
+.avataractive {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--SVP-main);
+  background-color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: var(--SVP-main);
+  font-family: "Inter", sans-serif;
+}
+
 .title {
   /* flex: 15%; */
   display: flex;
@@ -39,7 +67,7 @@
   /* height: 100vh; */
   margin-bottom: 1rem;
   margin-top: 3rem;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
   border: 1px solid var(--black200);
 }
 
@@ -269,6 +297,7 @@
   position: relative;
   height: 80vh;
   /* height: 85vh; */
+  width: 98%;
   display: flex;
   /* width: 95%; */
   /* width: 100%; */
@@ -305,6 +334,7 @@
 .inputcontainer {
   display: flex;
   gap: 0.5rem;
+  width: 98%;
   /* width: 95%; */
   padding: 0.5rem 0.5rem;
 }
