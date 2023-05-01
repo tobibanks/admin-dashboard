@@ -93,6 +93,9 @@ const MessageDashboard = () => {
               <div className={message.userslistcontainer}>
                 {messageDetails.map((messageDetail, index) => {
                   const active = filter === messageDetail._id;
+                  {
+                    console.log(messageDetail);
+                  }
                   return (
                     <div
                       className={
@@ -121,6 +124,18 @@ const MessageDashboard = () => {
                               />
                             )}
                           </>
+                        ) : messageDetail?.admin?.name?.includes("(PM)") ? (
+                          <div style={{ borderRadius: "50%" }}>
+                            <Image
+                              src="/svp-Logo-Favicon.png"
+                              style={{
+                                width: 35,
+                                height: 35,
+                                borderRadius: "50%",
+                              }}
+                              alt="pm-logo"
+                            />
+                          </div>
                         ) : (
                           <>
                             {active ? (
