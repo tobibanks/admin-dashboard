@@ -385,10 +385,11 @@ const MessageDashboard = () => {
                               </>
                             ) : (
                               <div
-                                style={{
-                                  alignSelf: "flex-end",
-                                  width: "100%",
-                                }}
+                                // style={{
+                                  // alignSelf: "flex-end",
+                                  // width: "100%",
+                                  // height: "30vh",
+                                // }}
                               >
                                 {chats.map((chat, index) => {
                                   return (

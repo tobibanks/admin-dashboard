@@ -21,7 +21,7 @@
   /* padding-bottom: 2rem; */
   width: 100%;
   /* background-color: bisque; */
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: flex-end;
   overflow-y: scroll;
@@ -36,10 +36,10 @@
   /* background-color: aquamarine; */
   /* margin: 0 auto; */
   display: flex;
-  height: 90vh;
+  /* height: 100vh; */
+  margin-bottom: 1rem;
   margin-top: 3rem;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-radius: 12px;
   border: 1px solid var(--black200);
 }
 
@@ -267,11 +267,12 @@
 .chatcontainer {
   background-color: #f0f0f0;
   position: relative;
-  height: 70vh;
+  height: 80vh;
+  /* height: 85vh; */
   display: flex;
   /* width: 95%; */
   /* width: 100%; */
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: 5;
   /* height: calc(100vh - 110px); */
 }
@@ -330,11 +331,11 @@
 }
 
 .incoming {
-  padding: 1rem;
+  padding: 16px;
   border-radius: 16px 16px 4px 16px;
   background-color: white;
   font-family: "Inter", sans-serif;
-  margin-left: 1rem;
+  margin-left: 16px;
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
 }
@@ -342,20 +343,20 @@
 .incomingcontainer {
   display: flex;
   gap: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .sendingcontainer {
   display: flex;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 16px;
+  margin-bottom: 16px;
   justify-content: flex-end;
 }
 .sending {
-  padding: 1rem;
+  padding: 16px;
   font-family: "Inter", sans-serif;
-  margin-right: 1rem;
+  margin-right: 16px;
   color: white;
   margin-bottom: 0px;
   background-color: var(--SVP-main);
