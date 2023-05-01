@@ -125,7 +125,16 @@ const MessageDashboard = () => {
                             )}
                           </>
                         ) : messageDetail?.admin?.name?.includes("(PM)") ? (
-                          <div style={{ borderRadius: "50%" }}>
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              padding: "5px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: "white",
+                            }}
+                          >
                             <Image
                               src="/svp-Logo-Favicon.png"
                               style={{
