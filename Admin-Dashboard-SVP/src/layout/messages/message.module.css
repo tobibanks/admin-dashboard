@@ -12,15 +12,18 @@
 }
 
 .title {
-  flex: 15%;
+  /* flex: 15%; */
   display: flex;
   align-items: center;
 }
 .overallcontainer {
   margin: 0 auto;
   /* padding-bottom: 2rem; */
-  width: 95%;
+  width: 100%;
+  /* background-color: bisque; */
   height: 100vh;
+  display: flex;
+  justify-content: flex-end;
   overflow-y: scroll;
 }
 
@@ -29,21 +32,23 @@
 }
 
 .messagecontentcontainer {
-  width: 95%;
-  margin: 0 auto;
+  width: 98%;
+  /* background-color: aquamarine; */
+  /* margin: 0 auto; */
   display: flex;
   height: 90vh;
   margin-top: 3rem;
-  border-radius: 8px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   border: 1px solid var(--black200);
 }
 
 .usercontainer {
-  width: 35%;
+  width: 400px;
 }
 
 .messagesviewcontainer {
-  width: 65%;
+  width: 756px;
   border-left: 1px solid var(--black200);
 }
 
@@ -141,6 +146,7 @@
   font-family: "Inter", sans-serif;
   font-size: 12px;
   color: var(--black200);
+  white-space: nowrap;
   /* padding-top: 0.3rem; */
   margin-bottom: 0px;
 }
@@ -151,6 +157,7 @@
   /* padding-top: 0.3rem; */
   color: white;
   margin-bottom: 0px;
+  white-space: nowrap;
 }
 
 .userflex {
@@ -209,7 +216,8 @@
 .messagetitle {
   font-weight: 600;
   font-size: 16px;
-  flex: 15%;
+  /* flex: 150px; */
+  white-space: nowrap;
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
 }
@@ -220,8 +228,12 @@
   font-family: "Inter", sans-serif;
 }
 
+.messagetitlecontainer {
+  flex: 170px;
+}
+
 .messagedescription {
-  flex: 85%;
+  flex: 500px;
   display: flex;
 }
 
@@ -247,7 +259,7 @@
   font-size: 16px;
   font-family: "Inter", sans-serif;
   color: var(--textblack);
-  flex: 85%;
+  flex: 500px;
   line-height: 16.9px;
   margin-bottom: 0px;
 }
@@ -257,6 +269,7 @@
   position: relative;
   height: 70vh;
   display: flex;
+  /* width: 95%; */
   /* width: 100%; */
   overflow-y: scroll;
   z-index: 5;
@@ -274,7 +287,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  /* width: 95%; */
   overflow-y: scroll;
   z-index: 5;
   /* height: calc(100vh - 110px); */
@@ -290,8 +303,9 @@
 
 .inputcontainer {
   display: flex;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  /* width: 95%; */
+  padding: 0.5rem 0.5rem;
 }
 
 .textarea {
@@ -317,7 +331,7 @@
 
 .incoming {
   padding: 1rem;
-  border-radius: 16px 16px 16px 4px;
+  border-radius: 16px 16px 4px 16px;
   background-color: white;
   font-family: "Inter", sans-serif;
   margin-left: 1rem;
@@ -345,7 +359,7 @@
   color: white;
   margin-bottom: 0px;
   background-color: var(--SVP-main);
-  border-radius: 16px 16px 16px 4px;
+  border-radius: 16px 16px 4px 16px;
 }
 
 .bottomcontainer {
@@ -362,12 +376,15 @@
   font-size: 14px;
   color: var(--textblack);
   margin-top: 8px;
+  margin-bottom: 0px;
+  white-space: nowrap;
 }
 .projectnameactive {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   color: white;
   margin-bottom: 0px;
+  white-space: nowrap;
   padding-top: 8px;
 }
 

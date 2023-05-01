@@ -235,9 +235,15 @@ const MessageDashboard = () => {
                                         message.messagedetailscontainer
                                       }
                                     >
-                                      <p className={message.messagetitle}>
-                                        Project:
-                                      </p>
+                                      <div
+                                        className={
+                                          message.messagetitlecontainer
+                                        }
+                                      >
+                                        <p className={message.messagetitle}>
+                                          Project:
+                                        </p>
+                                      </div>
                                       <div
                                         className={message.messagedescription}
                                       >
@@ -256,7 +262,11 @@ const MessageDashboard = () => {
                                         message.messagedetailscontainer
                                       }
                                     >
-                                      <div className={message.title}>
+                                      <div
+                                        className={
+                                          message.messagetitlecontainer
+                                        }
+                                      >
                                         <p className={message.initialtitle}>
                                           Status:
                                         </p>
@@ -278,9 +288,15 @@ const MessageDashboard = () => {
                                         message.messagedetailscontainer
                                       }
                                     >
-                                      <p className={message.messagetitle}>
-                                        Due Date:
-                                      </p>
+                                      <div
+                                        className={
+                                          message.messagetitlecontainer
+                                        }
+                                      >
+                                        <p className={message.messagetitle}>
+                                          Due Date:
+                                        </p>
+                                      </div>
                                       <div
                                         className={message.messagedescription}
                                       >
@@ -311,9 +327,15 @@ const MessageDashboard = () => {
                                         message.messagedetailscontainer
                                       }
                                     >
-                                      <p className={message.messagetitle}>
-                                        Description:
-                                      </p>
+                                      <div
+                                        className={
+                                          message.messagetitlecontainer
+                                        }
+                                      >
+                                        <p className={message.messagetitle}>
+                                          Description:
+                                        </p>
+                                      </div>
                                       <p
                                         className={
                                           message.messagedescriptioncontent
@@ -417,7 +439,7 @@ const MessageDashboard = () => {
                               className={message.textarea}
                               {...register("message")}
                               // value={msg}
-                              placeholder=""
+                              placeholder="Type Here"
                             />
                           </Form.Group>
                         </div>
@@ -436,128 +458,6 @@ const MessageDashboard = () => {
                     </form>
                   </>
                 )}
-                {/* // <> */}
-                {/* //   {data.map((project, index) => { */}
-                {/* //     <>
-                  //       <div key={index} className={message.chatcontainer}> */}
-                {/* <div>
-                        {project?.project ? (
-                          <>
-                            {open ? (
-                              <div className={message.detailsmessagecontainer}>
-                                <Image
-                                  src="/icons/close.svg"
-                                  className={message.close}
-                                  alt="close"
-                                  onClick={() => setOpen(false)}
-                                />
-                                <div
-                                  className={message.messagedetailscontainer}
-                                >
-                                  <p className={message.messagetitle}>
-                                    Project:
-                                  </p>
-                                  <div className={message.messagedescription}>
-                                    <p className={message.messagedescription1}>
-                                      {project?.project?.name}
-                                    </p>
-                                  </div>
-                                </div>
-
-                                <div
-                                  className={message.messagedetailscontainer}
-                                >
-                                  <div className={message.title}>
-                                    <p className={message.initialtitle}>
-                                      Status:
-                                    </p>
-                                  </div>
-                                  <div className={message.messagedescription}>
-                                    <div className={message.statusbutton}>
-                                      <p className={message.statusbuttontext}>
-                                        In Progress
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  className={message.messagedetailscontainer}
-                                >
-                                  <p className={message.messagetitle}>
-                                    Due Date:
-                                  </p>
-                                  <div className={message.messagedescription}>
-                                    <Image
-                                      src="/icons/calendar.svg"
-                                      alt="calendar"
-                                      style={{
-                                        marginRight: "0.2rem",
-                                        width: "18px",
-                                        height: "20px",
-                                      }}
-                                    />
-                                    <div className={message.absolutecenter}>
-                                      <p
-                                        className={
-                                          message.messagedescriptioncontent
-                                        }
-                                      >
-                                        {new Date(
-                                          project?.project?.due
-                                        ).toLocaleDateString()}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  className={message.messagedetailscontainer}
-                                >
-                                  <p className={message.messagetitle}>
-                                    Description:
-                                  </p>
-                                  <p
-                                    className={
-                                      message.messagedescriptioncontent
-                                    }
-                                  >
-                                    Lorem ipsum dolor sit amet consectetur.
-                                    Lectus le leo enim quis facilisis. Elit ut
-                                    facilisi arcu nibh. Etia posuere posuere
-                                    rhoncus nam. Molestie lorem qui id sed quis
-                                    eu etiam commodo.
-                                  </p>
-                                </div>
-                              </div>
-                            ) : null}
-                          </>
-                        ) : (
-                          <p>parle</p>
-                        )}
-                      </div>
-
-                      <div style={{ alignSelf: "flex-end", width: "100%" }}>
-                        {chats.map((chat, index) => {
-                          return (
-                            <div>
-                              <div key={index}>
-                                {chat.fromSelf ? (
-                                  <div className={message.sendingcontainer}>
-                                    <p className={message.sending}>
-                                      {chat.message}
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <div className={message.incomingcontainer}>
-                                    <p className={message.incoming}>
-                                      {chat.message}
-                                    </p>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div> */}
               </div>
             </div>
           </div>

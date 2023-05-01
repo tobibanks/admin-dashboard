@@ -309,6 +309,7 @@ a {
 .flexcontainer {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
   /* justify-content: space-between; */
 }
 
@@ -518,6 +519,18 @@ a {
   padding: 2rem;
   flex: 1;
 }
+
+/* .taskcontainer {
+  background-color: var(--dashboard-yellow);
+  border-radius: 2.4rem;
+  padding: 2rem;
+  width: 400px;
+  overflow-x: auto;
+}
+
+.taskcontainer::-webkit-scrollbar {
+  display: none;
+} */
 
 .header1 {
   font-family: "Inter", sans-serif;
@@ -885,8 +898,19 @@ td {
   }
   .hamburgericon {
     display: block;
+    height: 50px;
     cursor: pointer;
   }
+
+  .taskcontainer {
+    width: 400px;
+    overflow-x: auto;
+  }
+
+  .taskcontainer::-webkit-scrollbar {
+    display: none;
+  }
+
   .header {
     margin-bottom: 1.5rem;
   }
