@@ -129,8 +129,8 @@ const MessageDashboard = () => {
                             <Image
                               src="/svp-Logo-Favicon.png"
                               style={{
-                                width: 35,
-                                height: 35,
+                                width: 25,
+                                height: 25,
                                 borderRadius: "50%",
                               }}
                               alt="pm-logo"
