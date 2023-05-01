@@ -168,11 +168,11 @@ const MessageDashboard = () => {
                         </div>
                       </div>
                       <div>
-                        <p
+                        {/* <p
                           className={active ? message.activetime : message.time}
                         >
                           Just Now
-                        </p>
+                        </p> */}
                         {/* <Image src="/icons/three-dots.svg" alt="options" /> */}
                       </div>
                     </div>
