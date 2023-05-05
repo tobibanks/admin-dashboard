@@ -1,4 +1,4 @@
-import React, { useMemo, useState, forwardRef } from "react";
+import React, { useMemo, useState, forwardRef, useEffect } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import task from "./task.module.css";
 import "./task.css";
@@ -15,7 +15,11 @@ import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutC
 import { useNavigate } from "react-router-dom";
 
 const TasksDashboard = () => {
-  const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
+  const {
+    data: TaskCollection,
+    isLoading,
+    refetch,
+  } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -74,6 +78,14 @@ const TasksDashboard = () => {
   const filteredDeclinedData = TasksTableCollection.filter(
     (item) => item.status === "Declined"
   );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Container className={task.container}>

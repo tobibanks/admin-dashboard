@@ -1,4 +1,4 @@
-import React, { useMemo, useState, forwardRef } from "react";
+import React, { useMemo, useState, useEffect, forwardRef } from "react";
 import { Button, Container, Image } from "react-bootstrap";
 import project from "./project.module.css";
 import "./projects.css";
@@ -14,7 +14,11 @@ import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTabl
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ProjectDashboard = () => {
-  const { data: UserTableProjects, isLoading } = useGetProjectDetailsQuery({
+  const {
+    data: UserTableProjects,
+    isLoading,
+    refetch,
+  } = useGetProjectDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -24,7 +28,7 @@ const ProjectDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date("0"));
   const [endDate, setEndDate] = useState(new Date("01/01/2028"));
 
   const convertedStartDate = new Date(startDate).toISOString();
@@ -33,6 +37,8 @@ const ProjectDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
+  console.log(finalStartDate);
+
   const data = useMemo(() => {
     if (!filter) return ProjectsCollection;
     const filteredData = ProjectsCollection.filter(
@@ -40,6 +46,8 @@ const ProjectDashboard = () => {
     );
     return filteredData;
   }, [filter, ProjectsCollection]);
+
+  console.log(ProjectsCollection[0]?.date);
 
   const dataByDate = useMemo(() => {
     const filtereddata = data.filter(
@@ -61,6 +69,14 @@ const ProjectDashboard = () => {
   const filteredCompleteData = ProjectsCollection.filter(
     (item) => item.admin_Status === "Complete"
   );
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <Container className={project.container}>

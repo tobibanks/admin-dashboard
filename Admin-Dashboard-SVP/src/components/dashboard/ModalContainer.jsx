@@ -1,6 +1,7 @@
 import { Today, week, weekModal } from "../../../data/notification";
 import notification from "./User.module.css";
-import React from "react";
+import React, { useMemo, useState } from "react";
+
 import "./Modal.css";
 import {
   Modal,
@@ -13,8 +14,25 @@ import {
   ModalHeader,
   ModalTitle,
 } from "react-bootstrap";
+import { useGetAllNotificationsQuery } from "../../app/services/auth/authService";
+import { ProjectsCollection } from "../../../data/projects";
 
 const ModalContainer = (props) => {
+  const [filter, setFilter] = useState(null);
+  const { data: allNotifications } = useGetAllNotificationsQuery();
+
+  const allnotifications = allNotifications || [];
+
+  console.log(allnotifications);
+
+  const data = useMemo(() => {
+    if (!filter) return allnotifications;
+    const filteredData = allnotifications.filter(
+      (item) => item.type === filter
+    );
+    return filteredData;
+  }, [filter, allnotifications]);
+
   return (
     <Modal
       className={notification.modal}
@@ -36,19 +54,35 @@ const ModalContainer = (props) => {
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Nav variant="pills" className={notification.nav}>
             <Nav.Item>
-              <Nav.Link eventKey="first">All Notifications</Nav.Link>
+              <Nav.Link eventKey="first" onClick={() => setFilter(null)}>
+                All Notifications
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second">Messages</Nav.Link>
+              <Nav.Link onClick={() => setFilter("message")} eventKey="second">
+                Messages
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="third">Reports</Nav.Link>
+              <Nav.Link eventKey="third" onClick={() => setFilter("Report")}>
+                Reports
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="fourth">Project Request</Nav.Link>
+              <Nav.Link
+                eventKey="fourth"
+                onClick={() => setFilter("Project Request")}
+              >
+                Project Request
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="fifth">Project Approval</Nav.Link>
+              <Nav.Link
+                eventKey="fifth"
+                onClick={() => setFilter("Project Approval")}
+              >
+                Project Approval
+              </Nav.Link>
             </Nav.Item>
           </Nav>
           <Tab.Content>

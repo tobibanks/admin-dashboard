@@ -34,7 +34,7 @@ export const authApi = createApi({
     }),
     getProjectSpecificTask: build.query({
       query: (id) => ({
-        url: `/admin/projects/${id}`,
+        url: `/admin/tasks/project/${id}`,
         method: "GET",
       }),
     }),
@@ -122,6 +122,12 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    getAllNotifications: build.query({
+      query: () => ({
+        url: "/admin/notifications",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -131,6 +137,7 @@ export const {
   useGetTaskDetailsQuery,
   useAddpmDetailsMutation,
   useGetAllApprovalsQuery,
+  useGetAllNotificationsQuery,
   useGetAllChatsQuery,
   useGetAllMessagesQuery,
   useAddMessagesMutation,

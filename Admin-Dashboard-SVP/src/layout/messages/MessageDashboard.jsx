@@ -9,6 +9,7 @@ import {
 } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
 import { getInitials } from "../../../util/text";
+import moment from "moment";
 
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
@@ -19,6 +20,8 @@ const MessageDashboard = () => {
 
   // preventing code break. displays empty array till the messages loas
   const messageDetails = allMessagesDetails || [];
+
+  console.log(messageDetails);
 
   // getting the first object in the array of objects and copying it into a variable
   var first = [...messageDetails].shift();
@@ -45,6 +48,8 @@ const MessageDashboard = () => {
 
   // prevents code breaks
   const chats = allChats || [];
+
+  console.log(chats);
 
   // useForm hook
   const { register, reset, handleSubmit } = useForm();
@@ -376,6 +381,7 @@ const MessageDashboard = () => {
 
                                 <div>
                                   {chats.map((chat, index) => {
+                                    console.log(chat);
                                     return (
                                       <div>
                                         <div key={index}>

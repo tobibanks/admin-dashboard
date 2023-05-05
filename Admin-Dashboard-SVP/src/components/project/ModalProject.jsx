@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Image } from "react-bootstrap";
 import { ProjectsCollection } from "../../../data/projects";
 import modal from "./general.module.css";
@@ -11,25 +11,56 @@ import {
   useGetTaskDetailsQuery,
   useGetProjectSpecificTaskQuery,
 } from "@/app/services/auth/authService";
-import ModalTask from "../tasks/ModalTask";
 
 const ModalProject = (props) => {
   const { data: UserProjects } = useGetProjectDetailsQuery({
-    refetchOnMountOrArgChange: true,
+    // refetchOnMountOrArgChange: true,
   });
 
   const { data: UserProjectTask } = useGetTaskDetailsQuery({
-    refetchOnMountOrArgChange: true,
+    // refetchOnMountOrArgChange: true,
   });
 
+  const { data: task } = useGetProjectSpecificTaskQuery(props.id);
+
+  console.log(props);
+
   const [more, setMore] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [activeItemsCount, setActiveItemsCount] = useState(0);
   const ModalProjectsCollection = UserProjects || [];
 
   const ModalTasks = UserProjectTask || [];
 
-  const [id, setId] = useState();
+  const specifictask = task || [];
+
+  console.log(specifictask);
   const navigate = useNavigate();
 
+  console.log(activeItemsCount);
+
+  // const totalSum = useMemo(() =>
+  //   Object.entries(checked).reduce(accumulator, [id])
+  // );
+  const changeHandler = () => {
+    setIsActive(!isActive);
+  };
+
+  useEffect(() => {
+    if (!isActive) {
+      setActiveItemsCount((prevCount) => {
+        if (prevCount !== 0) {
+          return prevCount - 1;
+        }
+
+        return prevCount;
+      });
+    }
+
+    if (isActive) {
+      setActiveItemsCount((prevCount) => prevCount + 1);
+    }
+  }, [isActive, setActiveItemsCount]);
   return (
     <Modal
       className={modal.modal}
@@ -120,41 +151,71 @@ const ModalProject = (props) => {
                           </div> */}
                           <div className={modal.formcontainer}>
                             <Form>
-                              {more ? (
+                              {specifictask.length < 3 ? (
                                 <div>
-                                  {ModalTasks?.map((task, index) =>
-                                    props.id === task.project.id ? (
-                                      <Form.Check
-                                        type="checkbox"
-                                        key={index}
-                                        id="custom-switch"
-                                        label={task?.name}
-                                      />
-                                    ) : null
-                                  )}
+                                  {specifictask?.map((task, index) => (
+                                    <Form.Check
+                                      type="checkbox"
+                                      key={index}
+                                      checked={isActive}
+                                      onChange={changeHandler}
+                                      id="custom-switch"
+                                      label={task?.name}
+                                    />
+                                  ))}
                                 </div>
                               ) : (
                                 <div>
-                                  {ModalTasks?.slice(0, 3).map((task, index) =>
-                                    props.id === task.project.id ? (
+                                  {more ? (
+                                    <>
                                       <div>
-                                        <Form.Check
-                                          type="checkbox"
-                                          key={index}
-                                          id="custom-switch"
-                                          label={task?.name}
-                                        />
+                                        {specifictask?.map((task, index) => (
+                                          <Form.Check
+                                            type="checkbox"
+                                            key={index}
+                                            checked={isActive}
+                                            onChange={changeHandler}
+                                            id="custom-switch"
+                                            label={task?.name}
+                                          />
+                                        ))}
                                       </div>
-                                    ) : null
+                                    </>
+                                  ) : (
+                                    <>
+                                      {specifictask
+                                        ?.slice(0, 3)
+                                        .map((task, index) => (
+                                          <div>
+                                            <Form.Check
+                                              type="checkbox"
+                                              key={index}
+                                              checked={isActive}
+                                              onChange={changeHandler}
+                                              id="custom-switch"
+                                              label={task?.name}
+                                            />
+                                          </div>
+                                        ))}
+                                    </>
+                                  )}
+                                  {more ? (
+                                    <p
+                                      className={modal.title1}
+                                      onClick={() => setMore(!more)}
+                                    >
+                                      See Less
+                                    </p>
+                                  ) : (
+                                    <p
+                                      className={modal.title1}
+                                      onClick={() => setMore(!more)}
+                                    >
+                                      See More
+                                    </p>
                                   )}
                                 </div>
                               )}
-                              <p
-                                className={modal.title1}
-                                onClick={() => setMore(!more)}
-                              >
-                                See More
-                              </p>
                             </Form>
                             {/* <div className={modal.flexheader2}>
                               <div className={modal.absolutecenter}>
@@ -225,9 +286,18 @@ const ModalProject = (props) => {
                         >
                           {collect?.activities?.map((activities, index) => {
                             return (
-                              <div>
-                                {activities.action === "assigned" ? (
+                              <div key={index}>
+                                {activities.action_type ===
+                                "project manager" ? (
                                   <AssignedActivitycontainer
+                                    src="/icons/activity/user.svg"
+                                    date={activities.date}
+                                    type={activities.action_type}
+                                    name={activities.initiator}
+                                    assignee={activities.ref.name}
+                                  />
+                                ) : activities.action_type === "task" ? (
+                                  <AssignedTaskTitle
                                     src="/icons/activity/add.svg"
                                     date={activities.date}
                                     type={activities.action_type}
@@ -316,7 +386,93 @@ const AssignedActivitycontainer = (props) => {
       <Image src={`${props.src}`} className={modal.imageactivity} />
       <div className={modal.spacecontainer}>
         <p className={modal.activitydescription}>
+          {props.name} assigned {props.type} as new {props.assignee}
+          {/* <span className={modal.spantext}>{props.name}</span> */}
+        </p>
+        <p className={modal.activitydate}>
+          {" "}
+          Added at{" "}
+          {new Date(props.date).toLocaleDateString("en-GB", {
+            timeZone: "UTC",
+          })}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const AssignedTaskTitle = (props) => {
+  return (
+    <div className={modal.activitycontainer}>
+      <Image src={`${props.src}`} className={modal.imageactivity} />
+      <div className={modal.spacecontainer}>
+        <p className={modal.activitydescription}>
           {props.name} assigned {props.type} to {props.assignee}
+          {/* <span className={modal.spantext}>{props.name}</span> */}
+        </p>
+        <p className={modal.activitydate}>
+          {" "}
+          Added at{" "}
+          {new Date(props.date).toLocaleDateString("en-GB", {
+            timeZone: "UTC",
+          })}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const AssignedApproved = (props) => {
+  return (
+    <div className={modal.activitycontainer}>
+      <Image src={`${props.src}`} className={modal.imageactivity} />
+      <div className={modal.spacecontainer}>
+        <p className={modal.activitydescription}>
+          {props.name} {props.type} task :{" "}
+          <span className={modal.taskassign}>{props.assignee}</span>
+          {/* <span className={modal.spantext}>{props.name}</span> */}
+        </p>
+        <p className={modal.activitydate}>
+          {" "}
+          Added at{" "}
+          {new Date(props.date).toLocaleDateString("en-GB", {
+            timeZone: "UTC",
+          })}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const AssignedDeclined = (props) => {
+  return (
+    <div className={modal.activitycontainer}>
+      <Image src={`${props.src}`} className={modal.imageactivity} />
+      <div className={modal.spacecontainer}>
+        <p className={modal.activitydescription}>
+          {props.name} {props.type} task :{" "}
+          <span className={modal.taskassign}>{props.assignee}</span>
+          {/* <span className={modal.spantext}>{props.name}</span> */}
+        </p>
+        <p className={modal.activitydate}>
+          {" "}
+          Added at{" "}
+          {new Date(props.date).toLocaleDateString("en-GB", {
+            timeZone: "UTC",
+          })}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const AssignedRequested = (props) => {
+  return (
+    <div className={modal.activitycontainer}>
+      <Image src={`${props.src}`} className={modal.imageactivity} />
+      <div className={modal.spacecontainer}>
+        <p className={modal.activitydescription}>
+          {props.name} {props.type} task approval
           {/* <span className={modal.spantext}>{props.name}</span> */}
         </p>
         <p className={modal.activitydate}>
