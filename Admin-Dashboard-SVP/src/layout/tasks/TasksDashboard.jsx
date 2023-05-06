@@ -79,13 +79,13 @@ const TasksDashboard = () => {
     (item) => item.status === "Declined"
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <Container className={task.container}>
@@ -93,7 +93,7 @@ const TasksDashboard = () => {
         <div className={task.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={task.leftcontainer}>
-            <div className={task.flexwrap}>
+            <div>
               <NavCategories
                 name="All Tasks"
                 total={`(${TasksTableCollection.length})`}

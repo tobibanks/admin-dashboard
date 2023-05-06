@@ -914,6 +914,7 @@ td {
   .taskcontainer {
     width: 400px;
     overflow-x: auto;
+    padding: 1rem;
   }
 
   .taskcontainer::-webkit-scrollbar {

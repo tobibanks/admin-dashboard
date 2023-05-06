@@ -64,13 +64,13 @@ const MessageDashboard = () => {
   };
 
   // useEffect to refresh every 1seconds to check for new mwssages
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const [defaultState, setDefaultState] = useState(true);
 

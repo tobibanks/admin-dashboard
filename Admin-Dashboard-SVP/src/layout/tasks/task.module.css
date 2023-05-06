@@ -35,7 +35,6 @@
 .leftcontainer {
   display: flex;
   gap: 1rem;
-
   margin-top: 1rem;
 }
 
@@ -54,7 +53,7 @@
   font-family: "Inter", sans-serif;
   color: black;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   display: inline-block;
   margin-left: 0.5rem;
@@ -81,7 +80,7 @@
   color: black;
   font-weight: 600;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   display: inline-block;
   margin-left: 0.5rem;

@@ -4,9 +4,9 @@ import { Today, week } from "../../../data/notification";
 import notification from "./User.module.css";
 import "./Modal.css";
 import ModalContainer from "./ModalContainer";
-// import Moment from "react-moment";
 import { useGetAllNotificationsQuery } from "../../app/services/auth/authService";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const Notification = () => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -17,12 +17,9 @@ const Notification = () => {
 
   const allnotifications = allNotifications || [];
 
-  console.log(allnotifications);
-
   const initialvalue = moment()
     .startOf("day")
     .format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
-  console.log(initialvalue);
 
   const endOfDay = moment().endOf("day").format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
   console.log(endOfDay);
@@ -39,17 +36,6 @@ const Notification = () => {
   const endOfTodayISO = new Date(endOfDay).getTime();
   const startOfWeekISO = new Date(startOfWeek).getTime();
   const endOfWeekISO = new Date(endOfWeek).getTime();
-
-  const filtereddateweek = useMemo(() => {
-    const filtereddata = allnotifications.filter(
-      (item) =>
-        startOfWeekISO <= new Date(item.date).getTime() &&
-        new Date(item.date).getTime() <= endOfWeekISO
-    );
-    return filtereddata;
-  }, [startOfWeekISO, endOfWeekISO, allnotifications]);
-
-  console.log(filtereddateweek);
 
   const filteredDataToday = useMemo(() => {
     const filtereddata = allnotifications.filter(
@@ -70,8 +56,6 @@ const Notification = () => {
     );
     return filtereddata;
   }, [todayISO, endOfTodayISO, allnotifications]);
-
-  console.log(filteredToday);
 
   return (
     <div className={notification.notificationcontainer}>
@@ -149,7 +133,21 @@ const NotificationContent = (props) => {
           </div>
         </div>
         <div>
-          <Button className={notification.view}>View</Button>
+          <Link
+            to={
+              props.type === "Project Request"
+                ? "/project"
+                : props.type === "Project Approval"
+                ? "/project"
+                : props.type === "Report"
+                ? "/report"
+                : props.type === "message"
+                ? "/message"
+                : null
+            }
+          >
+            <Button className={notification.view}>View</Button>
+          </Link>
         </div>
       </div>
       {props.id === "1" ? <hr className={notification.horizontalline} /> : null}
