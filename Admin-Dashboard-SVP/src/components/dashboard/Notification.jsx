@@ -99,7 +99,7 @@ const Notification = () => {
           <p className={notification.nothing}>There are no new notifications</p>
         </div>
       )}
-      <div className={notification.rightbuttoncontainer1}>
+      <div className={notification.rightbuttoncontainer}>
         <ButtonModal handleclick={handleclick} />
         <ModalContainer show={modalShow} onHide={() => setModalShow(false)} />
       </div>

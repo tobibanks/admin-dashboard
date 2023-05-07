@@ -285,6 +285,7 @@ a {
   border-radius: 2.4rem;
   padding-left: 2rem;
   padding-top: 2rem;
+  position: relative;
   padding-right: 2rem;
   padding-bottom: 0rem;
   flex: 1;
@@ -414,6 +415,10 @@ a {
   color: white;
   font-weight: 500;
   font-size: 1rem;
+  /* margin: 4rem 0; */
+  /* position: absolute; */
+  /* right: 30px; */
+  /* bottom: 30px; */
   border: none;
 }
 
@@ -518,6 +523,7 @@ a {
   border-radius: 2.4rem;
   padding: 2rem;
   flex: 1;
+  position: relative;
 }
 
 /* .taskcontainer {
