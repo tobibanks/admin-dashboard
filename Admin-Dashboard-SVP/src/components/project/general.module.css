@@ -249,6 +249,17 @@
   margin-left: 0.5rem;
 }
 
+.nothing {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: var(--dashboard-yellow);
+  text-align: center;
+}
+
+
 .statusbuttontext {
   font-family: "Inter", sans-serif;
   font-size: 14px;

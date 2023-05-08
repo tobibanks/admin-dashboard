@@ -166,7 +166,7 @@
 }
 
 .button:active {
-  background-color:var(--SVP-main400) !important;
+  background-color: var(--SVP-main400) !important;
 }
 
 .button:hover {
@@ -218,6 +218,12 @@
   gap: 0.5rem;
   display: flex;
   border-color: var(--black200);
+}
+
+.reportabsolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .attachmenttext {
@@ -298,6 +304,15 @@
   margin-top: 2rem;
 }
 
+.fileabsolutecenter {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
 .title {
   font-family: "Inter", sans-serif;
   margin-top: 1rem;
@@ -355,11 +370,11 @@
 }
 
 .textarea {
-  background-color: var(--black200);
+  background-color: var(--black50);
 }
 
 .textarea:focus {
-  background-color: var(--black200);
+  background-color: var(--black50);
 }
 
 .textarea::placeholder {
@@ -458,31 +473,29 @@
   margin-right: 4rem;
 }
 
-.customfileinput::-webkit-file-upload-button {
-  visibility: hidden;
+.customfileinput {
+  border: 1px solid var(--SVP-main);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.customfileinput::before {
-  content: "Add New File";
-  display: inline-block;
-  background: transparent;
-  border: 1px solid var(--SVP-main);
-  border-radius: 3px;
-  padding: 10px 15px;
-  outline: none;
-  font-family: "Inter", sans-serif;
-  white-space: nowrap;
-  color: var(--SVP-main);
-  -webkit-user-select: none;
+.fileinputhide {
+  position: absolute;
+  top: 0;
   cursor: pointer;
-  text-shadow: 1px 1px #fff;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  right: 0;
+}
+
+.fileinputbutton {
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
   font-weight: 500;
   font-size: 12px;
-}
-.customfileinput:hover::before {
-  border-color: var(--SVP-main);
-}
-
-.customfileinput:active::before {
-  border-color: var(--SVP-main);
+  display: inline-block;
+  margin-right: 0.2rem;
+  margin-bottom: 0px;
 }

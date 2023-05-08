@@ -39,17 +39,26 @@ const ReportModal = (props) => {
   //   setFile(e.target.files[0]);
   // };
 
-  const [file, setFiles] = useState(null);
+  const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
-    setFiles(e.target.files[0]);
+    setFiles([...files, ...e.target.files]);
   };
 
+  const removeImage = (index) => {
+    const newArray = [...files];
+    newArray.splice(index, 1);
+    setFiles(newArray);
+    console.log("batman")
+  };
+
+  console.log(files);
+
   const submitForm = async (data) => {
-    if (!file) return toast.error("Select a file");
+    if (!files.length) return toast.error("Select a file");
     const conversion = { ...data };
     const stringid = conversion.send_to.toString();
     const formData = new FormData();
-    formData.append("attachments", file);
+    formData.append("attachments", files);
     formData.append("send_to", stringid);
     formData.append("project", conversion.project);
     formData.append("task", conversion.task);
@@ -79,15 +88,31 @@ const ReportModal = (props) => {
     >
       <Modal.Body className={modal.modalbody}>
         <Form onSubmit={handleSubmit(submitForm)}>
-          <div className={modal.absolutecenter3}>
-            {/* <Button className={modal.addfile}> */}
+          <div className={modal.attachmentflex}>
+            {files.map((file, index) => {
+              return (
+                <Attachment
+                  key={index}
+                  attachmentname={file.name}
+                  imagelink={file.type}
+                  onClick={removeImage}
+                  attachmentsize={file.size}
+                />
+              );
+            })}
+          </div>
+          <div className={modal.fileabsolutecenter}>
+            <div className={modal.customfileinput}>
+              <p className={modal.fileinputbutton}>Add New File</p>
+              <Image src="/icons/addreport.svg" alt="add" />
+            </div>
             <input
               type="file"
-              className={modal.customfileinput}
+              className={modal.fileinputhide}
+              // className={modal.customfileinput}
               // {...register("attachments")}
               onChange={handleFileChange}
             ></input>
-            {/* </Button> */}
           </div>
           <p className={modal.title}>Projects</p>
           {more ? (
@@ -141,7 +166,7 @@ const ReportModal = (props) => {
           ))}
           <div className={modal.flexcontainer}>
             <p className={modal.title}>Send to:</p>
-            <div className={modal.absolutecenter3}>
+            <div className={modal.fileabsolutecenter}>
               <div className={modal.searchiconcontainer}>
                 <input
                   type="text"
@@ -217,16 +242,28 @@ export default ReportModal;
 const Attachment = (props) => {
   return (
     <div className={modal.attachmentcontainer}>
-      <div className={modal.absolutecenter1}>
-        <Image
-          src={`${props.imagelink}`}
-          alt="image-link"
-          className={modal.attachmentimage}
-        />
+      <div className={modal.reportabsolutecenter}>
+        {props.imagelink === "image/jpeg" ? (
+          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : props.imagelink === "image/png" ? (
+          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : null}
       </div>
       <div>
-        <p className={modal.attachmenttext}>{props.attachmentname}</p>
-        <p className={modal.attachmentsize}>{props.attachmentsize}</p>
+        <p className={modal.attachmenttext}>
+          {props.attachmentname?.substring(0, 7)}
+        </p>
+        <p className={modal.attachmentsize}>
+          {Math.round(props.attachmentsize / 1000) + "kb"}
+        </p>
+      </div>
+      <div className={modal.reportabsolutecenter}>
+        <Image
+          src="/icons/reportclose.svg"
+          onClick={props.onClick}
+          style={{ cursor: "pointer" }}
+          alt="close"
+        />
       </div>
     </div>
   );

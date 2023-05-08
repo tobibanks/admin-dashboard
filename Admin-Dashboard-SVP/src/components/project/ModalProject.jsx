@@ -284,30 +284,38 @@ const ModalProject = (props) => {
                           className={modal.activityboardcontainer}
                           key={index}
                         >
-                          {collect?.activities?.map((activities, index) => {
-                            return (
-                              <div key={index}>
-                                {activities.action_type ===
-                                "project manager" ? (
-                                  <AssignedActivitycontainer
-                                    src="/icons/activity/user.svg"
-                                    date={activities.date}
-                                    type={activities.action_type}
-                                    name={activities.initiator}
-                                    assignee={activities.ref.name}
-                                  />
-                                ) : activities.action_type === "task" ? (
-                                  <AssignedTaskTitle
-                                    src="/icons/activity/add.svg"
-                                    date={activities.date}
-                                    type={activities.action_type}
-                                    name={activities.initiator}
-                                    assignee={activities.ref.name}
-                                  />
-                                ) : null}
-                              </div>
-                            );
-                          })}
+                          {collect.activities.length < 1 ? (
+                            <div>
+                              <p className={modal.nothing}>No new activities</p>
+                            </div>
+                          ) : (
+                            <>
+                              {collect?.activities?.map((activities, index) => {
+                                return (
+                                  <div key={index}>
+                                    {activities.action_type ===
+                                    "project manager" ? (
+                                      <AssignedActivitycontainer
+                                        src="/icons/activity/user.svg"
+                                        date={activities.date}
+                                        type={activities.action_type}
+                                        name={activities.initiator}
+                                        assignee={activities.ref.name}
+                                      />
+                                    ) : activities.action_type === "task" ? (
+                                      <AssignedTaskTitle
+                                        src="/icons/activity/add.svg"
+                                        date={activities.date}
+                                        type={activities.action_type}
+                                        name={activities.initiator}
+                                        assignee={activities.ref.name}
+                                      />
+                                    ) : null}
+                                  </div>
+                                );
+                              })}
+                            </>
+                          )}
                         </div>
                       ) : null
                     )}
