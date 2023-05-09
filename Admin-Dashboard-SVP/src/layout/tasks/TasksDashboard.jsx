@@ -27,6 +27,8 @@ const TasksDashboard = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
+  console.log(TasksTableCollection);
+
   // window.location.reload();
   // location.reload();
 
@@ -207,7 +209,9 @@ const TasksDashboard = () => {
                         </div>
                       </td>
                       <td>
-                        <StatusButton text={taskcollect.status} />
+                        <div className={task.absolutecenter}>
+                          <StatusButton text={taskcollect.status} />
+                        </div>
                       </td>
                       <td className={task.centericon}>
                         {" "}

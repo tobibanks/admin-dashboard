@@ -39,12 +39,14 @@ const Project = () => {
             name="Active"
             filter={filter}
             filter1="In Progress"
-            // imagelink="/icons/dashboard/project/tick.svg"
+            imagelink="/icons/dashboard/project/tick.svg"
+            imagelinkinactive="/icons/dashboard/project/tickinactive.svg"
             onClick={() => setFilter("In Progress")}
           />
           <Buttons
             name="Inactive"
-            // imagelink="/icons/dashboard/project/cancel.svg"
+            imagelink="/icons/dashboard/project/cancel.svg"
+            imagelinkinactive="/icons/dashboard/project/cancelinactive.svg"
             filter={filter}
             filter1={"Awaiting Approval" || "Completed"}
             onClick={() => setFilter("Awaiting Approval" || "Completed")}
@@ -116,12 +118,24 @@ const Buttons = (props) => {
       className={active ? project.projectbuttonactive : project.projectbutton}
       onClick={props.onClick}
     >
-      {/* <Image src = {`${props.imagelink || undefined }`} className = {project.projectbuttonicon}/> */}
-      {props.imagelink ? (
-        <Image
-          src={`${props.imagelink || undefined}`}
-          className={project.projectbuttonicon}
-        />
+      {props.imagelink || props.imagelinkinactive ? (
+        <>
+          {active ? (
+            <div className={project.absolutecenter}>
+              <Image
+                src={`${props.imagelink}`}
+                className={project.projectbuttonicon}
+              />
+            </div>
+          ) : (
+            <div className={project.absolutecenter}>
+              <Image
+                src={`${props.imagelinkinactive}`}
+                className={project.projectbuttonicon}
+              />
+            </div>
+          )}
+        </>
       ) : null}
       <p
         className={

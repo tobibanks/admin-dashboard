@@ -413,6 +413,9 @@ a {
   padding: 12px 24px 12px 24px;
   font-family: "Inter", sans-serif;
   color: white;
+  position: sticky;
+  top: 0;
+  bottom: 0;
   font-weight: 500;
   font-size: 1rem;
   /* margin: 4rem 0; */
@@ -568,6 +571,10 @@ th {
   background-color: white;
 }
 
+.tablestriped {
+  margin-bottom: 2rem;
+}
+
 .tasktitle {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
@@ -632,12 +639,14 @@ td {
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 0.8rem;
+  display: flex;
 }
 
 .projectbuttonactive {
   border: 1px solid;
   border-color: var(--SVP-main);
   padding: 5px 10px;
+  display: flex;
   border-radius: 0.8rem;
   cursor: pointer;
 }
@@ -646,7 +655,7 @@ td {
 }
 .projecttextbutton {
   font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 0px;
   display: inline-block;

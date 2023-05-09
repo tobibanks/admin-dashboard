@@ -142,13 +142,13 @@ const ModalProject = (props) => {
                             </div>
                             <div className={modal.absolutecenter}>
                               <p className={modal.headertext1}>
-                                {/* 0 / {ModalTasks.map((task,index) => props.id === task.project.id ? )} */}
+                                0 / {specifictask.length}
                               </p>
                             </div>
                           </div>
-                          {/* <div className={modal.progressbar}>
+                          <div className={modal.progressbar}>
                             <div className={modal.progressyellow}></div>
-                          </div> */}
+                          </div>
                           <div className={modal.formcontainer}>
                             <Form>
                               {specifictask.length < 3 ? (

@@ -6,6 +6,7 @@ import { Image } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Tasks = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -13,6 +14,8 @@ const Tasks = () => {
   });
 
   const TasksTableCollection = TaskCollection || [];
+
+  console.log(TasksTableCollection);
   // var options = { day: "numeric", month: "short" };
 
   return (
@@ -53,7 +56,7 @@ const Tasks = () => {
                           </div>
                         </td>
                         <td className={task.align}>
-                          {new Date(Taskdata.date).toLocaleDateString()}
+                          {moment(Taskdata.date).format("D/MM")}
                         </td>
                         <td className={task.centericon}>
                           {Taskdata.status === "Approved" ? (
@@ -63,7 +66,8 @@ const Tasks = () => {
                           )}
                         </td>
                         <td className={task.centericon}>
-                          {Taskdata.status === "In Progress" ? (
+                          {Taskdata.status === "In Progress" ||
+                          "Awaiting Approval" ? (
                             <Icon imagelink="/icons/dashboard/task/pending-true.svg" />
                           ) : (
                             <Icon imagelink="/icons/dashboard/task/pending-failed.svg" />

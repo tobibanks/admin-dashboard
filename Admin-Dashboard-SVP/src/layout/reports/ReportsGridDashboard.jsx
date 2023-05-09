@@ -40,6 +40,8 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
+  console.log(ReportsCollection)
+
   const [startDate, setStartDate] = useState(new Date("01/01/2022"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 

@@ -10,27 +10,35 @@ const Header = (props) => {
         <div className={head.textcontainer}>
           <p className={head.titlenavigation}>{props.name}</p>
         </div>
-        <div className={head.flexlinkcontainer}>
-          <NavBoxes
-            pathlink="/reports"
-            title="List"
-            imagelink="/icons/header/table.svg"
-            imagelinkactive="/icons/header/active-table.svg"
-          />
-          <NavBoxes
-            pathlink="/reports/grid"
-            title="Grid"
-            imagelink="/icons/header/grid.svg"
-            imagelinkactive="/icons/header/active-grid.svg"
-          />
-          <NavBoxes
-            title="Table"
-            pathlink="/reports/table"
-            imagelink="/icons/header/table.svg"
-            imagelinkactive="/icons/header/active-table.svg"
-          />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className={head.flexlinkcontainer}>
+            <NavBoxes
+              pathlink="/reports"
+              title="List"
+              imagelink="/icons/header/table.svg"
+              imagelinkactive="/icons/header/active-table.svg"
+            />
+            <NavBoxes
+              pathlink="/reports/grid"
+              title="Grid"
+              imagelink="/icons/header/grid.svg"
+              imagelinkactive="/icons/header/active-grid.svg"
+            />
+            <NavBoxes
+              title="Table"
+              pathlink="/reports/table"
+              imagelink="/icons/header/table.svg"
+              imagelinkactive="/icons/header/active-table.svg"
+            />
+          </div>
         </div>
-        <div className={head.absolutecenter3}>
+        <div className={head.absolutecenter4}>
           <div className={head.searchiconcontainer}>
             <input
               type="text"
@@ -50,7 +58,6 @@ export default Header;
 
 const NavBoxes = (props) => {
   const active = location.pathname === props.pathlink;
-
 
   return (
     <Link

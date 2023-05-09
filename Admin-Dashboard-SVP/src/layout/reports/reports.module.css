@@ -129,7 +129,7 @@
 
 .date {
   font-family: "Inter", sans-serif;
-  color: var(--textblack);
+  color: var(--black400);
   font-size: 1rem;
   margin-bottom: 0rem;
 }

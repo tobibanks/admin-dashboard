@@ -9,6 +9,8 @@
   border-bottom: 1px solid;
   border-color: var(--black100);
   display: flex;
+  padding-top: 17.5px;
+  padding-bottom: 17.5px;
   gap: 2rem;
 }
 
@@ -19,9 +21,9 @@
 }
 .textcontainer {
   /* margin-top: 0.4rem; */
-  padding-top: 2.5rem;
-  padding-bottom: 1.2rem;
-  margin-bottom: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .statusbuttontext {
@@ -47,8 +49,8 @@
 
 .flexlinkcontainer {
   display: flex;
-  padding-top: 1.3rem;
-  padding-bottom: 1.2rem;
+  /* padding-top: 1.3rem;
+  padding-bottom: 1.2rem; */
 }
 
 .linkcontainer:hover {
@@ -104,7 +106,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
 }
 
 .linkcontainer:hover {
@@ -302,6 +303,13 @@
   align-items: center;
   margin-bottom: 2rem;
   margin-top: 2rem;
+}
+
+.absolutecenter4 {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .fileabsolutecenter {

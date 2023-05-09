@@ -148,15 +148,18 @@
 .statusbutton {
   background-color: var(--black400);
   border-radius: 8px;
+  width: 170px;
 }
 
 .declinedbutton {
   background-color: var(--error);
   border-radius: 8px;
+  width: 170px;
 }
 
 .approvedbutton {
   background-color: var(--success);
+  width: 170px;
   /* background-color: brown; */
   border-radius: 8px;
 }
@@ -164,6 +167,7 @@
 .pendingbutton {
   background-color: #2d9cdb;
   border-radius: 8px;
+  width: 170px;
 }
 
 .statusbuttontext {
@@ -171,8 +175,9 @@
   font-size: 14px;
   text-align: center;
   padding-top: 0.8rem;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
+  /* padding-left: 0.3rem; */
+  /* padding-right: 0.3rem; */
+  white-space: nowrap;
   padding-bottom: 0.8rem;
   margin-bottom: 0px;
   color: var(--white);
