@@ -26,7 +26,7 @@ const TaskCalendarDashboard = () => {
 
   return (
     <Container className={taskcalendar.container}>
-      <DashboardLayoutContents name="Tasks">
+      <DashboardLayout name="Tasks">
         <div className={taskcalendar.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={taskcalendar.rightboardcontainer}>
@@ -83,7 +83,7 @@ const TaskCalendarDashboard = () => {
             />
           </div>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

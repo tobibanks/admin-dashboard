@@ -11,7 +11,6 @@ import ModalProject from "../../components/project/ModalProject";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ProjectDashboard = () => {
   const {
@@ -80,7 +79,7 @@ const ProjectDashboard = () => {
 
   return (
     <Container className={project.container}>
-      <DashboardLayoutContents name="Projects">
+      <DashboardLayout name="Projects">
         <div className={project.overallcontainer}>
           <ButtonProject />
           <Header name="My Projects" />
@@ -211,7 +210,7 @@ const ProjectDashboard = () => {
             </div>
           )}
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
       <ModalProject
         show={modalShow}
         onHide={() => setModalShow(false)}

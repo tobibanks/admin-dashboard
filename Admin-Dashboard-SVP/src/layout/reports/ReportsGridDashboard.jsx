@@ -13,7 +13,6 @@ import {
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
 } from "../../app/services/auth/authService";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ReportsGridDashboard = () => {
   const [filter, setFilter] = useState(null);
@@ -106,7 +105,7 @@ const ReportsGridDashboard = () => {
 
   return (
     <Container className={reportsgrid.container}>
-      <DashboardLayoutContents name="Reports">
+      <DashboardLayout name="Reports">
         <FileInputContainer />
         <div className={reportsgrid.overallcontainer}>
           <Header name="My Reports" />
@@ -245,7 +244,7 @@ const ReportsGridDashboard = () => {
             )}
           </div>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

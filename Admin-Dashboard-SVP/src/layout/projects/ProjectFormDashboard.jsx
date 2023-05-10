@@ -7,7 +7,7 @@ import "./ProjectsForm.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetAllUsersDetailsQuery } from "@/app/services/auth/authService";
 import toast, { Toaster } from "react-hot-toast";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import { useAddProjectDetailsMutation } from "../../app/services/auth/authService";
 
 const ProjectFormDashboard = () => {
@@ -79,7 +79,7 @@ const ProjectFormDashboard = () => {
   }
   return (
     <Container className={projectform.container}>
-      <DashboardLayoutContents name="Projects">
+      <DashboardLayout name="Projects">
         <div className={projectform.overallcontainer}>
           <p className={projectform.header}>Project Request Form</p>
           <div className={projectform.secondheader}>
@@ -265,7 +265,7 @@ const ProjectFormDashboard = () => {
             </div>
           </form>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

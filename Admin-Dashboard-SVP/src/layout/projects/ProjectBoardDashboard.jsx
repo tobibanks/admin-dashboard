@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import SkeleteonGrid from "../../components/dashboard/SkeletonGrid";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 
 const ProjectBoardDashboard = () => {
   const { data: UserProjectsBoard, isLoading } = useGetProjectDetailsQuery({
@@ -81,7 +80,7 @@ const ProjectBoardDashboard = () => {
 
   return (
     <Container className={grid.container}>
-      <DashboardLayoutContents name="Projects">
+      <DashboardLayout name="Projects">
         <div className={grid.overallcontainer}>
           <ButtonProject />
           <Header name="My Projects" />
@@ -238,7 +237,7 @@ const ProjectBoardDashboard = () => {
             )}
           </div>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

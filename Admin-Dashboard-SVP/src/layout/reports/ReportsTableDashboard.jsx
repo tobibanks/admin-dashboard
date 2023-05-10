@@ -110,7 +110,7 @@ const ReportsTableDashboard = () => {
 
   return (
     <Container className={reporttable.container}>
-      <DashboardLayoutContents name="Reports">
+      <DashboardLayout name="Reports">
         <FileInputContainer />
         <div className={reporttable.overallcontainer}>
           <Header name="My Reports" />
@@ -261,7 +261,7 @@ const ReportsTableDashboard = () => {
             )}
           </div>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

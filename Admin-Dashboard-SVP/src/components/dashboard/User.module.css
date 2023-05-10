@@ -121,7 +121,7 @@ a {
 }
 
 .logOutContainer {
-  margin-top: 10rem;
+  margin-top: 6rem;
 }
 
 .avatartitle {
@@ -239,7 +239,7 @@ a {
 .contentcardscontainer {
   border: 1px solid;
   margin-top: 2rem;
-  width: 234px;
+  width: 220px;
   border-style: dashed;
   border-radius: 1rem;
   border-color: var(--SVP-main);
@@ -310,7 +310,7 @@ a {
 .flexcontainer {
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   /* justify-content: space-between; */
 }
 
@@ -366,6 +366,7 @@ a {
   font-size: 16px;
   color: var(--textblack);
   margin-bottom: 1rem;
+  line-height: 20px;
 }
 
 .color {

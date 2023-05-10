@@ -1,8 +1,8 @@
 import React, { useState, useMemo, forwardRef } from "react";
 import { Container, Button, Image, Form } from "react-bootstrap";
 import report from "./reports.module.css";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import "./projects.css";
-import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import Header from "../../components/reports/Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +13,7 @@ import {
   useGetTaskDetailsQuery,
 } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
-import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+
 
 const ReportsDashboard = () => {
   const { data: AdminReports } = useGetReportsDetailsQuery({
@@ -109,7 +109,7 @@ const ReportsDashboard = () => {
   // console.log(filteredImage);
   return (
     <Container className={report.container}>
-      <DashboardLayoutContents name="Reports">
+      <DashboardLayout name="Reports">
         <FileInputContainer />
         <div className={report.overallcontainer}>
           <Header name="My Reports" />
@@ -249,7 +249,7 @@ const ReportsDashboard = () => {
             )}
           </div>
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
     </Container>
   );
 };

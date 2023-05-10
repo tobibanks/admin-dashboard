@@ -50,7 +50,7 @@ const Tasks = () => {
                             )}
                             <div className={task.centertext}>
                               <p className={task.tasktitle}>
-                                {Taskdata?.name?.substring?.(0, 9)}
+                                {Taskdata?.name?.substring?.(0, 7)}
                               </p>
                             </div>
                           </div>

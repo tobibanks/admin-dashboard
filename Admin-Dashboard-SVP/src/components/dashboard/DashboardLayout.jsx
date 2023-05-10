@@ -26,7 +26,10 @@ const DashboardLayout = (props) => {
     navigate("/");
   };
 
-  const handleClick = () => setModalShow(true);
+  const handleClick = () => {
+    setModalShow(true);
+    console.log("batman");
+  };
   return (
     <Container className={side.container}>
       <Row className={side.rowcontainer}>
@@ -161,11 +164,12 @@ const DashboardLayout = (props) => {
               <div className={side.center}>
                 <p className={side.headertitle}>{props.name}</p>
               </div>
-              <Image
-                src="/icons/dashboard/alarm-icon.svg"
-                className={side.alarm}
-                onClick={handleClick}
-              />
+              <div onClick={handleClick}>
+                <Image
+                  src="/icons/dashboard/alarm-icon.svg"
+                  className={side.alarm}
+                />
+              </div>
             </div>
           </div>
           <div className={side.contentscontainer}>{props.children}</div>

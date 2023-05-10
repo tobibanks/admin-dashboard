@@ -91,7 +91,7 @@ const TasksDashboard = () => {
 
   return (
     <Container className={task.container}>
-      <DashboardLayoutContents name="Tasks">
+      <DashboardLayout name="Tasks">
         <div className={task.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={task.leftcontainer}>
@@ -237,7 +237,7 @@ const TasksDashboard = () => {
             </div>
           )}
         </div>
-      </DashboardLayoutContents>
+      </DashboardLayout>
       <ModalTask
         show={modalShow}
         onHide={() => setModalShow(false)}
