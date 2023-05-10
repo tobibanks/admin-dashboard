@@ -36,7 +36,7 @@ const TasksDashboard = () => {
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
   const convertedStartDate = new Date(startDate).toISOString();
@@ -70,7 +70,7 @@ const TasksDashboard = () => {
   );
 
   const filteredPendingData = TasksTableCollection.filter(
-    (item) => item.status === "Pending"
+    (item) => item.status === "Awaiting Approval"
   );
 
   const filteredInProgressData = TasksTableCollection.filter(
@@ -95,7 +95,7 @@ const TasksDashboard = () => {
         <div className={task.overallcontainer}>
           <TaskHeader name="My Tasks" />
           <div className={task.leftcontainer}>
-            <div>
+            <div style={{ display: "flex" }}>
               <NavCategories
                 name="All Tasks"
                 total={`(${TasksTableCollection.length})`}
