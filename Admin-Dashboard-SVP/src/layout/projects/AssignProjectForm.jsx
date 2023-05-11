@@ -14,7 +14,6 @@ import DashboardLayout from "../../components/dashboard/DashboardLayout";
 
 const AssignProjectForm = () => {
   const { id } = useParams();
-  const [type, setType] = useState("");
   const navigate = useNavigate();
   const [projectid, setProject] = useState("");
 
@@ -43,6 +42,8 @@ const AssignProjectForm = () => {
   const projectcurrentid = id;
 
   const { register, control, reset, handleSubmit } = useForm();
+
+  console.log(new Date(filtereddatarevised?.date).toLocaleDateString());
 
   const submitForm = async (data) => {
     const useradditionaldetails = {
@@ -78,6 +79,17 @@ const AssignProjectForm = () => {
     }
   };
 
+  console.log(ProjectManagerCollection);
+
+  const date = new Date(filtereddatarevised?.date);
+  const futureDate = date.getDate() + 3;
+  date.setDate(futureDate);
+  const defaultValue = date.toLocaleDateString("en-CA");
+
+  const [type, setType] = useState(defaultValue);
+
+  console.log(filtereddatarevised);
+
   function MyBooleanInput({ control, name }) {
     return (
       <Controller
@@ -91,7 +103,7 @@ const AssignProjectForm = () => {
                   type="radio"
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(true)} // send value to hook form
-                  checked={value === true}
+                  checked={value || filtereddatarevised?.design === true}
                   inputRef={ref}
                 />
                 <span className={projectform.label1}>Yes</span>
@@ -103,7 +115,7 @@ const AssignProjectForm = () => {
                   type="radio"
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(false)} // send value to hook form
-                  checked={value === false}
+                  checked={value || filtereddatarevised?.design === false}
                   inputRef={ref}
                 />
                 <span className={projectform.label1}>No</span>
@@ -123,25 +135,6 @@ const AssignProjectForm = () => {
             <p className={projectform.header1}>PROJECT INFORMATION</p>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
-            <div className={projectform.formcontainer}>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <div className={projectform.formcontainer1}>
-                  <Form.Label className={projectform.form1}>
-                    Requested By
-                  </Form.Label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    {...register("assigned_to")}
-                  >
-                    {ProjectManagerCollection.map((pmcollect, index) => (
-                      <option key={index} value={pmcollect._id}>
-                        {pmcollect.firstname} {pmcollect.lastname}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div>
-              </Form.Group>
-            </div>
             <div className={projectform.formcontainer1}>
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label className={projectform.form1}>
@@ -149,6 +142,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.name}
                   {...register("name")}
                   placeholder="Type here..."
                   required
@@ -163,8 +157,8 @@ const AssignProjectForm = () => {
                 <input
                   type="date"
                   id="due"
-                  value={type}
                   name="due"
+                  defaultValue={defaultValue}
                   {...register("due")}
                   required
                   onChange={(e) => {
@@ -181,6 +175,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.details}
                   placeholder="Type here..."
                   required
                   {...register("details")}
@@ -194,6 +189,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.size}
                   required
                   {...register("size")}
                   placeholder="Type here..."
@@ -205,6 +201,7 @@ const AssignProjectForm = () => {
                 <Form.Label className={projectform.form1}>Budget:</Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.budget}
                   placeholder="Type here..."
                   required
                   {...register("budget")}
@@ -218,6 +215,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.facilities}
                   required
                   {...register("facilities")}
                   placeholder="Type here..."
@@ -231,6 +229,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.building_type}
                   placeholder="Type here..."
                   required
                   {...register("building_type")}
@@ -252,6 +251,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
+                  value={filtereddatarevised?.site_condition}
                   placeholder="Type here..."
                   {...register("site_condition")}
                   required
@@ -266,6 +266,7 @@ const AssignProjectForm = () => {
                 <Form.Control
                   type="text"
                   {...register("facilities")}
+                  value={filtereddatarevised?.facilities}
                   required
                   placeholder="Type here..."
                 />

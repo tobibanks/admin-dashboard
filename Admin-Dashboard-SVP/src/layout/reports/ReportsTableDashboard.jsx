@@ -17,6 +17,7 @@ import ReportsTableContents from "@/components/reports/ReportsTableContents";
 import { TablesData } from "../../../data/reports";
 import { truncateString } from "../../../util/text";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
+import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const ReportsTableDashboard = () => {
   const [filter, setFilter] = useState(null);
@@ -25,7 +26,7 @@ const ReportsTableDashboard = () => {
   const [display, setDisplay] = useState(false);
   const [message, setMessage] = useState(false);
 
-  const { data: AdminReports } = useGetReportsDetailsQuery({
+  const { data: AdminReports, isLoading } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -225,39 +226,47 @@ const ReportsTableDashboard = () => {
             </div>
           </div>
           <div>
-            {filteredCollection.length >= 1 ? (
-              <ReportsTableContents>
-                {filteredCollection.map((tabledata, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <div style={{ display: "flex" }}>
-                          {tabledata.type === "image/jpeg" ? (
-                            <Image src="/icons/jpg.svg" alt="jpg" />
-                          ) : tabledata.type === "image/png" ? (
-                            <Image src="/icons/jpg.svg" alt="jpg" />
-                          ) : tabledata.type === "image/svg+xml" ? (
-                            <Image src="/icons/jpg.svg" alt="jpg" />
-                          ) : null}
-                          <div className={reporttable.absolutecenter}>
-                            {tabledata?.name?.substring(0, 10)}
-                          </div>
-                        </div>
-                      </td>
-                      <td>{tabledata?.project_name}</td>
-                      <td>{tabledata?.send_from}</td>
-                      <td>{tabledata?.sent_to}</td>
-                      <td>{new Date(tabledata?.date).toLocaleDateString()}</td>
-                    </tr>
-                  );
-                })}
-              </ReportsTableContents>
+            {isLoading ? (
+              <SkeleteonLoaderTable />
             ) : (
-              <div style={{ marginTop: "3rem" }}>
-                <p className={reporttable.nothing}>
-                  {message || "there are no reports"}
-                </p>
-              </div>
+              <>
+                {filteredCollection.length >= 1 ? (
+                  <ReportsTableContents>
+                    {filteredCollection.map((tabledata, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            <div style={{ display: "flex" }}>
+                              {tabledata.type === "image/jpeg" ? (
+                                <Image src="/icons/jpg.svg" alt="jpg" />
+                              ) : tabledata.type === "image/png" ? (
+                                <Image src="/icons/jpg.svg" alt="jpg" />
+                              ) : tabledata.type === "image/svg+xml" ? (
+                                <Image src="/icons/jpg.svg" alt="jpg" />
+                              ) : null}
+                              <div className={reporttable.absolutecenter}>
+                                {tabledata?.name?.substring(0, 10)}
+                              </div>
+                            </div>
+                          </td>
+                          <td>{tabledata?.project_name}</td>
+                          <td>{tabledata?.send_from}</td>
+                          <td>{tabledata?.sent_to}</td>
+                          <td>
+                            {new Date(tabledata?.date).toLocaleDateString()}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </ReportsTableContents>
+                ) : (
+                  <div style={{ marginTop: "3rem" }}>
+                    <p className={reporttable.nothing}>
+                      {message || "there are no reports"}
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

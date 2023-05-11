@@ -153,7 +153,7 @@ const ModalProject = (props) => {
                             <Form>
                               {specifictask.length >= 1 ? (
                                 <>
-                                  {specifictask.length <= 3 ? (
+                                  {specifictask.length < 3 ? (
                                     <div>
                                       {specifictask?.map((task, index) => (
                                         <Form.Check

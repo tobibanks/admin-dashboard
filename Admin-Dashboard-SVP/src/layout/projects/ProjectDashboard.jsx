@@ -46,8 +46,6 @@ const ProjectDashboard = () => {
     return filteredData;
   }, [filter, ProjectsCollection]);
 
-  console.log(ProjectsCollection[0]?.date);
-
   const dataByDate = useMemo(() => {
     if (!startDate && !endDate) return data;
     const filtereddata = data.filter(
@@ -174,9 +172,11 @@ const ProjectDashboard = () => {
                           {projectcollect?.assigned_to?.firstname &&
                           projectcollect.assigned_to.lastname ? (
                             <p className={project.avatar}>
-                              {projectcollect?.assigned_to?.firstname?.charAt(
-                                0
-                              )}
+                              <span className={project.label}>
+                                {projectcollect?.assigned_to?.firstname?.charAt(
+                                  0
+                                )}
+                              </span>
                               <span className={project.label}>
                                 {projectcollect?.assigned_to?.lastname?.charAt(
                                   0

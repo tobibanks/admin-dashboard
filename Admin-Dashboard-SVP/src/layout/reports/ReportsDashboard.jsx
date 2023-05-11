@@ -13,10 +13,10 @@ import {
   useGetTaskDetailsQuery,
 } from "../../app/services/auth/authService";
 import { truncateString } from "../../../util/text";
-
+import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const ReportsDashboard = () => {
-  const { data: AdminReports } = useGetReportsDetailsQuery({
+  const { data: AdminReports, isLoading } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -40,8 +40,8 @@ const ReportsDashboard = () => {
   const [display, setDisplay] = useState(false);
   const [message, setMessage] = useState(false);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/2022"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2028"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -64,16 +64,15 @@ const ReportsDashboard = () => {
     return filteredData;
   }, [task, data]);
 
-  // const dataByDate = useMemo(() => {
-  //   const filtereddata =
-  //     data ||
-  //     filteredCollection.filter(
-  //       (item) =>
-  //         finalStartDate <= new Date(item.date).getTime() &&
-  //         new Date(item.date).getTime() <= finalEndDate
-  //     );
-  //   return filtereddata;
-  // }, [finalStartDate, finalEndDate, data]);
+  const dataByDate = useMemo(() => {
+    if (!startDate && !endDate) return data;
+    const filtereddata = data.filter(
+      (item) =>
+        finalStartDate <= new Date(item.due).getTime() &&
+        new Date(item.due).getTime() <= finalEndDate
+    );
+    return filtereddata;
+  }, [finalStartDate, finalEndDate, data]);
 
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
@@ -95,7 +94,6 @@ const ReportsDashboard = () => {
 
   const handleTask = (e) => {
     setTask(e.target.value);
-
     setMessage("There are no reports for selected task");
   };
 
@@ -226,26 +224,32 @@ const ReportsDashboard = () => {
             {/* )} */}
           </div>
           <div>
-            {filteredCollection.length >= 1 ? (
-              <div className={report.filecontainergrid}>
-                {filteredCollection.map((repo, index) => {
-                  return (
-                    <FileContainer
-                      key={index}
-                      name={repo.name}
-                      size={repo.size}
-                      date={repo.date}
-                      imagelink={repo.type}
-                    />
-                  );
-                })}
-              </div>
+            {isLoading ? (
+              <SkeleteonLoaderTable />
             ) : (
-              <div style={{ marginTop: "3rem" }}>
-                <p className={report.nothing}>
-                  {message || "There are no reports"}
-                </p>
-              </div>
+              <>
+                {filteredCollection.length >= 1 ? (
+                  <div className={report.filecontainergrid}>
+                    {filteredCollection.map((repo, index) => {
+                      return (
+                        <FileContainer
+                          key={index}
+                          name={repo.name}
+                          size={repo.size}
+                          date={repo.date}
+                          imagelink={repo.type}
+                        />
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div style={{ marginTop: "3rem" }}>
+                    <p className={report.nothing}>
+                      {message || "There are no reports"}
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

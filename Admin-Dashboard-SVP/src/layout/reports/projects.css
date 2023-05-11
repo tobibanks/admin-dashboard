@@ -39,8 +39,8 @@ tr {
 }
 
 .form-select {
-  height: 4vh;
-  width: 8rem;
+  height: 6vh;
+  width: 12rem;
   /* border-radius: 24px; */
   font-family: "Inter", sans-serif;
 }

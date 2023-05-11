@@ -13,6 +13,7 @@ import {
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
 } from "../../app/services/auth/authService";
+import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const ReportsGridDashboard = () => {
   const [filter, setFilter] = useState(null);
@@ -21,7 +22,7 @@ const ReportsGridDashboard = () => {
   const [display, setDisplay] = useState(false);
   const [message, setMessage] = useState(false);
 
-  const { data: AdminReports } = useGetReportsDetailsQuery({
+  const { data: AdminReports, isLoading } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -39,7 +40,7 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
-  console.log(ReportsCollection)
+  console.log(ReportsCollection);
 
   const [startDate, setStartDate] = useState(new Date("01/01/2022"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
@@ -208,39 +209,45 @@ const ReportsGridDashboard = () => {
             </div>
           </div>
           <div>
-            {filteredCollection.length >= 1 ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  gap: "3rem",
-                  marginTop: "2rem",
-                  flexWrap: "wrap",
-                }}
-              >
-                {filteredCollection.map((repo, index) => {
-                  return (
-                    <CardGridContainer
-                      key={index}
-                      url={repo.url}
-                      firstname={repo?.send_from || null}
-                      // lastname = {repo?.sent_to?.lastname}
-                      name={repo.name}
-                      imagelink={repo.type}
-                      // mainimage={report.mainimage}
-                      // avatar={report.avatar}
-                      // avatarname={report.avatarname}
-                      date={repo.date}
-                    />
-                  );
-                })}
-              </div>
+            {isLoading ? (
+              <SkeleteonLoaderTable />
             ) : (
-              <div style={{ marginTop: "3rem" }}>
-                <p className={reportsgrid.nothing}>
-                  {message || "there are no reports"}
-                </p>
-              </div>
+              <>
+                {filteredCollection.length >= 1 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      gap: "3rem",
+                      marginTop: "2rem",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {filteredCollection.map((repo, index) => {
+                      return (
+                        <CardGridContainer
+                          key={index}
+                          url={repo.url}
+                          firstname={repo?.send_from || null}
+                          // lastname = {repo?.sent_to?.lastname}
+                          name={repo.name}
+                          imagelink={repo.type}
+                          // mainimage={report.mainimage}
+                          // avatar={report.avatar}
+                          // avatarname={report.avatarname}
+                          date={repo.date}
+                        />
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div style={{ marginTop: "3rem" }}>
+                    <p className={reportsgrid.nothing}>
+                      {message || "there are no reports"}
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

@@ -1,30 +1,30 @@
 export const calendarevents = [
   {
-    title: "All Day Event very long title",
+    title: "Excavation",
     allDay: true,
     start: new Date(2015, 3, 0),
     end: new Date(2015, 3, 1),
   },
   {
-    title: "Long Event",
+    title: "Shuttering",
     start: new Date(2015, 3, 7),
     end: new Date(2015, 3, 10),
   },
 
   {
-    title: "DTS STARTS",
+    title: "Footing Concrete",
     start: new Date(2016, 2, 13, 0, 0, 0),
     end: new Date(2016, 2, 20, 0, 0, 0),
   },
 
   {
-    title: "DTS ENDS",
+    title: "Column Casting",
     start: new Date(2016, 10, 6, 0, 0, 0),
     end: new Date(2016, 10, 13, 0, 0, 0),
   },
 
   {
-    title: "Some Event",
+    title: "Construction Of Walls",
     start: new Date(2015, 3, 9, 0, 0, 0),
     end: new Date(2015, 3, 9, 0, 0, 0),
   },
@@ -36,55 +36,55 @@ export const calendarevents = [
     // status: "denied",
   },
   {
-    title: "Meeting",
+    title: "Plumbing",
     start: new Date(2015, 3, 12, 10, 30, 0, 0),
     end: new Date(2015, 3, 12, 12, 30, 0, 0),
     desc: "Pre-meeting meeting, to prepare for the meeting",
   },
   {
-    title: "Lunch",
+    title: "Laying Foundation",
     start: new Date(2015, 3, 12, 12, 0, 0, 0),
     end: new Date(2015, 3, 12, 13, 0, 0, 0),
     desc: "Power lunch",
   },
   {
-    title: "Meeting",
+    title: "Roofing",
     start: new Date(2015, 3, 12, 14, 0, 0, 0),
     end: new Date(2015, 3, 12, 15, 0, 0, 0),
   },
   {
-    title: "Happy Hour",
+    title: "Plastering Work",
     start: new Date(2015, 3, 12, 17, 0, 0, 0),
     end: new Date(2015, 3, 12, 17, 30, 0, 0),
     desc: "Most important meal of the day",
   },
   {
-    title: "Dinner",
+    title: "Tiles Laying",
     start: new Date(2015, 3, 12, 20, 0, 0, 0),
     end: new Date(2015, 3, 12, 21, 0, 0, 0),
   },
   {
-    title: "Birthday Party",
+    title: "Installation Of Furniture",
     start: new Date(2015, 3, 13, 7, 0, 0),
     end: new Date(2015, 3, 13, 10, 30, 0),
   },
   {
-    title: "Birthday Party 2",
+    title: "Terrace water proofing",
     start: new Date(2015, 3, 13, 7, 0, 0),
     end: new Date(2015, 3, 13, 10, 30, 0),
   },
   {
-    title: "Birthday Party 3",
+    title: "Brick and Block Laying",
     start: new Date(2015, 3, 13, 7, 0, 0),
     end: new Date(2015, 3, 13, 10, 30, 0),
   },
   {
-    title: "Late Night Event",
+    title: "Exteriror Cladding",
     start: new Date(2015, 3, 17, 19, 30, 0),
     end: new Date(2015, 3, 18, 2, 0, 0),
   },
   {
-    title: "Multi-day Event",
+    title: "Window Journey",
     start: new Date(2015, 3, 20, 19, 30, 0),
     end: new Date(2015, 3, 22, 2, 0, 0),
   },
