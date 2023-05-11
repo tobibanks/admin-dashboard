@@ -23,7 +23,6 @@ const ModalContainer = (props) => {
     return filteredData;
   }, [filter, allnotifications]);
 
-  console.log(data);
 
   const initialvalue = moment()
     .startOf("day")
@@ -66,7 +65,6 @@ const ModalContainer = (props) => {
     return filtereddata;
   }, [startOfWeekISO, endOfWeekISO, todayISO, data]);
 
-  console.log(filteredDataToday);
 
   return (
     <Modal

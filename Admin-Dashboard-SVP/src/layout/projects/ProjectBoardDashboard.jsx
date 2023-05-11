@@ -16,6 +16,8 @@ const ProjectBoardDashboard = () => {
   });
 
   const ProjectsBoardCollection = UserProjectsBoard || [];
+
+  console.log(ProjectsBoardCollection);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
@@ -138,12 +140,12 @@ const ProjectBoardDashboard = () => {
                             key={index}
                             headertext={filtereddata.name}
                             content={filtereddata.details}
-                            firstname={filtereddata.requested_by?.firstname}
-                            lastname={filtereddata.requested_by?.lastname}
-                            firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                            firstname={filtereddata.assigned_to?.firstname}
+                            lastname={filtereddata.assigned_to?.lastname}
+                            firstnamefirstletter={filtereddata.assigned_to?.firstname?.charAt(
                               0
                             )}
-                            lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                            lastnamefirstletter={filtereddata.assigned_to?.lastname?.charAt(
                               0
                             )}
                             onClick={() => {
@@ -179,12 +181,12 @@ const ProjectBoardDashboard = () => {
                           key={index}
                           headertext={filtereddata.name}
                           content={filtereddata.details}
-                          firstname={filtereddata.requested_by?.firstname}
-                          lastname={filtereddata.requested_by?.lastname}
-                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                          firstname={filtereddata.assigned_to?.firstname}
+                          lastname={filtereddata.assigned_to?.lastname}
+                          firstnamefirstletter={filtereddata.assigned_to?.firstname?.charAt(
                             0
                           )}
-                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                          lastnamefirstletter={filtereddata.assigned_to?.lastname?.charAt(
                             0
                           )}
                           onClick={() => {
@@ -221,12 +223,12 @@ const ProjectBoardDashboard = () => {
                           key={index}
                           headertext={filtereddata.projectname}
                           content={filtereddata.description}
-                          firstname={filtereddata.requested_by?.firstname}
-                          lastname={filtereddata.requested_by?.lastname}
-                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                          firstname={filtereddata.assigned_to?.firstname}
+                          lastname={filtereddata.assigned_to?.lastname}
+                          firstnamefirstletter={filtereddata.assigned_to?.firstname?.charAt(
                             0
                           )}
-                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                          lastnamefirstletter={filtereddata.assigned_to?.lastname?.charAt(
                             0
                           )}
                           onClick={() => {

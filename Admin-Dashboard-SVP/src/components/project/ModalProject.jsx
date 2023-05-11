@@ -23,8 +23,6 @@ const ModalProject = (props) => {
 
   const { data: task } = useGetProjectSpecificTaskQuery(props.id);
 
-  console.log(props);
-
   const [more, setMore] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [activeItemsCount, setActiveItemsCount] = useState(0);
@@ -33,11 +31,7 @@ const ModalProject = (props) => {
   const ModalTasks = UserProjectTask || [];
 
   const specifictask = task || [];
-
-  console.log(specifictask);
   const navigate = useNavigate();
-
-  console.log(activeItemsCount);
 
   // const totalSum = useMemo(() =>
   //   Object.entries(checked).reduce(accumulator, [id])
