@@ -237,7 +237,7 @@
   font-size: 0.8rem;
   margin-bottom: 0.8rem;
   line-height: 17px;
-  color: var(--textblack);
+  color: #727272;
 }
 
 .innercontainer {
@@ -254,7 +254,6 @@
   color: var(--black400);
   font-family: "Inter", sans-serif;
   font-size: 0.8rem;
-  margin-right: 4rem;
 }
 
 .textname {
@@ -338,7 +337,6 @@
   font-weight: 500;
   font-size: 1rem;
   margin-bottom: 0px;
-  margin-top: 20px;
   font-weight: 700;
   color: var(--textblack);
 }
@@ -508,7 +506,6 @@
   font-size: 1rem;
   border-color: var(--SVP-main);
 }
-
 
 .sharebutton {
   border-radius: 8px;

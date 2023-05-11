@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import SkeleteonGrid from "@/components/dashboard/SkeletonGrid";
+import ModalTask from "@/components/tasks/ModalTask";
 
 const TaskBoardDashboard = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -15,8 +16,12 @@ const TaskBoardDashboard = () => {
 
   const TasksBoardCollection = TaskCollection || [];
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date("01/01/2027"));
+  console.log(TasksBoardCollection);
+
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [setting, setSetting] = useState("");
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -26,15 +31,13 @@ const TaskBoardDashboard = () => {
 
   const inprogressdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
-      (item) =>
-        item.status === "In Progress" &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.status === "In Progress"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   const dataByDateinprogress = useMemo(() => {
+    if (!startDate) return inprogressdata;
     const filtereddata = inprogressdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -45,15 +48,13 @@ const TaskBoardDashboard = () => {
 
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
-      (item) =>
-        item.status === "Pending" &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.status === "Awaiting Approval"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   const dataByDateupcoming = useMemo(() => {
+    if (!startDate) return upcomingdata;
     const filtereddata = upcomingdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -64,10 +65,7 @@ const TaskBoardDashboard = () => {
 
   const completedata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
-      (item) =>
-        item.status === "complete" &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.status === "complete"
     );
     return filteredData;
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
@@ -90,17 +88,16 @@ const TaskBoardDashboard = () => {
             <div className={taskboard.datepickertitle}>
               <p className={taskboard.datepickertitlelabel}>Start Date</p>
               <DatePicker
-                selected={startDate}
+                selected={startDate ?? new Date("01/01/2023")}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
+                startDate={startDate}
                 showYearDropdown
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
-                startDate={startDate}
-                endDate={endDate}
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                width={300}
+                // width={300}
               />
             </div>
             <div className={taskboard.absolutecenter}>
@@ -110,7 +107,7 @@ const TaskBoardDashboard = () => {
               <p className={taskboard.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate}
+                selected={endDate ?? new Date("10/10/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -118,9 +115,8 @@ const TaskBoardDashboard = () => {
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>
@@ -136,11 +132,14 @@ const TaskBoardDashboard = () => {
                       {dataByDateinprogress.map((filtereddata, index) => (
                         <ContentContainer
                           key={index}
-                          name={filtereddata.name}
+                          onClick={() => {
+                            setSetting(filtereddata._id);
+                            setModalShow(true);
+                          }}
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.description}
+                          content={filtereddata.comments}
                           date={filtereddata.due}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -167,11 +166,14 @@ const TaskBoardDashboard = () => {
                       {dataByDateupcoming.map((filtereddata, index) => (
                         <ContentContainer
                           key={index}
-                          name={filtereddata.name}
+                          onClick={() => {
+                            setSetting(filtereddata._id);
+                            setModalShow(true);
+                          }}
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.description}
+                          content={filtereddata.comments}
                           date={filtereddata.due}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -181,7 +183,7 @@ const TaskBoardDashboard = () => {
                   ) : (
                     <div style={{ marginTop: "2rem" }}>
                       <p className={taskboard.nothing}>
-                        There are no upcoming tasks
+                        There are no awaiting approval tasks
                       </p>
                     </div>
                   )}
@@ -200,10 +202,14 @@ const TaskBoardDashboard = () => {
                         <ContentContainer
                           key={index}
                           name={filtereddata.name}
+                          onClick={() => {
+                            setSetting(filtereddata._id);
+                            setModalShow(true);
+                          }}
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.description}
+                          content={filtereddata.comments}
                           date={filtereddata.due}
                           status={filtereddata.status}
                           imagelink={filtereddata.imagelink}
@@ -224,6 +230,11 @@ const TaskBoardDashboard = () => {
           </div>
         </div>
       </DashboardLayout>
+      <ModalTask
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id={setting}
+      />
     </Container>
   );
 };
@@ -254,13 +265,17 @@ const ContentContainer = (props) => {
       <div className={taskboard.innercontainer}>
         <div className={taskboard.flexname}>
           <div className={taskboard.absolutecenter}>
-            <p className={taskboard.name}>{props.name}</p>
+            <p className={taskboard.name1}>
+              {props.firstname} <span>{props.lastname}</span>
+            </p>
           </div>
-          <Image src="/icons/dots.svg" alt="dots" />
+          <Image
+            src="/icons/dots.svg"
+            alt="dots"
+            onClick={props.onClick}
+            style={{ cursor: "pointer" }}
+          />
         </div>
-        <p className={taskboard.name1}>
-          {props.firstname} <span>{props.lastname}</span>
-        </p>
         <p className={taskboard.contenttext}>{props.headertext}</p>
         <p className={taskboard.content}>{props.content}</p>
         <div className={taskboard.flextext}>

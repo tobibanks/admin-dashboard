@@ -315,7 +315,7 @@ a {
 }
 
 .flexingcontainer {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .flexcontainercontents {
   display: flex;
@@ -753,6 +753,12 @@ td {
   font-weight: 600;
   font-size: 24px;
   text-align: center;
+}
+
+.assigned {
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0px;
+  font-size: 16px;
 }
 
 .welcomecolormessage {

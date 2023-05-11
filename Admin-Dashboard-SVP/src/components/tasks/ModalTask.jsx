@@ -97,29 +97,20 @@ const ModalTask = (props) => {
                               key={index}
                               style={{ display: "flex", gap: "2rem" }}
                             >
-                              {attachments
-                                .slice(0, 2)
-                                .map((attachment, index) => (
-                                  <div>
-                                    <Attachment
-                                      key={index}
-                                      name={attachment.name}
-                                      imagelink={attachment.type}
-                                      size={attachment.size}
-                                    />
-                                    <Link to="/reports">
-                                      <div
-                                        className={modal.absolutebuttoncenter}
-                                      >
-                                        <div className={modal.buttonname1}>
-                                          <p className={modal.buttontext1}>
-                                            See All Attachments
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  </div>
-                                ))}
+                              <>
+                                {attachments
+                                  .slice(0, 2)
+                                  .map((attachment, index) => (
+                                    <div>
+                                      <Attachment
+                                        key={index}
+                                        name={attachment.name}
+                                        imagelink={attachment.type}
+                                        size={attachment.size}
+                                      />
+                                    </div>
+                                  ))}
+                              </>
                             </div>
                           );
                         })
@@ -127,6 +118,17 @@ const ModalTask = (props) => {
                         <p className={modal.attachmentempty}>No attachments</p>
                       )}
                     </div>
+                    {collect.attachments.length > 2 ? (
+                      <Link to="/reports">
+                        <div className={modal.absolutebuttoncenter}>
+                          <div className={modal.buttonname1}>
+                            <p className={modal.buttontext1}>
+                              See All Attachments
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ) : null}
                     <div className={modal.bottomcontainer}>
                       {collect.approval_id ? (
                         <div

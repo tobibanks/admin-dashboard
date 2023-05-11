@@ -111,7 +111,11 @@
   display: inline-block;
   margin-left: 0.5rem;
 }
-
+.unassigned {
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0px;
+}
 .absolutecenter {
   display: flex;
   justify-content: center;
@@ -268,6 +272,7 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   height: 360px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   box-shadow: 4px 8px 13px rgba(0, 0, 0, 0.05);

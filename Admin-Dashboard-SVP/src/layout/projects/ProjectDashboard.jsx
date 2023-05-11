@@ -27,8 +27,8 @@ const ProjectDashboard = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
 
-  const [startDate, setStartDate] = useState(new Date("0"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2028"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -49,6 +49,7 @@ const ProjectDashboard = () => {
   console.log(ProjectsCollection[0]?.date);
 
   const dataByDate = useMemo(() => {
+    if (!startDate && !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -120,11 +121,10 @@ const ProjectDashboard = () => {
             <div className={project.datepickertitle}>
               <p className={project.datepickertitlelabel}>Start Date</p>
               <DatePicker
-                selected={startDate}
+                selected={startDate ?? new Date("01/01/2023")}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
                 startDate={startDate}
-                endDate={endDate}
                 showYearDropdown
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
@@ -140,7 +140,7 @@ const ProjectDashboard = () => {
               <p className={project.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate}
+                selected={endDate ?? new Date("10/10/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -148,9 +148,8 @@ const ProjectDashboard = () => {
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>
@@ -172,16 +171,23 @@ const ProjectDashboard = () => {
                       <td className={project.align}>{projectcollect.name}</td>
                       <td>
                         <div className={project.absolutecenter}>
-                          <p className={project.avatar}>
-                            {" "}
-                            {projectcollect?.assigned_to?.firstname?.charAt(
-                              0
-                            ) || null}
-                            <span>
-                              {projectcollect?.assigned_?.lastname?.charAt(0) ||
-                                null}
-                            </span>
-                          </p>
+                          {projectcollect?.assigned_to?.firstname &&
+                          projectcollect.assigned_to.lastname ? (
+                            <p className={project.avatar}>
+                              {projectcollect?.assigned_to?.firstname?.charAt(
+                                0
+                              )}
+                              <span className={project.label}>
+                                {projectcollect?.assigned_to?.lastname?.charAt(
+                                  0
+                                )}
+                              </span>
+                            </p>
+                          ) : (
+                            <div className={project.absolutecenter}>
+                              <p className={project.unassigned}>Unassigned</p>
+                            </div>
+                          )}
                         </div>
                       </td>
                       <td>

@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import { ButtonProject } from "../../components/dashboard/DashboardContents";
 import SkeleteonGrid from "../../components/dashboard/SkeletonGrid";
+import ModalProject from "../../components/project/ModalProject";
 
 const ProjectBoardDashboard = () => {
   const { data: UserProjectsBoard, isLoading } = useGetProjectDetailsQuery({
@@ -15,8 +16,10 @@ const ProjectBoardDashboard = () => {
   });
 
   const ProjectsBoardCollection = UserProjectsBoard || [];
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date("01/01/2027"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [setting, setSetting] = useState("");
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -88,17 +91,16 @@ const ProjectBoardDashboard = () => {
             <div className={grid.datepickertitle}>
               <p className={grid.datepickertitlelabel}>Start Date</p>
               <DatePicker
-                selected={startDate}
+                selected={startDate ?? new Date("01/01/2023")}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
+                startDate={startDate}
                 showYearDropdown
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
-                startDate={startDate}
-                endDate={endDate}
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                width={300}
+                // width={300}
               />
             </div>
             <div className={grid.absolutecenter}>
@@ -108,7 +110,7 @@ const ProjectBoardDashboard = () => {
               <p className={grid.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate}
+                selected={endDate ?? new Date("10/10/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -116,9 +118,8 @@ const ProjectBoardDashboard = () => {
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>
@@ -132,23 +133,29 @@ const ProjectBoardDashboard = () => {
                   {dataByDateinprogress.length >= 1 ? (
                     <>
                       {dataByDateinprogress.map((filtereddata, index) => (
-                        <ContentContainer
-                          key={index}
-                          headertext={filtereddata.name}
-                          content={filtereddata.details}
-                          firstname={filtereddata.requested_by?.firstname}
-                          lastname={filtereddata.requested_by?.lastname}
-                          firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
-                            0
-                          )}
-                          lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
-                            0
-                          )}
-                          date={filtereddata.date}
-                          status={filtereddata.admin_Status}
-                          imagelink={filtereddata.imagelink}
-                          priority={filtereddata.priority}
-                        />
+                        <>
+                          <ContentContainer
+                            key={index}
+                            headertext={filtereddata.name}
+                            content={filtereddata.details}
+                            firstname={filtereddata.requested_by?.firstname}
+                            lastname={filtereddata.requested_by?.lastname}
+                            firstnamefirstletter={filtereddata.requested_by?.firstname?.charAt(
+                              0
+                            )}
+                            lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
+                              0
+                            )}
+                            onClick={() => {
+                              setSetting(filtereddata._id);
+                              setModalShow(true);
+                            }}
+                            date={filtereddata.date}
+                            status={filtereddata.admin_Status}
+                            imagelink={filtereddata.imagelink}
+                            priority={filtereddata.priority}
+                          />
+                        </>
                       ))}
                     </>
                   ) : (
@@ -180,6 +187,10 @@ const ProjectBoardDashboard = () => {
                           lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
                             0
                           )}
+                          onClick={() => {
+                            setSetting(filtereddata._id);
+                            setModalShow(true);
+                          }}
                           date={filtereddata.due}
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
@@ -218,6 +229,10 @@ const ProjectBoardDashboard = () => {
                           lastnamefirstletter={filtereddata.requested_by?.lastname?.charAt(
                             0
                           )}
+                          onClick={() => {
+                            setSetting(filtereddata._id);
+                            setModalShow(true);
+                          }}
                           date={filtereddata.due}
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
@@ -235,6 +250,11 @@ const ProjectBoardDashboard = () => {
                 </>
               </div>
             )}
+            <ModalProject
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              id={setting}
+            />
           </div>
         </div>
       </DashboardLayout>
@@ -264,7 +284,7 @@ const BoarderHeader = (props) => {
 
 const ContentContainer = (props) => {
   return (
-    <div className={grid.contentcontainer}>
+    <div className={grid.contentcontainer} onClick={props.onClick}>
       <div className={grid.innercontainer}>
         <p className={grid.contenttext}>{props.headertext}</p>
         <p className={grid.content}>{props.content}</p>
@@ -273,14 +293,20 @@ const ContentContainer = (props) => {
             <p className={grid.assigned}>Assigned to</p>
           </div>
           <div className={grid.yellowbackground}>
-            <p className={grid.avatar}>
-              {props.firstnamefirstletter}
-              <span>{props.lastnamefirstletter}</span>
-            </p>
-            <div className={grid.absolutecenter}>
-              <p className={grid.textname}>{props.firstname}</p>
-              <p className={grid.textname}>{props.lastname}</p>
-            </div>
+            {props.firstnamefirstletter && props.lastnamefirstletter ? (
+              <p className={grid.avatar}>
+                {props.firstnamefirstletter}
+                <span>{props.lastnamefirstletter}</span>
+              </p>
+            ) : (
+              <p className={grid.unassigned}>Unassigned</p>
+            )}
+            {props.firstnamefirstletter && props.lastnamefirstletter ? (
+              <div className={grid.absolutecenter}>
+                <p className={grid.textname}>{props.firstname}</p>
+                <p className={grid.textname}>{props.lastname}</p>
+              </div>
+            ) : null}
           </div>
         </div>
         <div className={grid.flextext}>

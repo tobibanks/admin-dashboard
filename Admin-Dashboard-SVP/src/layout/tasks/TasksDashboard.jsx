@@ -36,8 +36,8 @@ const TasksDashboard = () => {
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [startDate, setStartDate] = useState(new Date("01/01/2023"));
-  const [endDate, setEndDate] = useState(new Date("01/01/2029"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -48,15 +48,13 @@ const TasksDashboard = () => {
   const data = useMemo(() => {
     if (!filter) return TasksTableCollection;
     const filteredData = TasksTableCollection.filter(
-      (item) =>
-        item.status === filter &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+      (item) => item.status === filter
     );
     return filteredData;
   }, [filter, TasksTableCollection]);
 
   const dataByDate = useMemo(() => {
+    if (!startDate && !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -136,17 +134,16 @@ const TasksDashboard = () => {
             <div className={task.datepickertitle}>
               <p className={task.datepickertitlelabel}>Start Date</p>
               <DatePicker
-                selected={startDate}
+                selected={startDate ?? new Date("01/01/2023")}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
                 startDate={startDate}
-                endDate={endDate}
                 showYearDropdown
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                width={300}
+                // width={300}
               />
             </div>
             <div className={task.absolutecenter}>
@@ -156,7 +153,7 @@ const TasksDashboard = () => {
               <p className={task.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate}
+                selected={endDate ?? new Date("10/10/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -164,9 +161,8 @@ const TasksDashboard = () => {
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>

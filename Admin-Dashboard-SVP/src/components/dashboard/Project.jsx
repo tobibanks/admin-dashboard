@@ -82,12 +82,17 @@ const Project = () => {
                       </td>
                       <td className={project.centericon}>
                         <div className={project.absolutecenter}>
-                          <p className={project.avatar}>
-                            {projectdata?.assigned_to?.firstname?.charAt(0)}
-                            <span className={project.label}>
-                              {projectdata?.assigned_to?.lastname?.charAt(0)}
-                            </span>
-                          </p>
+                          {projectdata?.assigned_to?.firstname &&
+                          projectdata.assigned_to.lastname ? (
+                            <p className={project.avatar}>
+                              {projectdata?.assigned_to?.firstname?.charAt(0)}
+                              <span className={project.label}>
+                                {projectdata?.assigned_to?.lastname?.charAt(0)}
+                              </span>
+                            </p>
+                          ) : (
+                            <p className={project.assigned}>Unassigned</p>
+                          )}
                         </div>
                       </td>
                       <td className={project.centericon}>

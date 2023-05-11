@@ -17,8 +17,8 @@ const ProjectGridDashboard = () => {
     refetchOnMountArgChange: true,
   });
   const ProjectGridCollection = UserProjectGrid || [];
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date("01/01/2026"));
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -104,17 +104,16 @@ const ProjectGridDashboard = () => {
             <div className={project.datepickertitle}>
               <p className={project.datepickertitlelabel}>Start Date</p>
               <DatePicker
-                selected={startDate}
+                selected={startDate ?? new Date("01/01/2023")}
                 onChange={(date) => setStartDate(date)}
                 selectsStart
+                startDate={startDate}
                 showYearDropdown
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
-                startDate={startDate}
-                endDate={endDate}
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                width={300}
+                // width={300}
               />
             </div>
             <div className={project.absolutecenter}>
@@ -124,7 +123,7 @@ const ProjectGridDashboard = () => {
               <p className={project.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate}
+                selected={endDate ?? new Date("10/10/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -132,9 +131,8 @@ const ProjectGridDashboard = () => {
                 scrollableYearDropdown
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
-                startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>

@@ -151,70 +151,80 @@ const ModalProject = (props) => {
                           </div>
                           <div className={modal.formcontainer}>
                             <Form>
-                              {specifictask.length < 3 ? (
-                                <div>
-                                  {specifictask?.map((task, index) => (
-                                    <Form.Check
-                                      type="checkbox"
-                                      key={index}
-                                      checked={isActive}
-                                      onChange={changeHandler}
-                                      id="custom-switch"
-                                      label={task?.name}
-                                    />
-                                  ))}
-                                </div>
-                              ) : (
-                                <div>
-                                  {more ? (
-                                    <>
-                                      <div>
-                                        {specifictask?.map((task, index) => (
-                                          <Form.Check
-                                            type="checkbox"
-                                            key={index}
-                                            checked={isActive}
-                                            onChange={changeHandler}
-                                            id="custom-switch"
-                                            label={task?.name}
-                                          />
-                                        ))}
-                                      </div>
-                                    </>
+                              {specifictask.length >= 1 ? (
+                                <>
+                                  {specifictask.length <= 3 ? (
+                                    <div>
+                                      {specifictask?.map((task, index) => (
+                                        <Form.Check
+                                          type="checkbox"
+                                          key={index}
+                                          checked={isActive}
+                                          onChange={changeHandler}
+                                          id="custom-switch"
+                                          label={task?.name}
+                                        />
+                                      ))}
+                                    </div>
                                   ) : (
-                                    <>
-                                      {specifictask
-                                        ?.slice(0, 3)
-                                        .map((task, index) => (
+                                    <div>
+                                      {more ? (
+                                        <>
                                           <div>
-                                            <Form.Check
-                                              type="checkbox"
-                                              key={index}
-                                              checked={isActive}
-                                              onChange={changeHandler}
-                                              id="custom-switch"
-                                              label={task?.name}
-                                            />
+                                            {specifictask?.map(
+                                              (task, index) => (
+                                                <Form.Check
+                                                  type="checkbox"
+                                                  key={index}
+                                                  checked={isActive}
+                                                  onChange={changeHandler}
+                                                  id="custom-switch"
+                                                  label={task?.name}
+                                                />
+                                              )
+                                            )}
                                           </div>
-                                        ))}
-                                    </>
+                                        </>
+                                      ) : (
+                                        <>
+                                          {specifictask
+                                            ?.slice(0, 3)
+                                            .map((task, index) => (
+                                              <div>
+                                                <Form.Check
+                                                  type="checkbox"
+                                                  key={index}
+                                                  checked={isActive}
+                                                  onChange={changeHandler}
+                                                  id="custom-switch"
+                                                  label={task?.name}
+                                                />
+                                              </div>
+                                            ))}
+                                        </>
+                                      )}
+                                      {more ? (
+                                        <p
+                                          className={modal.title1}
+                                          onClick={() => setMore(!more)}
+                                        >
+                                          See Less
+                                        </p>
+                                      ) : (
+                                        <p
+                                          className={modal.title1}
+                                          onClick={() => setMore(!more)}
+                                        >
+                                          See More
+                                        </p>
+                                      )}
+                                    </div>
                                   )}
-                                  {more ? (
-                                    <p
-                                      className={modal.title1}
-                                      onClick={() => setMore(!more)}
-                                    >
-                                      See Less
-                                    </p>
-                                  ) : (
-                                    <p
-                                      className={modal.title1}
-                                      onClick={() => setMore(!more)}
-                                    >
-                                      See More
-                                    </p>
-                                  )}
-                                </div>
+                                </>
+                              ) : (
+                                <p className={modal.notask}>
+                                  No Task Available
+                                </p>
                               )}
                             </Form>
                             {/* <div className={modal.flexheader2}>
