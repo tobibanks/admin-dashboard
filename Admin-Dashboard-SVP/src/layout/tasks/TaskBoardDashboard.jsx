@@ -37,7 +37,7 @@ const TaskBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   const dataByDateinprogress = useMemo(() => {
-    if (!startDate) return inprogressdata;
+    if (!startDate || !endDate) return inprogressdata;
     const filtereddata = inprogressdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -45,6 +45,8 @@ const TaskBoardDashboard = () => {
     );
     return filtereddata;
   }, [finalStartDate, finalEndDate, inprogressdata]);
+
+  console.log(!startDate && endDate);
 
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
@@ -54,7 +56,7 @@ const TaskBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   const dataByDateupcoming = useMemo(() => {
-    if (!startDate) return upcomingdata;
+    if (!startDate || !endDate) return upcomingdata;
     const filtereddata = upcomingdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -71,13 +73,14 @@ const TaskBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, TasksBoardCollection]);
 
   const dataByDatecomplete = useMemo(() => {
+    if (!startDate && !endDate) return completedata;
     const filtereddata = completedata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
     return filtereddata;
-  }, [finalStartDate, finalEndDate, upcomingdata]);
+  }, [finalStartDate, finalEndDate, completedata]);
 
   return (
     <Container className={taskboard.container}>
@@ -116,7 +119,6 @@ const TaskBoardDashboard = () => {
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 endDate={endDate}
-                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>
@@ -148,7 +150,7 @@ const TaskBoardDashboard = () => {
                     </>
                   ) : (
                     <div style={{ marginTop: "3rem" }}>
-                      <p className={taskboard.nothing}>There are no projects</p>
+                      <p className={taskboard.nothing}>There are no tasks</p>
                     </div>
                   )}
                 </>

@@ -19,7 +19,7 @@
 }
 
 .form-check-input:checked {
-  background-color: var(--SVP-main);
+  /* background-color: var(--SVP-main); */
   border-color: var(--SVP-main);
 }
 

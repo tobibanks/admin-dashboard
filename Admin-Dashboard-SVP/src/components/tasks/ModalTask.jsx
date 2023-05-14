@@ -5,6 +5,7 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import { Link, generatePath, useNavigate } from "react-router-dom";
+import ReportModal from "./../reports/ReportModal";
 
 const ModalTask = (props) => {
   const { data: AdminTasks } = useGetTaskDetailsQuery({
@@ -14,6 +15,7 @@ const ModalTask = (props) => {
   const ModalTaskCollection = AdminTasks || [];
 
   const [id, setId] = useState();
+  const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
   // console.log(ModalTaskCollection[4].attachments);
 
@@ -66,7 +68,12 @@ const ModalTask = (props) => {
                         </div>
                       </div>
                       <div>
-                        <div className={modal.buttonname}>
+                        <div
+                          className={modal.buttonname}
+                          onClick={() => {
+                            setModalShow(true);
+                          }}
+                        >
                           <p className={modal.buttontext}>
                             Upload Attachments <MdOutlineCloudUpload />
                           </p>
@@ -155,6 +162,7 @@ const ModalTask = (props) => {
           </div>
         ) : null
       )}
+      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
     </Modal>
   );
 };

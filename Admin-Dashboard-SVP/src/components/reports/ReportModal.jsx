@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { Modal, Image, Button } from "react-bootstrap";
+import { Modal, Image, Button, FormGroup } from "react-bootstrap";
 import modal from "./general.module.css";
-import "./modal.css";
+import "./Reportmodal.css";
+// import "./modal.css";
 import toast, { Toaster } from "react-hot-toast";
 import Form from "react-bootstrap/Form";
 import {
@@ -15,6 +16,8 @@ import {
 const ReportModal = (props) => {
   const [modalShow, setModalShow] = React.useState(true);
   const [more, setMore] = useState(false);
+  const [display, setDisplay] = useState(false);
+  const [select, setSelect] = useState("");
   const [addReportsMutation] = useAddReportsDetailsMutation();
   const { data: TaskCollection } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
@@ -39,6 +42,19 @@ const ReportModal = (props) => {
   //   setFile(e.target.files[0]);
   // };
 
+  const handleChanges = (e) => {
+    setSelect(e.target.value);
+    setDisplay(true);
+  };
+
+  const filteredtasks = useMemo(() => {
+    const filtereddata = TaskCollections.filter(
+      (item) => item.project.id === select
+    );
+    return filtereddata;
+  }, [select, TaskCollections]);
+
+
   const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
     setFiles([...files, ...e.target.files]);
@@ -48,10 +64,8 @@ const ReportModal = (props) => {
     const newArray = [...files];
     newArray.splice(index, 1);
     setFiles(newArray);
-    console.log("batman")
+    console.log("batman");
   };
-
-  console.log(files);
 
   const submitForm = async (data) => {
     if (!files.length) return toast.error("Select a file");
@@ -116,31 +130,41 @@ const ReportModal = (props) => {
           </div>
           <p className={modal.title}>Projects</p>
           {more ? (
-            <div>
+            <>
               {ProjectCollections.map((project, index) => (
+                // <FormGroup>
                 <Form.Check
-                  type="radio"
                   key={index}
+                  type="radio"
+                  onClick={handleChanges}
+                  // key={index}
                   {...register("project")}
-                  name="project"
+                  // name="project"
                   value={project._id}
                   label={project.name}
                 />
+                // </FormGroup>
               ))}
-            </div>
+            </>
           ) : (
-            <div>
+            // <div>
+            <>
               {ProjectCollections?.slice(0, 3)?.map((project, index) => (
+                // <FormGroup>
                 <Form.Check
                   type="radio"
+                  // onClick={(e)=> setSelect(e.target.value)}
                   key={index}
+                  onClick={handleChanges}
                   {...register("project")}
-                  name="project"
+                  // name="project"
                   value={project._id}
                   label={project.name}
                 />
+                // </FormGroup>
               ))}
-            </div>
+            </>
+            // </div>
           )}
           {ProjectCollections.length > 3 ? (
             more ? (
@@ -153,17 +177,28 @@ const ReportModal = (props) => {
               </p>
             )
           ) : null}
-          <p className={modal.title}>Tasks</p>
-          {TaskCollections.map((task, index) => (
-            <Form.Check
-              type="radio"
-              key={index}
-              name="task"
-              {...register("task")}
-              value={task._id}
-              label={task.name}
-            />
-          ))}
+          {display ? (
+            <>
+              <p className={modal.title}>Tasks</p>
+              {filteredtasks.length < 1 ? (
+                <p className={modal.notask}> There are no selected tasks</p>
+              ) : (
+                <>
+                  {filteredtasks.map((task, index) => (
+                    <Form.Check
+                      type="radio"
+                      key={index}
+                      onChange={() => console.log("be batman")}
+                      name="task"
+                      {...register("task")}
+                      value={task._id}
+                      label={task.name}
+                    />
+                  ))}
+                </>
+              )}
+            </>
+          ) : null}
           <div className={modal.flexcontainer}>
             <p className={modal.title}>Send to:</p>
             <div className={modal.fileabsolutecenter}>

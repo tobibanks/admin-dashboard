@@ -52,6 +52,7 @@ const ProjectFormDashboard = () => {
               <label className={projectform.label}>
                 <input
                   type="radio"
+                  className={projectform.radioinput}
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(true)} // send value to hook form
                   checked={value === true}
@@ -64,6 +65,7 @@ const ProjectFormDashboard = () => {
               <label className={projectform.label}>
                 <input
                   type="radio"
+                  className={projectform.radioinput}
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(false)} // send value to hook form
                   checked={value === false}

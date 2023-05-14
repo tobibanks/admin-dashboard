@@ -47,7 +47,7 @@ const ProjectDashboard = () => {
   }, [filter, ProjectsCollection]);
 
   const dataByDate = useMemo(() => {
-    if (!startDate && !endDate) return data;
+    if (!startDate || !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -89,15 +89,23 @@ const ProjectDashboard = () => {
                 total={`(${ProjectsCollection.length})`}
                 filter={filter}
                 filter1={null}
-                onClick={() => setFilter(null)}
+                onClick={() => {
+                  setFilter(null);
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
 
               <NavCategories
                 name="Requested"
                 total={`(${filteredUpcomingData.length})`}
                 filter={filter}
-                filter1="Requested"
-                onClick={() => setFilter("Requested")}
+                filter1="Awaiting Approval"
+                onClick={() => {
+                  setFilter("Requested");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="In Progress"
@@ -106,6 +114,8 @@ const ProjectDashboard = () => {
                 total={`(${filteredInProgressData.length})`}
                 onClick={() => {
                   setFilter("In Progress");
+                  setStartDate(null);
+                  setEndDate(null);
                 }}
               />
               <NavCategories
@@ -113,7 +123,11 @@ const ProjectDashboard = () => {
                 total={`(${filteredCompleteData.length})`}
                 filter={filter}
                 filter1="Complete"
-                onClick={() => setFilter("Complete")}
+                onClick={() => {
+                  setFilter("Complete");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
             </div>
             <div className={project.datepickertitle}>
@@ -138,7 +152,7 @@ const ProjectDashboard = () => {
               <p className={project.datepickertitlelabel}>End Date</p>
               <DatePicker
                 showIcon
-                selected={endDate ?? new Date("10/10/2023")}
+                selected={endDate ?? new Date("10/01/2023")}
                 onChange={(date) => setEndDate(date)}
                 selectsEnd
                 showYearDropdown
@@ -147,7 +161,7 @@ const ProjectDashboard = () => {
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 endDate={endDate}
-                minDate={endDate ?? new Date("10/10/2023")}
+                // minDate={endDate ?? new Date("01/01/2023")}
               />
             </div>
           </div>
@@ -169,16 +183,16 @@ const ProjectDashboard = () => {
                       <td className={project.align}>{projectcollect.name}</td>
                       <td>
                         <div className={project.absolutecenter}>
-                          {projectcollect?.assigned_to?.firstname &&
-                          projectcollect.assigned_to.lastname ? (
+                          {projectcollect?.requested_by?.firstname &&
+                          projectcollect?.requested_by.lastname ? (
                             <p className={project.avatar}>
                               <span className={project.label}>
-                                {projectcollect?.assigned_to?.firstname?.charAt(
+                                {projectcollect?.requested_by?.firstname?.charAt(
                                   0
                                 )}
                               </span>
                               <span className={project.label}>
-                                {projectcollect?.assigned_to?.lastname?.charAt(
+                                {projectcollect?.requested_by?.lastname?.charAt(
                                   0
                                 )}
                               </span>

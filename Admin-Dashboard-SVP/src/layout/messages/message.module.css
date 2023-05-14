@@ -303,7 +303,7 @@
   display: flex;
   /* width: 95%; */
   /* width: 100%; */
-  overflow-y: auto;
+  overflow-y: scroll;
   z-index: 5;
   /* height: calc(100vh - 110px); */
 }
@@ -368,6 +368,8 @@
   background-color: white;
   font-family: "Inter", sans-serif;
   margin-left: 16px;
+  margin-right: 16px;
+  /* max-width: 668px; */
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
 }
@@ -375,21 +377,25 @@
 .incomingcontainer {
   display: flex;
   gap: 0.5rem;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-self: flex-end;
 }
 
 .sendingcontainer {
   display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-self: flex-end;
   justify-content: flex-end;
 }
 .sending {
   padding: 16px;
   font-family: "Inter", sans-serif;
   margin-right: 16px;
+  margin-left: 16px;
   color: white;
+  /* max-width: 668px; */
   margin-bottom: 0px;
   background-color: var(--SVP-main);
   border-radius: 16px 16px 4px 16px;
@@ -439,4 +445,18 @@
   padding-bottom: 0.5rem;
   color: var(--white);
   font-weight: 600;
+}
+
+.scrollchat {
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  /* bottom: 0px; */
+  overflow-y: scroll;
+  height: 80vh;
+  width: 100%;
+}
+
+.scrollchat::-webkit-scrollbar {
+  display: none;
 }

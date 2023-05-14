@@ -54,7 +54,7 @@ const TasksDashboard = () => {
   }, [filter, TasksTableCollection]);
 
   const dataByDate = useMemo(() => {
-    if (!startDate && !endDate) return data;
+    if (!startDate || !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -99,7 +99,11 @@ const TasksDashboard = () => {
                 total={`(${TasksTableCollection.length})`}
                 filter={filter}
                 filter1={null}
-                onClick={() => setFilter(null)}
+                onClick={() => {
+                  setFilter(null);
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
 
               <NavCategories
@@ -107,28 +111,44 @@ const TasksDashboard = () => {
                 total={`(${filteredApprovedData.length})`}
                 filter={filter}
                 filter1="Approved"
-                onClick={() => setFilter("Approved")}
+                onClick={() => {
+                  setFilter("Approved");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="Awaiting Approval"
                 total={`(${filteredPendingData.length})`}
                 filter1="Awaiting Approval"
                 filter={filter}
-                onClick={() => setFilter("Awaiting Approval")}
+                onClick={() => {
+                  setFilter("Awaiting Approval");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="In Progress"
                 total={`(${filteredInProgressData.length})`}
                 filter1="In Progress"
                 filter={filter}
-                onClick={() => setFilter("In Progress")}
+                onClick={() => {
+                  setFilter("In Progress");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="Declined"
                 total={`(${filteredDeclinedData.length})`}
                 filter={filter}
                 filter1="Declined"
-                onClick={() => setFilter("Declined")}
+                onClick={() => {
+                  setFilter("Declined");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
             </div>
             <div className={task.datepickertitle}>
@@ -162,7 +182,6 @@ const TasksDashboard = () => {
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 endDate={endDate}
-                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>

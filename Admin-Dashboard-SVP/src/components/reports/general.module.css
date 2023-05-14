@@ -347,6 +347,12 @@
   width: 15rem;
 }
 
+.notask {
+  border-color: var(--black200);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}
+
 .search {
   border-radius: 25px;
   width: 144px;
@@ -498,6 +504,25 @@
   right: 0;
 }
 
+.radio:checked[type="radio"] {
+  background-image: url("/icons/dot.svg");
+}
+
+.radio {
+  background-color: aqua !important;
+}
+
+.radio:checked {
+  background-color: white;
+}
+
+.radio:checked:before {
+  background: white !important;
+}
+
+input[type="radio"]:checked {
+  border-color: var(--SVP-main);
+}
 .fileinputbutton {
   font-family: "Inter", sans-serif;
   color: var(--SVP-main);

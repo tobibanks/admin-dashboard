@@ -13,10 +13,15 @@ import SkeleteonBoard from "@/components/dashboard/SkeletonBoard";
 import ModalProject from "../../components/project/ModalProject";
 
 const ProjectGridDashboard = () => {
-  const { data: UserProjectGrid, isLoading } = useGetProjectDetailsQuery({
-    refetchOnMountArgChange: true,
+  const {
+    data: UserTableProjects,
+    isLoading,
+    refetch,
+  } = useGetProjectDetailsQuery({
+    refetchOnMountOrArgChange: true,
   });
-  const ProjectGridCollection = UserProjectGrid || [];
+
+  const ProjectsCollection = UserTableProjects || [];
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -31,18 +36,15 @@ const ProjectGridDashboard = () => {
   const [setting, setSetting] = useState("");
 
   const data = useMemo(() => {
-    if (!filter) return ProjectGridCollection;
-    const filteredData = ProjectGridCollection.filter(
-      (item) =>
-        item.admin_Status === filter &&
-        finalStartDate <= new Date(item.due).getTime() &&
-        new Date(item.due).getTime() <= finalEndDate
+    if (!filter) return ProjectsCollection;
+    const filteredData = ProjectsCollection.filter(
+      (item) => item.admin_Status === filter
     );
     return filteredData;
-  }, [filter, finalStartDate, finalEndDate, ProjectGridCollection]);
+  }, [filter, ProjectsCollection]);
 
   const dataByDate = useMemo(() => {
-    if (!startDate && !endDate) return data;
+    if (!startDate || !endDate) return data;
     const filtereddata = data.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -51,17 +53,20 @@ const ProjectGridDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, data]);
 
-  const filteredInProgressData = ProjectGridCollection.filter(
+  console.log(dataByDate);
+
+  const filteredInProgressData = ProjectsCollection.filter(
     (item) => item.admin_Status === "In Progress"
   );
 
-  const filteredUpcomingData = ProjectGridCollection.filter(
+  const filteredUpcomingData = ProjectsCollection.filter(
     (item) => item.admin_Status === "Requested"
   );
 
-  const filteredCompleteData = ProjectGridCollection.filter(
+  const filteredCompleteData = ProjectsCollection.filter(
     (item) => item.admin_Status === "Complete"
   );
+
   return (
     <Container className={project.container}>
       <DashboardLayout name="Projects">
@@ -75,8 +80,12 @@ const ProjectGridDashboard = () => {
                 name="All Projects"
                 filter={filter}
                 filter1={null}
-                total={`(${ProjectGridCollection.length})`}
-                onClick={() => setFilter(null)}
+                total={`(${ProjectsCollection.length})`}
+                onClick={() => {
+                  setFilter(null);
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
 
               <NavCategories
@@ -84,21 +93,33 @@ const ProjectGridDashboard = () => {
                 filter={filter}
                 filter1="Requested"
                 total={`(${filteredUpcomingData.length})`}
-                onClick={() => setFilter("Requested")}
+                onClick={() => {
+                  setFilter("Requested");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="In Progress"
                 filter1="In Progress"
                 filter={filter}
                 total={`(${filteredInProgressData.length})`}
-                onClick={() => setFilter("In Progress")}
+                onClick={() => {
+                  setFilter("In Progress");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
               <NavCategories
                 name="Completed"
                 filter={filter}
                 filter1="Complete"
                 total={`(${filteredCompleteData.length})`}
-                onClick={() => setFilter("Complete")}
+                onClick={() => {
+                  setFilter("Complete");
+                  setStartDate(null);
+                  setEndDate(null);
+                }}
               />
             </div>
             <div className={project.datepickertitle}>
@@ -132,7 +153,6 @@ const ProjectGridDashboard = () => {
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 endDate={endDate}
-                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>

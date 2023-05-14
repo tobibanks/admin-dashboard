@@ -107,9 +107,9 @@ input[type="radio"]:before {
 }
 
 input[type="radio"]:checked:before {
-  background: var(--SVP-main);
+  /* background: var(--SVP-main); */
 }
 
 input[type="radio"]:checked {
-  border-color: var(--SVP-main);
+  /* border-color: var(--SVP-main); */
 }

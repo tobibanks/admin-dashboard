@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { getInitials } from "../../../util/text";
 import moment from "moment";
+import { LoaderIcon } from "react-hot-toast";
 
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
@@ -44,7 +45,7 @@ const MessageDashboard = () => {
   }, [filter, messageDetails]);
 
   // fetching messages. filter contains the id. line 112, when you click it saves the id in a filter
-  const { data: allChats, refetch } = useGetAllChatsQuery(filter);
+  const { data: allChats, refetch, isLoading } = useGetAllChatsQuery(filter);
 
   // prevents code breaks
   const chats = allChats || [];
@@ -74,7 +75,19 @@ const MessageDashboard = () => {
 
   const [defaultState, setDefaultState] = useState(true);
 
-  console.log(messageDetails);
+  const [messages, setMessages] = useState(chats);
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scroll();
+  }, [chats]);
+
+  console.log(chats);
 
   return (
     <Container className={message.container}>
@@ -242,11 +255,16 @@ const MessageDashboard = () => {
                           <div
                             key={index}
                             style={{
-                              alignSelf: "flex-end",
+                              // position: "absolute",
+                              // bottom: "0px",
+                              // alignItems: "flex-end"
+                              // alignSelf: "flex-end",
                               width: "100%",
+                              display: "flex",
+                              alignSelf: "flex-end",
                             }}
                           >
-                            {project?.project ? (
+                            {project?.type === "project" ? (
                               <>
                                 {open ? (
                                   <div
@@ -373,56 +391,15 @@ const MessageDashboard = () => {
                                         Lectus le leo enim quis facilisis. Elit
                                         ut facilisi arcu nibh. Etia posuere
                                         posuere rhoncus nam. Molestie lorem qui
-                                        id sed quis eu etiam commodo.
+                                        id sed quis eu etiam commodo. lorem
                                       </p>
                                     </div>
                                   </div>
                                 ) : null}
 
-                                <div>
+                                <div className={message.scrollchat}>
                                   {chats.map((chat, index) => {
-                                    console.log(chat);
                                     return (
-                                      <div>
-                                        <div key={index}>
-                                          {chat.fromSelf ? (
-                                            <div
-                                              className={
-                                                message.sendingcontainer
-                                              }
-                                            >
-                                              <p className={message.sending}>
-                                                {chat.message}
-                                              </p>
-                                            </div>
-                                          ) : (
-                                            <div
-                                              className={
-                                                message.incomingcontainer
-                                              }
-                                            >
-                                              <p className={message.incoming}>
-                                                {chat.message}
-                                              </p>
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </>
-                            ) : (
-                              <div
-                              // style={{
-                              // alignSelf: "flex-end",
-                              // width: "100%",
-                              // height: "30vh",
-                              // }}
-                              >
-                                {chats.map((chat, index) => {
-                                  return (
-                                    <div>
                                       <div key={index}>
                                         {chat.fromSelf ? (
                                           <div
@@ -439,11 +416,37 @@ const MessageDashboard = () => {
                                             }
                                           >
                                             <p className={message.incoming}>
-                                              {chat.message}
+                                              {chat.message} 
                                             </p>
                                           </div>
                                         )}
                                       </div>
+                                    );
+                                  })}
+                                </div>
+                              </>
+                            ) : (
+                              <div className={message.scrollchat}>
+                                {chats.map((chat, index) => {
+                                  return (
+                                    <div key={index}>
+                                      {chat.fromSelf ? (
+                                        <div
+                                          className={message.sendingcontainer}
+                                        >
+                                          <p className={message.sending}>
+                                            {chat.message}
+                                          </p>
+                                        </div>
+                                      ) : (
+                                        <div
+                                          className={message.incomingcontainer}
+                                        >
+                                          <p className={message.incoming}>
+                                            {chat.message}
+                                          </p>
+                                        </div>
+                                      )}
                                     </div>
                                   );
                                 })}

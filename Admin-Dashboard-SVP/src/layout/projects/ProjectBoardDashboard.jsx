@@ -37,7 +37,7 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDateinprogress = useMemo(() => {
-    if (!startDate && !endDate) return inprogressdata;
+    if (!startDate || !endDate) return inprogressdata;
     const filtereddata = inprogressdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -54,7 +54,7 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDateupcoming = useMemo(() => {
-    if (!startDate && !endDate) return upcomingdata;
+    if (!startDate || !endDate) return upcomingdata;
     const filtereddata = upcomingdata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
@@ -74,14 +74,14 @@ const ProjectBoardDashboard = () => {
   }, [finalStartDate, finalEndDate, ProjectsBoardCollection]);
 
   const dataByDatecomplete = useMemo(() => {
-    if (!startDate && !endDate) return completedata;
+    if (!startDate || !endDate) return completedata;
     const filtereddata = completedata.filter(
       (item) =>
         finalStartDate <= new Date(item.due).getTime() &&
         new Date(item.due).getTime() <= finalEndDate
     );
     return filtereddata;
-  }, [finalStartDate, finalEndDate, upcomingdata]);
+  }, [finalStartDate, finalEndDate, completedata]);
 
   return (
     <Container className={grid.container}>
@@ -121,7 +121,6 @@ const ProjectBoardDashboard = () => {
                 dateFormat="dd/MM/yyyy"
                 customInput={<ExampleCustomInput />}
                 endDate={endDate}
-                minDate={endDate ?? new Date("10/10/2023")}
               />
             </div>
           </div>

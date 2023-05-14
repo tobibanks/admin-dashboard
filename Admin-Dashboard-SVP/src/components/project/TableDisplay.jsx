@@ -10,7 +10,7 @@ const TableDisplay = (props) => {
         <thead>
           <tr>
             <th className={table.centericon1}>Project name</th>
-            <th className={table.centericon}>assigned to</th>
+            <th className={table.centericon}>requested by</th>
             <th className={table.centericon}>status</th>
             <th className={table.centericon}>due date</th>
             <th className={table.centericon}>priority</th>

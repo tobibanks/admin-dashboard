@@ -11,6 +11,7 @@ import {
   useGetTaskDetailsQuery,
   useGetProjectSpecificTaskQuery,
 } from "@/app/services/auth/authService";
+import Skeleton from "react-loading-skeleton";
 
 const ModalProject = (props) => {
   const { data: UserProjects } = useGetProjectDetailsQuery({
@@ -21,7 +22,7 @@ const ModalProject = (props) => {
     // refetchOnMountOrArgChange: true,
   });
 
-  const { data: task } = useGetProjectSpecificTaskQuery(props.id);
+  const { data: task, isFetching } = useGetProjectSpecificTaskQuery(props.id);
 
   const [more, setMore] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -145,19 +146,36 @@ const ModalProject = (props) => {
                           </div>
                           <div className={modal.formcontainer}>
                             <Form>
-                              {specifictask.length >= 1 ? (
+                              {isFetching ? (
+                                <Skeleton
+                                  width={300}
+                                  baseColor="#ebab34"
+                                  highlightColor="#f2cb07"
+                                />
+                              ) : (
                                 <>
                                   {specifictask.length < 3 ? (
                                     <div>
                                       {specifictask?.map((task, index) => (
-                                        <Form.Check
-                                          type="checkbox"
-                                          key={index}
-                                          checked={isActive}
-                                          onChange={changeHandler}
-                                          id="custom-switch"
-                                          label={task?.name}
-                                        />
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            marginTop: "5px",
+                                          }}
+                                        >
+                                          <div className={modal.absolutecenter}>
+                                            <Form.Check
+                                              type="checkbox"
+                                              key={index}
+                                              // checked={isActive}
+                                              // onChange={changeHandler}
+                                              id="custom-switch"
+                                              label={task?.name}
+                                            />
+                                          </div>
+                                          <StatusButton text={task.status} />
+                                        </div>
                                       ))}
                                     </div>
                                   ) : (
@@ -167,14 +185,29 @@ const ModalProject = (props) => {
                                           <div>
                                             {specifictask?.map(
                                               (task, index) => (
-                                                <Form.Check
-                                                  type="checkbox"
-                                                  key={index}
-                                                  checked={isActive}
-                                                  onChange={changeHandler}
-                                                  id="custom-switch"
-                                                  label={task?.name}
-                                                />
+                                                <div
+                                                  style={{
+                                                    display: "flex",
+                                                    justifyContent:
+                                                      "space-between",
+                                                    marginTop: "5px",
+                                                  }}
+                                                >
+                                                  <div
+                                                    className={
+                                                      modal.absolutecenter
+                                                    }
+                                                  >
+                                                    <Form.Check
+                                                      type="checkbox"
+                                                      key={index}
+                                                      // checked={isActive}
+                                                      // onChange={changeHandler}
+                                                      id="custom-switch"
+                                                      label={task?.name}
+                                                    />
+                                                  </div>
+                                                </div>
                                               )
                                             )}
                                           </div>
@@ -184,15 +217,28 @@ const ModalProject = (props) => {
                                           {specifictask
                                             ?.slice(0, 3)
                                             .map((task, index) => (
-                                              <div>
-                                                <Form.Check
-                                                  type="checkbox"
-                                                  key={index}
-                                                  checked={isActive}
-                                                  onChange={changeHandler}
-                                                  id="custom-switch"
-                                                  label={task?.name}
-                                                />
+                                              <div
+                                                style={{
+                                                  display: "flex",
+                                                  justifyContent:
+                                                    "space-between",
+                                                  marginTop: "5px",
+                                                }}
+                                              >
+                                                <div
+                                                  className={
+                                                    modal.absolutecenter
+                                                  }
+                                                >
+                                                  <Form.Check
+                                                    type="checkbox"
+                                                    key={index}
+                                                    // checked={isActive}
+                                                    // onChange={changeHandler}
+                                                    id="custom-switch"
+                                                    label={task?.name}
+                                                  />
+                                                </div>
                                               </div>
                                             ))}
                                         </>
@@ -215,10 +261,6 @@ const ModalProject = (props) => {
                                     </div>
                                   )}
                                 </>
-                              ) : (
-                                <p className={modal.notask}>
-                                  No Task Available
-                                </p>
                               )}
                             </Form>
                             {/* <div className={modal.flexheader2}>
@@ -236,25 +278,33 @@ const ModalProject = (props) => {
                         </div> */}
                         <p className={modal.taskname}>Attachment</p>
                         <div className={modal.attachmentflex}>
-                          {collect.attachments.length > 1 ? (
-                            collect.attachments
-                              .slice(0, 3)
-                              .map((attachment, index) => (
-                                <Attachment
-                                  key={index}
-                                  imagelink={attachment.type}
-                                  attachmentname={attachment.name}
-                                  attachmentsize={attachment.size}
-                                />
-                              ))
+                          {collect.attachments.length < 1 ? (
+                            <p className={modal.notask}>
+                              No Attachment available
+                            </p>
                           ) : (
-                            <div className={modal.absolutebuttoncenter}>
-                              <div className={modal.buttonname}>
-                                <p className={modal.buttontext}>
-                                  See All Attachments
-                                </p>
-                              </div>
-                            </div>
+                            <>
+                              {collect.attachments.length > 1 ? (
+                                collect.attachments
+                                  .slice(0, 3)
+                                  .map((attachment, index) => (
+                                    <Attachment
+                                      key={index}
+                                      imagelink={attachment.type}
+                                      attachmentname={attachment.name}
+                                      attachmentsize={attachment.size}
+                                    />
+                                  ))
+                              ) : (
+                                <div className={modal.absolutebuttoncenter}>
+                                  <div className={modal.buttonname}>
+                                    <p className={modal.buttontext}>
+                                      See All Attachments
+                                    </p>
+                                  </div>
+                                </div>
+                              )}
+                            </>
                           )}
                         </div>
                       </div>
