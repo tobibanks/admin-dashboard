@@ -289,10 +289,12 @@ const Attachment = (props) => {
   return (
     <div className={modal.attachmentcontainer}>
       <div className={modal.reportabsolutecenter}>
-        {props.imagelink === "image/jpeg" ? (
+        {props.imagelink.startsWith("image") ? (
           <Image src="/icons/jpg.svg" alt="jpg" />
-        ) : props.imagelink === "image/png" ? (
-          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : props.imagelink.startsWith("application") ? (
+          <Image src="/icons/pdf.svg" alt="jpg" />
+        ) : props.imagelink.startsWith("video") ? (
+          <Image src="/icons/reports/pdf.svg" alt="jpg" />
         ) : null}
       </div>
       <div>

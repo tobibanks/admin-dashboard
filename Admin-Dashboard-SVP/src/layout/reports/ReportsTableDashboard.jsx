@@ -237,12 +237,12 @@ const ReportsTableDashboard = () => {
                         <tr key={index}>
                           <td>
                             <div style={{ display: "flex" }}>
-                              {tabledata.type === "image/jpeg" ? (
+                              {props.imagelink.startsWith("image") ? (
                                 <Image src="/icons/jpg.svg" alt="jpg" />
-                              ) : tabledata.type === "image/png" ? (
-                                <Image src="/icons/jpg.svg" alt="jpg" />
-                              ) : tabledata.type === "image/svg+xml" ? (
-                                <Image src="/icons/jpg.svg" alt="jpg" />
+                              ) : props.imagelink.startsWith("application") ? (
+                                <Image src="/icons/pdf.svg" alt="jpg" />
+                              ) : props.imagelink.startsWith("video") ? (
+                                <Image src="/icons/reports/pdf.svg" alt="jpg" />
                               ) : null}
                               <div className={reporttable.absolutecenter}>
                                 {tabledata?.name?.substring(0, 10)}

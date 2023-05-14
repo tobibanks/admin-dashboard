@@ -283,12 +283,12 @@ const FileContainer = (props) => {
   return (
     <div className={report.filecontainer} onClick={props.handleclick}>
       <div className={report.centericon}>
-        {props.imagelink === "image/jpeg" ? (
+        {props.imagelink.startsWith("image") ? (
           <Image src="/icons/jpg.svg" alt="jpg" />
-        ) : props.imagelink === "image/png" ? (
-          <Image src="/icons/jpg.svg" alt="jpg" />
-        ) : props.imagelink === "image/svg+xml" ? (
-          <Image src="/icons/jpg.svg" alt="jpg" />
+        ) : props.imagelink.startsWith("application") ? (
+          <Image src="/icons/pdf.svg" alt="jpg" />
+        ) : props.imagelink.startsWith("video") ? (
+          <Image src="/icons/reports/pdf.svg" alt="jpg" />
         ) : null}
       </div>
       <div className={report.filerightcontainer}>
