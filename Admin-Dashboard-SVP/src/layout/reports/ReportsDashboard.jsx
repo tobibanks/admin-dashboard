@@ -108,8 +108,8 @@ const ReportsDashboard = () => {
   return (
     <Container className={report.container}>
       <DashboardLayout name="Reports">
-        <FileInputContainer />
         <div className={report.overallcontainer}>
+          <FileInputContainer />
           <Header name="My Reports" />
           <div className={report.leftcontainer}>
             <div className={report.flexwrap}>

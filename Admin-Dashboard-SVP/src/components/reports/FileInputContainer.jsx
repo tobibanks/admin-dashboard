@@ -14,7 +14,7 @@ const FileInputContainer = () => {
   const TaskCollections = TaskCollection || [];
 
   return (
-    <div className={input.absolutecenter}>
+    <div className={input.absolutecenterfile}>
       <div className={input.innercontainer}>
         <div className={input.innercontainer1}>
           <Button

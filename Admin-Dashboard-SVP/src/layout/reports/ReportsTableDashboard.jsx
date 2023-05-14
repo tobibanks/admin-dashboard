@@ -112,8 +112,8 @@ const ReportsTableDashboard = () => {
   return (
     <Container className={reporttable.container}>
       <DashboardLayout name="Reports">
-        <FileInputContainer />
         <div className={reporttable.overallcontainer}>
+          <FileInputContainer />
           <Header name="My Reports" />
           <div className={reporttable.leftcontainer}>
             <div className={reporttable.flexwrap}>
@@ -237,11 +237,11 @@ const ReportsTableDashboard = () => {
                         <tr key={index}>
                           <td>
                             <div style={{ display: "flex" }}>
-                              {props.imagelink.startsWith("image") ? (
+                              {tabledata.type.startsWith("image") ? (
                                 <Image src="/icons/jpg.svg" alt="jpg" />
-                              ) : props.imagelink.startsWith("application") ? (
+                              ) : tabledata.type.startsWith("application") ? (
                                 <Image src="/icons/pdf.svg" alt="jpg" />
-                              ) : props.imagelink.startsWith("video") ? (
+                              ) : tabledata.type.startsWith("video") ? (
                                 <Image src="/icons/reports/pdf.svg" alt="jpg" />
                               ) : null}
                               <div className={reporttable.absolutecenter}>
