@@ -30,6 +30,8 @@ const ReportModal = (props) => {
 
   const UserCollection = Users || [];
 
+  console.log(UserCollection);
+
   const { data: Projects } = useGetProjectDetailsQuery({
     refetchOnMountArgChange: true,
   });
@@ -54,17 +56,17 @@ const ReportModal = (props) => {
     return filtereddata;
   }, [select, TaskCollections]);
 
-
   const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
-    setFiles([...files, ...e.target.files]);
+    setFiles([...files, e.target.files[0]]);
   };
+
+  console.log(files);
 
   const removeImage = (index) => {
     const newArray = [...files];
     newArray.splice(index, 1);
     setFiles(newArray);
-    console.log("batman");
   };
 
   const submitForm = async (data) => {
@@ -72,11 +74,16 @@ const ReportModal = (props) => {
     const conversion = { ...data };
     const stringid = conversion.send_to.toString();
     const formData = new FormData();
-    formData.append("attachments", files);
+    files.map((file) => {
+      return formData.append("attachments", file);
+    });
+    // formData.append("attachments", files);
     formData.append("send_to", stringid);
     formData.append("project", conversion.project);
     formData.append("task", conversion.task);
     formData.append("note", conversion.note);
+
+    console.log(formData);
 
     try {
       await toast.promise(addReportsMutation(formData).unwrap(), {
@@ -85,7 +92,7 @@ const ReportModal = (props) => {
         error: "Failed to create form",
       });
       reset();
-      setfile(null);
+      setFiles(null);
       // toast.success("Project Registered Successfully");
     } catch (error) {
       console.log("error", error);
@@ -103,17 +110,21 @@ const ReportModal = (props) => {
       <Modal.Body className={modal.modalbody}>
         <Form onSubmit={handleSubmit(submitForm)}>
           <div className={modal.attachmentflex}>
-            {files.map((file, index) => {
-              return (
-                <Attachment
-                  key={index}
-                  attachmentname={file.name}
-                  imagelink={file.type}
-                  onClick={removeImage}
-                  attachmentsize={file.size}
-                />
-              );
-            })}
+            {!files ? null : (
+              <>
+                {files.map((file, index) => {
+                  return (
+                    <Attachment
+                      key={index}
+                      attachmentname={file.name}
+                      imagelink={file.type}
+                      onClick={removeImage}
+                      attachmentsize={file.size}
+                    />
+                  );
+                })}
+              </>
+            )}
           </div>
           <div className={modal.fileabsolutecenter}>
             <div className={modal.customfileinput}>

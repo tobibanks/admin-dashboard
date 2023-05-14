@@ -385,6 +385,7 @@
 
 .textarea {
   background-color: var(--black50);
+  font-family: "Inter", sans-serif;
 }
 
 .textarea:focus {
