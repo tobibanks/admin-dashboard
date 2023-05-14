@@ -255,13 +255,11 @@ const MessageDashboard = () => {
                           <div
                             key={index}
                             style={{
-                              // position: "absolute",
-                              // bottom: "0px",
-                              // alignItems: "flex-end"
-                              // alignSelf: "flex-end",
                               width: "100%",
+                              flexDirection: "column",
                               display: "flex",
-                              alignSelf: "flex-end",
+                              height: "80vh",
+                              justifyContent: "flex-end",
                             }}
                           >
                             {project?.type === "project" ? (
@@ -416,7 +414,7 @@ const MessageDashboard = () => {
                                             }
                                           >
                                             <p className={message.incoming}>
-                                              {chat.message} 
+                                              {chat.message}
                                             </p>
                                           </div>
                                         )}
