@@ -368,10 +368,29 @@
   background-color: white;
   font-family: "Inter", sans-serif;
   margin-left: 16px;
+  border: 1px solid var(--black200);
   margin-right: 16px;
   /* max-width: 668px; */
   margin-bottom: 0px;
   font-family: "Inter", sans-serif;
+}
+
+.projectgroup {
+  margin-bottom: 5px;
+  font-family: "Inter", sans-serif;
+  margin-left: 23px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--black400);
+}
+
+.incomingcontainergroup {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 0.5rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-self: flex-end;
 }
 
 .incomingcontainer {

@@ -24,7 +24,6 @@ const MessageDashboard = () => {
   // preventing code break. displays empty array till the messages loas
   const messageDetails = allMessagesDetails || [];
 
-
   // getting the first object in the array of objects and copying it into a variable
   var first = [...messageDetails].shift();
 
@@ -50,7 +49,6 @@ const MessageDashboard = () => {
 
   // prevents code breaks
   const chats = allChats || [];
-
 
   // useForm hook
   const { register, reset, handleSubmit } = useForm();
@@ -87,7 +85,7 @@ const MessageDashboard = () => {
   const allMessages =
     messages.sort((a, b) => a.time_stamp - b.time_stamp) || [];
 
-
+  console.log(allMessages);
 
   const adminInfo = JSON.parse(localStorage.getItem("adminInfo"));
 
@@ -412,12 +410,17 @@ const MessageDashboard = () => {
                                         ) : (
                                           <div
                                             className={
-                                              message.incomingcontainer
+                                              message.incomingcontainergroup
                                             }
                                           >
-                                            <p className={message.incoming}>
-                                              {chat.message.message}
+                                            <div>
+                                              <p className={message.projectgroup}>
+                                              {chat.sender_name}
                                             </p>
+                                              <p className={message.incoming}>
+                                                {chat.message.message}
+                                              </p>
+                                            </div>
                                           </div>
                                         )}
                                       </div>
