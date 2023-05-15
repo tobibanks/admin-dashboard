@@ -63,7 +63,7 @@ const Project = () => {
                 <thead className={project.tableheader}>
                   <tr>
                     <th>PROJECT NAME</th>
-                    <th className={project.centericon}>REQUESTED BY</th>
+                    <th className={project.centericon}>ASSIGNED TO</th>
                     <th className={project.centericon}>DUE DATE</th>
                   </tr>
                 </thead>

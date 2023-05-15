@@ -683,8 +683,9 @@
 
 .search {
   border-radius: 25px;
-  width: 144px;
-  border-color: var(--black200);
+  width: 100%;
+  border: none;
+  border: 1px solid var(--black200);
   font-family: "Inter", sans-serif;
   font-size: 12px;
   text-indent: 30px;

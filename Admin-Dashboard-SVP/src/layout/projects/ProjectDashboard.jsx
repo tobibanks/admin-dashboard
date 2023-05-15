@@ -181,16 +181,16 @@ const ProjectDashboard = () => {
                       <td className={project.align}>{projectcollect.name}</td>
                       <td>
                         <div className={project.absolutecenter}>
-                          {projectcollect?.requested_by?.firstname &&
-                          projectcollect?.requested_by.lastname ? (
+                          {projectcollect?.assigned_to?.firstname &&
+                          projectcollect?.assigned_to.lastname ? (
                             <p className={project.avatar}>
                               <span className={project.label}>
-                                {projectcollect?.requested_by?.firstname?.charAt(
+                                {projectcollect?.assigned_to?.firstname?.charAt(
                                   0
                                 )}
                               </span>
                               <span className={project.label}>
-                                {projectcollect?.requested_by?.lastname?.charAt(
+                                {projectcollect?.assigned_to?.lastname?.charAt(
                                   0
                                 )}
                               </span>
