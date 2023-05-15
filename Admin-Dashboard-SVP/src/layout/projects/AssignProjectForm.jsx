@@ -43,8 +43,6 @@ const AssignProjectForm = () => {
 
   const { register, control, reset, handleSubmit } = useForm();
 
-  console.log(new Date(filtereddatarevised?.date).toLocaleDateString());
-
   const submitForm = async (data) => {
     const useradditionaldetails = {
       requested_by: {
@@ -79,16 +77,12 @@ const AssignProjectForm = () => {
     }
   };
 
-  console.log(ProjectManagerCollection);
-
   const date = new Date(filtereddatarevised?.date);
   const futureDate = date.getDate() + 3;
   date.setDate(futureDate);
   const defaultValue = date.toLocaleDateString("en-CA");
 
   const [type, setType] = useState(defaultValue);
-
-  console.log(filtereddatarevised);
 
   function MyBooleanInput({ control, name }) {
     return (

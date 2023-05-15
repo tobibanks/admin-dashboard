@@ -30,7 +30,6 @@ const ReportModal = (props) => {
 
   const UserCollection = Users || [];
 
-  console.log(UserCollection);
 
   const { data: Projects } = useGetProjectDetailsQuery({
     refetchOnMountArgChange: true,
@@ -61,7 +60,6 @@ const ReportModal = (props) => {
     setFiles([...files, e.target.files[0]]);
   };
 
-  console.log(files);
 
   const removeImage = (index) => {
     const newArray = [...files];
@@ -83,7 +81,6 @@ const ReportModal = (props) => {
     formData.append("task", conversion.task);
     formData.append("note", conversion.note);
 
-    console.log(formData);
 
     try {
       await toast.promise(addReportsMutation(formData).unwrap(), {

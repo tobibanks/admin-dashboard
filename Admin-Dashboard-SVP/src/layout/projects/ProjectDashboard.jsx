@@ -36,8 +36,6 @@ const ProjectDashboard = () => {
   const finalStartDate = new Date(convertedStartDate).getTime();
   const finalEndDate = new Date(convertedEndDate).getTime();
 
-  console.log(finalStartDate);
-
   const data = useMemo(() => {
     if (!filter) return ProjectsCollection;
     const filteredData = ProjectsCollection.filter(

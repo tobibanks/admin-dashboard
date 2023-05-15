@@ -28,7 +28,6 @@ const DashboardLayout = (props) => {
 
   const handleClick = () => {
     setModalShow(true);
-    console.log("batman");
   };
   return (
     <Container className={side.container}>

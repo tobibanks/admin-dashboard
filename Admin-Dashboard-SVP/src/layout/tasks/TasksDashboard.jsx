@@ -27,7 +27,7 @@ const TasksDashboard = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
-  console.log(TasksTableCollection);
+
 
   // window.location.reload();
   // location.reload();

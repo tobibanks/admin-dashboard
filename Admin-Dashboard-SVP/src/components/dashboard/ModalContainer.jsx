@@ -29,7 +29,6 @@ const ModalContainer = (props) => {
     .format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
 
   const endOfDay = moment().endOf("day").format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
-  console.log(endOfDay);
 
   const startOfWeek = moment()
     .startOf("week")

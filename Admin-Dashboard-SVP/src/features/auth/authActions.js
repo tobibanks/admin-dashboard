@@ -19,6 +19,7 @@ export const adminLogin = createAsyncThunk(
       );
 
       localStorage.setItem("adminToken", data.token);
+      localStorage.setItem("adminInfo", JSON.stringify(data));
 
       return data;
     } catch (error) {

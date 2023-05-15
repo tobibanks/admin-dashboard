@@ -22,7 +22,6 @@ const Notification = () => {
     .format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
 
   const endOfDay = moment().endOf("day").format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
-  console.log(endOfDay);
 
   const startOfWeek = moment()
     .startOf("week")
@@ -63,7 +62,7 @@ const Notification = () => {
       <div className={notification.notificationcontent}>
         {filteredToday.length >= 1 ? (
           <>
-            {filteredToday.map((data, index) => (
+            {filteredToday.slice(0, 3).map((data, index) => (
               <NotificationContent
                 name={data.from_user.firstname}
                 type={data.type}
@@ -84,7 +83,7 @@ const Notification = () => {
       <p className={notification.firsttext}>THIS WEEK</p>
       {filteredDataToday.length >= 1 ? (
         <>
-          {filteredDataToday.map((data, index) => (
+          {filteredDataToday.slice(0, 3).map((data, index) => (
             <NotificationContent
               name={data.from_user.firstname}
               type={data.type}

@@ -53,8 +53,6 @@ const ProjectGridDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, data]);
 
-  console.log(dataByDate);
-
   const filteredInProgressData = ProjectsCollection.filter(
     (item) => item.admin_Status === "In Progress"
   );

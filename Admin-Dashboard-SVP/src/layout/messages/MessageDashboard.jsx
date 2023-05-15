@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import { getInitials } from "../../../util/text";
 import moment from "moment";
 import { LoaderIcon } from "react-hot-toast";
+import useSendMessage from "../../hooks/useSendMessage";
+import { useCollection } from "./../../hooks/useCollection";
 
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
@@ -22,7 +24,6 @@ const MessageDashboard = () => {
   // preventing code break. displays empty array till the messages loas
   const messageDetails = allMessagesDetails || [];
 
-  console.log(messageDetails);
 
   // getting the first object in the array of objects and copying it into a variable
   var first = [...messageDetails].shift();
@@ -50,7 +51,6 @@ const MessageDashboard = () => {
   // prevents code breaks
   const chats = allChats || [];
 
-  console.log(chats);
 
   // useForm hook
   const { register, reset, handleSubmit } = useForm();
@@ -58,10 +58,16 @@ const MessageDashboard = () => {
   //closing of messages that involves group chats
   const [open, setOpen] = useState(true);
 
+  const { error, sendMessage } = useSendMessage();
+
   // form hook submission of messages
   const submitForm = async (msg) => {
     reset();
-    updateMsg({ data: msg, id: filter }).unwrap();
+    const time = new Date().getTime();
+    reset();
+    await sendMessage(filter, msg, time).then(() => {
+      reset();
+    });
   };
 
   // useEffect to refresh every 1seconds to check for new mwssages
@@ -74,20 +80,16 @@ const MessageDashboard = () => {
   // }, []);
 
   const [defaultState, setDefaultState] = useState(true);
+  const { documents: messages, loading } = useCollection(
+    `messages/${filter}/messages`
+  );
 
-  const [messages, setMessages] = useState(chats);
+  const allMessages =
+    messages.sort((a, b) => a.time_stamp - b.time_stamp) || [];
 
-  const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  };
 
-  useEffect(() => {
-    scroll();
-  }, [chats]);
-
-  console.log(chats);
+  const adminInfo = JSON.parse(localStorage.getItem("adminInfo"));
 
   return (
     <Container className={message.container}>
@@ -396,15 +398,15 @@ const MessageDashboard = () => {
                                 ) : null}
 
                                 <div className={message.scrollchat}>
-                                  {chats.map((chat, index) => {
+                                  {allMessages.map((chat, index) => {
                                     return (
                                       <div key={index}>
-                                        {chat.fromSelf ? (
+                                        {chat.sender === adminInfo.id ? (
                                           <div
                                             className={message.sendingcontainer}
                                           >
                                             <p className={message.sending}>
-                                              {chat.message}
+                                              {chat.message.message}
                                             </p>
                                           </div>
                                         ) : (
@@ -414,7 +416,7 @@ const MessageDashboard = () => {
                                             }
                                           >
                                             <p className={message.incoming}>
-                                              {chat.message}
+                                              {chat.message.message}
                                             </p>
                                           </div>
                                         )}
@@ -425,15 +427,15 @@ const MessageDashboard = () => {
                               </>
                             ) : (
                               <div className={message.scrollchat}>
-                                {chats.map((chat, index) => {
+                                {allMessages.map((chat, index) => {
                                   return (
                                     <div key={index}>
-                                      {chat.fromSelf ? (
+                                      {chat.sender === adminInfo.id ? (
                                         <div
                                           className={message.sendingcontainer}
                                         >
                                           <p className={message.sending}>
-                                            {chat.message}
+                                            {chat.message.message}
                                           </p>
                                         </div>
                                       ) : (
@@ -441,7 +443,7 @@ const MessageDashboard = () => {
                                           className={message.incomingcontainer}
                                         >
                                           <p className={message.incoming}>
-                                            {chat.message}
+                                            {chat.message.message}
                                           </p>
                                         </div>
                                       )}

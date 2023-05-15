@@ -16,7 +16,7 @@ const TaskBoardDashboard = () => {
 
   const TasksBoardCollection = TaskCollection || [];
 
-  console.log(TasksBoardCollection);
+
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -46,7 +46,6 @@ const TaskBoardDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, inprogressdata]);
 
-  console.log(!startDate && endDate);
 
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(

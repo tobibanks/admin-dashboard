@@ -15,7 +15,6 @@ const Tasks = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
-  console.log(TasksTableCollection);
   // var options = { day: "numeric", month: "short" };
 
   return (
