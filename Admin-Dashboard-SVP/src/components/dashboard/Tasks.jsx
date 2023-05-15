@@ -15,6 +15,8 @@ const Tasks = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
+  console.log(TasksTableCollection);
+
   // var options = { day: "numeric", month: "short" };
 
   return (
@@ -65,8 +67,8 @@ const Tasks = () => {
                           )}
                         </td>
                         <td className={task.centericon}>
-                          {Taskdata.status === "In Progress" ||
-                          "Awaiting Approval" ? (
+                          {Taskdata.status ===
+                          ("In Progress" || "Awaiting Approval") ? (
                             <Icon imagelink="/icons/dashboard/task/pending-true.svg" />
                           ) : (
                             <Icon imagelink="/icons/dashboard/task/pending-failed.svg" />

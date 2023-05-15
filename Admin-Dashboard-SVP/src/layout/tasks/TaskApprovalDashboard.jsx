@@ -36,13 +36,13 @@ const TaskApprovalDashboard = () => {
 
   const taskapprovalid = id;
 
-
-
   const submitForm = async (data) => {
     const completeform = {
       ...updatedTask,
       ...data,
     };
+
+    console.log(completeform);
     try {
       await toast.promise(
         updateTaskMutation({ data: completeform, id: taskapprovalid }).unwrap(),
@@ -117,7 +117,7 @@ const TaskApprovalDashboard = () => {
                       {...register("status")}
                       required
                       name="status"
-                      value="approved"
+                      value="Approved"
                       id="custom-switch"
                       label="Approved"
                     />
@@ -125,7 +125,7 @@ const TaskApprovalDashboard = () => {
                       {...register("status")}
                       type="radio"
                       name="status"
-                      value="declined"
+                      value="Declined"
                       id="custom-switch2"
                       label="Declined"
                     />

@@ -57,6 +57,7 @@ const AssignProjectForm = () => {
       ...data,
     };
 
+    console.log(completeform);
     try {
       await toast.promise(
         assignpmDetailsMutation({
@@ -66,7 +67,7 @@ const AssignProjectForm = () => {
         {
           loading: "Saving Form",
           success: "Project Assigned Successfully",
-          // success: "Project Form Created Successfully",
+          success: "Project Form Created Successfully",
           error: "Failed to create form",
         }
       );

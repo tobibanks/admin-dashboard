@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import "./Modal.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import SkeletonLoader from "./SkeletonLoader";
+import ModalProject from "./../project/ModalProject";
 
 const Project = () => {
   const { data: UserProjects, isLoading } = useGetProjectDetailsQuery({
@@ -13,6 +14,9 @@ const Project = () => {
   const [filter, setFilter] = useState(null);
 
   const UserProjectsCollection = UserProjects || [];
+
+  const [modalShow, setModalShow] = React.useState(false);
+  const [setting, setSetting] = useState("");
 
   const data = useMemo(() => {
     if (!filter) return UserProjectsCollection;
@@ -69,7 +73,14 @@ const Project = () => {
                 </thead>
                 <tbody>
                   {data.map((projectdata, index) => (
-                    <tr key={index} className={project.pointer}>
+                    <tr
+                      key={index}
+                      className={project.pointer}
+                      onClick={() => {
+                        setSetting(projectdata._id);
+                        setModalShow(true);
+                      }}
+                    >
                       <td className={project.align}>
                         <div className={project.flexcontent}>
                           <Icon imagelink="/icons/dashboard/task/star.svg" />
@@ -110,6 +121,11 @@ const Project = () => {
           </div>
         )}
       </div>
+      <ModalProject
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id={setting}
+      />
     </div>
   );
 };

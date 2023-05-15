@@ -433,8 +433,14 @@
 }
 
 .textarea {
-  background-color: var(--black200);
+  background-color: #F3F3F3;
   font-family: "Inter", sans-serif;
+}
+
+.textarea:focus {
+  outline: none !important;
+  border: none;
+  background-color: #F3F3F3;
 }
 
 .descriptioncontainer {
