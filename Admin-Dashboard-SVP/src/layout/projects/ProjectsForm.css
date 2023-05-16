@@ -87,7 +87,7 @@ tr {
   border-style: none;
   border-width: 0px;
 }
-/* 
+
 input[type="radio"] {
   -webkit-appearance: none;
   width: 24px;
@@ -112,4 +112,4 @@ input[type="radio"]:checked:before {
 
 input[type="radio"]:checked {
   border-color: var(--SVP-main);
-} */
+}

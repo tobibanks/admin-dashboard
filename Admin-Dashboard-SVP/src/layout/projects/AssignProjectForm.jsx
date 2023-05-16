@@ -37,6 +37,10 @@ const AssignProjectForm = () => {
     return obj._id === id;
   });
 
+  const [checkedradio, setCheckedRadio] = useState(filtereddatarevised?.design);
+
+  console.log(checkedradio);
+
   const projectcurrentid = id;
 
   const { register, control, reset, handleSubmit } = useForm();
@@ -125,6 +129,25 @@ const AssignProjectForm = () => {
             <p className={projectform.header1}>PROJECT INFORMATION</p>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
+            <div className={projectform.formcontainer}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <div className={projectform.formcontainer1}>
+                  <Form.Label className={projectform.form1}>
+                    Assigned To
+                  </Form.Label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    {...register("user_id")}
+                  >
+                    {ProjectManagerCollection.map((usercollect, index) => (
+                      <option key={index} value={usercollect._id}>
+                        {usercollect.firstname} {usercollect.lastname}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </div>
+              </Form.Group>
+            </div>
             <div className={projectform.formcontainer1}>
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label className={projectform.form1}>
