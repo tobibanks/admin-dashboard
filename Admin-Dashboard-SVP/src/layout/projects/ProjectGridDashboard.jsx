@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useMemo } from "react";
+import React, { forwardRef, useState, useMemo, useEffect } from "react";
 import { Container, Image, Button } from "react-bootstrap";
 import project from "./project.module.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
@@ -34,6 +34,7 @@ const ProjectGridDashboard = () => {
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
+  const [message, setMessage] = useState("There are no projects");
 
   const data = useMemo(() => {
     if (!filter) return ProjectsCollection;
@@ -65,6 +66,10 @@ const ProjectGridDashboard = () => {
     (item) => item.admin_Status === "Complete"
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container className={project.container}>
       <DashboardLayout name="Projects">
@@ -83,6 +88,7 @@ const ProjectGridDashboard = () => {
                   setFilter(null);
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects");
                 }}
               />
 
@@ -95,6 +101,7 @@ const ProjectGridDashboard = () => {
                   setFilter("Requested");
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects requested");
                 }}
               />
               <NavCategories
@@ -106,6 +113,7 @@ const ProjectGridDashboard = () => {
                   setFilter("In Progress");
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects in progress");
                 }}
               />
               <NavCategories
@@ -116,6 +124,7 @@ const ProjectGridDashboard = () => {
                 onClick={() => {
                   setFilter("Complete");
                   setStartDate(null);
+                  setMessage("There are no completed projects");
                   setEndDate(null);
                 }}
               />
@@ -177,7 +186,7 @@ const ProjectGridDashboard = () => {
                 </div>
               ) : (
                 <div style={{ marginTop: "2rem" }}>
-                  <p className={project.nothing}>There are no projects</p>
+                  <p className={project.nothing}>{message}</p>
                 </div>
               )}
             </>

@@ -91,7 +91,7 @@ const Cards = (props) => {
         </div>
         <p className={user.title}>{props.title}</p>
         <p className={user.description}>
-          You have {props.text} {props.verb} {props.title}
+          You have {props.text} {props.verb} <br /> {props.title}
         </p>
       </div>
     </div>

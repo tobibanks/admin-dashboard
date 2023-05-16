@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 const ModalContainer = (props) => {
   const [filter, setFilter] = useState(null);
   const [active, setActive] = useState();
+  const [message, setMessage] = useState("No notifications today");
+  const [message1, setMessage1] = useState("No notifications this week");
   const { data: allNotifications } = useGetAllNotificationsQuery();
 
   const allnotifications = allNotifications || [];
@@ -22,7 +24,6 @@ const ModalContainer = (props) => {
     );
     return filteredData;
   }, [filter, allnotifications]);
-
 
   const initialvalue = moment()
     .startOf("day")
@@ -64,7 +65,6 @@ const ModalContainer = (props) => {
     return filtereddata;
   }, [startOfWeekISO, endOfWeekISO, todayISO, data]);
 
-
   return (
     <Modal
       className={notification.modal}
@@ -86,24 +86,49 @@ const ModalContainer = (props) => {
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Nav variant="pills" className={notification.nav}>
             <Nav.Item>
-              <Nav.Link eventKey="first" onClick={() => setFilter(null)}>
+              <Nav.Link
+                eventKey="first"
+                onClick={() => {
+                  setFilter(null);
+                  setMessage("No notifications today");
+                  setMessage1("No notifications this week");
+                }}
+              >
                 All Notifications
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={() => setFilter("message")} eventKey="second">
+              <Nav.Link
+                onClick={() => {
+                  setFilter("message");
+                  setMessage("No notifications today");
+                  setMessage1("No notifications this week");
+                }}
+                eventKey="second"
+              >
                 Messages
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="third" onClick={() => setFilter("Report")}>
+              <Nav.Link
+                eventKey="third"
+                onClick={() => {
+                  setFilter("Report");
+                  setMessage("No notifications today");
+                  setMessage1("No notifications this week");
+                }}
+              >
                 Reports
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 eventKey="fourth"
-                onClick={() => setFilter("Project Request")}
+                onClick={() => {
+                  setFilter("Project Request");
+                  setMessage("No notifications today");
+                  setMessage1("No notifications this week");
+                }}
               >
                 Project Request
               </Nav.Link>
@@ -111,7 +136,11 @@ const ModalContainer = (props) => {
             <Nav.Item>
               <Nav.Link
                 eventKey="fifth"
-                onClick={() => setFilter("Project Approval")}
+                onClick={() => {
+                  setFilter("Project Approval");
+                  setMessage("No notifications today");
+                  setMessage1("No notifications this week");
+                }}
               >
                 Project Approval
               </Nav.Link>
@@ -138,9 +167,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message}</p>
                     </div>
                   )}
                 </div>
@@ -162,9 +189,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message1}</p>
                     </div>
                   )}
                 </div>
@@ -190,9 +215,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message}</p>
                     </div>
                   )}
                 </div>
@@ -214,9 +237,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message1}</p>
                     </div>
                   )}
                 </div>
@@ -242,9 +263,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message}</p>
                     </div>
                   )}
                 </div>
@@ -266,9 +285,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message1}</p>
                     </div>
                   )}
                 </div>
@@ -294,9 +311,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message}</p>
                     </div>
                   )}
                 </div>
@@ -318,9 +333,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message1}</p>
                     </div>
                   )}
                 </div>
@@ -346,9 +359,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message}</p>
                     </div>
                   )}
                 </div>
@@ -370,9 +381,7 @@ const ModalContainer = (props) => {
                     </>
                   ) : (
                     <div>
-                      <p className={notification.nothing}>
-                        There are no new notifications
-                      </p>
+                      <p className={notification.nothing}>{message1}</p>
                     </div>
                   )}
                 </div>

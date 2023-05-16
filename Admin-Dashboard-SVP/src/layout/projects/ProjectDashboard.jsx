@@ -21,11 +21,16 @@ const ProjectDashboard = () => {
     refetchOnMountOrArgChange: true,
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const ProjectsCollection = UserTableProjects || [];
 
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
+  const [message, setMessage] = useState("There are no projects");
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -66,6 +71,10 @@ const ProjectDashboard = () => {
     (item) => item.admin_Status === "Complete"
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     refetch();
@@ -91,6 +100,7 @@ const ProjectDashboard = () => {
                   setFilter(null);
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects");
                 }}
               />
 
@@ -103,6 +113,7 @@ const ProjectDashboard = () => {
                   setFilter("Requested");
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects requested");
                 }}
               />
               <NavCategories
@@ -114,6 +125,7 @@ const ProjectDashboard = () => {
                   setFilter("In Progress");
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects in progress");
                 }}
               />
               <NavCategories
@@ -125,6 +137,7 @@ const ProjectDashboard = () => {
                   setFilter("Complete");
                   setStartDate(null);
                   setEndDate(null);
+                  setMessage("There are no projects completed");
                 }}
               />
             </div>
@@ -221,8 +234,8 @@ const ProjectDashboard = () => {
                   ))}
                 </TableDisplay>
               ) : (
-                <div style={{ marginTop: "3rem" }}>
-                  <p className={project.nothing}>There are no projects</p>
+                <div style={{ marginTop: "2rem" }}>
+                  <p className={project.nothing}>{message}</p>
                 </div>
               )}
             </div>

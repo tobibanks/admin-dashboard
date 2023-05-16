@@ -17,7 +17,6 @@ const ModalTask = (props) => {
   const [id, setId] = useState();
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
-  // console.log(ModalTaskCollection[4].attachments);
 
   return (
     <Modal

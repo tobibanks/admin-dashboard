@@ -30,7 +30,6 @@ const TaskFormDashboard = () => {
 
   const projectcurrentid = id;
 
-  // console.log(filtereddatarevised);
   const { register, control, reset, handleSubmit } = useForm();
 
   const submitForm = async (data) => {
@@ -49,7 +48,7 @@ const TaskFormDashboard = () => {
       reset();
       navigate("/dashboard");
     } catch (error) {
-      console.log("error", error);
+      toast.error(error);
     }
   };
   return (

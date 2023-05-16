@@ -42,7 +42,6 @@ const TaskApprovalDashboard = () => {
       ...data,
     };
 
-    console.log(completeform);
     try {
       await toast.promise(
         updateTaskMutation({ data: completeform, id: taskapprovalid }).unwrap(),
@@ -54,8 +53,7 @@ const TaskApprovalDashboard = () => {
       );
       navigate("/task");
     } catch (error) {
-      // toast.error(error);
-      console.log(error);
+      toast.error(error);
     }
   };
 

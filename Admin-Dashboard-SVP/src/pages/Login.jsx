@@ -114,8 +114,6 @@ const Login = () => {
               </div>
             </Form.Group>
             {errors.password_repeat && errors.password_repeat?.message}
-            {console.log(errors.password_repeat?.message)} */}
-            {/* {console.log(errors.password_repeat.message)} */}
             {/* <Spinner /> */}
             <Button
               type="submit"

@@ -74,9 +74,7 @@ const Notification = () => {
           </>
         ) : (
           <div>
-            <p className={notification.nothing}>
-              There are no new notifications
-            </p>
+            <p className={notification.nothing}>No notifications today</p>
           </div>
         )}
       </div>
@@ -95,7 +93,7 @@ const Notification = () => {
         </>
       ) : (
         <div>
-          <p className={notification.nothing}>There are no new notifications</p>
+          <p className={notification.nothing}>No notifications this week</p>
         </div>
       )}
       {filteredDataToday > 3 ? (

@@ -85,8 +85,6 @@ const MessageDashboard = () => {
   const allMessages =
     messages.sort((a, b) => a.time_stamp - b.time_stamp) || [];
 
-  console.log(allMessages);
-
   const adminInfo = JSON.parse(localStorage.getItem("adminInfo"));
 
   return (
@@ -111,9 +109,6 @@ const MessageDashboard = () => {
               <div className={message.userslistcontainer}>
                 {messageDetails.map((messageDetail, index) => {
                   const active = filter === messageDetail._id;
-                  {
-                    console.log(messageDetail);
-                  }
                   return (
                     <div
                       className={
@@ -414,9 +409,11 @@ const MessageDashboard = () => {
                                             }
                                           >
                                             <div>
-                                              <p className={message.projectgroup}>
-                                              {chat.sender_name}
-                                            </p>
+                                              <p
+                                                className={message.projectgroup}
+                                              >
+                                                {chat.sender_name}
+                                              </p>
                                               <p className={message.incoming}>
                                                 {chat.message.message}
                                               </p>

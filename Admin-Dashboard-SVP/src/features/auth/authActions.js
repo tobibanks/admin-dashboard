@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const url = "https://svp.hypen.blog";
 
@@ -23,7 +24,7 @@ export const adminLogin = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.response.data);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {

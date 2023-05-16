@@ -1,4 +1,4 @@
-import React, { useMemo, useState, forwardRef } from "react";
+import React, { useMemo, useState, forwardRef, useEffect } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import Header from "../../components/project/Header";
 import grid from "./project.module.css";
@@ -17,7 +17,7 @@ const ProjectBoardDashboard = () => {
 
   const ProjectsBoardCollection = UserProjectsBoard || [];
 
-  console.log(ProjectsBoardCollection);
+
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
@@ -82,6 +82,10 @@ const ProjectBoardDashboard = () => {
     );
     return filtereddata;
   }, [finalStartDate, finalEndDate, completedata]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Container className={grid.container}>
@@ -160,7 +164,7 @@ const ProjectBoardDashboard = () => {
                       ))}
                     </>
                   ) : (
-                    <div style={{ marginTop: "3rem" }}>
+                    <div style={{ marginTop: "2rem" }}>
                       <p className={grid.nothing}>There are no projects</p>
                     </div>
                   )}
@@ -202,7 +206,7 @@ const ProjectBoardDashboard = () => {
                   ) : (
                     <div style={{ marginTop: "2rem" }}>
                       <p className={grid.nothing}>
-                        There are no upcoming projects
+                        There are no requested projects
                       </p>
                     </div>
                   )}

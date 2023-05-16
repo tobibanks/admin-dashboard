@@ -33,8 +33,6 @@ const AssignProjectForm = () => {
 
   const filtereddata = ProjectsCollection.filter((item) => item._id === id);
 
-  // console.log(filtereddata);
-
   const filtereddatarevised = filtereddata.find((obj) => {
     return obj._id === id;
   });
@@ -56,8 +54,6 @@ const AssignProjectForm = () => {
       ...useradditionaldetails,
       ...data,
     };
-
-    console.log(completeform);
     try {
       await toast.promise(
         assignpmDetailsMutation({
@@ -67,14 +63,13 @@ const AssignProjectForm = () => {
         {
           loading: "Saving Form",
           success: "Project Assigned Successfully",
-          success: "Project Form Created Successfully",
           error: "Failed to create form",
         }
       );
       reset();
       navigate("/dashboard");
     } catch (error) {
-      console.log("error", error);
+      toast.error(error);
     }
   };
 

@@ -1,6 +1,6 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import FileInputContainer from "@/components/reports/FileInputContainer";
-import React, { useState, useMemo, forwardRef } from "react";
+import React, { useState, useMemo, forwardRef, useEffect } from "react";
 import Header from "../../components/reports/Header";
 import reportsgrid from "./reports.module.css";
 import DatePicker from "react-datepicker";
@@ -20,7 +20,7 @@ const ReportsGridDashboard = () => {
   const [select, setSelect] = useState("");
   const [task, setTask] = useState("");
   const [display, setDisplay] = useState(false);
-  const [message, setMessage] = useState(false);
+  const [message, setMessage] = useState("There are no reports");
 
   const { data: AdminReports, isLoading } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
@@ -40,7 +40,7 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
-  console.log(ReportsCollection);
+
 
   const [startDate, setStartDate] = useState(new Date("01/01/2022"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
@@ -74,7 +74,7 @@ const ReportsGridDashboard = () => {
   //   return filtereddata;
   // }, [finalStartDate, finalEndDate, data]);
 
-  // console.log(dataByDate);
+
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
   );
@@ -104,6 +104,10 @@ const ReportsGridDashboard = () => {
     return filtereddata;
   }, [select, ReportsCollection]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container className={reportsgrid.container}>
       <DashboardLayout name="Reports">
@@ -117,7 +121,11 @@ const ReportsGridDashboard = () => {
                 filter={filter}
                 filter1={null}
                 total={`(${ReportsCollection.length})`}
-                onClick={() => setFilter(null)}
+                onClick={() => {
+                  setFilter(null);
+                  setTask(null);
+                  setMessage("There are no reports");
+                }}
               />
 
               <NavCategories
@@ -125,21 +133,33 @@ const ReportsGridDashboard = () => {
                 filter={filter}
                 filter1="image"
                 total={`(${filteredImage.length})`}
-                onClick={() => setFilter("image")}
+                onClick={() => {
+                  setFilter("image");
+                  setTask(null);
+                  setMessage("There are no pictures");
+                }}
               />
               <NavCategories
-                name="Video"
+                name="Videos"
                 filter={filter}
                 filter1="video"
                 total={`(${filteredVideo.length})`}
-                onClick={() => setFilter("video")}
+                onClick={() => {
+                  setFilter("video");
+                  setTask(null);
+                  setMessage("There are no videos");
+                }}
               />
               <NavCategories
                 name="Documents"
                 filter={filter}
                 filter1="document"
                 total={`(${filteredDocument.length})`}
-                onClick={() => setFilter("document")}
+                onClick={() => {
+                  setFilter("document");
+                  setTask(null);
+                  setMessage("There are no documents");
+                }}
               />
             </div>
             {/* <div className={reportsgrid.datepickertitle}>
@@ -241,10 +261,8 @@ const ReportsGridDashboard = () => {
                     })}
                   </div>
                 ) : (
-                  <div style={{ marginTop: "3rem" }}>
-                    <p className={reportsgrid.nothing}>
-                      {message || "there are no reports"}
-                    </p>
+                  <div style={{ marginTop: "2rem" }}>
+                    <p className={reportsgrid.nothing}>{message}</p>
                   </div>
                 )}
               </>

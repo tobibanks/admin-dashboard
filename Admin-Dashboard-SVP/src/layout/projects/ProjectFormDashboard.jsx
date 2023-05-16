@@ -37,7 +37,7 @@ const ProjectFormDashboard = () => {
       navigate("/project");
       window.location.reload();
     } catch (error) {
-      console.log("error", error);
+      toast.error(error);
     }
   };
 

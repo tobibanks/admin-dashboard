@@ -20,7 +20,6 @@ import ReportsTable from "./pages/reports/ReportsTable";
 import ReportsGrid from "./pages/reports/ReportsGrid";
 import TaskApproval from "./pages/tasks/taskapproval/[id]";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
 import TaskForm from "./pages/tasks/TaskForm";
 import AssignProjectForm from "./layout/projects/AssignProjectForm";
 import TaskFormDashboard from "./layout/tasks/TaskFormDashboard";
@@ -46,7 +45,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Login />} />
             {/* <ProtectedRoute exact path="/"> */}
-            <Route path="/register" element={<Register />} />
             <Route
               path="/dashboard"
               element={

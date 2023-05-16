@@ -1,4 +1,4 @@
-import React, { useState, useMemo, forwardRef } from "react";
+import React, { useState, useMemo, forwardRef, useEffect } from "react";
 import { Container, Button, Image, Form } from "react-bootstrap";
 import report from "./reports.module.css";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
@@ -38,7 +38,7 @@ const ReportsDashboard = () => {
   const [select, setSelect] = useState("");
   const [task, setTask] = useState("");
   const [display, setDisplay] = useState(false);
-  const [message, setMessage] = useState(false);
+  const [message, setMessage] = useState("There are no reports");
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -104,7 +104,11 @@ const ReportsDashboard = () => {
     return filtereddata;
   }, [select, ReportsCollection]);
 
-  // console.log(filteredImage);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <Container className={report.container}>
       <DashboardLayout name="Reports">
@@ -120,6 +124,7 @@ const ReportsDashboard = () => {
                 filter1={null}
                 onClick={() => {
                   setFilter(null);
+                  setTask(null);
                   setMessage("There are no reports");
                 }}
               />
@@ -131,16 +136,18 @@ const ReportsDashboard = () => {
                 total={`(${filteredImage.length})`}
                 onClick={() => {
                   setFilter("image");
-                  setMessage("There are no images");
+                  setTask(null);
+                  setMessage("There are no pictures");
                 }}
               />
               <NavCategories
-                name="Video"
+                name="Videos"
                 filter={filter}
                 filter1="video"
                 total={`(${filteredVideo.length})`}
                 onClick={() => {
                   setFilter("video");
+                  setTask(null);
                   setMessage("There are no videos");
                 }}
               />
@@ -151,6 +158,7 @@ const ReportsDashboard = () => {
                 total={`(${filteredDocument.length})`}
                 onClick={() => {
                   setFilter("document");
+                  setTask(null);
                   setMessage("There are no documents");
                 }}
               />
@@ -243,10 +251,8 @@ const ReportsDashboard = () => {
                     })}
                   </div>
                 ) : (
-                  <div style={{ marginTop: "3rem" }}>
-                    <p className={report.nothing}>
-                      {message || "There are no reports"}
-                    </p>
+                  <div style={{ marginTop: "2rem" }}>
+                    <p className={report.nothing}>{message}</p>
                   </div>
                 )}
               </>

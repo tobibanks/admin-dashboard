@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useMemo } from "react";
+import React, { useState, forwardRef, useMemo, useEffect } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import { Container, Image } from "react-bootstrap";
 import taskboard from "./task.module.css";
@@ -15,8 +15,6 @@ const TaskBoardDashboard = () => {
   });
 
   const TasksBoardCollection = TaskCollection || [];
-
-
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -45,7 +43,6 @@ const TaskBoardDashboard = () => {
     );
     return filtereddata;
   }, [finalStartDate, finalEndDate, inprogressdata]);
-
 
   const upcomingdata = useMemo(() => {
     const filteredData = TasksBoardCollection.filter(
@@ -80,6 +77,10 @@ const TaskBoardDashboard = () => {
     );
     return filtereddata;
   }, [finalStartDate, finalEndDate, completedata]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Container className={taskboard.container}>
@@ -148,7 +149,7 @@ const TaskBoardDashboard = () => {
                       ))}
                     </>
                   ) : (
-                    <div style={{ marginTop: "3rem" }}>
+                    <div style={{ marginTop: "2rem" }}>
                       <p className={taskboard.nothing}>There are no tasks</p>
                     </div>
                   )}
@@ -184,7 +185,7 @@ const TaskBoardDashboard = () => {
                   ) : (
                     <div style={{ marginTop: "2rem" }}>
                       <p className={taskboard.nothing}>
-                        There are no awaiting approval tasks
+                        There are no tasks awaiting approval
                       </p>
                     </div>
                   )}

@@ -30,7 +30,6 @@ const ReportModal = (props) => {
 
   const UserCollection = Users || [];
 
-
   const { data: Projects } = useGetProjectDetailsQuery({
     refetchOnMountArgChange: true,
   });
@@ -60,7 +59,6 @@ const ReportModal = (props) => {
     setFiles([...files, e.target.files[0]]);
   };
 
-
   const removeImage = (index) => {
     const newArray = [...files];
     newArray.splice(index, 1);
@@ -81,7 +79,6 @@ const ReportModal = (props) => {
     formData.append("task", conversion.task);
     formData.append("note", conversion.note);
 
-
     try {
       await toast.promise(addReportsMutation(formData).unwrap(), {
         loading: "Saving Form",
@@ -92,7 +89,7 @@ const ReportModal = (props) => {
       setFiles(null);
       // toast.success("Project Registered Successfully");
     } catch (error) {
-      console.log("error", error);
+      toast.error(error);
     }
   };
 
@@ -196,7 +193,6 @@ const ReportModal = (props) => {
                     <Form.Check
                       type="radio"
                       key={index}
-                      onChange={() => console.log("be batman")}
                       name="task"
                       {...register("task")}
                       value={task._id}

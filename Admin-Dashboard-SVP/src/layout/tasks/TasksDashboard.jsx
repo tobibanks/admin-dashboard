@@ -27,8 +27,6 @@ const TasksDashboard = () => {
 
   const TasksTableCollection = TaskCollection || [];
 
-
-
   // window.location.reload();
   // location.reload();
 
@@ -38,6 +36,7 @@ const TasksDashboard = () => {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [message, setMessage] = useState("There are no tasks");
 
   const convertedStartDate = new Date(startDate).toISOString();
   const convertedEndDate = new Date(endDate).toISOString();
@@ -87,6 +86,10 @@ const TasksDashboard = () => {
   //   return () => clearInterval(interval);
   // }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container className={task.container}>
       <DashboardLayout name="Tasks">
@@ -101,6 +104,7 @@ const TasksDashboard = () => {
                 filter1={null}
                 onClick={() => {
                   setFilter(null);
+                  setMessage("There are no tasks");
                   setStartDate(null);
                   setEndDate(null);
                 }}
@@ -112,6 +116,7 @@ const TasksDashboard = () => {
                 filter={filter}
                 filter1="Approved"
                 onClick={() => {
+                  setMessage("There are no approved tasks");
                   setFilter("Approved");
                   setStartDate(null);
                   setEndDate(null);
@@ -125,6 +130,7 @@ const TasksDashboard = () => {
                 onClick={() => {
                   setFilter("Awaiting Approval");
                   setStartDate(null);
+                  setMessage("There are no tasks awaiting approval");
                   setEndDate(null);
                 }}
               />
@@ -135,6 +141,7 @@ const TasksDashboard = () => {
                 filter={filter}
                 onClick={() => {
                   setFilter("In Progress");
+                  setMessage("There are no tasks in progress");
                   setStartDate(null);
                   setEndDate(null);
                 }}
@@ -146,6 +153,7 @@ const TasksDashboard = () => {
                 filter1="Declined"
                 onClick={() => {
                   setFilter("Declined");
+                  setMessage("There are no declined tasks");
                   setStartDate(null);
                   setEndDate(null);
                 }}
@@ -245,8 +253,8 @@ const TasksDashboard = () => {
                   ))}
                 </TaskTableDisplay>
               ) : (
-                <div style={{ marginTop: "3rem" }}>
-                  <p className={task.nothing}>There are no tasks</p>
+                <div style={{ marginTop: "2rem" }}>
+                  <p className={task.nothing}>{message}</p>
                 </div>
               )}
             </div>
