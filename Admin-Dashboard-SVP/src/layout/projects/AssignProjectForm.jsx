@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,7 +19,7 @@ const AssignProjectForm = () => {
 
   const [assignpmDetailsMutation] = useAddpmDetailsMutation();
 
-  const { data: ProjectManager } = useGetPMDetailsQuery({
+  const { data: ProjectManager, refetch } = useGetPMDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -39,21 +39,33 @@ const AssignProjectForm = () => {
 
   const projectcurrentid = id;
 
-  const { register, control, reset, handleSubmit } = useForm();
+  const { register, control, reset, handleSubmit } = useForm({
+    defaultValues: {
+      name: filtereddatarevised?.name,
+      details: filtereddatarevised?.details,
+      size: filtereddatarevised?.size,
+      budget: filtereddatarevised?.budget,
+      facilities: filtereddatarevised?.facilities,
+      building_type: filtereddatarevised?.building_type,
+      site_condition: filtereddatarevised?.site_condition,
+    },
+  });
+
+  useEffect(() => {
+    reset();
+  }, [filtereddatarevised]);
 
   const submitForm = async (data) => {
     const useradditionaldetails = {
-      requested_by: {
-        firstname: filtereddatarevised.requested_by.firstname,
-        lastname: filtereddatarevised.requested_by.lastname,
-        id: filtereddatarevised.requested_by.id,
-      },
+      requested_by: filtereddatarevised.requested_by.id,
     };
 
     const completeform = {
       ...useradditionaldetails,
       ...data,
     };
+
+    console.log(completeform);
     try {
       await toast.promise(
         assignpmDetailsMutation({
@@ -66,19 +78,27 @@ const AssignProjectForm = () => {
           error: "Failed to create form",
         }
       );
-      reset();
+      // reset();
       navigate("/dashboard");
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
     }
   };
 
-  const date = new Date(filtereddatarevised?.date);
-  const futureDate = date.getDate() + 3;
-  date.setDate(futureDate);
-  const defaultValue = date.toLocaleDateString("en-CA");
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 1000);
 
-  const [type, setType] = useState(defaultValue);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  // const date = new Date(filtereddatarevised?.date);
+  // const futureDate = date.getDate() + 3;
+  // date.setDate(futureDate);
+  // const defaultValue = date.toLocaleDateString("en-CA");
+
+  const [type, setType] = useState("");
 
   function MyBooleanInput({ control, name }) {
     return (
@@ -135,7 +155,7 @@ const AssignProjectForm = () => {
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
-                    {...register("user_id")}
+                    {...register("assigned_to")}
                   >
                     {ProjectManagerCollection.map((usercollect, index) => (
                       <option key={index} value={usercollect._id}>
@@ -153,7 +173,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.name}
+                  name="title"
                   {...register("name")}
                   placeholder="Type here..."
                   required
@@ -169,7 +189,6 @@ const AssignProjectForm = () => {
                   type="date"
                   id="due"
                   name="due"
-                  defaultValue={defaultValue}
                   {...register("due")}
                   required
                   onChange={(e) => {
@@ -186,7 +205,7 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.details}
+                  name="details"
                   placeholder="Type here..."
                   required
                   {...register("details")}
@@ -200,7 +219,6 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.size}
                   required
                   {...register("size")}
                   placeholder="Type here..."
@@ -212,7 +230,6 @@ const AssignProjectForm = () => {
                 <Form.Label className={projectform.form1}>Budget:</Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.budget}
                   placeholder="Type here..."
                   required
                   {...register("budget")}
@@ -226,7 +243,6 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.facilities}
                   required
                   {...register("facilities")}
                   placeholder="Type here..."
@@ -240,7 +256,6 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.building_type}
                   placeholder="Type here..."
                   required
                   {...register("building_type")}
@@ -262,7 +277,6 @@ const AssignProjectForm = () => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={filtereddatarevised?.site_condition}
                   placeholder="Type here..."
                   {...register("site_condition")}
                   required
@@ -277,37 +291,12 @@ const AssignProjectForm = () => {
                 <Form.Control
                   type="text"
                   {...register("facilities")}
-                  value={filtereddatarevised?.facilities}
                   required
                   placeholder="Type here..."
                 />
               </Form.Group>
             </div>
-            <Toaster
-              position="top-left"
-              gutter={8}
-              containerClassName=""
-              containerStyle={{}}
-              toastOptions={{
-                // Define default options
-                className: "",
-                duration: 5000,
-                style: {
-                  background: "#363636",
-                  color: "#fff",
-                  fontFamily: "Inter, sans-serif",
-                },
 
-                // Default options for specific types
-                success: {
-                  duration: 3000,
-                  theme: {
-                    primary: "green",
-                    secondary: "black",
-                  },
-                },
-              }}
-            />
             <div className={projectform.absoluterightendcontainer}>
               <div className={projectform.flexbuttoncontainer}>
                 <Button
@@ -324,6 +313,32 @@ const AssignProjectForm = () => {
           </form>
         </div>
       </DashboardLayout>
+      <Toaster
+        position="top-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+            fontFamily: "Inter, sans-serif",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </Container>
   );
 };

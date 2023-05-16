@@ -25,6 +25,9 @@ const ProjectDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    refetch();
+  }, []);
   const ProjectsCollection = UserTableProjects || [];
 
   const [filter, setFilter] = useState(null);
