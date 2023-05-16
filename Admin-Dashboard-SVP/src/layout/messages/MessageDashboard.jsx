@@ -2,11 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Container, Image, Form, Button } from "react-bootstrap";
 import message from "./message.module.css";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
-import {
-  useGetAllMessagesQuery,
-  useGetAllChatsQuery,
-  useAddMessagesMutation,
-} from "../../app/services/auth/authService";
+import { useGetAllMessagesQuery } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
 import { getInitials } from "../../../util/text";
 import moment from "moment";
@@ -18,8 +14,6 @@ const MessageDashboard = () => {
   // const [id, setId] = useState("");
   // fetching users and details about them
   const { data: allMessagesDetails } = useGetAllMessagesQuery();
-  // sending messages
-  const [updateMsg] = useAddMessagesMutation();
 
   // preventing code break. displays empty array till the messages loas
   const messageDetails = allMessagesDetails || [];
@@ -43,12 +37,6 @@ const MessageDashboard = () => {
     const filteredData = messageDetails.filter((item) => item._id === filter);
     return filteredData;
   }, [filter, messageDetails]);
-
-  // fetching messages. filter contains the id. line 112, when you click it saves the id in a filter
-  const { data: allChats, refetch, isLoading } = useGetAllChatsQuery(filter);
-
-  // prevents code breaks
-  const chats = allChats || [];
 
   // useForm hook
   const { register, reset, handleSubmit } = useForm();
