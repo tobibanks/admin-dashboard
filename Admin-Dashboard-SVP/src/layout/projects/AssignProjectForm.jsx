@@ -37,10 +37,6 @@ const AssignProjectForm = () => {
     return obj._id === id;
   });
 
-  const [checkedradio, setCheckedRadio] = useState(filtereddatarevised?.design);
-
-  console.log(checkedradio);
-
   const projectcurrentid = id;
 
   const { register, control, reset, handleSubmit } = useForm();
@@ -95,9 +91,10 @@ const AssignProjectForm = () => {
               <label className={projectform.label}>
                 <input
                   type="radio"
+                  className={projectform.radioinput}
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(true)} // send value to hook form
-                  checked={value || filtereddatarevised?.design === true}
+                  checked={value === true}
                   inputRef={ref}
                 />
                 <span className={projectform.label1}>Yes</span>
@@ -107,9 +104,10 @@ const AssignProjectForm = () => {
               <label className={projectform.label}>
                 <input
                   type="radio"
+                  className={projectform.radioinput}
                   onBlur={onBlur} // notify when input is touched
                   onChange={() => onChange(false)} // send value to hook form
-                  checked={value || filtereddatarevised?.design === false}
+                  checked={value === false}
                   inputRef={ref}
                 />
                 <span className={projectform.label1}>No</span>
