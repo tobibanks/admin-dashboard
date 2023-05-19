@@ -101,6 +101,14 @@ const ReportsDashboard = () => {
     setMessage("There are no reports for selected task");
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const filteredtasks = useMemo(() => {
     const filtereddata = taskCollection.filter(
       (item) => item.project.id === select

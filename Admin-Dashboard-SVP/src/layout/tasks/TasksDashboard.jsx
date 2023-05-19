@@ -81,17 +81,18 @@ const TasksDashboard = () => {
     (item) => item.status === "Declined"
   );
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     refetch();
-  //   }, 1000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
 
   return (
     <Container className={task.container}>

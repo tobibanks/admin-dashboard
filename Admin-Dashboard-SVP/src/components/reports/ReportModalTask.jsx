@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Form from "react-bootstrap/Form";
 import {
   useAddTaskReportMutation,
-  useGetProjectSpecificTaskQuery,
+  useGetSpecificTaskQuery,
 } from "../../app/services/auth/authService";
 
 const ReportModalTask = ({ show, onHide, id }) => {
@@ -16,13 +16,7 @@ const ReportModalTask = ({ show, onHide, id }) => {
 
   const { register, reset, handleSubmit } = useForm();
 
-  const { specificTask } = useGetProjectSpecificTaskQuery(id);
-
-  const singletask = specificTask || [];
-
-  console.log(id);
-
-  console.log(singletask);
+  const { data: specificTask } = useGetSpecificTaskQuery(id);
 
   // const handleFileChange = (e) => {
   //   setFile(e.target.files[0]);
@@ -41,22 +35,16 @@ const ReportModalTask = ({ show, onHide, id }) => {
 
   const submitForm = async (data) => {
     if (!files.length) return toast.error("Select a file");
-    const conversion = { ...data };
-    const stringid = conversion.send_to.toString();
     const formData = new FormData();
     files.map((file) => {
       return formData.append("attachments", file);
     });
-    // formData.append("attachments", files);
-    formData.append("send_to", stringid);
-    formData.append("project", conversion.project);
-    formData.append("task", conversion.task);
-    formData.append("note", conversion.note);
+    formData.append("note", data.note);
 
     try {
       await toast.promise(
         addTaskReportsMutation({
-          id: fileTypeFromBuffer,
+          id: id,
           data: formData,
         }).unwrap(),
         {
@@ -179,7 +167,7 @@ const Attachment = (props) => {
       </div>
       <div>
         <p className={modal.attachmenttext}>
-          {props.attachmentname?.substring(0, 7)}
+          {props.attachmentname?.substring(0, 5)}
         </p>
         <p className={modal.attachmentsize}>
           {Math.round(props.attachmentsize / 1000) + "kb"}

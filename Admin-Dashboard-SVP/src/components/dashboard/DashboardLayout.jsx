@@ -107,21 +107,9 @@ const DashboardLayout = (props) => {
                 <div className={side.flex}>
                   <div className={side.absolutecenter}>
                     <p className={side.avatar}>
-                      {adminInfo?.firstname?.charAt(0) || (
-                        <Skeleton
-                          baseColor="#ebab34"
-                          highlightColor="#f2cb07"
-                          width={50}
-                        />
-                      )}
+                      {adminInfo?.firstname?.charAt(0) || null}
                       <span className={side.label}>
-                        {adminInfo?.lastname?.charAt(0) || (
-                          <Skeleton
-                            baseColor="#ebab34"
-                            highlightColor="#f2cb07"
-                            width={50}
-                          />
-                        )}
+                        {adminInfo?.lastname?.charAt(0) || null}
                       </span>
                     </p>
                   </div>

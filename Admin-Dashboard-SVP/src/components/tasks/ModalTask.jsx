@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import modal from "./tasktable.module.css";
 import { Modal, Image } from "react-bootstrap";
 import { MdOutlineCloudUpload } from "react-icons/md";
@@ -6,29 +6,34 @@ import "../project/Modal.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import ReportModalTask from "../reports/ReportModalTask";
+import { truncateString } from "../../../util/text";
 
-const ModalTask = (props) => {
-  const { data: AdminTasks } = useGetTaskDetailsQuery({
+const ModalTask = ({ show, onHide, id }) => {
+  const { data: AdminTasks, refetch } = useGetTaskDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
   const ModalTaskCollection = AdminTasks || [];
 
-  const [id, setId] = useState();
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    refetch();
+  }, [ModalTaskCollection]);
+
   return (
     <Modal
       className={modal.modal}
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       {ModalTaskCollection.map((collect, index) =>
-        props.id === collect._id ? (
+        id === collect._id ? (
           <div key={index}>
             <Modal.Header closeButton>
               <Modal.Title
@@ -72,6 +77,7 @@ const ModalTask = (props) => {
                           className={modal.buttonname}
                           onClick={() => {
                             setModalShow(true);
+                            // onHide();
                             // setId(props.id);
                           }}
                         >
@@ -116,16 +122,16 @@ const ModalTask = (props) => {
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
                       {collect.attachments.length > 1 ? (
-                        collect.attachments.map((attachments, index) => {
-                          return (
-                            <div
-                              key={index}
-                              style={{ display: "flex", gap: "2rem" }}
-                            >
-                              <>
-                                {attachments
-                                  .slice(0, 2)
-                                  .map((attachment, index) => (
+                        collect.attachments
+                          .slice(0, 3)
+                          .map((attachments, index) => {
+                            return (
+                              <div
+                                key={index}
+                                style={{ display: "flex", gap: "2rem" }}
+                              >
+                                <>
+                                  {attachments.map((attachment, index) => (
                                     <div>
                                       <Attachment
                                         key={index}
@@ -135,15 +141,15 @@ const ModalTask = (props) => {
                                       />
                                     </div>
                                   ))}
-                              </>
-                            </div>
-                          );
-                        })
+                                </>
+                              </div>
+                            );
+                          })
                       ) : (
                         <p className={modal.attachmentempty}>No attachments</p>
                       )}
                     </div>
-                    {collect.attachments.length > 2 ? (
+                    {collect.attachments.length > 3 ? (
                       <Link to="/reports">
                         <div className={modal.absolutebuttoncenter}>
                           <div className={modal.buttonname1}>
@@ -159,7 +165,7 @@ const ModalTask = (props) => {
                         <div
                           className={modal.buttonname}
                           onClick={() => {
-                            props.id &&
+                            id &&
                               navigate(
                                 generatePath("/taskapproval/:id", {
                                   id: collect.approval_id,
@@ -183,7 +189,7 @@ const ModalTask = (props) => {
       <ReportModalTask
         show={modalShow}
         onHide={() => setModalShow(false)}
-        id={props.id}
+        id={id}
       />
       {/* <ReportModal */}
     </Modal>
@@ -241,7 +247,7 @@ const Attachment = (props) => {
       ) : null}
       {/* </div> */}
       <div>
-        <p className={modal.attachmenttext}>{props.name}</p>
+        <p className={modal.attachmenttext}> {truncateString(props.name, 7)}</p>
         <p className={modal.attachmentsize}>
           {Math.round(props.size / 1000) + "kb"}
         </p>

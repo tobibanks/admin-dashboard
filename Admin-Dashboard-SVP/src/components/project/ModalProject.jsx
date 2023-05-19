@@ -14,7 +14,7 @@ import {
 import Skeleton from "react-loading-skeleton";
 
 const ModalProject = (props) => {
-  const { data: UserProjects } = useGetProjectDetailsQuery({
+  const { data: UserProjects, isLoading } = useGetProjectDetailsQuery({
     // refetchOnMountOrArgChange: true,
   });
 
@@ -146,7 +146,7 @@ const ModalProject = (props) => {
                             </div>
                             <div className={modal.absolutecenter}>
                               <p className={modal.headertext1}>
-                                0 / {specifictask.length}
+                                0 / {isFetching ? 0 : specifictask.length}
                               </p>
                             </div>
                           </div>

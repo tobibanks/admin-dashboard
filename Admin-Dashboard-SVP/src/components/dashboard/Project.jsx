@@ -82,7 +82,7 @@ const Project = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((projectdata, index) => (
+                  {data.slice(0, 5).map((projectdata, index) => (
                     <tr
                       key={index}
                       className={project.pointer}

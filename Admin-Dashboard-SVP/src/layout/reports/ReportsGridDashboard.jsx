@@ -40,8 +40,6 @@ const ReportsGridDashboard = () => {
 
   const ReportsCollection = AdminReports || [];
 
-
-
   const [startDate, setStartDate] = useState(new Date("01/01/2022"));
   const [endDate, setEndDate] = useState(new Date("01/01/2029"));
 
@@ -74,7 +72,6 @@ const ReportsGridDashboard = () => {
   //   return filtereddata;
   // }, [finalStartDate, finalEndDate, data]);
 
-
   const filteredDocument = ReportsCollection.filter((item) =>
     item.type.startsWith("application")
   );
@@ -106,6 +103,14 @@ const ReportsGridDashboard = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -237,7 +242,7 @@ const ReportsGridDashboard = () => {
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "flex-start",
+                      justifyContent: "space-between",
                       gap: "3rem",
                       marginTop: "2rem",
                       flexWrap: "wrap",

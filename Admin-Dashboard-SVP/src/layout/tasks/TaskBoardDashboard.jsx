@@ -82,6 +82,14 @@ const TaskBoardDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Container className={taskboard.container}>
       <DashboardLayout name="Tasks">

@@ -38,6 +38,12 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    getSpecificTask: build.query({
+      query: (id) => ({
+        url: `/admin/tasks/${id}`,
+        method: "GET",
+      }),
+    }),
     getReportsDetails: build.query({
       query: () => ({
         url: "/admin/reports/attachments/all",
@@ -142,6 +148,7 @@ export const {
   useGetDetailsQuery,
   useGetProjectDetailsQuery,
   useGetTaskDetailsQuery,
+  useGetSpecificTaskQuery,
   useAddpmDetailsMutation,
   useGetAllApprovalsQuery,
   useGetAllNotificationsQuery,

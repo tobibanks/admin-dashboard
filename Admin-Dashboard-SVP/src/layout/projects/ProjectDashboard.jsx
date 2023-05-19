@@ -25,11 +25,11 @@ const ProjectDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    refetch();
-  }, []);
   const ProjectsCollection = UserTableProjects || [];
 
+  useEffect(() => {
+    refetch();
+  }, [ProjectsCollection]);
 
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
