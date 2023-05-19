@@ -43,7 +43,7 @@ const Tasks = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {TasksTableCollection.map((Taskdata, index) => (
+                    {TasksTableCollection.slice(0, 8).map((Taskdata, index) => (
                       <tr
                         key={index}
                         onClick={() => {
@@ -94,19 +94,21 @@ const Tasks = () => {
                     ))}
                   </tbody>
                 </Table>
-                <div className={task.rightbuttoncontainer}>
-                  <Link to="/task">
-                    <button className={task.modalbutton}>
-                      View all
-                      <Image
-                        src="/icons/notification/arrow-down.svg"
-                        class="img-fluid"
-                        className={task.arrowdown}
-                        alt="arrow-down"
-                      />
-                    </button>
-                  </Link>
-                </div>
+                {TasksTableCollection.length > 8 ? (
+                  <div className={task.rightbuttoncontainer}>
+                    <Link to="/task">
+                      <button className={task.modalbutton}>
+                        View all
+                        <Image
+                          src="/icons/notification/arrow-down.svg"
+                          class="img-fluid"
+                          className={task.arrowdown}
+                          alt="arrow-down"
+                        />
+                      </button>
+                    </Link>
+                  </div>
+                ) : null}
               </>
             ) : (
               <div style={{ marginBottom: "3rem" }}>
