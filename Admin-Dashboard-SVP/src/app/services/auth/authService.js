@@ -70,6 +70,12 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    getSpecificProject: build.query({
+      query: (id) => ({
+        url: `/admin/projects/${id}`,
+        method: "GET",
+      }),
+    }),
     addpmDetails: build.mutation({
       query: ({ id, data }) => ({
         url: `/admin/projects/assign/${id}`,
@@ -93,6 +99,13 @@ export const authApi = createApi({
     addReportsDetails: build.mutation({
       query: (data) => ({
         url: "/admin/reports",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    addTaskReport: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/admin/tasks/update/${id}`,
         method: "POST",
         body: data,
       }),
@@ -134,7 +147,9 @@ export const {
   useGetAllNotificationsQuery,
   useGetAllMessagesQuery,
   useAddMessagesMutation,
+  useAddTaskReportMutation,
   useGetApprovalRequestQuery,
+  useGetSpecificProjectQuery,
   useGetPMDetailsQuery,
   useAddProjectDetailsMutation,
   useAddTaskDetailsMutation,

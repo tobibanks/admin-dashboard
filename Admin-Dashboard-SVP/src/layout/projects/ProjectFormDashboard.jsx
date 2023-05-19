@@ -8,11 +8,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetAllUsersDetailsQuery } from "@/app/services/auth/authService";
 import toast, { Toaster } from "react-hot-toast";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
-import { useAddProjectDetailsMutation } from "../../app/services/auth/authService";
+import {
+  useAddProjectDetailsMutation,
+  useGetPMDetailsQuery,
+} from "../../app/services/auth/authService";
 
 const ProjectFormDashboard = () => {
   const [type, setType] = useState("");
   const [addProjectDetailsMutation] = useAddProjectDetailsMutation();
+  const { data: ProjectManager, refetch } = useGetPMDetailsQuery({
+    refetchOnMountArgChange: true,
+  });
+
+  const ProjectManagerCollection = ProjectManager || [];
+
   const navigate = useNavigate();
   // const { data: admin } = useGetDetailsQuery();
   // toast.configure();
@@ -37,7 +46,7 @@ const ProjectFormDashboard = () => {
       navigate("/project");
       window.location.reload();
     } catch (error) {
-      toast.error(error);
+      toast.error(error.status);
     }
   };
 
@@ -88,6 +97,25 @@ const ProjectFormDashboard = () => {
             <p className={projectform.header1}>PROJECT INFORMATION</p>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
+            <div className={projectform.formcontainer}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <div className={projectform.formcontainer1}>
+                  <Form.Label className={projectform.form1}>
+                    Assigned To
+                  </Form.Label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    {...register("assigned_to")}
+                  >
+                    {ProjectManagerCollection.map((usercollect, index) => (
+                      <option key={index} value={usercollect._id}>
+                        {usercollect.firstname} {usercollect.lastname}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </div>
+              </Form.Group>
+            </div>
             <div className={projectform.formcontainer}>
               <Form.Group className="mb-3" controlId="formBasicName">
                 <div className={projectform.formcontainer1}>
@@ -190,7 +218,7 @@ const ProjectFormDashboard = () => {
               </Form.Group>
             </div>
             <div className={projectform.formcontainer1}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicSite">
                 <Form.Label className={projectform.form1}>
                   Building Type:
                 </Form.Label>
@@ -224,7 +252,7 @@ const ProjectFormDashboard = () => {
               </Form.Group>
             </div>
             <div className={projectform.formcontainer1}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicSite">
                 <Form.Label className={projectform.form1}>
                   Facilities surrounding site and on site:
                 </Form.Label>

@@ -30,6 +30,7 @@ const ProjectDashboard = () => {
   }, []);
   const ProjectsCollection = UserTableProjects || [];
 
+
   const [filter, setFilter] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
@@ -111,7 +112,7 @@ const ProjectDashboard = () => {
                 name="Requested"
                 total={`(${filteredUpcomingData.length})`}
                 filter={filter}
-                filter1="Awaiting Approval"
+                filter1="Requested"
                 onClick={() => {
                   setFilter("Requested");
                   setStartDate(null);
@@ -222,7 +223,7 @@ const ProjectDashboard = () => {
                         <StatusButton text={projectcollect.admin_Status} />
                       </td>
                       <td className={project.centericon}>
-                        {new Date(projectcollect.date).toLocaleDateString()}
+                        {new Date(projectcollect.due).toLocaleDateString()}
                       </td>
                       <td className={project.centericon}>
                         {projectcollect.priority === "red" ? (

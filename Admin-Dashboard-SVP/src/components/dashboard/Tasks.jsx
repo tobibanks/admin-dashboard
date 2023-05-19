@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import task from "./User.module.css";
 import "./Modal.css";
 import Table from "react-bootstrap/Table";
 import { Image } from "react-bootstrap";
+import ModalTask from "@/components/tasks/ModalTask";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { truncateString } from "./../../../util/text";
 
 const Tasks = () => {
   const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
@@ -14,6 +16,9 @@ const Tasks = () => {
   });
 
   const TasksTableCollection = TaskCollection || [];
+
+  const [setting, setSetting] = useState("");
+  const [modalShow, setModalShow] = React.useState(false);
 
   // var options = { day: "numeric", month: "short" };
 
@@ -39,7 +44,13 @@ const Tasks = () => {
                   </thead>
                   <tbody>
                     {TasksTableCollection.map((Taskdata, index) => (
-                      <tr key={index}>
+                      <tr
+                        key={index}
+                        onClick={() => {
+                          setSetting(Taskdata._id);
+                          setModalShow(true);
+                        }}
+                      >
                         <td className={task.align}>
                           <div className={task.flexcontent}>
                             {Taskdata.star === true ? (
@@ -49,7 +60,7 @@ const Tasks = () => {
                             )}
                             <div className={task.centertext}>
                               <p className={task.tasktitle}>
-                                {Taskdata?.name?.substring?.(0, 7)}
+                                {truncateString(Taskdata?.name, 7)}
                               </p>
                             </div>
                           </div>
@@ -105,6 +116,11 @@ const Tasks = () => {
           </div>
         )}
       </div>
+      <ModalTask
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id={setting}
+      />
     </div>
   );
 };

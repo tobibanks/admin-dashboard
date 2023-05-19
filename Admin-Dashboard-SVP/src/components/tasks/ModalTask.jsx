@@ -5,7 +5,7 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
 import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
 import { Link, generatePath, useNavigate } from "react-router-dom";
-import ReportModal from "./../reports/ReportModal";
+import ReportModalTask from "../reports/ReportModalTask";
 
 const ModalTask = (props) => {
   const { data: AdminTasks } = useGetTaskDetailsQuery({
@@ -15,6 +15,7 @@ const ModalTask = (props) => {
   const ModalTaskCollection = AdminTasks || [];
 
   const [id, setId] = useState();
+  const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const ModalTask = (props) => {
                           className={modal.buttonname}
                           onClick={() => {
                             setModalShow(true);
+                            // setId(props.id);
                           }}
                         >
                           <p className={modal.buttontext}>
@@ -82,17 +84,34 @@ const ModalTask = (props) => {
                     <p className={modal.description}>{collect.description}</p>
                     <p className={modal.assigned}>Assigned to:</p>
                     <div className={modal.yellowbackground}>
-                      <Image src="/images/avatar.png" alt="avatar" />
                       <div className={modal.absolutecenter}>
-                        <p className={modal.textname}>
-                          {" "}
-                          {collect.assigned_to?.firstname || null} &nbsp;
-                          <span>{collect.assigned_to?.lastname || null}</span>
-                        </p>
+                        {collect?.assigned_to?.firstname &&
+                        collect?.assigned_to.lastname ? (
+                          <>
+                            <p className={modal.avatar}>
+                              <span className={modal.label}>
+                                {collect?.assigned_to?.firstname?.charAt(0)}
+                              </span>
+                              <span className={modal.label}>
+                                {collect?.assigned_to?.lastname?.charAt(0)}
+                              </span>
+                            </p>
+                            <span className={modal.label1}>
+                              {collect?.assigned_to?.firstname}{" "}
+                              {collect?.assigned_to?.lastname}
+                            </span>
+                          </>
+                        ) : (
+                          <div className={modal.absolutecenter}>
+                            <p className={modal.unassigned}>Unassigned</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                     <p className={modal.instructionheading}>Instruction</p>
-                    <p className={modal.instruction}>{collect.instruction}</p>
+                    <p className={modal.instruction}>
+                      {collect.instruction || "No instructions available"}
+                    </p>
 
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
@@ -161,7 +180,12 @@ const ModalTask = (props) => {
           </div>
         ) : null
       )}
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
+      <ReportModalTask
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        id={props.id}
+      />
+      {/* <ReportModal */}
     </Modal>
   );
 };

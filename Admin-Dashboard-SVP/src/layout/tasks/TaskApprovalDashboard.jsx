@@ -53,7 +53,7 @@ const TaskApprovalDashboard = () => {
       );
       navigate("/task");
     } catch (error) {
-      toast.error(error);
+      toast.error(error.status);
     }
   };
 

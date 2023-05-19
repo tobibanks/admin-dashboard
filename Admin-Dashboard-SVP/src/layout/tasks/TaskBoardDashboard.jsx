@@ -143,6 +143,7 @@ const TaskBoardDashboard = () => {
                           headertext={filtereddata.projectname}
                           content={filtereddata.comments}
                           date={filtereddata.due}
+                          value={filtereddata.attachments.length}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
                         />
@@ -177,6 +178,7 @@ const TaskBoardDashboard = () => {
                           headertext={filtereddata.projectname}
                           content={filtereddata.comments}
                           date={filtereddata.due}
+                          value={filtereddata.attachments.length}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
                         />
@@ -213,6 +215,7 @@ const TaskBoardDashboard = () => {
                           headertext={filtereddata.projectname}
                           content={filtereddata.comments}
                           date={filtereddata.due}
+                          value={filtereddata.attachments.length}
                           status={filtereddata.status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
@@ -325,8 +328,8 @@ const ContentContainer = (props) => {
 
       <div className={taskboard.absoluterightcontainer}>
         <div className={taskboard.flexicon}>
-          <ImageTextIcon src="/icons/attach.svg" value="3" />
-          <ImageTextIcon src="/icons/message.svg" value="3" />
+          <ImageTextIcon src="/icons/attach.svg" value={props.value} />
+          {/* <ImageTextIcon src="/icons/message.svg" value="3" /> */}
         </div>
       </div>
     </div>

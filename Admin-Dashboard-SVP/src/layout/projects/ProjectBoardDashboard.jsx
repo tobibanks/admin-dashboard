@@ -17,7 +17,6 @@ const ProjectBoardDashboard = () => {
 
   const ProjectsBoardCollection = UserProjectsBoard || [];
 
-
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [modalShow, setModalShow] = React.useState(false);
@@ -87,6 +86,8 @@ const ProjectBoardDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(dataByDateinprogress);
+
   return (
     <Container className={grid.container}>
       <DashboardLayout name="Projects">
@@ -155,10 +156,11 @@ const ProjectBoardDashboard = () => {
                               setSetting(filtereddata._id);
                               setModalShow(true);
                             }}
-                            date={filtereddata.date}
+                            date={filtereddata.due}
                             status={filtereddata.admin_Status}
                             imagelink={filtereddata.imagelink}
                             priority={filtereddata.priority}
+                            value={filtereddata.attachments.length}
                           />
                         </>
                       ))}
@@ -200,6 +202,7 @@ const ProjectBoardDashboard = () => {
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
+                          value={filtereddata.attachments.length}
                         />
                       ))}
                     </>
@@ -242,6 +245,7 @@ const ProjectBoardDashboard = () => {
                           status={filtereddata.admin_Status}
                           imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
+                          value={filtereddata.attachments.length}
                         />
                       ))}
                     </>
@@ -356,8 +360,7 @@ const ContentContainer = (props) => {
 
       <div className={grid.absoluterightcontainer}>
         <div className={grid.flexicon}>
-          <ImageTextIcon src="/icons/attach.svg" value="3" />
-          <ImageTextIcon src="/icons/message.svg" value="3" />
+          <ImageTextIcon src="/icons/attach.svg" value={props.value} />
         </div>
       </div>
     </div>

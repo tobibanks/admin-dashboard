@@ -9,7 +9,10 @@ import TaskHeader from "../../components/tasks/TaskHeader";
 import ModalTask from "@/components/tasks/ModalTask";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import {
+  useGetTaskDetailsQuery,
+  useGetProjectSpecificTaskQuery,
+} from "../../app/services/auth/authService";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
 import { useNavigate } from "react-router-dom";
@@ -238,7 +241,7 @@ const TasksDashboard = () => {
                       </td>
                       <td className={task.centericon}>
                         {" "}
-                        {new Date(taskcollect.date).toLocaleDateString()}
+                        {new Date(taskcollect.due).toLocaleDateString()}
                       </td>
                       <td className={task.centericon}>
                         {taskcollect.priority === "red" ? (

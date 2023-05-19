@@ -12,9 +12,10 @@ import {
   useGetTaskDetailsQuery,
   useGetProjectDetailsQuery,
 } from "../../app/services/auth/authService";
+import Skeleton from "react-loading-skeleton";
 
-const ReportModal = (props) => {
-  const [modalShow, setModalShow] = React.useState(true);
+const ReportModal = ({ show, onHide }) => {
+  // const [modalShow, setModalShow] = React.useState(true);
   const [more, setMore] = useState(false);
   const [display, setDisplay] = useState(false);
   const [select, setSelect] = useState("");
@@ -24,7 +25,7 @@ const ReportModal = (props) => {
   });
   const TaskCollections = TaskCollection || [];
 
-  const { data: Users } = useGetAllUsersDetailsQuery({
+  const { data: Users, isLoading } = useGetAllUsersDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -66,6 +67,7 @@ const ReportModal = (props) => {
   };
 
   const submitForm = async (data) => {
+    console.log("batman");
     if (!files.length) return toast.error("Select a file");
     const conversion = { ...data };
     const stringid = conversion.send_to.toString();
@@ -89,15 +91,33 @@ const ReportModal = (props) => {
       setFiles(null);
       // toast.success("Project Registered Successfully");
     } catch (error) {
-      toast.error(error);
+      toast.error(error.status);
     }
+    onHide();
   };
+
+  // const filteredImage = ProjectCollections.filter((item) =>
+  //   item.includes("image")
+  // );
+
+  const filteredAsignedtoProjects = ProjectCollections.filter(
+    (item) => item.assigned_to != undefined
+  );
+
+  // collection.filter((collectionItem) =>
+  //   Object.keys(constraint).every(
+  //     (key) =>
+  //       collectionItem.hasOwnProperty(key) &&
+  //       constraint[key] === collectionItem[key]
+  //   )
+  // );
 
   return (
     <Modal
       className={modal.modal}
-      {...props}
       size="md"
+      show={show}
+      onHide={onHide}
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -134,42 +154,56 @@ const ReportModal = (props) => {
             ></input>
           </div>
           <p className={modal.title}>Projects</p>
-          {more ? (
-            <>
-              {ProjectCollections.map((project, index) => (
-                // <FormGroup>
-                <Form.Check
-                  key={index}
-                  type="radio"
-                  onClick={handleChanges}
-                  // key={index}
-                  {...register("project")}
-                  // name="project"
-                  value={project._id}
-                  label={project.name}
-                />
-                // </FormGroup>
-              ))}
-            </>
+          {isLoading ? (
+            <Skeleton
+              width={300}
+              baseColor="#ebab34"
+              highlightColor="#f2cb07"
+            />
           ) : (
-            // <div>
             <>
-              {ProjectCollections?.slice(0, 3)?.map((project, index) => (
-                // <FormGroup>
-                <Form.Check
-                  type="radio"
-                  // onClick={(e)=> setSelect(e.target.value)}
-                  key={index}
-                  onClick={handleChanges}
-                  {...register("project")}
-                  // name="project"
-                  value={project._id}
-                  label={project.name}
-                />
-                // </FormGroup>
-              ))}
+              {more ? (
+                <>
+                  {filteredAsignedtoProjects.map((project, index) => (
+                    <div style={{ margin: "8px 0px" }}>
+                      <Form.Check
+                        key={index}
+                        type="radio"
+                        required
+                        onClick={handleChanges}
+                        // key={index}
+                        {...register("project")}
+                        // name="project"
+                        value={project._id}
+                        label={project.name}
+                      />
+                    </div>
+                  ))}
+                </>
+              ) : (
+                // <div>
+                <>
+                  {filteredAsignedtoProjects
+                    ?.slice(0, 3)
+                    ?.map((project, index) => (
+                      <div style={{ margin: "8px 0px" }}>
+                        <Form.Check
+                          type="radio"
+                          // onClick={(e)=> setSelect(e.target.value)}
+                          key={index}
+                          required
+                          onClick={handleChanges}
+                          {...register("project")}
+                          // name="project"
+                          value={project._id}
+                          label={project.name}
+                        />
+                      </div>
+                    ))}
+                </>
+                // </div>
+              )}
             </>
-            // </div>
           )}
           {ProjectCollections.length > 3 ? (
             more ? (
@@ -193,6 +227,8 @@ const ReportModal = (props) => {
                     <Form.Check
                       type="radio"
                       key={index}
+                      required
+                      className={modal.radioinput}
                       name="task"
                       {...register("task")}
                       value={task._id}
@@ -222,6 +258,8 @@ const ReportModal = (props) => {
               <Form.Check
                 type="checkbox"
                 key={index}
+                required
+                className={modal.checkinput}
                 {...register("send_to")}
                 value={usercollect._id}
                 label={usercollect?.firstname}
@@ -245,33 +283,34 @@ const ReportModal = (props) => {
               </Button>
             </div>
           </div>
-          <Toaster
-            position="top-left"
-            gutter={8}
-            containerClassName=""
-            containerStyle={{}}
-            toastOptions={{
-              // Define default options
-              className: "",
-              duration: 5000,
-              style: {
-                background: "#363636",
-                color: "#fff",
-                fontFamily: "Inter, sans-serif",
-              },
-
-              // Default options for specific types
-              success: {
-                duration: 3000,
-                theme: {
-                  primary: "green",
-                  secondary: "black",
-                },
-              },
-            }}
-          />
         </Form>
       </Modal.Body>
+      <Toaster
+        position="top-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+            fontFamily: "Inter, sans-serif",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </Modal>
   );
 };

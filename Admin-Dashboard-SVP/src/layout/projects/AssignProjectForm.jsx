@@ -7,6 +7,7 @@ import "./ProjectsForm.css";
 import {
   useGetPMDetailsQuery,
   useGetProjectDetailsQuery,
+  useGetSpecificProjectQuery,
   useAddpmDetailsMutation,
 } from "../../app/services/auth/authService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -81,7 +82,7 @@ const AssignProjectForm = () => {
       // reset();
       navigate("/dashboard");
     } catch (error) {
-      // toast.error(error);
+      toast.error(error.status);
     }
   };
 
@@ -189,6 +190,7 @@ const AssignProjectForm = () => {
                   type="date"
                   id="due"
                   name="due"
+                  value={type}
                   {...register("due")}
                   required
                   onChange={(e) => {
@@ -237,7 +239,7 @@ const AssignProjectForm = () => {
               </Form.Group>
             </div>
             <div className={projectform.formcontainer1}>
-              <Form.Group className="mb-3" controlId="formBasicLocation">
+              <Form.Group className="mb-3" controlId="buildinglocation">
                 <Form.Label className={projectform.form1}>
                   Building Location:
                 </Form.Label>
@@ -250,7 +252,7 @@ const AssignProjectForm = () => {
               </Form.Group>
             </div>
             <div className={projectform.formcontainer1}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="buildingtype">
                 <Form.Label className={projectform.form1}>
                   Building Type:
                 </Form.Label>
@@ -284,7 +286,7 @@ const AssignProjectForm = () => {
               </Form.Group>
             </div>
             <div className={projectform.formcontainer1}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="buildingfacilities">
                 <Form.Label className={projectform.form1}>
                   Facilities surrounding site and on site:
                 </Form.Label>

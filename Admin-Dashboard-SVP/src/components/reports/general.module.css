@@ -354,6 +354,41 @@
   font-size: 14px;
 }
 
+/* .radioinput {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  outline: none;
+  border: 3px solid gray;
+} */
+
+.radioinput {
+  border-color: 3px solid var(--SVP-main);
+}
+
+.checkinput:checked::before {
+  background-color: white;
+}
+
+.radioinput:before {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 60%;
+  background-color: var(--SVP-main);
+  margin: 5px auto;
+  border-radius: 50%;
+}
+
+.radioinput:checked:before {
+  background: white;
+}
+
+.radioinput:checked {
+  border-color: var(--SVP-main);
+}
+
 .search {
   border-radius: 8px;
   width: 100%;
@@ -508,7 +543,7 @@
 }
 
 .radio:checked[type="radio"] {
-  background-image: url("/icons/dot.svg");
+  /* background-image: url("/icons/dot.svg"); */
 }
 
 .radio {

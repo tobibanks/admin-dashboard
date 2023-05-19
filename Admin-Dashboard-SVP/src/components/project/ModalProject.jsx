@@ -95,19 +95,28 @@ const ModalProject = (props) => {
                     {collect.assigned_to ? (
                       <div>
                         <div className={modal.yellowbackground}>
-                          <Image
-                            src="/images/avatar.png"
-                            className={modal.imageavatar}
-                            alt="avatar"
-                          />
                           <div className={modal.absolutecenter}>
-                            <p className={modal.textname}>
-                              {" "}
-                              {collect.assigned_to?.firstname || null} &nbsp;
-                              <span>
-                                {collect.assigned_to?.lastname || null}
-                              </span>
-                            </p>
+                            {collect?.assigned_to?.firstname &&
+                            collect?.assigned_to.lastname ? (
+                              <>
+                                <p className={modal.avatar}>
+                                  <span className={modal.label}>
+                                    {collect?.assigned_to?.firstname?.charAt(0)}
+                                  </span>
+                                  <span className={modal.label}>
+                                    {collect?.assigned_to?.lastname?.charAt(0)}
+                                  </span>
+                                </p>
+                                <span className={modal.label1}>
+                                  {collect?.assigned_to?.firstname}{" "}
+                                  {collect?.assigned_to?.lastname}
+                                </span>
+                              </>
+                            ) : (
+                              <div className={modal.absolutecenter}>
+                                <p className={modal.unassigned}>Unassigned</p>
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className={modal.absolutebuttoncenter}>

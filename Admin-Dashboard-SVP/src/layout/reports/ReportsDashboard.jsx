@@ -16,7 +16,11 @@ import { truncateString } from "../../../util/text";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 
 const ReportsDashboard = () => {
-  const { data: AdminReports, isLoading } = useGetReportsDetailsQuery({
+  const {
+    data: AdminReports,
+    isLoading,
+    refetch,
+  } = useGetReportsDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
@@ -108,6 +112,9 @@ const ReportsDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    refetch();
+  }, [ReportsCollection]);
 
   return (
     <Container className={report.container}>
@@ -298,7 +305,7 @@ const FileContainer = (props) => {
         ) : null}
       </div>
       <div className={report.filerightcontainer}>
-        <p className={report.name}>{truncateString(props.name, 10)}</p>
+        <p className={report.name}>{truncateString(props.name, 15)}</p>
         <div className={report.flex}>
           <p className={report.size}> {Math.round(props.size / 1000) + "kb"}</p>
           <p className={report.date}>

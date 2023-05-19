@@ -230,6 +230,37 @@
   align-items: center;
 }
 
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-bottom: 0px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: var(--SVP-main);
+  font-family: "Inter", sans-serif;
+}
+
+.label {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.label1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
 .textname {
   font-family: "Inter", sans-serif;
   font-weight: 600;

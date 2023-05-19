@@ -12,6 +12,11 @@ const FileInputContainer = () => {
     refetchOnMountOrArgChange: true,
   });
   const projectsCollection = projects || [];
+
+  const handleShow = () => {
+    setModalShow(true);
+  };
+  const handleClose = () => setModalShow(false);
   return (
     <div className={input.absolutecenterfile}>
       <div className={input.innercontainer}>
@@ -23,7 +28,7 @@ const FileInputContainer = () => {
                 ? toast.error(
                     "There are no projects. You can upload reports after adding projects"
                   )
-                : setModalShow(true);
+                : handleShow();
             }}
           >
             Upload
@@ -31,7 +36,9 @@ const FileInputContainer = () => {
           </Button>
         </div>
       </div>
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
+      {modalShow && (
+        <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
+      )}
       <Toaster
         position="top-left"
         gutter={8}
