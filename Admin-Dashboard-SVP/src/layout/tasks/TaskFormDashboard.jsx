@@ -60,7 +60,7 @@ const TaskFormDashboard = () => {
       return formData.append("attachments", file);
     });
     formData.append("name", data.name);
-    formData.append("comments", data.comments);
+    formData.append("instruction", data.instruction);
     formData.append("due", data.due);
 
     // formData.append();
@@ -150,7 +150,7 @@ const TaskFormDashboard = () => {
                   as="textarea"
                   className={taskform.textarea1}
                   rows={3}
-                  {...register("comments")}
+                  {...register("instruction")}
                   placeholder="Type here"
                 />
               </Form.Group>
