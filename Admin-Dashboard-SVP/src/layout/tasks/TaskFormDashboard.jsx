@@ -35,8 +35,6 @@ const TaskFormDashboard = () => {
 
   const specificProject = specificProjects || [];
 
-  console.log(specificProject);
-
   const { register, setValue, reset, handleSubmit } = useForm();
 
   useEffect(() => {
@@ -57,7 +55,7 @@ const TaskFormDashboard = () => {
 
   const submitForm = async (data) => {
     const formData = new FormData();
-    console.log(data);
+
     files.map((file) => {
       return formData.append("attachments", file);
     });

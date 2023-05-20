@@ -117,7 +117,7 @@ const Project = () => {
                         </div>
                       </td>
                       <td className={project.centericon}>
-                        {new Date(projectdata.date).toLocaleDateString()}
+                        {new Date(projectdata.due).toLocaleDateString()}
                       </td>
                     </tr>
                   ))}

@@ -66,7 +66,6 @@ const AssignProjectForm = () => {
       ...data,
     };
 
-    console.log(completeform);
     try {
       await toast.promise(
         assignpmDetailsMutation({
@@ -94,12 +93,12 @@ const AssignProjectForm = () => {
   //   return () => clearInterval(interval);
   // }, []);
 
-  // const date = new Date(filtereddatarevised?.date);
-  // const futureDate = date.getDate() + 3;
-  // date.setDate(futureDate);
-  // const defaultValue = date.toLocaleDateString("en-CA");
+  const date = new Date(filtereddatarevised?.due);
+  const futureDate = date.getDate() + 3;
+  date.setDate(futureDate);
+  const defaultValue = date.toLocaleDateString("en-CA");
 
-  const [type, setType] = useState("");
+  const [type, setType] = useState(defaultValue);
 
   function MyBooleanInput({ control, name }) {
     return (

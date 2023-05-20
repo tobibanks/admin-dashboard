@@ -184,7 +184,7 @@ const ReportModal = ({ show, onHide }) => {
                 // <div>
                 <>
                   {filteredAsignedtoProjects
-                    ?.slice(0, 3)
+                    ?.slice(0, 5)
                     ?.map((project, index) => (
                       <div style={{ margin: "8px 0px" }}>
                         <Form.Check
@@ -205,7 +205,7 @@ const ReportModal = ({ show, onHide }) => {
               )}
             </>
           )}
-          {ProjectCollections.length > 3 ? (
+          {filteredAsignedtoProjects.length > 5 ? (
             more ? (
               <p className={modal.title1} onClick={() => setMore(!more)}>
                 See Less

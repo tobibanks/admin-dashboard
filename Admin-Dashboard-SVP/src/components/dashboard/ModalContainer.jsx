@@ -16,8 +16,6 @@ const ModalContainer = (props) => {
 
   const allnotifications = allNotifications || [];
 
-  console.log(allnotifications);
-
   const data = useMemo(() => {
     if (!filter) return allnotifications;
     const filteredData = allnotifications.filter(

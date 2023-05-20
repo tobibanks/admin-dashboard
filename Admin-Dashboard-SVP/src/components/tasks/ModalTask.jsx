@@ -3,25 +3,42 @@ import modal from "./tasktable.module.css";
 import { Modal, Image } from "react-bootstrap";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import "../project/Modal.css";
-import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import {
+  useGetTaskDetailsQuery,
+  useGetSpecificTaskQuery,
+} from "../../app/services/auth/authService";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import ReportModalTask from "../reports/ReportModalTask";
 import { truncateString } from "../../../util/text";
+import Skeleton from "react-loading-skeleton";
 
 const ModalTask = ({ show, onHide, id }) => {
-  const { data: AdminTasks, refetch } = useGetTaskDetailsQuery({
+  const {
+    data: AdminTasks,
+    refetch,
+    isFetching,
+  } = useGetTaskDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
 
   const ModalTaskCollection = AdminTasks || [];
 
+  const { data: specificTask } = useGetSpecificTaskQuery(id);
+
+  const specified = specificTask || [];
+
+  console.log(id);
+
+  console.log(Array.isArray(specified));
+
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    refetch();
-  }, [ModalTaskCollection]);
+  console.log(specified);
+  // useEffect(() => {
+  //   refetch();
+  // }, [specified?.attachments]);
 
   return (
     <Modal
@@ -121,35 +138,43 @@ const ModalTask = ({ show, onHide, id }) => {
 
                     <p className={modal.taskname}>Attachment</p>
                     <div className={modal.attachmentflex}>
-                      {collect.attachments.length > 1 ? (
-                        collect.attachments
-                          .slice(0, 3)
-                          .map((attachments, index) => {
-                            return (
-                              <div
-                                key={index}
-                                style={{ display: "flex", gap: "2rem" }}
-                              >
-                                <>
-                                  {attachments.map((attachment, index) => (
-                                    <div>
-                                      <Attachment
-                                        key={index}
-                                        name={attachment.name}
-                                        imagelink={attachment.type}
-                                        size={attachment.size}
-                                      />
-                                    </div>
-                                  ))}
-                                </>
-                              </div>
-                            );
-                          })
-                      ) : (
+                      {collect.attachments.length < 1 ? (
                         <p className={modal.attachmentempty}>No attachments</p>
+                      ) : (
+                        <>
+                          {collect.attachments
+                            .slice(0, 3)
+                            .map((attachment, index) => {
+                              return (
+                                <>
+                                  {Array.isArray(attachment) ? (
+                                    <>
+                                      {attachment.map((attach, index) => {
+                                        return (
+                                          <Attachment
+                                            key={index}
+                                            name={attach.name}
+                                            imagelink={attach.type}
+                                            size={attach.size}
+                                          />
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <Attachment
+                                      key={index}
+                                      name={attachment.name}
+                                      imagelink={attachment.type}
+                                      size={attachment.size}
+                                    />
+                                  )}
+                                </>
+                              );
+                            })}
+                        </>
                       )}
                     </div>
-                    {collect.attachments.length > 3 ? (
+                    {specificTask?.attachments?.length > 3 ? (
                       <Link to="/reports">
                         <div className={modal.absolutebuttoncenter}>
                           <div className={modal.buttonname1}>

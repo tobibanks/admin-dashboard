@@ -9,6 +9,7 @@ import { logout } from "@/features/auth/authSlice";
 import { useGetDetailsQuery } from "@/app/services/auth/authService";
 import { authApi } from "../../app/services/auth/authService";
 import ModalContainer from "./ModalContainer";
+import { truncateString } from "../../../util/text";
 
 const DashboardLayout = (props) => {
   const [display, setDisplay] = useState(false);
@@ -16,7 +17,7 @@ const DashboardLayout = (props) => {
   // const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: admin } = useGetDetailsQuery();
+  const { data: admin, isFetching } = useGetDetailsQuery();
 
   const adminInfo = admin || [];
 
@@ -116,12 +117,21 @@ const DashboardLayout = (props) => {
                   <div className={side.textcontainer}>
                     <p className={side.avatartitle}>{adminInfo?.firstname}</p>
                     <p className={side.avatarcontext}>
-                      {adminInfo?.email?.substring?.(0, 17) || (
+                      {/* {truncateString(adminInfo?.email, 17) || (
                         <Skeleton
                           baseColor="#ebab34"
                           highlightColor="#f2cb07"
                           width={100}
                         />
+                      )} */}
+                      {isFetching ? (
+                        <Skeleton
+                          baseColor="#ebab34"
+                          highlightColor="#f2cb07"
+                          width={100}
+                        />
+                      ) : (
+                        truncateString(adminInfo?.email, 17)
                       )}
                     </p>
                   </div>

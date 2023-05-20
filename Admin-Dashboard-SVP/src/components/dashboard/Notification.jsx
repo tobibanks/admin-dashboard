@@ -16,8 +16,6 @@ const Notification = () => {
 
   const allnotifications = allNotifications || [];
 
-  console.log(allnotifications);
-
   const initialvalue = moment()
     .startOf("day")
     .format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");

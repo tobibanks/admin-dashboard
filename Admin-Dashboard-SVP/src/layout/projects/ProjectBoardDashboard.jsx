@@ -86,8 +86,6 @@ const ProjectBoardDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(dataByDateinprogress);
-
   return (
     <Container className={grid.container}>
       <DashboardLayout name="Projects">
