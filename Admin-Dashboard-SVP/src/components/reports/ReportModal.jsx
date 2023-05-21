@@ -72,9 +72,10 @@ const ReportModal = ({ show, onHide }) => {
     const conversion = { ...data };
     const stringid = conversion.send_to.toString();
     const formData = new FormData();
-    files.map((file) => {
-      return formData.append("attachments", file);
-    });
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`attachments`, files[i]);
+    }
     // formData.append("attachments", files);
     formData.append("send_to", stringid);
     formData.append("project", conversion.project);

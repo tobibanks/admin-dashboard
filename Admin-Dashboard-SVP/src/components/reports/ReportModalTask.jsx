@@ -36,9 +36,9 @@ const ReportModalTask = ({ show, onHide, id }) => {
   const submitForm = async (data) => {
     if (!files.length) return toast.error("Select a file");
     const formData = new FormData();
-    files.map((file) => {
-      return formData.append("attachments", file);
-    });
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`attachments`, files[i]);
+    }
     formData.append("note", data.note);
 
     try {
