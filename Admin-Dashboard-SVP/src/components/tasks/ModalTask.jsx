@@ -27,18 +27,13 @@ const ModalTask = ({ show, onHide, id }) => {
 
   const specified = specificTask || [];
 
-  console.log(id);
-
-  console.log(Array.isArray(specified));
-
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
-  console.log(specified);
-  // useEffect(() => {
-  //   refetch();
-  // }, [specified?.attachments]);
+  useEffect(() => {
+    refetch();
+  }, [specified?.attachments]);
 
   return (
     <Modal

@@ -221,6 +221,7 @@
 .detailsmessagecontainer {
   padding: 16px 16px;
   position: absolute;
+  width: 100%;
   background-color: white;
   z-index: 30;
   top: 0px;

@@ -59,7 +59,9 @@ const ReportModalTask = ({ show, onHide, id }) => {
     } catch (error) {
       toast.error(error.status);
     }
-    onHide();
+    specificTask?.attachments?.length > 3
+      ? navigate("/reports")
+      : navigate("/task");
   };
 
   return (

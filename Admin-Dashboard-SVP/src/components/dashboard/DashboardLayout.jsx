@@ -131,7 +131,7 @@ const DashboardLayout = (props) => {
                           width={100}
                         />
                       ) : (
-                        truncateString(adminInfo?.email, 17)
+                        truncateString(adminInfo?.email || "", 17)
                       )}
                     </p>
                   </div>
