@@ -149,7 +149,7 @@ const TaskBoardDashboard = () => {
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.comments}
+                          content={filtereddata.comments[0]}
                           date={filtereddata.due}
                           value={filtereddata.attachments.length}
                           imagelink={filtereddata.imagelink}
@@ -184,7 +184,7 @@ const TaskBoardDashboard = () => {
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.comments}
+                          content={filtereddata.comments[0]}
                           date={filtereddata.due}
                           value={filtereddata.attachments.length}
                           imagelink={filtereddata.imagelink}
@@ -221,11 +221,11 @@ const TaskBoardDashboard = () => {
                           firstname={filtereddata.assigned_to?.firstname}
                           lastname={filtereddata.assigned_to?.lastname}
                           headertext={filtereddata.projectname}
-                          content={filtereddata.comments}
+                          content={filtereddata.comments[0]}
                           date={filtereddata.due}
                           value={filtereddata.attachments.length}
                           status={filtereddata.status}
-                          imagelink={filtereddata.imagelink}
+                          // imagelink={filtereddata.imagelink}
                           priority={filtereddata.priority}
                         />
                       ))}
@@ -290,7 +290,9 @@ const ContentContainer = (props) => {
           />
         </div>
         <p className={taskboard.contenttext}>{props.headertext}</p>
-        <p className={taskboard.content}>{props.content}</p>
+        <p className={taskboard.content}>
+          {props.content || "No description available"}
+        </p>
         <div className={taskboard.flextext}>
           <p className={taskboard.assigned1}>Due:</p>
           <p className={taskboard.value}>

@@ -83,12 +83,28 @@ const TaskApprovalDashboard = () => {
                 </Descritption>
                 <Descritption title="Requested by:">
                   <div className={taskapproval.yellowbackground}>
-                    <Image src="/images/avatar.png" alt="avatar" />
                     <div className={taskapproval.absolutecenter}>
-                      <p className={taskapproval.textname}>
-                        {task?.assigned_to?.firstname} &nbsp;
-                        {task?.assigned_to?.lastname}
-                      </p>
+                      {task?.assigned_to?.firstname &&
+                      task?.assigned_to.lastname ? (
+                        <>
+                          <p className={taskapproval.avatar}>
+                            <span className={taskapproval.label}>
+                              {task?.assigned_to?.firstname?.charAt(0)}
+                            </span>
+                            <span className={taskapproval.label}>
+                              {task?.assigned_to?.lastname?.charAt(0)}
+                            </span>
+                          </p>
+                          <span className={taskapproval.label1}>
+                            {task?.assigned_to?.firstname}{" "}
+                            {task?.assigned_to?.lastname}
+                          </span>
+                        </>
+                      ) : (
+                        <div className={taskapproval.absolutecenter}>
+                          <p className={taskapproval.unassigned}>Unassigned</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Descritption>

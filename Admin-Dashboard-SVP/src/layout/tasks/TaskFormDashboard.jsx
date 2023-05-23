@@ -37,10 +37,10 @@ const TaskFormDashboard = () => {
 
   const { register, setValue, reset, handleSubmit } = useForm();
 
-  useEffect(() => {
-    // you can do async server request and fill up form
-    setValue("assign", specificProject.display_name);
-  }, [filtereddatarevised]);
+  // useEffect(() => {
+  //   // you can do async server request and fill up form
+  //   setValue("assign", specificProject.display_name);
+  // }, [filtereddatarevised]);
 
   const [files, setFiles] = useState([]);
   const handleFileChange = (e) => {
@@ -101,6 +101,7 @@ const TaskFormDashboard = () => {
                     <Form.Control
                       type="text"
                       readOnly
+                      value={specificProject.display_name}
                       name="assign"
                       {...register("assign")}
                       // placeholder="Type here..."

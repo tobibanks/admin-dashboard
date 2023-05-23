@@ -10,8 +10,10 @@ import {
   useAddTaskReportMutation,
   useGetSpecificTaskQuery,
 } from "../../app/services/auth/authService";
+import { useNavigate } from "react-router-dom";
 
 const ReportModalTask = ({ show, onHide, id }) => {
+  const navigate = useNavigate(0);
   const [addTaskReportsMutation] = useAddTaskReportMutation();
 
   const { register, reset, handleSubmit } = useForm();
@@ -55,13 +57,14 @@ const ReportModalTask = ({ show, onHide, id }) => {
       );
       reset();
       setFiles(null);
+      navigate(0);
       // toast.success("Project Registered Successfully");
     } catch (error) {
       toast.error(error.status);
     }
-    specificTask?.attachments?.length > 3
-      ? navigate("/reports")
-      : navigate("/task");
+    // specificTask?.attachments?.length > 3
+    //   ? navigate("/reports")
+    //   : navigate("/task");
   };
 
   return (

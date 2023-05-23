@@ -27,6 +27,8 @@ const ModalTask = ({ show, onHide, id }) => {
 
   const specified = specificTask || [];
 
+  console.log(specified);
+
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
@@ -93,9 +95,11 @@ const ModalTask = ({ show, onHide, id }) => {
                             // setId(props.id);
                           }}
                         >
-                          <p className={modal.buttontext}>
-                            Upload Attachments <MdOutlineCloudUpload />
-                          </p>
+                          {collect.status === "Approved" ? null : (
+                            <p className={modal.buttontext}>
+                              Upload Attachments <MdOutlineCloudUpload />
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -180,25 +184,27 @@ const ModalTask = ({ show, onHide, id }) => {
                         </div>
                       </Link>
                     ) : null}
-                    <div className={modal.bottomcontainer}>
-                      {collect.approval_id ? (
-                        <div
-                          className={modal.buttonname}
-                          onClick={() => {
-                            id &&
-                              navigate(
-                                generatePath("/taskapproval/:id", {
-                                  id: collect.approval_id,
-                                })
-                              );
-                          }}
-                        >
-                          <p className={modal.buttontext}>
-                            Review Approval Request
-                          </p>
-                        </div>
-                      ) : null}
-                    </div>
+                    {collect.status === "Approved" ? null : (
+                      <div className={modal.bottomcontainer}>
+                        {collect.approval_id ? (
+                          <div
+                            className={modal.buttonname}
+                            onClick={() => {
+                              id &&
+                                navigate(
+                                  generatePath("/taskapproval/:id", {
+                                    id: collect.approval_id,
+                                  })
+                                );
+                            }}
+                          >
+                            <p className={modal.buttontext}>
+                              Review Approval Request
+                            </p>
+                          </div>
+                        ) : null}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

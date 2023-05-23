@@ -145,6 +145,23 @@
   font-family: "Inter", sans-serif;
 }
 
+.label {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.label1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
 .statusbutton {
   background-color: var(--black400);
   border-radius: 8px;
@@ -254,6 +271,7 @@
   color: var(--black400);
   font-family: "Inter", sans-serif;
   font-size: 0.8rem;
+  margin-bottom: 0px;
 }
 
 .textname {

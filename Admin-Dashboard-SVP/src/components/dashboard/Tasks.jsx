@@ -20,6 +20,8 @@ const Tasks = () => {
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
+  console.log(TasksTableCollection);
+
   // var options = { day: "numeric", month: "short" };
 
   return (
@@ -37,9 +39,9 @@ const Tasks = () => {
                     <tr>
                       <th className={task.heading}>Task</th>
                       <th className={task.heading}>Due</th>
-                      <th className={task.heading}>Approved</th>
+                      <th className={task.heading}>In Progress</th>
                       <th className={task.heading}>Pending</th>
-                      <th className={task.heading}>Declined</th>
+                      <th className={task.heading}>Complete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -69,22 +71,21 @@ const Tasks = () => {
                           {moment(Taskdata.date).format("D/MM")}
                         </td>
                         <td className={task.centericon}>
-                          {Taskdata.status === "Approved" ? (
+                          {Taskdata.status === "In Progress" ? (
                             <Icon imagelink="/icons/dashboard/task/progress-true.svg" />
                           ) : (
                             <Icon imagelink="/icons/dashboard/task/progress-failed.svg" />
                           )}
                         </td>
                         <td className={task.centericon}>
-                          {Taskdata.status ===
-                          ("In Progress" || "Awaiting Approval") ? (
+                          {Taskdata.status === "Awaiting Approval" ? (
                             <Icon imagelink="/icons/dashboard/task/pending-true.svg" />
                           ) : (
                             <Icon imagelink="/icons/dashboard/task/pending-failed.svg" />
                           )}
                         </td>
                         <td className={task.centericon}>
-                          {Taskdata.status === "Declined" ? (
+                          {Taskdata.status === "Approved" ? (
                             <Icon imagelink="/icons/dashboard/task/close-true.svg" />
                           ) : (
                             <Icon imagelink="/icons/dashboard/task/close-failed.svg" />
