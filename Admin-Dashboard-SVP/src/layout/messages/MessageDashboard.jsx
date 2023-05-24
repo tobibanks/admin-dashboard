@@ -38,8 +38,6 @@ const MessageDashboard = () => {
     return filteredData;
   }, [filter, messageDetails]);
 
-
-
   // useForm hook
   const { register, reset, handleSubmit } = useForm();
 
@@ -50,27 +48,31 @@ const MessageDashboard = () => {
 
   // form hook submission of messages
   const submitForm = async (msg) => {
+    const stringmessage = msg.message.toString();
+    console.log(stringmessage);
     reset();
     const time = new Date().getTime();
     reset();
-    await sendMessage(filter, msg, time).then(() => {
+    await sendMessage(filter, stringmessage, time).then(() => {
       reset();
     });
   };
 
   // useEffect to refresh every 1seconds to check for new mwssages
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 1000);
+  // }, []);
 
   const [defaultState, setDefaultState] = useState(true);
   const { documents: messages, loading } = useCollection(
     `messages/${filter}/messages`
   );
+
+  useEffect(() => {
+    reset();
+  }, [useCollection]);
 
   const allMessages =
     messages.sort((a, b) => a.time_stamp - b.time_stamp) || [];
@@ -378,6 +380,7 @@ const MessageDashboard = () => {
 
                                 <div className={message.scrollchat}>
                                   {allMessages.map((chat, index) => {
+                                    console.log(chat);
                                     return (
                                       <div key={index}>
                                         {chat.sender === adminInfo.id ? (
@@ -385,7 +388,7 @@ const MessageDashboard = () => {
                                             className={message.sendingcontainer}
                                           >
                                             <p className={message.sending}>
-                                              {chat.message.message}
+                                              {chat.message}
                                             </p>
                                           </div>
                                         ) : (
@@ -401,7 +404,7 @@ const MessageDashboard = () => {
                                                 {chat.sender_name}
                                               </p>
                                               <p className={message.incoming}>
-                                                {chat.message.message}
+                                                {chat.message}
                                               </p>
                                             </div>
                                           </div>
