@@ -13,7 +13,7 @@ import { useCollection } from "./../../hooks/useCollection";
 const MessageDashboard = () => {
   // const [id, setId] = useState("");
   // fetching users and details about them
-  const { data: allMessagesDetails } = useGetAllMessagesQuery();
+  const { data: allMessagesDetails, refetch } = useGetAllMessagesQuery();
 
   // preventing code break. displays empty array till the messages loas
   const messageDetails = allMessagesDetails || [];
@@ -49,7 +49,6 @@ const MessageDashboard = () => {
   // form hook submission of messages
   const submitForm = async (msg) => {
     const stringmessage = msg.message.toString();
-    console.log(stringmessage);
     reset();
     const time = new Date().getTime();
     reset();
@@ -71,7 +70,7 @@ const MessageDashboard = () => {
   );
 
   useEffect(() => {
-    reset();
+    refetch();
   }, [useCollection]);
 
   const allMessages =
@@ -424,7 +423,7 @@ const MessageDashboard = () => {
                                           className={message.sendingcontainer}
                                         >
                                           <p className={message.sending}>
-                                            {chat.message.message}
+                                            {chat.message}
                                           </p>
                                         </div>
                                       ) : (
@@ -432,7 +431,7 @@ const MessageDashboard = () => {
                                           className={message.incomingcontainer}
                                         >
                                           <p className={message.incoming}>
-                                            {chat.message.message}
+                                            {chat.message}
                                           </p>
                                         </div>
                                       )}
