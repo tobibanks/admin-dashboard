@@ -6,14 +6,22 @@ import "./Modal.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import SkeletonLoader from "./SkeletonLoader";
 import ModalProject from "./../project/ModalProject";
+import { useAddStarProjectMutation } from "../../app/services/auth/authService";
+import { toast } from "react-hot-toast";
 
 const Project = () => {
-  const { data: UserProjects, isLoading } = useGetProjectDetailsQuery({
+  const {
+    data: UserProjects,
+    isLoading,
+    refetch,
+  } = useGetProjectDetailsQuery({
     refetchOnMountOrArgChange: true,
   });
   const [filter, setFilter] = useState(null);
 
   const UserProjectsCollection = UserProjects || [];
+
+  const [addStarMutation] = useAddStarProjectMutation();
 
   const [modalShow, setModalShow] = React.useState(false);
   const [setting, setSetting] = useState("");
@@ -26,6 +34,22 @@ const Project = () => {
     );
     return filteredData;
   }, [filter, UserProjectsCollection]);
+
+  const submitForm = async () => {
+    try {
+      await toast.promise(
+        addProjectDetailsMutation({ id: "6464a0791f023c0d560f75e0" }).unwrap(),
+        {
+          loading: "Saving Form",
+          success: "Project Form Created Successfully",
+          error: "Failed to create form",
+        }
+      );
+      refetch();
+    } catch (error) {
+      toast.error(error.status);
+    }
+  };
 
   return (
     <div className={project.projectcontainer1}>
@@ -86,14 +110,28 @@ const Project = () => {
                     <tr
                       key={index}
                       className={project.pointer}
-                      onClick={() => {
-                        setSetting(projectdata._id);
-                        setModalShow(true);
-                      }}
+                      // onClick={() => {
+                      //   setSetting(projectdata._id);
+                      //   setModalShow(true);
+                      // }}
                     >
                       <td className={project.align}>
-                        <div className={project.flexcontent}>
-                          <Icon imagelink="/icons/dashboard/task/star.svg" />
+                        <div
+                          onClick={submitForm}
+                          className={project.flexcontent}
+                        >
+                          {project.starred ? (
+                            <div onClick={submitForm}>
+                              <Icon imagelink="/icons/dashboard/task/star.svg" />
+                            </div>
+                          ) : (
+                            <div>
+                              <Icon
+                                onClick={submitForm}
+                                imagelink="/icons/dashboard/task/starred.svg"
+                              />
+                            </div>
+                          )}
                           <div className={project.centertext}>
                             <p className={project.tasktitle}>
                               {projectdata.name}

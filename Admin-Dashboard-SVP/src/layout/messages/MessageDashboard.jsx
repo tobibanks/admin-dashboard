@@ -382,7 +382,7 @@ const MessageDashboard = () => {
                                     console.log(chat);
                                     return (
                                       <div key={index}>
-                                        {chat.sender === adminInfo.id ? (
+                                        {chat.sender_id === adminInfo.id ? (
                                           <div
                                             className={message.sendingcontainer}
                                           >
@@ -416,9 +416,10 @@ const MessageDashboard = () => {
                             ) : (
                               <div className={message.scrollchat}>
                                 {allMessages.map((chat, index) => {
+                                  console.log(chat);
                                   return (
                                     <div key={index}>
-                                      {chat.sender === adminInfo.id ? (
+                                      {chat.sender_id === adminInfo.id ? (
                                         <div
                                           className={message.sendingcontainer}
                                         >

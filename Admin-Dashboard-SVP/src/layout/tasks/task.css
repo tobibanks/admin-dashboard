@@ -4,7 +4,8 @@
 }
 
 .rbc-toolbar {
-  display: none !important;
+  font-family: "Inter", sans-serif;
+  /* display: none !important; */
 }
 
 .rbc-ellipsis,

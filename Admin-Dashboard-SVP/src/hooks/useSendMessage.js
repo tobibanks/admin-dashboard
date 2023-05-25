@@ -15,7 +15,7 @@ export default function useSendMessage() {
     try {
       await addDoc(collection(db, "messages", threadID, "messages"), {
         message: message,
-        sender: adminInfo.id,
+        sender_id: adminInfo.id,
         sender_name: adminInfo.firstname,
         time_stamp: timeStamp,
       });

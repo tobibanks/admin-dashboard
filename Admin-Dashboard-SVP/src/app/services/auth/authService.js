@@ -141,6 +141,12 @@ export const authApi = createApi({
         method: "GET",
       }),
     }),
+    addStarProject: build.mutation({
+      query: () => ({
+        url: `/admin/projects/star/${id}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -153,6 +159,7 @@ export const {
   useGetAllApprovalsQuery,
   useGetAllNotificationsQuery,
   useGetAllMessagesQuery,
+  useAddStarProjectMutation,
   useAddMessagesMutation,
   useAddTaskReportMutation,
   useGetApprovalRequestQuery,
