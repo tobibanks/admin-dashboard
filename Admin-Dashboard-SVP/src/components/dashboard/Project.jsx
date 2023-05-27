@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import project from "./User.module.css";
 import { Image } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
@@ -6,8 +6,9 @@ import "./Modal.css";
 import { useGetProjectDetailsQuery } from "@/app/services/auth/authService";
 import SkeletonLoader from "./SkeletonLoader";
 import ModalProject from "./../project/ModalProject";
+import { toast, Toaster } from "react-hot-toast";
 import { useAddStarProjectMutation } from "../../app/services/auth/authService";
-import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Project = () => {
   const {
@@ -21,35 +22,33 @@ const Project = () => {
 
   const UserProjectsCollection = UserProjects || [];
 
-  const [addStarMutation] = useAddStarProjectMutation();
-
   const [modalShow, setModalShow] = React.useState(false);
+  const [text, setText] = useState("");
   const [setting, setSetting] = useState("");
   const [message, setMessage] = useState("There are no projects");
 
-  const data = useMemo(() => {
-    if (!filter) return UserProjectsCollection;
-    const filteredData = UserProjectsCollection.filter(
+  const navigate = useNavigate();
+
+  const sortedArray = [
+    ...UserProjectsCollection.filter((item) => item.star === true),
+    ...UserProjectsCollection.filter((item) => item.star === false),
+  ];
+
+  const [addStarMutation] = useAddStarProjectMutation();
+
+  const filterdata = useMemo(() => {
+    if (!filter) return sortedArray;
+    const filteredData = sortedArray.filter(
       (item) => item.user_status === filter
     );
     return filteredData;
-  }, [filter, UserProjectsCollection]);
+  }, [filter, sortedArray]);
 
-  const submitForm = async () => {
-    try {
-      await toast.promise(
-        addProjectDetailsMutation({ id: "6464a0791f023c0d560f75e0" }).unwrap(),
-        {
-          loading: "Saving Form",
-          success: "Project Form Created Successfully",
-          error: "Failed to create form",
-        }
-      );
-      refetch();
-    } catch (error) {
-      toast.error(error.status);
-    }
-  };
+  // useEffect(() => {
+  //   refetch();
+  // }, [starproject]);
+
+  // console.log(res);
 
   return (
     <div className={project.projectcontainer1}>
@@ -96,7 +95,7 @@ const Project = () => {
           <SkeletonLoader />
         ) : (
           <div style={{ marginBottom: "3rem" }}>
-            {data.length >= 1 ? (
+            {filterdata.length >= 1 ? (
               <Table className={project.tablestriped}>
                 <thead className={project.tableheader}>
                   <tr>
@@ -106,33 +105,60 @@ const Project = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.slice(0, 5).map((projectdata, index) => (
-                    <tr
-                      key={index}
-                      className={project.pointer}
-                      // onClick={() => {
-                      //   setSetting(projectdata._id);
-                      //   setModalShow(true);
-                      // }}
-                    >
+                  {filterdata.slice(0, 5).map((projectdata, index) => (
+                    <tr key={index} className={project.pointer}>
                       <td className={project.align}>
-                        <div
-                          onClick={submitForm}
-                          className={project.flexcontent}
-                        >
-                          {project.starred ? (
-                            <div onClick={submitForm}>
-                              <Icon imagelink="/icons/dashboard/task/star.svg" />
+                        <div className={project.flexcontent}>
+                          {projectdata.star ? (
+                            <div
+                              onClick={async (id) => {
+                                try {
+                                  await toast.promise(
+                                    addStarMutation(projectdata._id).unwrap(),
+                                    {
+                                      loading: "Saving",
+                                      success: "Starred",
+                                      error: "Failed to star",
+                                    }
+                                  );
+                                  // toast.success("Project Registered Successfully");
+                                  refetch();
+                                } catch (error) {
+                                  toast.error(error.status);
+                                }
+                              }}
+                            >
+                              <Icon imagelink="/icons/dashboard/task/starred.svg" />
                             </div>
                           ) : (
-                            <div>
-                              <Icon
-                                onClick={submitForm}
-                                imagelink="/icons/dashboard/task/starred.svg"
-                              />
+                            <div
+                              onClick={async (id) => {
+                                try {
+                                  await toast.promise(
+                                    addStarMutation(projectdata._id).unwrap(),
+                                    {
+                                      loading: "Saving",
+                                      success: "Starred",
+                                      error: "Failed to star",
+                                    }
+                                  );
+                                  // toast.success("Project Registered Successfully");
+                                  refetch();
+                                } catch (error) {
+                                  toast.error(error.status);
+                                }
+                              }}
+                            >
+                              <Icon imagelink="/icons/dashboard/task/star.svg" />
                             </div>
                           )}
-                          <div className={project.centertext}>
+                          <div
+                            onClick={() => {
+                              setSetting(projectdata._id);
+                              setModalShow(true);
+                            }}
+                            className={project.centertext}
+                          >
                             <p className={project.tasktitle}>
                               {projectdata.name}
                             </p>
@@ -173,6 +199,32 @@ const Project = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         id={setting}
+      />
+      <Toaster
+        position="top-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+            fontFamily: "Inter, sans-serif",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
       />
     </div>
   );

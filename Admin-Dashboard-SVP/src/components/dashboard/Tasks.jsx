@@ -3,15 +3,23 @@ import task from "./User.module.css";
 import "./Modal.css";
 import Table from "react-bootstrap/Table";
 import { Image } from "react-bootstrap";
+import { toast, Toaster } from "react-hot-toast";
 import ModalTask from "@/components/tasks/ModalTask";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useGetTaskDetailsQuery } from "../../app/services/auth/authService";
+import {
+  useAddStarTaskMutation,
+  useGetTaskDetailsQuery,
+} from "../../app/services/auth/authService";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { truncateString } from "./../../../util/text";
 
 const Tasks = () => {
-  const { data: TaskCollection, isLoading } = useGetTaskDetailsQuery({
+  const {
+    data: TaskCollection,
+    isLoading,
+    refetch,
+  } = useGetTaskDetailsQuery({
     refetchOnMountArgChange: true,
   });
 
@@ -20,7 +28,12 @@ const Tasks = () => {
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
-  console.log(TasksTableCollection);
+  const [addStarMutation] = useAddStarTaskMutation();
+
+  const sortedArray = [
+    ...TasksTableCollection.filter((item) => item.star === true),
+    ...TasksTableCollection.filter((item) => item.star === false),
+  ];
 
   // var options = { day: "numeric", month: "short" };
 
@@ -45,22 +58,60 @@ const Tasks = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {TasksTableCollection.slice(0, 8).map((Taskdata, index) => (
-                      <tr
-                        key={index}
-                        onClick={() => {
-                          setSetting(Taskdata._id);
-                          setModalShow(true);
-                        }}
-                      >
+                    {sortedArray.slice(0, 8).map((Taskdata, index) => (
+                      <tr key={index}>
                         <td className={task.align}>
                           <div className={task.flexcontent}>
-                            {Taskdata.star === true ? (
-                              <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                            {Taskdata.star ? (
+                              <div
+                                onClick={async (id) => {
+                                  try {
+                                    await toast.promise(
+                                      addStarMutation(Taskdata._id).unwrap(),
+                                      {
+                                        loading: "Saving",
+                                        success: "Starred",
+                                        error: "Failed to star",
+                                      }
+                                    );
+                                    // toast.success("Project Registered Successfully");
+                                    refetch();
+                                  } catch (error) {
+                                    toast.error(error.status);
+                                  }
+                                }}
+                              >
+                                <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                              </div>
                             ) : (
-                              <Icon imagelink="/icons/dashboard/task/star.svg" />
+                              <div
+                                onClick={async (id) => {
+                                  try {
+                                    await toast.promise(
+                                      addStarMutation(Taskdata._id).unwrap(),
+                                      {
+                                        loading: "Saving",
+                                        success: "Starred",
+                                        error: "Failed to star",
+                                      }
+                                    );
+                                    // toast.success("Project Registered Successfully");
+                                    refetch();
+                                  } catch (error) {
+                                    toast.error(error.status);
+                                  }
+                                }}
+                              >
+                                <Icon imagelink="/icons/dashboard/task/star.svg" />
+                              </div>
                             )}
-                            <div className={task.centertext}>
+                            <div
+                              onClick={() => {
+                                setSetting(Taskdata._id);
+                                setModalShow(true);
+                              }}
+                              className={task.centertext}
+                            >
                               <p className={task.tasktitle}>
                                 {truncateString(Taskdata?.name, 7)}
                               </p>
@@ -123,6 +174,32 @@ const Tasks = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         id={setting}
+      />
+      <Toaster
+        position="top-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+            fontFamily: "Inter, sans-serif",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
       />
     </div>
   );

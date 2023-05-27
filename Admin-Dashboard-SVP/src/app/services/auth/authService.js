@@ -13,6 +13,7 @@ export const authApi = createApi({
       }
     },
   }),
+  tagTypes: ["Project", "Task"],
   endpoints: (build) => ({
     getDetails: build.query({
       query: () => ({
@@ -36,6 +37,7 @@ export const authApi = createApi({
       query: (id) => ({
         url: `/admin/tasks/project/${id}`,
         method: "GET",
+        provideTags: ["Project"],
       }),
     }),
     getSpecificTask: build.query({
@@ -142,8 +144,14 @@ export const authApi = createApi({
       }),
     }),
     addStarProject: build.mutation({
-      query: () => ({
+      query: (id) => ({
         url: `/admin/projects/star/${id}`,
+        method: "POST",
+      }),
+    }),
+    addStarTask: build.mutation({
+      query: (id) => ({
+        url: `/admin/tasks/star/${id}`,
         method: "POST",
       }),
     }),
@@ -172,4 +180,5 @@ export const {
   useUseUpdateTaskApprovalMutation,
   useGetAllUsersDetailsQuery,
   useGetProjectSpecificTaskQuery,
+  useAddStarTaskMutation,
 } = authApi;

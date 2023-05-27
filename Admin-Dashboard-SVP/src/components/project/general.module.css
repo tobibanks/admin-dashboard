@@ -299,6 +299,11 @@
   align-items: center;
 }
 
+.unassigned {
+  margin-bottom: 0px;
+  font-family: "Inter", sans-serif;
+}
+
 .avatar {
   width: 35px;
   height: 35px;

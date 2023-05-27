@@ -27,8 +27,6 @@ const ModalTask = ({ show, onHide, id }) => {
 
   const specified = specificTask || [];
 
-  console.log(specified);
-
   const [setting, setSetting] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();

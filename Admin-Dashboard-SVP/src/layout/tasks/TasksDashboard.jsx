@@ -8,10 +8,12 @@ import TaskTableDisplay from "../../components/tasks/TaskTableDisplay";
 import TaskHeader from "../../components/tasks/TaskHeader";
 import ModalTask from "@/components/tasks/ModalTask";
 import DatePicker from "react-datepicker";
+import { toast, Toaster } from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   useGetTaskDetailsQuery,
   useGetProjectSpecificTaskQuery,
+  useAddStarTaskMutation,
 } from "../../app/services/auth/authService";
 import SkeleteonLoaderTable from "../../components/dashboard/SkeleteonLoaderTable";
 import DashboardLayoutContents from "../../components/dashboard/DashboardLayoutContents";
@@ -29,6 +31,13 @@ const TasksDashboard = () => {
   const navigate = useNavigate();
 
   const TasksTableCollection = TaskCollection || [];
+
+  const [addStarMutation] = useAddStarTaskMutation();
+
+  const sortedArray = [
+    ...TasksTableCollection.filter((item) => item.star === true),
+    ...TasksTableCollection.filter((item) => item.star === false),
+  ];
 
   // window.location.reload();
   // location.reload();
@@ -48,12 +57,10 @@ const TasksDashboard = () => {
   const finalEndDate = new Date(convertedEndDate).getTime();
 
   const data = useMemo(() => {
-    if (!filter) return TasksTableCollection;
-    const filteredData = TasksTableCollection.filter(
-      (item) => item.status === filter
-    );
+    if (!filter) return sortedArray;
+    const filteredData = sortedArray.filter((item) => item.status === filter);
     return filteredData;
-  }, [filter, TasksTableCollection]);
+  }, [filter, sortedArray]);
 
   const dataByDate = useMemo(() => {
     if (!startDate || !endDate) return data;
@@ -93,6 +100,7 @@ const TasksDashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(dataByDate);
 
   return (
     <Container className={task.container}>
@@ -204,21 +212,59 @@ const TasksDashboard = () => {
               {dataByDate.length >= 1 ? (
                 <TaskTableDisplay>
                   {dataByDate.map((taskcollect, index) => (
-                    <tr
-                      key={index}
-                      onClick={() => {
-                        setSetting(taskcollect._id);
-                        setModalShow(true);
-                      }}
-                    >
+                    <tr key={index}>
                       <td>
                         <div className={task.flexcontent}>
-                          {taskcollect.star === "true" ? (
-                            <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                          {taskcollect.star ? (
+                            <div
+                              onClick={async (id) => {
+                                try {
+                                  await toast.promise(
+                                    addStarMutation(taskcollect._id).unwrap(),
+                                    {
+                                      loading: "Saving",
+                                      success: "Starred",
+                                      error: "Failed to star",
+                                    }
+                                  );
+                                  // toast.success("Project Registered Successfully");
+                                  refetch();
+                                } catch (error) {
+                                  toast.error(error.status);
+                                }
+                              }}
+                            >
+                              <Icon imagelink="/icons/dashboard/task/starred.svg" />
+                            </div>
                           ) : (
-                            <Icon imagelink="/icons/dashboard/task/star.svg" />
+                            <div
+                              onClick={async (id) => {
+                                try {
+                                  await toast.promise(
+                                    addStarMutation(taskcollect._id).unwrap(),
+                                    {
+                                      loading: "Saving",
+                                      success: "Starred",
+                                      error: "Failed to star",
+                                    }
+                                  );
+                                  // toast.success("Project Registered Successfully");
+                                  refetch();
+                                } catch (error) {
+                                  toast.error(error.status);
+                                }
+                              }}
+                            >
+                              <Icon imagelink="/icons/dashboard/task/star.svg" />
+                            </div>
                           )}
-                          <div className={task.centertext}>
+                          <div
+                            className={task.centertext}
+                            onClick={() => {
+                              setSetting(taskcollect._id);
+                              setModalShow(true);
+                            }}
+                          >
                             <p className={task.tasktitle}>{taskcollect.name}</p>
                           </div>
                         </div>
@@ -269,6 +315,32 @@ const TasksDashboard = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         id={setting}
+      />
+      <Toaster
+        position="top-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+            fontFamily: "Inter, sans-serif",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
       />
     </Container>
   );

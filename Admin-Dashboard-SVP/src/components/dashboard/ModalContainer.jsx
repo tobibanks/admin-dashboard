@@ -64,6 +64,8 @@ const ModalContainer = (props) => {
     return filtereddata;
   }, [startOfWeekISO, endOfWeekISO, todayISO, data]);
 
+  const filternotificationsweek = filteredDataToday.reverse();
+
   return (
     <Modal
       className={notification.modal}
@@ -177,7 +179,7 @@ const ModalContainer = (props) => {
                 <div className={notification.notificationcontent1}>
                   {filteredDataToday.length >= 1 ? (
                     <>
-                      {filteredDataToday.map((data, index) => (
+                      {filternotificationsweek.map((data, index) => (
                         <NotificationContent
                           name={data.from_user.firstname}
                           type={data.type}
@@ -225,7 +227,7 @@ const ModalContainer = (props) => {
                   <p className={notification.firsttext1}>THIS WEEK</p>
                 </div>
                 <div className={notification.notificationcontent1}>
-                  {filteredDataToday.length >= 1 ? (
+                  {filternotificationsweek.length >= 1 ? (
                     <>
                       {filteredDataToday.map((data, index) => (
                         <NotificationContent
@@ -275,7 +277,7 @@ const ModalContainer = (props) => {
                   <p className={notification.firsttext1}>THIS WEEK</p>
                 </div>
                 <div className={notification.notificationcontent1}>
-                  {filteredDataToday.length >= 1 ? (
+                  {filternotificationsweek.length >= 1 ? (
                     <>
                       {filteredDataToday.map((data, index) => (
                         <NotificationContent
@@ -327,7 +329,7 @@ const ModalContainer = (props) => {
                 <div className={notification.notificationcontent1}>
                   {filteredDataToday.length >= 1 ? (
                     <>
-                      {filteredDataToday.map((data, index) => (
+                      {filternotificationsweek.map((data, index) => (
                         <NotificationContent
                           name={data.from_user.firstname}
                           type={data.type}
@@ -375,7 +377,7 @@ const ModalContainer = (props) => {
                   <p className={notification.firsttext1}>THIS WEEK</p>
                 </div>
                 <div className={notification.notificationcontent1}>
-                  {filteredDataToday.length >= 1 ? (
+                  {filternotificationsweek.length >= 1 ? (
                     <>
                       {filteredDataToday.map((data, index) => (
                         <NotificationContent
