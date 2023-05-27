@@ -72,19 +72,19 @@ const TasksDashboard = () => {
     return filtereddata;
   }, [finalStartDate, finalEndDate, data]);
 
-  const filteredApprovedData = TasksTableCollection.filter(
+  const filteredApprovedData = sortedArray.filter(
     (item) => item.status === "Approved"
   );
 
-  const filteredPendingData = TasksTableCollection.filter(
+  const filteredPendingData = sortedArray.filter(
     (item) => item.status === "Awaiting Approval"
   );
 
-  const filteredInProgressData = TasksTableCollection.filter(
+  const filteredInProgressData = sortedArray.filter(
     (item) => item.status === "In Progress"
   );
 
-  const filteredDeclinedData = TasksTableCollection.filter(
+  const filteredDeclinedData = sortedArray.filter(
     (item) => item.status === "Declined"
   );
 
