@@ -9,8 +9,10 @@ import moment from "moment";
 import { LoaderIcon } from "react-hot-toast";
 import useSendMessage from "../../hooks/useSendMessage";
 import { useCollection } from "./../../hooks/useCollection";
+import { MessageUploadModal } from "./MessageUploadModal";
 
 const MessageDashboard = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   // const [id, setId] = useState("");
   // fetching users and details about them
   const { data: allMessagesDetails, refetch } = useGetAllMessagesQuery();
@@ -452,6 +454,11 @@ const MessageDashboard = () => {
                             className={message.attachment}
                             src="/icons/attachment.svg"
                             alt="attach"
+                            onClick={() => {
+                              setModalShow(true);
+                              // onHide();
+                              // setId(props.id);
+                            }}
                           />
                         </div>
                         <div style={{ flex: "14" }}>
@@ -484,6 +491,10 @@ const MessageDashboard = () => {
             </div>
           </div>
         </div>
+        <MessageUploadModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
       </DashboardLayout>
     </Container>
   );

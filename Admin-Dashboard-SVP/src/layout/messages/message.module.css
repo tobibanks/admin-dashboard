@@ -342,6 +342,10 @@
   padding: 0.5rem 0.5rem;
 }
 
+.attachment {
+  cursor: pointer;
+}
+
 .textarea {
   height: 35px;
   /* width: 650px; */
@@ -479,4 +483,115 @@
 
 .scrollchat::-webkit-scrollbar {
   display: none;
+}
+
+.attachmentcontainer {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.4rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  display: flex;
+  border-color: var(--black200);
+}
+
+.reportabsolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.attachmenttext {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--textblack);
+  margin-bottom: 0rem;
+}
+
+.attachmentsize {
+  color: var(--black400);
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0rem;
+}
+
+.absolutecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexheader {
+  display: flex;
+  gap: 1rem;
+}
+
+.attachmentflex {
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.modalbody {
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.fileabsolutecenter {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.fileinputbutton {
+  font-family: "Inter", sans-serif;
+  color: var(--SVP-main);
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 0.2rem;
+  margin-bottom: 0px;
+}
+
+.customfileinput {
+  border: 1px solid var(--SVP-main);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.fileinputhide {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  right: 0;
+}
+
+.absoluterightendcontainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flexbuttoncontainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.sharebutton {
+  border-radius: 8px;
+  padding: 12px 24px 12px 24px;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  border: 1px solid !important;
+  background-color: var(--SVP-main) !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-color: var(--SVP-main);
 }
