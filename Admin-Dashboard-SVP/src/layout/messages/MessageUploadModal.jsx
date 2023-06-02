@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { Modal, Image, Button, FormGroup } from "react-bootstrap";
 import modal from "./message.module.css";
 import toast, { Toaster } from "react-hot-toast";
+import { useUpload } from "./../../hooks/useUpload";
+import useSendMessage from "./../../hooks/useSendMessage";
+import { useForm } from "react-hook-form";
 
-export const MessageUploadModal = ({ show, onHide }) => {
+export const MessageUploadModal = ({ show, onHide, id }) => {
   const [files, setFiles] = useState([]);
+  const [downloadUrl, setDownloadUrl] = useState("");
+
+  console.log(files);
   const handleFileChange = (e) => {
+    if (!e.target.files) return;
     setFiles([...files, e.target.files[0]]);
   };
 
@@ -13,6 +20,41 @@ export const MessageUploadModal = ({ show, onHide }) => {
     const newArray = [...files];
     newArray.splice(index, 1);
     setFiles(newArray);
+  };
+  const { register, reset, handleSubmit } = useForm();
+
+  const { upload } = useUpload();
+  const { error, sendMessage } = useSendMessage();
+  const urls = [];
+
+  const submit = async () => {
+    if (!files.length) return toast.error("Select a file");
+    files.map(async (file) => {
+      await upload(id, file).then((url) => {
+        urls.push(url);
+        setDownloadUrl(url);
+        submitFile(file, url);
+      });
+    });
+    onHide();
+  };
+
+  const submitFile = async (file, url) => {
+    console.log(file);
+    console.log(url);
+    const time = new Date().getTime();
+    reset();
+    const fileDetails = {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    };
+    console.log(fileDetails);
+    await sendMessage(id, url, time, fileDetails).then(() => {
+      console.log("boy");
+      reset();
+      setFiles([]);
+    });
   };
 
   return (
@@ -26,21 +68,19 @@ export const MessageUploadModal = ({ show, onHide }) => {
     >
       <Modal.Body className={modal.modalbody}>
         <div className={modal.attachmentflex}>
-          {!files ? null : (
-            <>
-              {files.map((file, index) => {
-                return (
-                  <Attachment
-                    key={index}
-                    attachmentname={file.name}
-                    imagelink={file.type}
-                    onClick={removeImage}
-                    attachmentsize={file.size}
-                  />
-                );
-              })}
-            </>
-          )}
+          <>
+            {files.map((file, index) => {
+              return (
+                <Attachment
+                  key={index}
+                  attachmentname={file.name}
+                  imagelink={file.type}
+                  onClick={removeImage}
+                  attachmentsize={file.size}
+                />
+              );
+            })}
+          </>
         </div>
         <div className={modal.fileabsolutecenter}>
           <div className={modal.customfileinput}>
@@ -58,7 +98,11 @@ export const MessageUploadModal = ({ show, onHide }) => {
 
         <div className={modal.absoluterightendcontainer}>
           <div className={modal.flexbuttoncontainer}>
-            <Button type="submit" className={modal.sharebutton}>
+            <Button
+              type="submit"
+              className={modal.sharebutton}
+              onClick={submit}
+            >
               Upload
             </Button>
           </div>

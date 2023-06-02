@@ -261,7 +261,6 @@ const ReportModal = ({ show, onHide }) => {
               <Form.Check
                 type="checkbox"
                 key={index}
-                required
                 className={modal.checkinput}
                 {...register("send_to")}
                 value={usercollect._id}

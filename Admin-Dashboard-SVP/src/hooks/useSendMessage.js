@@ -8,7 +8,12 @@ import { useState } from "react";
 export default function useSendMessage() {
   const [error, setError] = useState(null);
   //   const { user } = useAuthContext();
-  const sendMessage = async (threadID, message, timeStamp) => {
+  const sendMessage = async (
+    threadID,
+    message,
+    timeStamp,
+    fileDetails
+  ) => {
     setError(null);
     const adminInfo = JSON.parse(localStorage.getItem("adminInfo"));
 
@@ -18,6 +23,9 @@ export default function useSendMessage() {
         sender_id: adminInfo.id,
         sender_name: adminInfo.firstname,
         time_stamp: timeStamp,
+        file_name: fileDetails?.name,
+        type: fileDetails?.type || "text",
+        size: fileDetails?.size
       });
     } catch (error) {
       setError(error.message);
