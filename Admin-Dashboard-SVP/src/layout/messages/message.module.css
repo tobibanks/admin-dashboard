@@ -507,17 +507,17 @@
   gap: 0.5rem;
   flex-wrap: wrap;
   display: flex;
-  border-color: var(--white);
+  border-color: #F0F0F0;
 }
 
-.attachmentcontainer {
+.attachmentcontainer1 {
   border: 1px solid;
   border-radius: 8px;
   padding: 0.4rem;
   gap: 0.5rem;
   flex-wrap: wrap;
   display: flex;
-  border-color: var(--white);
+  border-color: var(--black200);
 }
 
 .reportabsolutecenter {
@@ -529,7 +529,7 @@
 .attachmenttext {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--white);
   margin-bottom: 0rem;
 }
@@ -537,9 +537,8 @@
 .attachmenttext1 {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 1rem;
-  color: var(--black400);
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--textblack);
   margin-bottom: 0rem;
 }
 
@@ -551,7 +550,7 @@
   margin-bottom: 0rem;
 }
 
-.attachmentsize {
+.attachmentsize1 {
   color: var(--black400);
   font-family: "Inter", sans-serif;
   font-size: 0.8rem;

@@ -6,7 +6,7 @@ import { useGetAllMessagesQuery } from "../../app/services/auth/authService";
 import { useForm } from "react-hook-form";
 import { getInitials } from "../../../util/text";
 import moment from "moment";
-import { LoaderIcon } from "react-hot-toast";
+import { LoaderIcon, Toaster } from "react-hot-toast";
 import useSendMessage from "../../hooks/useSendMessage";
 import { useCollection } from "./../../hooks/useCollection";
 import { MessageUploadModal } from "./MessageUploadModal";
@@ -462,7 +462,7 @@ const MessageDashboard = () => {
                                                 >
                                                   {chat.sender_name}
                                                 </p>
-                                                <Attachment
+                                                <AttachmentBlack
                                                   imagelink="icons/reports/image-white.svg"
                                                   alt="icons"
                                                   attachmentname={
@@ -484,7 +484,7 @@ const MessageDashboard = () => {
                                                 >
                                                   {chat.sender_name}
                                                 </p>
-                                                <Attachment
+                                                <AttachmentBlack
                                                   imagelink="icons/reports/document-white.svg"
                                                   alt="icons"
                                                   attachmentname={
@@ -505,7 +505,7 @@ const MessageDashboard = () => {
                                                 >
                                                   {chat.sender_name}
                                                 </p>
-                                                <Attachment
+                                                <AttachmentBlack
                                                   imagelink="icons/reports/video-white.svg"
                                                   alt="icons"
                                                   attachmentname={
@@ -596,7 +596,7 @@ const MessageDashboard = () => {
                                         >
                                           {chat?.type?.startsWith("image") ? (
                                             <div className={message.sending}>
-                                              <Attachment
+                                              <AttachmentBlack
                                                 imagelink="icons/reports/image-white.svg"
                                                 alt="icons"
                                                 attachmentname={chat.file_name}
@@ -609,7 +609,7 @@ const MessageDashboard = () => {
                                               "application"
                                             ) ? (
                                             <div className={message.sending}>
-                                              <Attachment
+                                              <AttachmentBlack
                                                 imagelink="icons/reports/document-white.svg"
                                                 alt="icons"
                                                 attachmentname={chat.file_name}
@@ -621,7 +621,7 @@ const MessageDashboard = () => {
                                               "video"
                                             ) ? (
                                             <div className={message.sending}>
-                                              <Attachment
+                                              <AttachmentBlack
                                                 imagelink="icons/reports/video-white.svg"
                                                 alt="icons"
                                                 attachmentname={chat.file_name}
@@ -631,7 +631,7 @@ const MessageDashboard = () => {
                                               />
                                             </div>
                                           ) : chat?.type?.startsWith("text") ? (
-                                            <p className={message.sending}>
+                                            <p className={message.incoming}>
                                               {chat.message}
                                             </p>
                                           ) : null}
@@ -695,6 +695,32 @@ const MessageDashboard = () => {
           onHide={() => setModalShow(false)}
           id={filter}
         />
+        <Toaster
+          position="top-left"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            // Define default options
+            className: "",
+            duration: 5000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+              fontFamily: "Inter, sans-serif",
+            },
+
+            // Default options for specific types
+            success: {
+              duration: 3000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
       </DashboardLayout>
     </Container>
   );
@@ -751,7 +777,7 @@ const AttachmentBlack = (props) => {
         </p>
       </div>
       <div className={message.reportabsolutecenter}>
-        <a href={props.link}>
+        <a target="_blank" href={props.link}>
           <Image
             src="/icons/reports/download.svg"
             style={{ cursor: "pointer", width: "20px" }}

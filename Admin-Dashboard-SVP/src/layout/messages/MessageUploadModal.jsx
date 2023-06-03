@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Image, Button, FormGroup } from "react-bootstrap";
+import { Modal, Image, Button, FormGroup, Spinner } from "react-bootstrap";
 import modal from "./message.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useUpload } from "./../../hooks/useUpload";
@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 
 export const MessageUploadModal = ({ show, onHide, id }) => {
   const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState("");
   const [downloadUrl, setDownloadUrl] = useState("");
 
-  console.log(files);
   const handleFileChange = (e) => {
     if (!e.target.files) return;
     setFiles([...files, e.target.files[0]]);
@@ -28,20 +28,20 @@ export const MessageUploadModal = ({ show, onHide, id }) => {
   const urls = [];
 
   const submit = async () => {
+    setLoading("loading");
     if (!files.length) return toast.error("Select a file");
     files.map(async (file) => {
       await upload(id, file).then((url) => {
         urls.push(url);
         setDownloadUrl(url);
         submitFile(file, url);
+        setLoading("");
+        onHide();
       });
     });
-    onHide();
   };
 
   const submitFile = async (file, url) => {
-    console.log(file);
-    console.log(url);
     const time = new Date().getTime();
     reset();
     const fileDetails = {
@@ -49,9 +49,8 @@ export const MessageUploadModal = ({ show, onHide, id }) => {
       size: file.size,
       type: file.type,
     };
-    console.log(fileDetails);
     await sendMessage(id, url, time, fileDetails).then(() => {
-      console.log("boy");
+      toast.success("Successfully Uploaded");
       reset();
       setFiles([]);
     });
@@ -103,35 +102,14 @@ export const MessageUploadModal = ({ show, onHide, id }) => {
               className={modal.sharebutton}
               onClick={submit}
             >
-              Upload
+              {loading === "loading" ? (
+                <Spinner animation="border" role="status" />
+              ) : (
+                "Upload"
+              )}
             </Button>
           </div>
         </div>
-        <Toaster
-          position="top-left"
-          gutter={8}
-          containerClassName=""
-          containerStyle={{}}
-          toastOptions={{
-            // Define default options
-            className: "",
-            duration: 5000,
-            style: {
-              background: "#363636",
-              color: "#fff",
-              fontFamily: "Inter, sans-serif",
-            },
-
-            // Default options for specific types
-            success: {
-              duration: 3000,
-              theme: {
-                primary: "green",
-                secondary: "black",
-              },
-            },
-          }}
-        />
       </Modal.Body>
     </Modal>
   );
@@ -139,7 +117,7 @@ export const MessageUploadModal = ({ show, onHide, id }) => {
 
 const Attachment = (props) => {
   return (
-    <div className={modal.attachmentcontainer}>
+    <div className={modal.attachmentcontainer1}>
       <div className={modal.reportabsolutecenter}>
         {props.imagelink.startsWith("image") ? (
           <Image src="/icons/jpg.svg" alt="jpg" />
@@ -150,10 +128,10 @@ const Attachment = (props) => {
         ) : null}
       </div>
       <div>
-        <p className={modal.attachmenttext}>
-          {props.attachmentname?.substring(0, 5)}
+        <p className={modal.attachmenttext1}>
+          {props.attachmentname?.substring(0, 9)}
         </p>
-        <p className={modal.attachmentsize}>
+        <p className={modal.attachmentsize1}>
           {Math.round(props.attachmentsize / 1000) + "kb"}
         </p>
       </div>
