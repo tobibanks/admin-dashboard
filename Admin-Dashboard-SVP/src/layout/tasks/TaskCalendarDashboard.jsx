@@ -31,17 +31,6 @@ const TaskCalendarDashboard = () => {
 
   const TasksBoardCollection = TaskCollection || [];
 
-  // const eventList = TasksBoardCollection.map((event: any) => {
-  //   const {
-  //     time: { startTime, endTime },
-  //     ...thisEvent
-  //   } = event;
-  //   return {
-  //     ...thisEvent,
-  //     start: new Date(moment(startTime * 1000).format("YYYY-MM-DD HH:mm:ss")),
-  //     end: new Date(moment(endTime * 1000).format("YYYY-MM-DD HH:mm:ss")),
-  //   };
-  // });
 
   const eventList = TasksBoardCollection.map((event) => {
     new Date(moment(event.date).format("YYYY,MM,DD"));
@@ -54,8 +43,6 @@ const TaskCalendarDashboard = () => {
     };
   });
 
-  // console.log(eventList);
-  console.log(new Date(2015, 3, 0));
 
   return (
     <Container className={taskcalendar.container}>
