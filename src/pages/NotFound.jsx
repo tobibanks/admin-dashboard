@@ -4,11 +4,14 @@ import { Container } from "react-bootstrap";
 
 const NotFound = () => {
   return (
-    <div className={general.maincontainer1}>
-      <div className={general.centerContainer}>
-        <p className={general.centertext}>Error 404 | Page Not Found</p>
-      </div>
-    </div>
+    <>
+      <p>JSON error: cannot parse JSON properly. Check line 28.</p>
+    </>
+    // <div className={general.maincontainer1}>
+    //   <div className={general.centerContainer}>
+    //     <p className={general.centertext}>Error 404 | Page Not Found</p>
+    //   </div>
+    // </div>
   );
 };
 
