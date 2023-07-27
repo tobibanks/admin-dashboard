@@ -54,7 +54,7 @@ const App = () => {
               }
             />
             <Route path="*" element={<NotFound />} />
-            <Route
+{/*             <Route
               path="/project"
               element={
                 <ProtectedRoute>
@@ -182,7 +182,7 @@ const App = () => {
                   <TaskFormDashboard />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             {/* </ProtectedRoute> */}
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>
