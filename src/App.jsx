@@ -53,7 +53,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<NotFound />} />
              <Route
               path="/project"
               element={
@@ -183,6 +182,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
             {/* </ProtectedRoute> */}
             {/* <Route path="/admin" element={<HomepageAdmin />} /> */}
           </Routes>
